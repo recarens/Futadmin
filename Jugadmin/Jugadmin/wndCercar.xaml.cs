@@ -77,42 +77,30 @@ namespace Jugadmin
                 dtcImatge.CellTemplate = cellTemplate1;
                 dtcImatge.Width = 90;
 
-
                 DataGridTextColumn dtcNom = new DataGridTextColumn();
                 DataGridTextColumn dtcEdat = new DataGridTextColumn();
                 DataGridTextColumn dtcAny = new DataGridTextColumn();
                 DataGridTextColumn dtcEquip = new DataGridTextColumn();
-                DataGridTextColumn dtcAltura = new DataGridTextColumn();
-                DataGridTextColumn dtcPes = new DataGridTextColumn();
-                DataGridTextColumn dtcSexe = new DataGridTextColumn();
-                DataGridTextColumn dtcPosicio = new DataGridTextColumn();
+                DataGridTextColumn dtcCognoms = new DataGridTextColumn();
                 
                 dtcNom.Header = "Nom";
                 dtcImatge.Header = "Foto";
                 dtcEquip.Header = "Equip";
                 dtcAny.Header = "AnyNeixament";
                 dtcEdat.Header = "Edat";
-                dtcPes.Header = "Pes";
-                dtcSexe.Header = "Sexe";
-                dtcPosicio.Header = "Posicio";
-                dtcAltura.Header = "Altura";
+                dtcCognoms.Header = "Cognoms";
                 dtcNom.Binding = new Binding("Nom");
-                dtcAltura.Binding = new Binding("Altura");
+                dtcCognoms.Binding = new Binding("Cognoms");
                 dtcAny.Binding = new Binding("AnyNeixament");
-                dtcPes.Binding = new Binding("Pes");
                 dtcEdat.Binding = new Binding("Edat");
                 dtcEquip.Binding = new Binding("NomEquip");
-                dtcSexe.Binding = new Binding("Sexe"); 
-                dtcPosicio.Binding = new Binding("P");
                 dgResultat.Columns.Add(dtcImatge);
                 dgResultat.Columns.Add(dtcNom);
+                dgResultat.Columns.Add(dtcCognoms);
                 dgResultat.Columns.Add(dtcEdat);
                 dgResultat.Columns.Add(dtcAny);
                 dgResultat.Columns.Add(dtcEquip);
-                dgResultat.Columns.Add(dtcAltura);
-                dgResultat.Columns.Add(dtcPes);
-                dgResultat.Columns.Add(dtcSexe);
-                dgResultat.Columns.Add(dtcPosicio);
+                
             }
         }
 
@@ -141,21 +129,21 @@ namespace Jugadmin
                                 if (j.Nom.Contains(((TextBox)sender).Text.Trim()))
                                 {
 
-                                    dgResultat.Items.Add(new Jugador() { NomImg = "../../Fotos/" + j.NomImg, Nom = j.Nom, Edat = j.Edat, AnyNeixament = j.AnyNeixament, NomEquip = j.NomEquip, Altura = j.Altura, Pes = j.Pes, Sexe = j.Sexe, P = j.P });
+                                    dgResultat.Items.Add(new Jugador() { NomImg = "../../Fotos/" + j.NomImg, Nom = j.Nom, Edat = j.Edat, AnyNeixament = j.AnyNeixament, NomEquip = j.NomEquip, Cognoms = j.Cognoms});
                                 }
                             }
                             else if ("any" == lbCategoriaCerca.SelectedItem.ToString().ToLower())
                             {
                                 if (j.AnyNeixament.ToString().Contains(((TextBox)sender).Text.Trim()))
                                 {
-                                    dgResultat.Items.Add(new Jugador() { NomImg = "../../Fotos/" + j.NomImg, Nom = j.Nom, Edat = j.Edat, AnyNeixament = j.AnyNeixament, NomEquip = j.NomEquip, Altura = j.Altura, Pes = j.Pes, Sexe = j.Sexe, P = j.P });
+                                    dgResultat.Items.Add(new Jugador() { NomImg = "../../Fotos/" + j.NomImg, Nom = j.Nom, Edat = j.Edat, AnyNeixament = j.AnyNeixament, NomEquip = j.NomEquip, Cognoms = j.Cognoms});
                                 }
                             }
                             else
                             {
                                 if (j.Edat.ToString().Contains(((TextBox)sender).Text.Trim()))
                                 {
-                                    dgResultat.Items.Add(new Jugador() { NomImg = "../../Fotos/" + j.NomImg, Nom = j.Nom, Edat = j.Edat, AnyNeixament = j.AnyNeixament, NomEquip = j.NomEquip, Altura = j.Altura, Pes = j.Pes, Sexe = j.Sexe, P = j.P });
+                                    dgResultat.Items.Add(new Jugador() { NomImg = "../../Fotos/" + j.NomImg, Nom = j.Nom, Edat = j.Edat, AnyNeixament = j.AnyNeixament, NomEquip = j.NomEquip, Cognoms = j.Cognoms});
                                 }
                             }
                         }

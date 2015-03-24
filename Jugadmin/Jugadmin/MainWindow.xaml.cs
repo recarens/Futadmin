@@ -78,8 +78,8 @@ namespace Jugadmin
                 while (rdr.Read())
                 {
                     j = new Jugador(rdr.GetString("dni"));
-
-
+                    j.Nom = rdr.GetString("nom");
+                    j.Cognoms = rdr.GetString("cognoms");
                     j.Altura = Convert.ToDouble(rdr.GetDouble("altura"));
                     j.Pes = Convert.ToDouble(rdr.GetDouble("pes"));
                     j.NomEquip = rdr.GetString("nom_equip").ToLower();
