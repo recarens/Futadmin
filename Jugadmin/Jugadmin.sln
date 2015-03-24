@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jugadmin", "Jugadmin\Jugadmin.csproj", "{23D27ED8-C0C6-4EC5-B46D-6C86D64A8471}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EstructuraClasses", "EstructuraClasses\EstructuraClasses.csproj", "{2284FF15-70D2-489F-9D14-7101C4203A7A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23D27ED8-C0C6-4EC5-B46D-6C86D64A8471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23D27ED8-C0C6-4EC5-B46D-6C86D64A8471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23D27ED8-C0C6-4EC5-B46D-6C86D64A8471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23D27ED8-C0C6-4EC5-B46D-6C86D64A8471}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2284FF15-70D2-489F-9D14-7101C4203A7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2284FF15-70D2-489F-9D14-7101C4203A7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2284FF15-70D2-489F-9D14-7101C4203A7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2284FF15-70D2-489F-9D14-7101C4203A7A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

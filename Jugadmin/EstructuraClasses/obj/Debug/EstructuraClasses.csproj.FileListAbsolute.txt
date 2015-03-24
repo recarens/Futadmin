@@ -1,0 +1,10 @@
+C:\Users\Eric\Google Drive\Jugadmin\EstructuraClasses\bin\Debug\EstructuraClasses.dll
+C:\Users\Eric\Google Drive\Jugadmin\EstructuraClasses\bin\Debug\EstructuraClasses.pdb
+C:\Users\Eric\Google Drive\Jugadmin\EstructuraClasses\obj\Debug\EstructuraClasses.csprojResolveAssemblyReference.cache
+C:\Users\Eric\Google Drive\Jugadmin\EstructuraClasses\obj\Debug\EstructuraClasses.dll
+C:\Users\Eric\Google Drive\Jugadmin\EstructuraClasses\obj\Debug\EstructuraClasses.pdb
+C:\Users\Eric\Google Drive\DAM Compartida\Jugadmin\EstructuraClasses\bin\Debug\EstructuraClasses.dll
+C:\Users\Eric\Google Drive\DAM Compartida\Jugadmin\EstructuraClasses\bin\Debug\EstructuraClasses.pdb
+C:\Users\Eric\Google Drive\DAM Compartida\Jugadmin\EstructuraClasses\obj\Debug\EstructuraClasses.csprojResolveAssemblyReference.cache
+C:\Users\Eric\Google Drive\DAM Compartida\Jugadmin\EstructuraClasses\obj\Debug\EstructuraClasses.dll
+C:\Users\Eric\Google Drive\DAM Compartida\Jugadmin\EstructuraClasses\obj\Debug\EstructuraClasses.pdb

@@ -1,0 +1,43 @@
+﻿<Window x:Name="wndPrincipal" x:Class="Jugadmin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Jugadmin" Height="400" Width="674.632">
+    <Window.Background>
+        <ImageBrush ImageSource="Fotos/grass.jpg" Stretch="UniformToFill"/>
+    </Window.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130" MaxWidth="130"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <WrapPanel Orientation="Vertical" Grid.Column="0">
+            <Button x:Name="btnCerca" Content="Cercar" Margin="9" Click="btnCerca_Click" FontSize="16"/>
+            <Button x:Name="btnAfageix" Content="Afagir jugador" Margin="9" FontSize="16" Click="btnAfageix_Click"/>
+            <Button x:Name="btnCrearEquip" Content="Crear equip" Margin="9" FontSize="16"/>
+            <Button x:Name="btnSortir" Content="Sortir" Margin="9" Click="btnSortir_Click" FontSize="16"/>
+        </WrapPanel>
+        <GridSplitter Grid.Column="0" Width="10" BorderBrush="#FF171212" Background="White"/>
+        <StackPanel x:Name="spDadesPrincipal" Grid.Column="1" Orientation="Vertical">
+            <Image x:Name="imgImatge" Width="100" Height="100" Margin="5"/>
+            <Button x:Name="btnDadesPersonals" Content="Dades Personals" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesPersonals_Click" Background="#FF2E5F0C" BorderBrush="#FFDCD6D6" BorderThickness="3" Foreground="White"/>
+            <Border Margin="10,0,10,0" x:Name="wpDadesPersonals" BorderBrush="White" BorderThickness="2">
+                <WrapPanel Orientation="Horizontal" Background="#FF72D680">
+                    <Label Margin="4" FontSize="14" FontWeight="Bold">Nom:</Label>
+                    <TextBox x:Name="tbNom" MinWidth="200" Margin="4" FontSize="16" BorderBrush="Black"/>
+                    <Label Margin="4" FontSize="14" FontWeight="Bold">Edat:</Label>
+                    <TextBox x:Name="tbEdat" MinWidth="30" Margin="4" FontSize="16" BorderBrush="Black"/>
+                    <Label Margin="4" FontSize="14" FontWeight="Bold">Any Neixament:</Label>
+                    <TextBox x:Name="tbAny" MinWidth="50" Margin="4" FontSize="16" BorderBrush="Black"/>
+                    <Label Margin="4" FontSize="14" FontWeight="Bold">Pes:</Label>
+                    <TextBox x:Name="tbPes" MinWidth="50" Margin="4" FontSize="16" BorderBrush="Black"/>
+                    <Label Margin="4" FontSize="14" FontWeight="Bold">Altura:</Label>
+                    <TextBox x:Name="tbAltura" MinWidth="50" Margin="4" FontSize="16" BorderBrush="Black"/>
+                    <Label Margin="4" FontSize="14" FontWeight="Bold">Equip:</Label>
+                    <TextBox x:Name="tbEquip" MinWidth="100" Margin="4" FontSize="16" BorderBrush="Black"/>
+                    <Label Margin="4" FontSize="14" FontWeight="Bold">Posicio:</Label>
+                    <TextBox x:Name="tbPosicio" MinWidth="100" Margin="4" FontSize="16" BorderBrush="Black"/>
+                </WrapPanel>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Window>
