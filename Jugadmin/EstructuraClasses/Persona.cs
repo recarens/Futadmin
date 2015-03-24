@@ -13,26 +13,65 @@ namespace EstructuraClasses
         string cognoms;
         string nomImg;
         string sexe;
-        
+        DateTime dtInscripcio;
+        DateTime dtNeixament;   
+        int anyNeixament;
+        string targetaSanitaria;
+        string malaltiaOAlergia;    
+        string mobil;    
+        string telefon;
+        string correuElectronic;
+        string nSoci;  
+        int edat;
+        double pes;
+        double altura;     
+
         /// <summary>
         /// Crea una persona
         /// </summary>
         /// <param name="nom">nom de la persona</param>
-        public Persona(string nom, string nomImg,string sexe)
+        public Persona(string dni)
         {
-            this.nom = nom;
-            this.nomImg = nomImg;
-            this.sexe = sexe;
-            
+            this.dni = dni;
         }
         /// <summary>
         /// Crea una persona
         /// </summary>
         public Persona() 
         {
-            this.nom = "No establert";
-            this.nomImg = "No establert";
-            this.sexe = "Masculí";
+            this.dni = "No te dni";
+        }
+
+        #region PROPIETATS
+        public string NSoci
+        {
+            get { return nSoci; }
+            set { nSoci = value; }
+        }
+        public int Edat
+        {
+            get { return edat; }
+            set { edat = value; }
+        }
+        public double Altura
+        {
+            get { return altura; }
+            set { altura = value; }
+        }
+        public string CorreuElectronic
+        {
+            get { return correuElectronic; }
+            set { correuElectronic = value; }
+        }
+        public double Pes
+        {
+            get { return pes; }
+            set { pes = value; }
+        }
+        public string Dni
+        {
+            get { return dni; }
+            set { dni = value; }
         }
         /// <summary>
         /// Obté el nom de la persona
@@ -42,20 +81,60 @@ namespace EstructuraClasses
             get { return nom;}
             set { this.nom = value; }
         }
-
-        public string Sexe
-        {
-            get { return sexe; }
-            set { sexe = value; }
-        }
-
         //Retorna o asigna un bitmat "imatge" a la persona;
         public string NomImg
         {
             get { return nomImg; }
             set { nomImg = value; }
         }
+        public int AnyNeixament
+        {
+            get { return anyNeixament; }
+            set { anyNeixament = value; }
+        }
+        public string Cognoms
+        {
+            get { return cognoms; }
+            set { cognoms = value; }
+        }
 
+        public DateTime DtInscripcio
+        {
+            get { return dtInscripcio; }
+            set { dtInscripcio = value; }
+        }
+
+        public DateTime DtNeixament
+        {
+            get { return dtNeixament; }
+            set { dtNeixament = value; }
+        }
+        public string TargetaSanitaria
+        {
+            get { return targetaSanitaria; }
+            set { targetaSanitaria = value; }
+        }
+        public string Telefon
+        {
+            get { return telefon; }
+            set { telefon = value; }
+        }
+        public string Sexe
+        {
+            get { return sexe; }
+            set { sexe = value; }
+        }
+        public string Mobil
+        {
+            get { return mobil; }
+            set { mobil = value; }
+        }
+        public string MalaltiaOAlergia
+        {
+            get { return malaltiaOAlergia; }
+            set { malaltiaOAlergia = value; }
+        }
+        #endregion
         /// <summary>
         /// Determina si la persona es un jugador o un entrenador
         /// </summary>

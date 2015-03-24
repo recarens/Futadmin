@@ -8,3 +8,7 @@ C:\Users\Eric\Google Drive\DAM Compartida\Jugadmin\EstructuraClasses\bin\Debug\E
 C:\Users\Eric\Google Drive\DAM Compartida\Jugadmin\EstructuraClasses\obj\Debug\EstructuraClasses.csprojResolveAssemblyReference.cache
 C:\Users\Eric\Google Drive\DAM Compartida\Jugadmin\EstructuraClasses\obj\Debug\EstructuraClasses.dll
 C:\Users\Eric\Google Drive\DAM Compartida\Jugadmin\EstructuraClasses\obj\Debug\EstructuraClasses.pdb
+C:\Users\Eric\Documents\GitHub\Futadmin\Jugadmin\EstructuraClasses\bin\Debug\EstructuraClasses.dll
+C:\Users\Eric\Documents\GitHub\Futadmin\Jugadmin\EstructuraClasses\bin\Debug\EstructuraClasses.pdb
+C:\Users\Eric\Documents\GitHub\Futadmin\Jugadmin\EstructuraClasses\obj\Debug\EstructuraClasses.dll
+C:\Users\Eric\Documents\GitHub\Futadmin\Jugadmin\EstructuraClasses\obj\Debug\EstructuraClasses.pdb

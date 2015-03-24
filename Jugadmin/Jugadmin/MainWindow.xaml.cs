@@ -47,7 +47,7 @@ namespace Jugadmin
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    eq = new Equip(rdr.GetString(0).ToLower(), rdr.GetInt32(2), rdr.GetString(1)); //0 nom, 1 futbol 11 o 7 , 2 categoria
+                    eq = new Equip(rdr.GetString("nom").ToLower(), rdr.GetInt32("tipus"), rdr.GetString("categoria")); //0 nom, 1 futbol 11 o 7 , 2 categoria
                     equips.Add(eq.Nom, eq);
                 }
             }
@@ -77,20 +77,22 @@ namespace Jugadmin
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    j = new Jugador(rdr.GetString(0), rdr.GetString(3), rdr.GetString(8), rdr.GetInt32(1), rdr.GetInt32(2));
-                    j.Altura = Convert.ToDouble(rdr.GetDouble(6));
-                    j.Pes = Convert.ToDouble(rdr.GetDouble(7));
-                    j.NomEquip = rdr.GetString(4).ToLower();
-                    if (rdr.GetString(5) == Posicio.Porter.ToString().ToLower())
+                    j = new Jugador(rdr.GetString("dni"));
+
+
+                    j.Altura = Convert.ToDouble(rdr.GetDouble("altura"));
+                    j.Pes = Convert.ToDouble(rdr.GetDouble("pes"));
+                    j.NomEquip = rdr.GetString("nom_equip").ToLower();
+                    if (rdr.GetString("posicio") == Posicio.Porter.ToString().ToLower())
                         j.P = Posicio.Porter;
 
-                    else if (rdr.GetString(5) == Posicio.Defensa.ToString().ToLower())
+                    else if (rdr.GetString("posicio") == Posicio.Defensa.ToString().ToLower())
                         j.P = Posicio.Defensa;
 
-                    else if (rdr.GetString(5) == Posicio.Migcampista.ToString().ToLower())
+                    else if (rdr.GetString("posicio") == Posicio.Migcampista.ToString().ToLower())
                         j.P = Posicio.Migcampista;
 
-                    else if (rdr.GetString(5) == Posicio.Davanter.ToString().ToLower())
+                    else if (rdr.GetString("posicio") == Posicio.Davanter.ToString().ToLower())
                         j.P = Posicio.Davanter;
                     equips[j.NomEquip.ToLower()].Afegir(j);
                 }

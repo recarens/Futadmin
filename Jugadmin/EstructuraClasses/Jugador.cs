@@ -9,66 +9,56 @@ namespace EstructuraClasses
     public enum Posicio { Porter, Defensa, Migcampista, Davanter}
     public class Jugador : Persona
     {
-        int edat;
-        double altura;
-        int anyNeixament;
-        double pes;
         Posicio p;
         string nomEquip;
-
+        int minutsJugats;
+        int gols;
+        int faltesEntreno;
+        string usuariPortal; // portal del federat  
+        string contrasenyaPortal; // portal del federat
         
         /// <summary>
         /// Crea un convidat
         /// </summary>
         /// <param name="nom">Caràcter que l'identificarà</param>
         /// <param name="sex">Plus de simpatia sobre el sexe contrari</param>
-        public Jugador(string nom, string sexe, string nomImg, int edat, int anyNeixament): base(nom, nomImg, sexe)
-        {
-            this.edat = edat;
-            this.anyNeixament = anyNeixament;
-            this.altura = 0;
-            this.pes = 0;
-            this.p = Posicio.Migcampista;
-        }
-        public Jugador()
-        {
-
-        }
-
+        public Jugador(string dni): base(dni) {}
+        public Jugador() { }
         public Posicio P
         {
             get { return p; }
             set { p = value; }
-        } 
-        public int Edat
-        {
-            get { return edat; }
-            set { edat = value; }
-        }      
-
-        public int AnyNeixament
-        {
-            get { return anyNeixament; }
-            set { anyNeixament = value; }
         }  
-
-        public double Altura
-        {
-            get { return altura; }
-            set { altura = value; }
-        } 
-
-        public double Pes
-        {
-            get { return pes; }
-            set { pes = value; }
-        }
         public string NomEquip
         {
             get { return nomEquip; }
             set { nomEquip = value; }
         }
-        
+        public int MinutsJugats
+        {
+            get { return minutsJugats; }
+            set { minutsJugats = value; }
+        }
+        public int Gols
+        {
+            get { return gols; }
+            set { gols = value; }
+        }
+        public int FaltesEntreno
+        {
+            get { return faltesEntreno; }
+            set { faltesEntreno = value; }
+        }
+        public string UsuariPortal
+        {
+            get { return usuariPortal; }
+            set { usuariPortal = value; }
+        }
+        public string ContrasenyaPortal
+        {
+            get { return contrasenyaPortal; }
+            set { contrasenyaPortal = value; }
+        }
         /// <summary>
         /// Retorna que si és un Jugador
         /// </summary>

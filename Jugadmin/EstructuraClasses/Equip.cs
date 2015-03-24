@@ -65,16 +65,16 @@ namespace EstructuraClasses
         /// <param name="conv">Convidat a afegir</param>
         public void Afegir(Jugador j)
         {
-            if (!equip.ContainsKey(j.Nom))
+            if (!equip.ContainsKey(j.Dni))
             {
-                equip.Add(j.Nom.ToString().ToLower(), j);
+                equip.Add(j.Dni.ToString().ToLower(), j);
                 numJugadors++;
             }
         }
 
         public void Eliminar(Jugador j)
         {
-            equip.Remove(j.Nom.ToString().ToLower());
+            equip.Remove(j.Dni.ToString().ToLower());
             numJugadors--;
         }
 
