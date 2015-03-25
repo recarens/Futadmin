@@ -79,6 +79,7 @@ namespace Jugadmin
                 {
 
                     j = new Jugador(rdr.GetString("dni"));
+                    j.NomImg = rdr.GetString("nom_imatge"); // es aixi?
                     j.Nom = rdr.GetString("nom");
                     j.Cognoms = rdr.GetString("cognoms");
                     j.Altura = Convert.ToDouble(rdr.GetDouble("altura"));
@@ -124,7 +125,7 @@ namespace Jugadmin
             {
                 if (j.Nom == nomBuscat)
                 {
-                    string ruta = System.IO.Path.GetFullPath("Fotos/" + j.NomImg);
+                    string ruta = System.IO.Path.GetFullPath("../../Fotos/" + j.NomImg);
    
                     Uri uri = new Uri(ruta,UriKind.Absolute); // per assignar l'arxiu a una imatge
                     BitmapImage bim = new BitmapImage(uri); // tenim la imatge 
