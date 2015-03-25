@@ -77,14 +77,15 @@ namespace Jugadmin
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-
                     j = new Jugador(rdr.GetString("dni"));
-                    j.NomImg = rdr.GetString("nom_imatge"); // es aixi?
+                    j.NomImg = rdr.GetString("nomImatge"); // es aixi?
                     j.Nom = rdr.GetString("nom");
                     j.Cognoms = rdr.GetString("cognoms");
                     j.Altura = Convert.ToDouble(rdr.GetDouble("altura"));
                     j.Pes = Convert.ToDouble(rdr.GetDouble("pes"));
                     j.NomEquip = rdr.GetString("nom_equip").ToLower();
+                    j.Edat = rdr.GetInt32("edat");
+                    j.AnyNeixament = rdr.GetInt32("data_neixament");
                     if (rdr.GetString("posicio") == Posicio.Porter.ToString().ToLower())
                         j.P = Posicio.Porter;
 

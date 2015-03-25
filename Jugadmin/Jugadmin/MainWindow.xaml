@@ -1,7 +1,7 @@
 ﻿<Window x:Name="wndPrincipal" x:Class="Jugadmin.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Jugadmin" Height="400" Width="674.632">
+        Title="Jugadmin" Height="448.227" Width="1070.781">
     <Window.Background>
         <ImageBrush ImageSource="Fotos/grass.jpg" Stretch="UniformToFill"/>
     </Window.Background>
@@ -21,22 +21,60 @@
             <Image x:Name="imgImatge" Width="100" Height="100" Margin="5"/>
             <Button x:Name="btnDadesPersonals" Content="Dades Personals" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesPersonals_Click" Background="#FF2E5F0C" BorderBrush="#FFDCD6D6" BorderThickness="3" Foreground="White"/>
             <Border Margin="10,0,10,0" x:Name="wpDadesPersonals" BorderBrush="White" BorderThickness="2">
-                <WrapPanel Orientation="Horizontal" Background="#FF72D680">
+                <WrapPanel Orientation="Vertical" Background="#FF72D680" MaxHeight="250">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Margin="4" FontSize="14" FontWeight="Bold">DNI:</Label>
+                        <TextBox x:Name="tbAnyDni" MinWidth="200" Margin="33,5,10,5" FontSize="16" BorderBrush="Black"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
                     <Label Margin="4" FontSize="14" FontWeight="Bold">Nom:</Label>
-                    <TextBox x:Name="tbNom" MinWidth="200" Margin="4" FontSize="16" BorderBrush="Black"/>
-                    <Label Margin="4" FontSize="14" FontWeight="Bold">Edat:</Label>
-                    <TextBox x:Name="tbEdat" MinWidth="30" Margin="4" FontSize="16" BorderBrush="Black"/>
-                    <Label Margin="4" FontSize="14" FontWeight="Bold">Any Neixament:</Label>
-                    <TextBox x:Name="tbAny" MinWidth="50" Margin="4" FontSize="16" BorderBrush="Black"/>
-                    <Label Margin="4" FontSize="14" FontWeight="Bold">Pes:</Label>
-                    <TextBox x:Name="tbPes" MinWidth="50" Margin="4" FontSize="16" BorderBrush="Black"/>
-                    <Label Margin="4" FontSize="14" FontWeight="Bold">Altura:</Label>
-                    <TextBox x:Name="tbAltura" MinWidth="50" Margin="4" FontSize="16" BorderBrush="Black"/>
-                    <Label Margin="4" FontSize="14" FontWeight="Bold">Equip:</Label>
-                    <TextBox x:Name="tbEquip" MinWidth="100" Margin="4" FontSize="16" BorderBrush="Black"/>
-                    <Label Margin="4" FontSize="14" FontWeight="Bold">Posicio:</Label>
-                    <TextBox x:Name="tbPosicio" MinWidth="100" Margin="4" FontSize="16" BorderBrush="Black"/>
-                </WrapPanel>
+                    <TextBox x:Name="tbNom" MinWidth="199" Margin="28,5,10,5" FontSize="16" BorderBrush="Black"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Margin="4" FontSize="14" FontWeight="Bold">Cognom:</Label>
+                        <TextBox x:Name="tbCognom" MinWidth="199" Margin="4,5,10,5" FontSize="16" BorderBrush="Black"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Margin="4" FontSize="14" FontWeight="Bold">Edat:</Label>
+                        <TextBox x:Name="tbEdat" MinWidth="200" Margin="30,5,10,5" FontSize="16" BorderBrush="Black"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Margin="4" FontSize="14" FontWeight="Bold">Any Neixament:</Label>
+                        <TextBox x:Name="tbAnyNeixament" MinWidth="147" Margin="10,5,10,5" FontSize="16" BorderBrush="Black"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Margin="4" FontSize="14" FontWeight="Bold">Telèfon:</Label>
+                        <TextBox x:Name="tbTelefon" MinWidth="200" Margin="10,5,10,5" FontSize="16" BorderBrush="Black"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Margin="4" FontSize="14" FontWeight="Bold">Mòbil:</Label>
+                        <TextBox x:Name="tbMobil" MinWidth="203" Margin="20,5,10,5" FontSize="16" BorderBrush="Black"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Margin="4" FontSize="14" FontWeight="Bold">Sexe:</Label>
+                        <TextBox x:Name="tbSexe" MinWidth="201" Margin="30,5,10,5" FontSize="16" BorderBrush="Black"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Margin="4" FontSize="14" FontWeight="Bold">Data inscripció:</Label>
+                        <DatePicker x:Name="dpAnyNeixament" MaxWidth="155" Margin="10,5,10,5" FontSize="16" BorderBrush="Black"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Margin="4" FontSize="14" FontWeight="Bold">Tarjeta Sanitaria:</Label>
+                        <TextBox x:Name="tbTarjetaSanitaria" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="Black"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Margin="4" FontSize="14" FontWeight="Bold">Correu electrònic:</Label>
+                        <TextBox x:Name="tbcorreuElec" MinWidth="150" Margin="1,5,10,5" FontSize="16" BorderBrush="Black"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Margin="4" FontSize="14" FontWeight="Bold">Numero de Soci:</Label>
+                        <TextBox x:Name="tbnSoci" MinWidth="150" Margin="9,5,10,5" FontSize="16" BorderBrush="Black"/>
+                    </StackPanel>
+                    <Label Margin="4" FontSize="14" FontWeight="Bold">Malalties o alergies:</Label>
+                    <ScrollViewer MaxWidth="300"  Margin="1,5,10,5">
+                        <TextBox x:Name="tbMalalties"  FontSize="16" BorderBrush="Black"/>
+                    </ScrollViewer>
+                </WrapPanel>   
             </Border>
         </StackPanel>
     </Grid>
