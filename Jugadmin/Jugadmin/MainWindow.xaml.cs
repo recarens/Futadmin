@@ -77,6 +77,7 @@ namespace Jugadmin
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
+
                     j = new Jugador(rdr.GetString("dni"));
                     j.Nom = rdr.GetString("nom");
                     j.Cognoms = rdr.GetString("cognoms");
