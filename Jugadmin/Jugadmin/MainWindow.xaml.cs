@@ -122,16 +122,19 @@ namespace Jugadmin
             nomBuscat = wc.nom;
             nomEquipBuscat = wc.nomEquip;
             spDadesPrincipal.Height = Double.NaN;
-            foreach(Jugador j in equips[nomEquipBuscat])
+            if (wc.nom != null && wc.nomEquip != null)
             {
-                if (j.Nom == nomBuscat)
+                foreach (Jugador j in equips[nomEquipBuscat])
                 {
-                    string ruta = System.IO.Path.GetFullPath("../../Fotos/" + j.NomImg);
-   
-                    Uri uri = new Uri(ruta,UriKind.Absolute); // per assignar l'arxiu a una imatge
-                    BitmapImage bim = new BitmapImage(uri); // tenim la imatge 
-                    imgImatge.Source = bim; //bit a bit fem la imatge en el image panel
-                    imgImatge.Stretch = Stretch.Uniform;
+                    if (j.Nom == nomBuscat)
+                    {
+                        string ruta = System.IO.Path.GetFullPath("../../Fotos/" + j.NomImg);
+
+                        Uri uri = new Uri(ruta, UriKind.Absolute); // per assignar l'arxiu a una imatge
+                        BitmapImage bim = new BitmapImage(uri); // tenim la imatge 
+                        imgImatge.Source = bim; //bit a bit fem la imatge en el image panel
+                        imgImatge.Stretch = Stretch.Uniform;
+                    }
                 }
             }
         }
@@ -157,6 +160,11 @@ namespace Jugadmin
         private void btnAfageix_Click(object sender, RoutedEventArgs e)
         {
             spDadesPrincipal.Height = Double.NaN;
+        }
+
+        private void btnDadesTemporada_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

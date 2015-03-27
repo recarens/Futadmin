@@ -1,7 +1,7 @@
 ﻿<Window x:Name="wndPrincipal" x:Class="Jugadmin.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Jugadmin" Height="448.227" Width="1070.781">
+        Title="Jugadmin" Height="601.227" Width="1070.781">
     <Window.Background>
         <ImageBrush ImageSource="Fotos/grass.jpg" Stretch="UniformToFill"/>
     </Window.Background>
@@ -17,10 +17,11 @@
             <Button x:Name="btnSortir" Content="Sortir" Margin="9" Click="btnSortir_Click" FontSize="16"/>
         </WrapPanel>
         <GridSplitter Grid.Column="0" Width="10" BorderBrush="#FF171212" Background="White"/>
-        <StackPanel x:Name="spDadesPrincipal" Grid.Column="1" Orientation="Vertical">
+        <ScrollViewer Grid.Column="1" >
+        <StackPanel x:Name="spDadesPrincipal" Orientation="Vertical">
             <Image x:Name="imgImatge" Width="100" Height="100" Margin="5"/>
             <Button x:Name="btnDadesPersonals" Content="Dades Personals" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesPersonals_Click" Background="#FF2E5F0C" BorderBrush="#FFDCD6D6" BorderThickness="3" Foreground="White"/>
-            <Border Margin="10,0,10,0" x:Name="wpDadesPersonals" BorderBrush="White" BorderThickness="2">
+            <Border Margin="10,0,10,30" x:Name="wpDadesPersonals" BorderBrush="White" BorderThickness="2">
                 <WrapPanel Orientation="Vertical" Background="#FF72D680" MaxHeight="250">
                     <StackPanel Orientation="Horizontal">
                         <Label Margin="4" FontSize="14" FontWeight="Bold">DNI:</Label>
@@ -71,11 +72,15 @@
                         <TextBox x:Name="tbnSoci" MinWidth="150" Margin="9,5,10,5" FontSize="16" BorderBrush="Black"/>
                     </StackPanel>
                     <Label Margin="4" FontSize="14" FontWeight="Bold">Malalties o alergies:</Label>
-                    <ScrollViewer MaxWidth="300"  Margin="1,5,10,5">
-                        <TextBox x:Name="tbMalalties"  FontSize="16" BorderBrush="Black"/>
+                    <ScrollViewer MaxWidth="300" MinWidth="300" MaxHeight="100" MinHeight="100" Margin="1,5,10,5">
+                        <TextBox x:Name="tbMalalties"  FontSize="16" BorderBrush="Black" AcceptsReturn="True" TextWrapping="Wrap"/>
                     </ScrollViewer>
                 </WrapPanel>   
             </Border>
+            
+            <Button x:Name="btnDadesTemporada" Content="Dades per Temporada" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesTemporada_Click" Background="#FF2E5F0C" BorderBrush="#FFDCD6D6" BorderThickness="3" Foreground="White"/>
+            
         </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
