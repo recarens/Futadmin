@@ -28,6 +28,7 @@ namespace Jugadmin
         public MainWindow()
         {
             InitializeComponent();
+            imgImatge = new Image();//?
             equips = new Dictionary<string, Equip>();
             ConexioCargaEquips();
             ConexioCargaJugadors();
