@@ -22,50 +22,50 @@
             <Image x:Name="imgImatge" Width="100" Height="100" Margin="5"/>
             <Button x:Name="btnDadesPersonals" Content="Dades Personals" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesPersonals_Click" Background="#FF2E5F0C" BorderBrush="#FFDCD6D6" BorderThickness="3" Foreground="White"/>
             <Border Margin="10,0,10,30" x:Name="wpDadesPersonals" BorderBrush="White" BorderThickness="2">
-                <WrapPanel Orientation="Vertical" Background="#FF72D680" MaxHeight="250">
+                <WrapPanel Orientation="Vertical" Background="#FFACFFA8" MaxHeight="250">
                     <StackPanel Orientation="Horizontal">
                         <Label Margin="4" FontSize="14" FontWeight="Bold">DNI:</Label>
-                        <TextBox x:Name="tbAnyDni" MinWidth="200" Margin="33,5,10,5" FontSize="16" BorderBrush="Black"/>
+                        <TextBox x:Name="tbAnyDni" MinWidth="200" Margin="33,5,10,5" FontSize="16" BorderBrush="#FF2E5F0C"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                    <Label Margin="4" FontSize="14" FontWeight="Bold">Nom:</Label>
-                    <TextBox x:Name="tbNom" MinWidth="199" Margin="28,5,10,5" FontSize="16" BorderBrush="Black"/>
+                        <Label Margin="4" FontSize="14" FontWeight="Bold">Nom:</Label>
+                        <TextBox x:Name="tbNom" MinWidth="199" Margin="28,5,10,5" FontSize="16" BorderBrush="#FF2E5F0C"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Margin="4" FontSize="14" FontWeight="Bold">Cognom:</Label>
-                        <TextBox x:Name="tbCognom" MinWidth="199" Margin="4,5,10,5" FontSize="16" BorderBrush="Black"/>
+                            <TextBox x:Name="tbCognom" MinWidth="199" Margin="4,5,10,5" FontSize="16" BorderBrush="#FF2E5F0C"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Margin="4" FontSize="14" FontWeight="Bold">Edat:</Label>
-                        <TextBox x:Name="tbEdat" MinWidth="200" Margin="30,5,10,5" FontSize="16" BorderBrush="Black"/>
+                            <TextBox x:Name="tbEdat" MinWidth="200" Margin="30,5,10,5" FontSize="16" BorderBrush="#FF2E5F0C"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Margin="4" FontSize="14" FontWeight="Bold">Any Neixament:</Label>
-                        <TextBox x:Name="tbAnyNeixament" MinWidth="147" Margin="10,5,10,5" FontSize="16" BorderBrush="Black"/>
+                            <TextBox x:Name="tbAnyNeixament" MinWidth="147" Margin="10,5,10,5" FontSize="16" BorderBrush="#FF2E5F0C"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Margin="4" FontSize="14" FontWeight="Bold">Telèfon:</Label>
-                        <TextBox x:Name="tbTelefon" MinWidth="200" Margin="10,5,10,5" FontSize="16" BorderBrush="Black"/>
+                            <TextBox x:Name="tbTelefon" MinWidth="200" Margin="10,5,10,5" FontSize="16" BorderBrush="#FF2E5F0C"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Margin="4" FontSize="14" FontWeight="Bold">Mòbil:</Label>
-                        <TextBox x:Name="tbMobil" MinWidth="203" Margin="20,5,10,5" FontSize="16" BorderBrush="Black"/>
+                            <TextBox x:Name="tbMobil" MinWidth="203" Margin="20,5,10,5" FontSize="16" BorderBrush="#FF2E5F0C"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Margin="4" FontSize="14" FontWeight="Bold">Sexe:</Label>
-                        <TextBox x:Name="tbSexe" MinWidth="201" Margin="30,5,10,5" FontSize="16" BorderBrush="Black"/>
+                            <TextBox x:Name="tbSexe" MinWidth="201" Margin="30,5,10,5" FontSize="16" BorderBrush="#FF2E5F0C"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Margin="4" FontSize="14" FontWeight="Bold">Data inscripció:</Label>
-                        <DatePicker x:Name="dpAnyNeixament" MaxWidth="155" Margin="10,5,10,5" FontSize="16" BorderBrush="Black"/>
+                            <DatePicker x:Name="dpAnyNeixament" MaxWidth="155" Margin="10,5,10,5" FontSize="16" BorderBrush="#FF2E5F0C"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Margin="4" FontSize="14" FontWeight="Bold">Tarjeta Sanitaria:</Label>
-                        <TextBox x:Name="tbTarjetaSanitaria" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="Black"/>
+                            <TextBox x:Name="tbTarjetaSanitaria" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="#FF2E5F0C"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Margin="4" FontSize="14" FontWeight="Bold">Correu electrònic:</Label>
-                        <TextBox x:Name="tbcorreuElec" MinWidth="150" Margin="1,5,10,5" FontSize="16" BorderBrush="Black"/>
+                            <TextBox x:Name="tbcorreuElec" MinWidth="150" Margin="1,5,10,5" FontSize="16" BorderBrush="#FF2E5F0C"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Margin="4" FontSize="14" FontWeight="Bold">Numero de Soci:</Label>
@@ -73,7 +73,7 @@
                     </StackPanel>
                     <Label Margin="4" FontSize="14" FontWeight="Bold">Malalties o alergies:</Label>
                     <ScrollViewer MaxWidth="300" MinWidth="300" MaxHeight="100" MinHeight="100" Margin="1,5,10,5">
-                        <TextBox x:Name="tbMalalties"  FontSize="16" BorderBrush="Black" AcceptsReturn="True" TextWrapping="Wrap"/>
+                            <TextBox x:Name="tbMalalties"  FontSize="16" BorderBrush="#FF2E5F0C" AcceptsReturn="True" TextWrapping="Wrap"/>
                     </ScrollViewer>
                 </WrapPanel>   
             </Border>

@@ -131,7 +131,7 @@ namespace Jugadmin
                     {
                         string ruta = System.IO.Path.GetFullPath("../../Fotos/" + j.NomImg);
 
-                        Uri uri = new Uri(ruta, UriKind.Absolute); // per assignar l'arxiu a una imatge
+                        Uri uri = new Uri(ruta, UriKind.Relative); // per assignar l'arxiu a una imatge
                         BitmapImage bim = new BitmapImage(uri); // tenim la imatge 
                         imgImatge.Source = bim; //bit a bit fem la imatge en el image panel
                         imgImatge.Stretch = Stretch.Uniform;
