@@ -7,15 +7,17 @@
     </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="130" MaxWidth="130"/>
+            <ColumnDefinition Width="150" MaxWidth="150"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <WrapPanel Orientation="Vertical" Grid.Column="0">
-            <Button x:Name="btnCerca" Content="Cercar" Margin="9" Click="btnCerca_Click" FontSize="16"/>
-            <Button x:Name="btnAfageix" Content="Afagir jugador" Margin="9" FontSize="16" Click="btnAfageix_Click"/>
-            <Button x:Name="btnCrearEquip" Content="Crear equip" Margin="9" FontSize="16"/>
-            <Button x:Name="btnSortir" Content="Sortir" Margin="9" Click="btnSortir_Click" FontSize="16"/>
-        </WrapPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="0" Margin="5">
+            <Button x:Name="btnCerca" Content="Cercar" Margin="9" Click="btnCerca_Click" FontSize="16" Background="#FF2E5F0C" BorderBrush="#FFDCD6D6" BorderThickness="2" Foreground="White"/>
+            <Button x:Name="btnAfageix" Content="+ jugador" Margin="9" FontSize="16" Click="btnAfageix_Click" Background="#FF2E5F0C" BorderBrush="#FFDCD6D6" BorderThickness="2" Foreground="White"/>
+            <Button x:Name="btnAfageixEntrenador" Content="+ entrenador" Margin="9" FontSize="16" Background="#FF2E5F0C" BorderBrush="#FFDCD6D6" BorderThickness="2" Foreground="White"/>
+            <Button x:Name="btnCrearEquip" Content="Crear equip" Margin="9" FontSize="16" Background="#FF2E5F0C" BorderBrush="#FFDCD6D6" BorderThickness="2" Foreground="White"/>
+            <Button x:Name="btnNovaTemporada" Content="Nova Temporada" Margin="9" FontSize="16" Background="#FF2E5F0C" BorderBrush="#FFDCD6D6" BorderThickness="2" Foreground="White"/>
+            <Button x:Name="btnSortir" Content="Sortir" Margin="9" Click="btnSortir_Click" FontSize="16" Background="#FF2E5F0C" BorderBrush="#FFDCD6D6" BorderThickness="2" Foreground="White"/>
+        </StackPanel>
         <GridSplitter Grid.Column="0" Width="10" BorderBrush="#FF171212" Background="White"/>
         <ScrollViewer Grid.Column="1" >
         <StackPanel x:Name="spDadesPrincipal" Orientation="Vertical">
@@ -79,8 +81,12 @@
             </Border>
             
             <Button x:Name="btnDadesTemporada" Content="Dades per Temporada" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesTemporada_Click" Background="#FF2E5F0C" BorderBrush="#FFDCD6D6" BorderThickness="3" Foreground="White"/>
-            
-        </StackPanel>
+                <Border Margin="10,0,10,30" x:Name="wpDadesTemporada" BorderBrush="White" BorderThickness="2">
+                    <StackPanel Orientation="Vertical" Background="#FFACFFA8" MaxHeight="250">
+                        <TabPanel MinHeight="100"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </Window>

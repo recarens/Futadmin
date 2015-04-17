@@ -165,7 +165,14 @@ namespace Jugadmin
 
         private void btnDadesTemporada_Click(object sender, RoutedEventArgs e)
         {
-
+            if (wpDadesTemporada.Height > 0 || wpDadesTemporada.Height.Equals(Double.NaN))
+            {
+                wpDadesTemporada.Height = 0;
+            }
+            else
+            {
+                wpDadesTemporada.Height = Double.NaN; // aixo es  height l'auto del xaml
+            }
         }
     }
 }
