@@ -1,0 +1,120 @@
+﻿<Window x:Class="Gsport.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="601.227" Width="1070.781">
+    <Window.Background>
+        <ImageBrush ImageSource="Fotos/grass.jpg" Stretch="UniformToFill"/>
+    </Window.Background>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="165" MaxWidth="165"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" Grid.Column="0" Margin="5">
+                    <Button x:Name="btnCerca" Content="Cercar" Margin="9" Click="btnCerca_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold"/>
+                    <Button x:Name="btnAfageix" Content="+ Jugador" Margin="9" FontSize="16" Click="btnAfageix_Click" Background="#FF52B64E" BorderBrush="{x:Null}"  Foreground="#FF0B2E10" FontWeight="Bold"/>
+                    <Button x:Name="btnAfageixEntrenador" Content="+ Entrenador" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold"/>
+                    <Button x:Name="btnCrearEquip" Content="Crear equip" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}"  Foreground="#FF0B2E10" FontWeight="Bold"/>
+                    <Button x:Name="btnNovaTemporada" Content="Nova Temporada" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}"  Foreground="#FF0B2E10" FontWeight="Bold"/>
+                    <Button x:Name="btnSortir" Content="Sortir" Margin="9" Click="btnSortir_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold"/>
+                </StackPanel>
+                <GridSplitter Grid.Column="0" Width="10" BorderBrush="#FF171212" Background="White"/>
+                <ScrollViewer Grid.Column="1" Margin="0,-5,0,5" >
+                    <StackPanel x:Name="spDadesPrincipal" Orientation="Vertical">
+                        <Image x:Name="imgImatge" Width="100" Height="100" Margin="5"/>
+                        <Button x:Name="btnDadesPersonals" Content="Dades Personals" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesPersonals_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
+                        <Border Margin="10,0,10,30" x:Name="wpDadesPersonals" BorderThickness="2">
+                            <WrapPanel Orientation="Vertical" Background="#FF52B64E" MaxHeight="250">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10">DNI:</Label>
+                                    <TextBox x:Name="tbAnyDni" MinWidth="200" Margin="33,5,10,5" FontSize="16" BorderBrush="{x:Null}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10">Nom:</Label>
+                                    <TextBox x:Name="tbNom" MinWidth="199" Margin="28,5,10,5" FontSize="16" BorderBrush="{x:Null}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10">Cognom:</Label>
+                                    <TextBox x:Name="tbCognom" MinWidth="199" Margin="4,5,10,5" FontSize="16" BorderBrush="{x:Null}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10">Edat:</Label>
+                                    <TextBox x:Name="tbEdat" MinWidth="200" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10">Any Neixament:</Label>
+                                    <TextBox x:Name="tbAnyNeixament" MinWidth="147" Margin="10,5,10,5" FontSize="16" BorderBrush="{x:Null}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10">Telèfon:</Label>
+                                    <TextBox x:Name="tbTelefon" MinWidth="200" Margin="10,5,10,5" FontSize="16" BorderBrush="{x:Null}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10">Mòbil:</Label>
+                                    <TextBox x:Name="tbMobil" MinWidth="203" Margin="20,5,10,5" FontSize="16" BorderBrush="{x:Null}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10">Sexe:</Label>
+                                    <TextBox x:Name="tbSexe" MinWidth="201" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10">Data inscripció:</Label>
+                                    <DatePicker x:Name="dpAnyNeixament" MaxWidth="155" Margin="10,5,10,5" FontSize="16" BorderBrush="{x:Null}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10">Tarjeta Sanitaria:</Label>
+                                    <TextBox x:Name="tbTarjetaSanitaria" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10">Correu electrònic:</Label>
+                                    <TextBox x:Name="tbcorreuElec" MinWidth="150" Margin="1,5,10,5" FontSize="16" BorderBrush="{x:Null}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10">Numero de Soci:</Label>
+                                    <TextBox x:Name="tbnSoci" MinWidth="150" Margin="9,5,10,5" FontSize="16" BorderBrush="{x:Null}"/>
+                                </StackPanel>
+                                <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10">Malalties o alergies:</Label>
+                                <ScrollViewer MaxWidth="300" MinWidth="300" MaxHeight="100" MinHeight="100" Margin="1,5,10,5">
+                                    <TextBox x:Name="tbMalalties"  FontSize="16" BorderBrush="{x:Null}" AcceptsReturn="True" TextWrapping="Wrap"/>
+                                </ScrollViewer>
+                            </WrapPanel>
+                        </Border>
+
+                        <Button x:Name="btnDadesTemporada" Content="Dades per Temporada" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesTemporada_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF0B2E10"/>
+                        <Border Margin="10,0,10,30" x:Name="wpDadesTemporada" BorderThickness="1">
+                            <StackPanel Orientation="Vertical">
+                                <TabControl BorderThickness="0" Background="#FF52B64E" MinHeight="50">
+                                    <TabControl.Resources>
+                                        <Style TargetType="TabItem">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="TabItem">
+                                                        <Grid Name="Seleccionat">
+                                                            <ContentPresenter x:Name="Contingut" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="10,0" TextElement.FontSize="13" TextElement.Foreground="#FF0B2E10" TextElement.FontWeight="Bold"/>
+                                                        </Grid>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsSelected" Value="True">
+                                                                <Setter TargetName="Seleccionat" Property="Background" Value="White" />
+                                                                <Setter TargetName="Contingut" Property="TextElement.FontWeight" Value="Bold"/>
+                                                                <Setter TargetName="Contingut" Property="TextElement.FontSize" Value="16"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsSelected" Value="False">
+                                                                <Setter TargetName="Seleccionat" Property="Background" Value="#FF1C630D" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </TabControl.Resources>
+                                    <TabItem Header="2015"/>
+                                    <TabItem Header="2016"/>
+                                </TabControl>
+
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Window>
+

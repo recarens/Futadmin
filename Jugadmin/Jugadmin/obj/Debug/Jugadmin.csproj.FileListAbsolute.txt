@@ -49,3 +49,6 @@ C:\Users\Eric\Documents\GitHub\Futadmin\Jugadmin\Jugadmin\bin\Debug\Jugadmin.exe
 C:\Users\Eric\Documents\GitHub\Futadmin\Jugadmin\Jugadmin\bin\Debug\Jugadmin.pdb
 C:\Users\Eric\Documents\GitHub\Futadmin\Jugadmin\Jugadmin\bin\Debug\EstructuraClasses.dll
 C:\Users\Eric\Documents\GitHub\Futadmin\Jugadmin\Jugadmin\bin\Debug\EstructuraClasses.pdb
+C:\Users\Eric\Documents\GitHub\Gsport\Jugadmin\Jugadmin\bin\Debug\Jugadmin.exe.config
+C:\Users\Eric\Documents\GitHub\Gsport\Jugadmin\Jugadmin\obj\Debug\Jugadmin.exe
+C:\Users\Eric\Documents\GitHub\Gsport\Jugadmin\Jugadmin\obj\Debug\Jugadmin.pdb
