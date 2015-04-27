@@ -23,5 +23,45 @@ namespace Gsport
         {
             InitializeComponent();
         }
+
+        private void rbEntrenador_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void rbJugador_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void rbEntrenador_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void rbEquip_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void rbJugador_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void rbEquip_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tbBusca_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void dgResultat_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

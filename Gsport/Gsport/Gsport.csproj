@@ -60,6 +60,9 @@
     <Compile Include="wndCercar.xaml.cs">
       <DependentUpon>wndCercar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="wndLogin.xaml.cs">
+      <DependentUpon>wndLogin.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -78,6 +81,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="wndCercar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wndLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
