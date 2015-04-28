@@ -20,9 +20,13 @@ namespace Gsport
     /// </summary>
     public partial class MainWindow : Window
     {
+        Gsport.efadbDataSet efadbDataSet;
+        int codiUsuari;
         public MainWindow()
         {
             InitializeComponent();
+            spDadesPrincipal.IsEnabled = false;
+            spDadesPrincipal.Opacity = 0;
         }
 
         private void btnCerca_Click(object sender, RoutedEventArgs e)
@@ -31,6 +35,8 @@ namespace Gsport
 
         private void btnAfageix_Click(object sender, RoutedEventArgs e)
         {
+            spDadesPrincipal.IsEnabled = true;
+            spDadesPrincipal.Opacity = 100;
             spDadesPrincipal.Height = Double.NaN;
         }
 
@@ -78,18 +84,43 @@ namespace Gsport
             {
                 wpDadesTemporada.Height = Double.NaN; // aixo es  height l'auto del xaml
             }
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
-            Gsport.efadbDataSet efadbDataSet = ((Gsport.efadbDataSet)(this.FindResource("efadbDataSet")));
+            efadbDataSet = ((Gsport.efadbDataSet)(this.FindResource("efadbDataSet")));
             // Cargar datos en la tabla jugadors. Puede modificar este código según sea necesario.
             Gsport.efadbDataSetTableAdapters.jugadorsTableAdapter efadbDataSetjugadorsTableAdapter = new Gsport.efadbDataSetTableAdapters.jugadorsTableAdapter();
             efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
+            Gsport.efadbDataSetTableAdapters.usuarisTableAdapter efadbDataSetusuarisTableAdapter = new Gsport.efadbDataSetTableAdapters.usuarisTableAdapter();
+            efadbDataSetusuarisTableAdapter.Fill(efadbDataSet.usuaris);
             System.Windows.Data.CollectionViewSource jugadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugadorsViewSource")));
             jugadorsViewSource.View.MoveCurrentToFirst();
+            wndLogin wnd = new wndLogin(efadbDataSet);
+            wnd.ShowDialog();
+            codiUsuari = wnd.codiUsuari;   
+            switch(wnd.privilegi)
+            {
+                case 1: //Jugadors
+                    break;
+                case 2: //Delegat
+                    break;
+                case 3: //Entrenador
+                    btnAfageix.IsEnabled = true;
+                    break;
+                case 4: //Coordinador
+                    btnAfageix.IsEnabled = true;
+                    btnCrearEquip.IsEnabled = true;
+                    btnNovaTemporada.IsEnabled = true;
+                    btnAfageixEntrenador.IsEnabled = true;
+                    break;
+                case 5: //Gsport Admin
+                    btnAfageix.IsEnabled = true;
+                    btnCrearEquip.IsEnabled = true;
+                    btnNovaTemporada.IsEnabled = true;
+                    btnAfageixEntrenador.IsEnabled = true;
+                    break;
+            }
         }
     }
 }

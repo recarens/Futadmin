@@ -17,11 +17,11 @@
             <ColumnDefinition Width="82*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Margin="5">
-            <Button x:Name="btnCerca" Content="Cercar" Margin="9" Click="btnCerca_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold"/>
-            <Button x:Name="btnAfageix" Content="+ Jugador" Margin="9" FontSize="16" Click="btnAfageix_Click" Background="#FF52B64E" BorderBrush="{x:Null}"  Foreground="#FF0B2E10" FontWeight="Bold"/>
-            <Button x:Name="btnAfageixEntrenador" Content="+ Entrenador" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold" Click="btnAfageixEntrenador_Click"/>
-            <Button x:Name="btnCrearEquip" Content="Crear equip" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}"  Foreground="#FF0B2E10" FontWeight="Bold" Click="btnCrearEquip_Click"/>
-            <Button x:Name="btnNovaTemporada" Content="Nova Temporada" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}"  Foreground="#FF0B2E10" FontWeight="Bold" Click="btnNovaTemporada_Click"/>
+            <Button x:Name="btnCerca" Content="Cercar" Margin="9" Click="btnCerca_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold" />
+            <Button x:Name="btnAfageix" Content="+ Jugador" Margin="9" FontSize="16" Click="btnAfageix_Click" Background="#FF52B64E" BorderBrush="{x:Null}"  Foreground="#FF0B2E10" FontWeight="Bold" IsEnabled="False"/>
+            <Button x:Name="btnAfageixEntrenador" Content="+ Entrenador" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold" Click="btnAfageixEntrenador_Click" IsEnabled="False"/>
+            <Button x:Name="btnCrearEquip" Content="Crear equip" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}"  Foreground="#FF0B2E10" FontWeight="Bold" Click="btnCrearEquip_Click"  IsEnabled="False"/>
+            <Button x:Name="btnNovaTemporada" Content="Nova Temporada" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}"  Foreground="#FF0B2E10" FontWeight="Bold" Click="btnNovaTemporada_Click"  IsEnabled="False"/>
             <Button x:Name="btnSortir" Content="Sortir" Margin="9" Click="btnSortir_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold"/>
         </StackPanel>
         <GridSplitter Grid.Column="0" Width="10" BorderBrush="#FF171212" Background="White"/>

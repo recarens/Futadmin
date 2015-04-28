@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,14 +20,37 @@ namespace Gsport
     /// </summary>
     public partial class wndLogin : Window
     {
+        efadbDataSet dataSetAux;
+        public int codiUsuari;
+        public int privilegi;
         public wndLogin()
         {
             InitializeComponent();
         }
-
+        public wndLogin(efadbDataSet dataSet)
+        {
+            InitializeComponent();
+            dataSetAux = dataSet;
+        }
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-
+            bool trobat = false;
+            foreach (DataRow Linia in dataSetAux.usuaris.Rows)
+            {
+                if (tbUsuari.Text.Trim() == Linia["usuari"].ToString().Trim())
+                    if (pbContrasenya.Password.Trim() == Linia["contrasenya"].ToString().Trim())
+                    {
+                        trobat = true;
+                        codiUsuari = (int)Linia["codi"];
+                        privilegi = (int)Linia["privilegi"];
+                    }
+            }
+            if (trobat)
+            {
+                this.Close();
+            }
+            else
+                MessageBox.Show("No és correcte");
         }
     }
 }
