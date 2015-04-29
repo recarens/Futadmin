@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Globalization;
 using System.Linq;
@@ -36,8 +37,6 @@ namespace Gsport
 
             InitializeComponent();
             dataSetAux = dataSet;
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.CurrentCulture;
-            idiomes.WrapperIdiomes.ChangeCulture(Thread.CurrentThread.CurrentUICulture);
         }
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -88,6 +87,12 @@ namespace Gsport
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-ES");
             idiomes.WrapperIdiomes.ChangeCulture(Thread.CurrentThread.CurrentUICulture);
 
+        }
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            e.Cancel = true;
+            Environment.Exit(0);
         }
     }
 }

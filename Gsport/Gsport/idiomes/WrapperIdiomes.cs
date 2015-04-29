@@ -18,13 +18,13 @@ namespace Gsport.idiomes
         {
         }
 
-        //devuelve una instancia nueva de nuestros recursos.
+        //torna una instancia nova dels nostres recurssos d'idioma
         public idiomes GetResourceInstance()
         {
             return new idiomes();
         }
 
-        //Esta propiedad devuelve el ObjectDataProvider en uso.
+        //torna ObjectDataProvider en us.
         public static ObjectDataProvider ResourceProvider
         {
             get
@@ -35,7 +35,7 @@ namespace Gsport.idiomes
             }
         }
 
-        //Este método cambia la cultura aplicada a los recursos y refresca la propiedad ResourceProvider.
+        //cambia la cultura aplicada en els recursos y refresca la propietat ResourceProvider.
         public static void ChangeCulture(CultureInfo culture)
         {
             Properties.Resources.Culture = culture;
