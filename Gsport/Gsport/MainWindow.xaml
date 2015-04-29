@@ -13,8 +13,9 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="165" MaxWidth="165"/>
-            <ColumnDefinition Width="367*"/>
-            <ColumnDefinition Width="82*"/>
+            <ColumnDefinition Width="457*"/>
+            <ColumnDefinition Width="310*"/>
+            <ColumnDefinition Width="171*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Margin="5">
             <Button x:Name="btnCerca" Content="Cercar" Margin="9" Click="btnCerca_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold" />
@@ -25,7 +26,7 @@
             <Button x:Name="btnSortir" Content="Sortir" Margin="9" Click="btnSortir_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold"/>
         </StackPanel>
         <GridSplitter Grid.Column="0" Width="10" BorderBrush="#FF171212" Background="White"/>
-        <ScrollViewer Grid.Column="1" Grid.ColumnSpan="2" >
+        <ScrollViewer Grid.Column="1" Grid.ColumnSpan="3" >
             <StackPanel x:Name="spDadesPrincipal" Orientation="Vertical">
                 <Image x:Name="imgImatge" Width="100" Height="100" Margin="5"/>
                 <Button x:Name="btnDadesPersonals" Content="Dades Personals" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesPersonals_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>

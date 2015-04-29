@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,14 +25,19 @@ namespace Gsport
         efadbDataSet dataSetAux;
         public int codiUsuari;
         public int privilegi;
+        int nErrors = 0;
         public wndLogin()
         {
             InitializeComponent();
         }
         public wndLogin(efadbDataSet dataSet)
         {
+            
+
             InitializeComponent();
             dataSetAux = dataSet;
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.CurrentCulture;
+            idiomes.WrapperIdiomes.ChangeCulture(Thread.CurrentThread.CurrentUICulture);
         }
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -50,7 +57,37 @@ namespace Gsport
                 this.Close();
             }
             else
-                MessageBox.Show("No és correcte");
+            {
+                nErrors++;
+                
+                if(nErrors >= 5)
+                {
+                    MessageBox.Show("T'has equivocat molts cops");
+                }
+                else
+                    MessageBox.Show("No és correcte");
+            }
+        }
+
+        private void imgCat_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("ca-ES");
+            idiomes.WrapperIdiomes.ChangeCulture(Thread.CurrentThread.CurrentUICulture);
+            
+        }
+
+        private void imgEn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-GB");
+            idiomes.WrapperIdiomes.ChangeCulture(Thread.CurrentThread.CurrentUICulture);
+
+        }
+
+        private void imgEs_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-ES");
+            idiomes.WrapperIdiomes.ChangeCulture(Thread.CurrentThread.CurrentUICulture);
+
         }
     }
 }

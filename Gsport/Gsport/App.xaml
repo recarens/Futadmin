@@ -1,8 +1,11 @@
 ﻿<Application x:Class="Gsport.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:idiomes="clr-namespace:Gsport.idiomes"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ObjectDataProvider x:Key="IdiomesRes" MethodName="GetResourceInstance" ObjectType="{x:Type idiomes:WrapperIdiomes}">
+        </ObjectDataProvider>
     </Application.Resources>
+    
 </Application>
