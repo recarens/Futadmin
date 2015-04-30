@@ -43,12 +43,12 @@ namespace Gsport
             bool trobat = false;
             foreach (DataRow Linia in dataSetAux.usuaris.Rows)
             {
-                if (tbUsuari.Text.Trim() == Linia["usuari"].ToString().Trim())
-                    if (pbContrasenya.Password.Trim() == Linia["contrasenya"].ToString().Trim())
+                if (tbUsuari.Text.Trim() == Linia["username"].ToString().Trim())
+                    if (pbContrasenya.Password.Trim() == Linia["password"].ToString().Trim())
                     {
                         trobat = true;
-                        codiUsuari = (int)Linia["codi"];
-                        privilegi = (int)Linia["privilegi"];
+                        codiUsuari = (int)Linia["id_usuari"];
+                        privilegi = (int)Linia["id_rol"];
                     }
             }
             if (trobat)
@@ -87,12 +87,6 @@ namespace Gsport
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-ES");
             idiomes.WrapperIdiomes.ChangeCulture(Thread.CurrentThread.CurrentUICulture);
 
-        }
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-        {
-            base.OnClosing(e);
-            e.Cancel = true;
-            Environment.Exit(0);
         }
     }
 }

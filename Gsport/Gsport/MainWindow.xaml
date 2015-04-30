@@ -6,6 +6,8 @@
     <Window.Resources>
         <local:efadbDataSet x:Key="efadbDataSet"/>
         <CollectionViewSource x:Key="jugadorsViewSource" Source="{Binding jugadors, Source={StaticResource efadbDataSet}}"/>
+        <CollectionViewSource x:Key="equipsViewSource" Source="{Binding equips, Source={StaticResource efadbDataSet}}"/>
+        <CollectionViewSource x:Key="equipsjugadorsViewSource" Source="{Binding eqJUgador, Source={StaticResource equipsViewSource}}"/>
     </Window.Resources>
     <Window.Background>
         <ImageBrush ImageSource="Fotos/grass.jpg" Stretch="UniformToFill"/>
@@ -13,9 +15,9 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="165" MaxWidth="165"/>
-            <ColumnDefinition Width="457*"/>
-            <ColumnDefinition Width="310*"/>
-            <ColumnDefinition Width="171*"/>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Margin="5">
             <Button x:Name="btnCerca" Content="Cercar" Margin="9" Click="btnCerca_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold" />
@@ -26,7 +28,7 @@
             <Button x:Name="btnSortir" Content="Sortir" Margin="9" Click="btnSortir_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold"/>
         </StackPanel>
         <GridSplitter Grid.Column="0" Width="10" BorderBrush="#FF171212" Background="White"/>
-        <ScrollViewer Grid.Column="1" Grid.ColumnSpan="3" >
+        <ScrollViewer Grid.Column="1">
             <StackPanel x:Name="spDadesPrincipal" Orientation="Vertical">
                 <Image x:Name="imgImatge" Width="100" Height="100" Margin="5"/>
                 <Button x:Name="btnDadesPersonals" Content="Dades Personals" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesPersonals_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
@@ -119,6 +121,77 @@
                         </TabControl>
 
                     </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+        <ScrollViewer Grid.Column="2">
+            <StackPanel>
+                <Button x:Name="btnDadesEquip" Content="Dades Equip" FontSize="16" FontWeight="Bold" Margin="10,50,10,0" Click="btnDadesEquip_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
+                <Border Margin="10,0,10,30" x:Name="wpDadesEquip" BorderThickness="2">
+                    <WrapPanel Orientation="Vertical" Background="#FF52B64E" MaxHeight="250" DataContext="{StaticResource equipsjugadorsViewSource}">
+                        <Grid x:Name="grid1" DataContext="{StaticResource equipsViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="nom:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="1" VerticalAlignment="Center"/>
+                            <TextBox x:Name="nomTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="1" Text="{Binding nom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            <Label Content="id divisio:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10"  Grid.Row="2" VerticalAlignment="Center"/>
+                            <TextBox x:Name="id_divisioTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="2" Text="{Binding id_divisio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            <Label Content="id categoria:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="3" VerticalAlignment="Center"/>
+                            <TextBox x:Name="id_categoriaTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="3" Text="{Binding id_categoria, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            <Label Content="id entrenador:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="4" VerticalAlignment="Center"/>
+                            <TextBox x:Name="id_entrenadorTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="4" Text="{Binding id_entrenador, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            <Label Content="puntuacio:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="5" VerticalAlignment="Center"/>
+                            <TextBox x:Name="puntuacioTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="5" Text="{Binding puntuacio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </Grid>
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" MaxWidth="600" VerticalScrollBarVisibility="Auto" Height="180" Margin="6">
+                        <DataGrid x:Name="jugadorsDataGrid" AutoGenerateColumns="False" MinHeight="70" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="dniColumn" Binding="{Binding dni}" Header="dni" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="nomColumn" Binding="{Binding nom}" Header="nom" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="cognomsColumn" Binding="{Binding cognoms}" Header="cognoms" Width="SizeToHeader"/>
+                                <DataGridTemplateColumn x:Name="data_inscripcioColumn" Header="data inscripcio" Width="SizeToHeader">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <DatePicker SelectedDate="{Binding data_inscripcio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn x:Name="data_naixementColumn" Header="data naixement" Width="SizeToHeader">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <DatePicker SelectedDate="{Binding data_naixement, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn x:Name="tarjeta_sanitariaColumn" Binding="{Binding tarjeta_sanitaria}" Header="tarjeta sanitaria" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="malaltia_alergiaColumn" Binding="{Binding malaltia_alergia}" Header="malaltia alergia" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="mobilColumn" Binding="{Binding mobil}" Header="mobil" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="telefonColumn" Binding="{Binding telefon}" Header="telefon" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="correu_electronicColumn" Binding="{Binding correu_electronic}" Header="correu electronic" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="numero_sociColumn" Binding="{Binding numero_soci}" Header="numero soci" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="edatColumn" Binding="{Binding edat}" Header="edat" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="pesColumn" Binding="{Binding pes}" Header="pes" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="alturaColumn" Binding="{Binding altura}" Header="altura" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="posicioColumn" Binding="{Binding posicio}" Header="posicio" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="dorsalColumn" Binding="{Binding dorsal}" Header="dorsal" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="minuts_jugatsColumn" Binding="{Binding minuts_jugats}" Header="minuts jugats" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="golsColumn" Binding="{Binding gols}" Header="gols" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="faltes_entrenoColumn" Binding="{Binding faltes_entreno}" Header="faltes entreno" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="id_equipColumn" Binding="{Binding id_equip}" Header="id equip" Width="SizeToHeader"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        </ScrollViewer>
+                    </WrapPanel>
                 </Border>
             </StackPanel>
         </ScrollViewer>

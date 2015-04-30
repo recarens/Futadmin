@@ -92,6 +92,8 @@ namespace Gsport {
         
         private global::System.Data.DataRelation relationfk_gols_partit_partits1;
         
+        private global::System.Data.DataRelation relationeqJUgador;
+        
         private global::System.Data.DataRelation relationfk_lesions_jugadors1;
         
         private global::System.Data.DataRelation relationfk_partits_equips_rivals1;
@@ -662,6 +664,7 @@ namespace Gsport {
             this.relationfk_equips_rivals_fases1 = this.Relations["fk_equips_rivals_fases1"];
             this.relationfk_gols_partit_jugadors1 = this.Relations["fk_gols_partit_jugadors1"];
             this.relationfk_gols_partit_partits1 = this.Relations["fk_gols_partit_partits1"];
+            this.relationeqJUgador = this.Relations["eqJUgador"];
             this.relationfk_lesions_jugadors1 = this.Relations["fk_lesions_jugadors1"];
             this.relationfk_partits_equips_rivals1 = this.Relations["fk_partits_equips_rivals1"];
             this.relationfk_partits_equips1 = this.Relations["fk_partits_equips1"];
@@ -778,6 +781,10 @@ namespace Gsport {
                         this.tablepartits.id_partitColumn}, new global::System.Data.DataColumn[] {
                         this.tablegols_partit.id_partitColumn}, false);
             this.Relations.Add(this.relationfk_gols_partit_partits1);
+            this.relationeqJUgador = new global::System.Data.DataRelation("eqJUgador", new global::System.Data.DataColumn[] {
+                        this.tableequips.id_equipColumn}, new global::System.Data.DataColumn[] {
+                        this.tablejugadors.id_equipColumn}, false);
+            this.Relations.Add(this.relationeqJUgador);
             this.relationfk_lesions_jugadors1 = new global::System.Data.DataRelation("fk_lesions_jugadors1", new global::System.Data.DataColumn[] {
                         this.tablejugadors.id_jugadorColumn}, new global::System.Data.DataColumn[] {
                         this.tablelesions.id_jugadorColumn}, false);
@@ -4544,7 +4551,7 @@ namespace Gsport {
                         int minuts_jugats, 
                         int gols, 
                         int faltes_entreno, 
-                        int id_equip) {
+                        equipsRow parentequipsRowByeqJUgador) {
                 jugadorsRow rowjugadorsRow = ((jugadorsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -4569,7 +4576,10 @@ namespace Gsport {
                         minuts_jugats,
                         gols,
                         faltes_entreno,
-                        id_equip};
+                        null};
+                if ((parentequipsRowByeqJUgador != null)) {
+                    columnValuesArray[22] = parentequipsRowByeqJUgador[0];
+                }
                 rowjugadorsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowjugadorsRow);
                 return rowjugadorsRow;
@@ -7765,6 +7775,17 @@ namespace Gsport {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public jugadorsRow[] GetjugadorsRows() {
+                if ((this.Table.ChildRelations["eqJUgador"] == null)) {
+                    return new jugadorsRow[0];
+                }
+                else {
+                    return ((jugadorsRow[])(base.GetChildRows(this.Table.ChildRelations["eqJUgador"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public partitsRow[] GetpartitsRows() {
                 if ((this.Table.ChildRelations["fk_partits_equips1"] == null)) {
                     return new partitsRow[0];
@@ -8455,6 +8476,17 @@ namespace Gsport {
                 }
                 set {
                     this[this.tablejugadors.id_equipColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public equipsRow equipsRow {
+                get {
+                    return ((equipsRow)(this.GetParentRow(this.Table.ParentRelations["eqJUgador"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["eqJUgador"]);
                 }
             }
             

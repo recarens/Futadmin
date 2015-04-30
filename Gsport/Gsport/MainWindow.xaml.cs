@@ -39,9 +39,9 @@ namespace Gsport
 
         private void btnAfageix_Click(object sender, RoutedEventArgs e)
         {
-            spDadesPrincipal.IsEnabled = true;
-            spDadesPrincipal.Opacity = 100;
-            spDadesPrincipal.Height = Double.NaN;
+            //spDadesPrincipal.IsEnabled = true;
+            //spDadesPrincipal.Opacity = 100;
+            //spDadesPrincipal.Height = Double.NaN;
         }
 
         private void btnAfageixEntrenador_Click(object sender, RoutedEventArgs e)
@@ -102,8 +102,8 @@ namespace Gsport
             jugadorsViewSource.View.MoveCurrentToFirst();
             wndLogin wnd = new wndLogin(efadbDataSet);
             wnd.ShowDialog();
-            codiUsuari = wnd.codiUsuari;   
-            switch(wnd.privilegi)
+            codiUsuari = wnd.codiUsuari;
+            switch (wnd.privilegi)
             {
                 case 1: //Jugadors
                     break;
@@ -124,6 +124,24 @@ namespace Gsport
                     btnNovaTemporada.IsEnabled = true;
                     btnAfageixEntrenador.IsEnabled = true;
                     break;
+            }
+            // Cargar datos en la tabla equips. Puede modificar este código según sea necesario.
+            Gsport.efadbDataSetTableAdapters.equipsTableAdapter efadbDataSetequipsTableAdapter = new Gsport.efadbDataSetTableAdapters.equipsTableAdapter();
+            efadbDataSetequipsTableAdapter.Fill(efadbDataSet.equips);
+            System.Windows.Data.CollectionViewSource equipsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("equipsViewSource")));
+            equipsViewSource.View.MoveCurrentToFirst();
+        }
+
+        private void btnDadesEquip_Click(object sender, RoutedEventArgs e)
+        {
+            if (wpDadesEquip.Height > 0 || wpDadesEquip.Height.Equals(Double.NaN))
+            {
+                wpDadesEquip.Height = 0;
+            }
+            else
+            {
+                wpDadesEquip.Height = Double.NaN; // aixo es  height l'auto del xaml
+                jugadorsDataGrid.Width = Double.NaN;
             }
         }
     }
