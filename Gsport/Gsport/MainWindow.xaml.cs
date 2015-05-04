@@ -29,29 +29,41 @@ namespace Gsport
             InitializeComponent();
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("ca-ES");
             idiomes.WrapperIdiomes.ChangeCulture(Thread.CurrentThread.CurrentUICulture);
-            spDadesPrincipal.IsEnabled = false;
-            spDadesPrincipal.Opacity = 0;
         }
 
         private void btnCerca_Click(object sender, RoutedEventArgs e)
         {
+            wndCercar wnd = new wndCercar();
         }
 
         private void btnAfageix_Click(object sender, RoutedEventArgs e)
         {
-            //spDadesPrincipal.IsEnabled = true;
-            //spDadesPrincipal.Opacity = 100;
-            //spDadesPrincipal.Height = Double.NaN;
+            GridLength gE2 = new GridLength(0, GridUnitType.Star);
+            cdequips.Width = gE2;
+            GridLength gJ2 = new GridLength(this.ActualWidth,GridUnitType.Star);
+            cdjugadors.Width = gJ2;
+            GridLength gC2 = new GridLength(0, GridUnitType.Star);
+            cdntrenadors.Width = gC2;
         }
 
         private void btnAfageixEntrenador_Click(object sender, RoutedEventArgs e)
         {
-
+            GridLength gE2 = new GridLength(0, GridUnitType.Star);
+            cdequips.Width = gE2;
+            GridLength gJ2 = new GridLength(0, GridUnitType.Star);
+            cdjugadors.Width = gJ2;
+            GridLength gC2 = new GridLength(this.ActualWidth, GridUnitType.Star);
+            cdntrenadors.Width = gC2;
         }
 
         private void btnCrearEquip_Click(object sender, RoutedEventArgs e)
         {
-
+            GridLength gE2 = new GridLength(this.ActualWidth, GridUnitType.Star);
+            cdequips.Width = gE2;
+            GridLength gJ2 = new GridLength(0, GridUnitType.Star);
+            cdjugadors.Width = gJ2;
+            GridLength gC2 = new GridLength(0, GridUnitType.Star);
+            cdntrenadors.Width = gC2;
         }
 
         private void btnNovaTemporada_Click(object sender, RoutedEventArgs e)
@@ -130,6 +142,11 @@ namespace Gsport
             efadbDataSetequipsTableAdapter.Fill(efadbDataSet.equips);
             System.Windows.Data.CollectionViewSource equipsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("equipsViewSource")));
             equipsViewSource.View.MoveCurrentToFirst();
+            // Cargar datos en la tabla entrenadors. Puede modificar este código según sea necesario.
+            Gsport.efadbDataSetTableAdapters.entrenadorsTableAdapter efadbDataSetentrenadorsTableAdapter = new Gsport.efadbDataSetTableAdapters.entrenadorsTableAdapter();
+            efadbDataSetentrenadorsTableAdapter.Fill(efadbDataSet.entrenadors);
+            System.Windows.Data.CollectionViewSource entrenadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("entrenadorsViewSource")));
+            entrenadorsViewSource.View.MoveCurrentToFirst();
         }
 
         private void btnDadesEquip_Click(object sender, RoutedEventArgs e)
