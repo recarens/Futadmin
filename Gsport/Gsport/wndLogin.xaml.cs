@@ -32,9 +32,7 @@ namespace Gsport
             InitializeComponent();
         }
         public wndLogin(efadbDataSet dataSet)
-        {
-            
-
+        { 
             InitializeComponent();
             dataSetAux = dataSet;
         }
@@ -49,6 +47,7 @@ namespace Gsport
                         trobat = true;
                         codiUsuari = (int)Linia["id_usuari"];
                         privilegi = (int)Linia["id_rol"];
+
                     }
             }
             if (trobat)

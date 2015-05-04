@@ -199,7 +199,7 @@
         </ScrollViewer>
         <ScrollViewer Grid.Column="3">
             <StackPanel x:Name="spDadesEntrenador" Orientation="Vertical">
-                <Button x:Name="btnDadesEntrenador" Content="Dades Entrenador" FontSize="16" FontWeight="Bold" Margin="10,50,10,0" Click="btnDadesEquip_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
+                <Button x:Name="btnDadesEntrenador" Content="Dades Entrenador" FontSize="16" FontWeight="Bold" Margin="10,50,10,0" Click="btnDadesEntrenador_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,30" x:Name="wpDadesEntrenador" BorderThickness="2">
                     <WrapPanel Height="240"  Background="#FF52B64E">
                         <Grid x:Name="grid2" DataContext="{StaticResource entrenadorsViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
