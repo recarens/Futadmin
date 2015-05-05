@@ -32,13 +32,14 @@
         <GridSplitter Grid.Column="0" Width="10" BorderBrush="#FF171212" Background="White"/>
         <ScrollViewer Grid.Column="1">
             <StackPanel x:Name="spDadesJugador" Orientation="Vertical">
+                <Button x:Name="btnGuardar" Click="btnGuardar_Click">Guardar</Button>
                 <Image x:Name="imgImatge" Width="100" Height="100" Margin="5"/>
                 <Button x:Name="btnDadesJugador" Content="Dades Personals" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesPersonals_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,30" x:Name="wpDadesPersonals" BorderThickness="2">
                     <WrapPanel Orientation="Vertical" Background="#FF52B64E" MaxHeight="250" DataContext="{StaticResource jugadorsViewSource}">
                         <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="DNI:"/>
-                            <TextBox x:Name="tbAnyDni" MinWidth="200" Margin="33,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding dni, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            <TextBox x:Name="tbDni" MinWidth="200" Margin="33,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding dni, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Nom:"/>
@@ -258,6 +259,7 @@
                 </Border>
             </StackPanel>
         </ScrollViewer>
+        
     </Grid>
 </Window>
 

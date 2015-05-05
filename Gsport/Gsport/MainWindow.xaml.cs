@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -45,6 +46,7 @@ namespace Gsport
             GridLength gC2 = new GridLength(0, GridUnitType.Star);
             cdntrenadors.Width = gC2;
 
+            
         }
 
         private void btnAfageixEntrenador_Click(object sender, RoutedEventArgs e)
@@ -137,12 +139,6 @@ namespace Gsport
                     btnNovaTemporada.IsEnabled = true;
                     btnAfageixEntrenador.IsEnabled = true;
                     break;
-                case 6: //Gsport Admin
-                    btnAfageix.IsEnabled = true;
-                    btnCrearEquip.IsEnabled = true;
-                    btnNovaTemporada.IsEnabled = true;
-                    btnAfageixEntrenador.IsEnabled = true;
-                    break;
             }
 
             // Cargar datos en la tabla equips. Puede modificar este código según sea necesario.
@@ -180,6 +176,13 @@ namespace Gsport
             {
                 wpDadesEntrenador.Height = Double.NaN; // aixo es  height l'auto del xaml
             }
+        }
+
+        private void btnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            DataRow dr = efadbDataSet.Tables["jugadors"].NewRow();
+            dr[0] = tbDni.Text.Trim();
+            efadbDataSet.jugadors.Rows.Add(dr);   
         }
     }
 }
