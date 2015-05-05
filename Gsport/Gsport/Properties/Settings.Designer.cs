@@ -22,16 +22,5 @@ namespace Gsport.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("server=db4free.net;port=3306;user id=gsportadmin;password=gsport123;persistsecuri" +
-            "tyinfo=True;database=efadb")]
-        public string efadbConnectionString {
-            get {
-                return ((string)(this["efadbConnectionString"]));
-            }
-        }
     }
 }
