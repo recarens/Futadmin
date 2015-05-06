@@ -10,6 +10,7 @@
         <CollectionViewSource x:Key="equipsjugadorsViewSource" Source="{Binding eqJUgador, Source={StaticResource equipsViewSource}}"/>
         <CollectionViewSource x:Key="entrenadorsViewSource" Source="{Binding entrenadors, Source={StaticResource efadbDataSet}}"/>
         <CollectionViewSource x:Key="entrenadorsequipsViewSource" Source="{Binding fk_equips_entrenadors1, Source={StaticResource entrenadorsViewSource}}"/>
+        <CollectionViewSource x:Key="jugador_temporadaViewSource" Source="{Binding jugador_temporada, Source={StaticResource efadbDataSet}}"/>
     </Window.Resources>
     <Window.Background>
         <ImageBrush ImageSource="Fotos/grass.jpg" Stretch="UniformToFill"/>
@@ -17,7 +18,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="cdmenu" Width="165" MaxWidth="165"/>
-            <ColumnDefinition x:Name="cdjugadors" Width="0"/>
+            <ColumnDefinition x:Name="cdjugadors" />
             <ColumnDefinition x:Name="cdequips" Width="0"/>
             <ColumnDefinition x:Name="cdntrenadors" Width="0"/>
         </Grid.ColumnDefinitions>
@@ -30,7 +31,7 @@
             <Button x:Name="btnSortir" Content="Sortir" Margin="9" Click="btnSortir_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold"/>
         </StackPanel>
         <GridSplitter Grid.Column="0" Width="10" BorderBrush="#FF171212" Background="White"/>
-        <ScrollViewer Grid.Column="1">
+        <ScrollViewer Grid.Column="1" Margin="0,18,0,-18">
             <StackPanel x:Name="spDadesJugador" Orientation="Vertical">
                 <Button x:Name="btnGuardar" Click="btnGuardar_Click">Guardar</Button>
                 <Image x:Name="imgImatge" Width="100" Height="100" Margin="5"/>
@@ -93,36 +94,55 @@
                 </Border>
 
                 <Button x:Name="btnDadesTemporada" Content="Dades per Temporada" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesTemporada_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF0B2E10"/>
-                <Border Margin="10,0,10,30" x:Name="wpDadesTemporada" BorderThickness="1">
+                <Border Margin="10,0,10,30" x:Name="wpDadesTemporada" BorderThickness="2">
                     <StackPanel Orientation="Vertical">
-                        <TabControl BorderThickness="0" Background="#FF52B64E" MinHeight="50">
-                            <TabControl.Resources>
-                                <Style TargetType="{x:Type TabItem}">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type TabItem}">
-                                                <Grid x:Name="Seleccionat">
-                                                    <ContentPresenter x:Name="Contingut" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="10,0" TextElement.FontSize="13" TextElement.Foreground="#FF0B2E10" TextElement.FontWeight="Bold"/>
-                                                </Grid>
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsSelected" Value="True">
-                                                        <Setter TargetName="Seleccionat" Property="Background" Value="White" />
-                                                        <Setter TargetName="Contingut" Property="TextElement.FontWeight" Value="Bold"/>
-                                                        <Setter TargetName="Contingut" Property="TextElement.FontSize" Value="16"/>
-                                                    </Trigger>
-                                                    <Trigger Property="IsSelected" Value="False">
-                                                        <Setter TargetName="Seleccionat" Property="Background" Value="#FF1C630D" />
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </TabControl.Resources>
-                            <TabItem Header="2015"/>
-                            <TabItem Header="2016"/>
-                        </TabControl>
-
+                        <WrapPanel x:Name="spButonsTemporada">
+                            <Button FontSize="16" FontWeight="Bold" Padding="5" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10">
+                            2015
+                            </Button>
+                            <Button FontSize="16" FontWeight="Bold" Padding="5" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10">
+                            2016
+                            </Button>
+                            </WrapPanel>
+                        <WrapPanel Orientation="Vertical" Background="#FF52B64E">
+                            <Grid x:Name="grid4" DataContext="{StaticResource jugador_temporadaViewSource}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Content="gols:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="2" VerticalAlignment="Center"/>
+                                <TextBox x:Name="golsTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="2" Text="{Binding gols, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <Label Content="ocasions de gol:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="3" VerticalAlignment="Center"/>
+                                <TextBox x:Name="ocasions_de_golTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="3" Text="{Binding ocasions_de_gol, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <Label Content="minuts jugats:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="4" VerticalAlignment="Center"/>
+                                <TextBox x:Name="minuts_jugatsTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="4" Text="{Binding minuts_jugats, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <Label Content="faltes comeses:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="5" VerticalAlignment="Center"/>
+                                <TextBox x:Name="faltes_comesesTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="5" Text="{Binding faltes_comeses, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <Label Content="faltes rebudes:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="6" VerticalAlignment="Center"/>
+                                <TextBox x:Name="faltes_rebudesTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="6" Text="{Binding faltes_rebudes, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <Label Content="targetes grogues:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="7" VerticalAlignment="Center"/>
+                                <TextBox x:Name="targetes_groguesTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="7" Text="{Binding targetes_grogues, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <Label Content="targetes vermelles:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="8" VerticalAlignment="Center"/>
+                                <TextBox x:Name="targetes_vermellesTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="8" Text="{Binding targetes_vermelles, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <Label Content="pes:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="9" VerticalAlignment="Center"/>
+                                <TextBox x:Name="pesTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="9" Text="{Binding pes, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <Label Content="altura:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="10" VerticalAlignment="Center"/>
+                                <TextBox x:Name="alturaTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="10" Text="{Binding altura, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                            </Grid>
+                        </WrapPanel>
                     </StackPanel>
                 </Border>
             </StackPanel>
@@ -259,7 +279,7 @@
                 </Border>
             </StackPanel>
         </ScrollViewer>
-        
+
     </Grid>
 </Window>
 

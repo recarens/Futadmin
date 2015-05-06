@@ -22,5 +22,16 @@ namespace Gsport.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("server=shz24.guebs.net;port=3306;user id=gsportse_remot;password=gsport123.;persi" +
+            "stsecurityinfo=True;database=gsportse_efadb")]
+        public string gsportse_efadbConnectionString {
+            get {
+                return ((string)(this["gsportse_efadbConnectionString"]));
+            }
+        }
     }
 }

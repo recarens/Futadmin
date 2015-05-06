@@ -151,6 +151,11 @@ namespace Gsport
             efadbDataSetentrenadorsTableAdapter.Fill(efadbDataSet.entrenadors);
             System.Windows.Data.CollectionViewSource entrenadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("entrenadorsViewSource")));
             entrenadorsViewSource.View.MoveCurrentToFirst();
+            // Cargar datos en la tabla jugador_temporada. Puede modificar este código según sea necesario.
+            Gsport.efadbDataSetTableAdapters.jugador_temporadaTableAdapter efadbDataSetjugador_temporadaTableAdapter = new Gsport.efadbDataSetTableAdapters.jugador_temporadaTableAdapter();
+            efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
+            System.Windows.Data.CollectionViewSource jugador_temporadaViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugador_temporadaViewSource")));
+            jugador_temporadaViewSource.View.MoveCurrentToFirst();
         }
 
         private void btnDadesEquip_Click(object sender, RoutedEventArgs e)
