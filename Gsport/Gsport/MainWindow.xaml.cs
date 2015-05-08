@@ -33,7 +33,7 @@ namespace Gsport
         System.Windows.Data.CollectionViewSource equipsViewSource;
         Gsport.efadbDataSetTableAdapters.entrenadorsTableAdapter efadbDataSetentrenadorsTableAdapter;
         System.Windows.Data.CollectionViewSource entrenadorsViewSource;
-        string rutaImg;
+        string rutaImg = @"C:/Fotos/img.jpg";
         int codiUsuari;
         public MainWindow()
         {
@@ -157,32 +157,32 @@ namespace Gsport
             efadbDataSetequipsTableAdapter = new Gsport.efadbDataSetTableAdapters.equipsTableAdapter();
             efadbDataSetequipsTableAdapter.Fill(efadbDataSet.equips);
             equipsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("equipsViewSource")));
-            equipsViewSource.View.MoveCurrentToFirst();
+            //equipsViewSource.View.MoveCurrentToFirst();
             // Cargar datos en la tabla entrenadors. Puede modificar este código según sea necesario.
             efadbDataSetentrenadorsTableAdapter = new Gsport.efadbDataSetTableAdapters.entrenadorsTableAdapter();
             efadbDataSetentrenadorsTableAdapter.Fill(efadbDataSet.entrenadors);
             entrenadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("entrenadorsViewSource")));
-            entrenadorsViewSource.View.MoveCurrentToFirst();
+            //entrenadorsViewSource.View.MoveCurrentToFirst();
             // Cargar datos en la tabla jugador_temporada. Puede modificar este código según sea necesario.
             Gsport.efadbDataSetTableAdapters.jugador_temporadaTableAdapter efadbDataSetjugador_temporadaTableAdapter = new Gsport.efadbDataSetTableAdapters.jugador_temporadaTableAdapter();
             efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
             System.Windows.Data.CollectionViewSource jugador_temporadaViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugador_temporadaViewSource")));
-            jugador_temporadaViewSource.View.MoveCurrentToFirst();
+            //jugador_temporadaViewSource.View.MoveCurrentToFirst();
             // Cargar datos en la tabla posicions. Puede modificar este código según sea necesario.
             Gsport.efadbDataSetTableAdapters.posicionsTableAdapter efadbDataSetposicionsTableAdapter = new Gsport.efadbDataSetTableAdapters.posicionsTableAdapter();
             efadbDataSetposicionsTableAdapter.Fill(efadbDataSet.posicions);
             System.Windows.Data.CollectionViewSource posicionsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("posicionsViewSource")));
-            posicionsViewSource.View.MoveCurrentToFirst();
+            //posicionsViewSource.View.MoveCurrentToFirst();
             // Cargar datos en la tabla divisio. Puede modificar este código según sea necesario.
             Gsport.efadbDataSetTableAdapters.divisioTableAdapter efadbDataSetdivisioTableAdapter = new Gsport.efadbDataSetTableAdapters.divisioTableAdapter();
             efadbDataSetdivisioTableAdapter.Fill(efadbDataSet.divisio);
             System.Windows.Data.CollectionViewSource divisioViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("divisioViewSource")));
-            divisioViewSource.View.MoveCurrentToFirst();
+            //divisioViewSource.View.MoveCurrentToFirst();
             // Cargar datos en la tabla categories. Puede modificar este código según sea necesario.
             Gsport.efadbDataSetTableAdapters.categoriesTableAdapter efadbDataSetcategoriesTableAdapter = new Gsport.efadbDataSetTableAdapters.categoriesTableAdapter();
             efadbDataSetcategoriesTableAdapter.Fill(efadbDataSet.categories);
             System.Windows.Data.CollectionViewSource categoriesViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("categoriesViewSource")));
-            categoriesViewSource.View.MoveCurrentToFirst();
+            //categoriesViewSource.View.MoveCurrentToFirst();
         }
 
         private void btnDadesEquip_Click(object sender, RoutedEventArgs e)

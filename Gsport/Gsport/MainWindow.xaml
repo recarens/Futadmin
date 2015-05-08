@@ -8,7 +8,9 @@
         <CollectionViewSource x:Key="equipsViewSource" Source="{Binding equips, Source={StaticResource efadbDataSet}}"/>
         <CollectionViewSource x:Key="equipsjugadorsViewSource" Source="{Binding eqJUgador, Source={StaticResource equipsViewSource}}"/>
         <CollectionViewSource x:Key="entrenadorsViewSource" Source="{Binding entrenadors, Source={StaticResource efadbDataSet}}"/>
+        <CollectionViewSource x:Key="entrenadorsViewSource1" Source="{Binding entrenadors, Source={StaticResource efadbDataSet}}"/>
         <CollectionViewSource x:Key="entrenadorsequipsViewSource" Source="{Binding fk_equips_entrenadors1, Source={StaticResource entrenadorsViewSource}}"/>
+        <CollectionViewSource x:Key="entrenadorsequipsViewSource1" Source="{Binding fk_equips_entrenadors1, Source={StaticResource entrenadorsViewSource}}"/>
         <CollectionViewSource x:Key="jugador_temporadaViewSource" Source="{Binding jugador_temporada, Source={StaticResource efadbDataSet}}"/>
         <CollectionViewSource x:Key="posicionsViewSource" Source="{Binding posicions, Source={StaticResource efadbDataSet}}"/>
         <CollectionViewSource x:Key="posicionsjugadorsViewSource" Source="{Binding fk_jugadors_posicions1, Source={StaticResource posicionsViewSource}}"/>
@@ -23,9 +25,9 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="cdmenu" Width="165" MaxWidth="165"/>
-            <ColumnDefinition x:Name="cdjugadors" Width="1000"/>
+            <ColumnDefinition x:Name="cdjugadors" Width="0"/>
             <ColumnDefinition x:Name="cdequips" Width="0"/>
-            <ColumnDefinition x:Name="cdntrenadors" Width="0"/>
+            <ColumnDefinition x:Name="cdntrenadors" Width="1000"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Margin="5">
             <Button x:Name="btnCerca" Content="Cercar" Margin="9" Click="btnCerca_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold" />
@@ -39,7 +41,7 @@
         <ScrollViewer Grid.Column="1">
             <StackPanel x:Name="spDadesJugador" Orientation="Vertical">
                 <Button x:Name="btnGuardar" Click="btnGuardar_Click" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10" IsEnabled="False">Guardar</Button>
-                <Image x:Name="imgImatge" Width="100" Height="100" Margin="5" MouseRightButtonDown="imgImatge_MouseRightButtonDown" Source="Fotos/eric.jpg"/>
+                <Image x:Name="imgImatge" Width="100" Height="100" Margin="5" MouseRightButtonDown="imgImatge_MouseRightButtonDown" Source="Fotos/img.jpg"/>
                 <Button x:Name="btnDadesJugador" Content="Dades Personals" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesPersonals_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,30" x:Name="wpDadesPersonals" BorderThickness="2">
                     <WrapPanel Orientation="Vertical" Background="#FF52B64E" MaxHeight="265" DataContext="{StaticResource jugadorsViewSource}">
@@ -185,7 +187,7 @@
                 <Button x:Name="btnGuardarEquip" Click="btnGuardar_Click" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10" IsEnabled="False">Guardar</Button>
                 <Button x:Name="btnDadesEquip" Content="Dades Equip" FontSize="16" FontWeight="Bold" Margin="10,50,10,0" Click="btnDadesEquip_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,30" x:Name="wpDadesEquip" BorderThickness="2">
-                    <WrapPanel Orientation="Vertical" Background="#FF52B64E" MaxHeight="250" DataContext="{StaticResource equipsjugadorsViewSource}">
+                    <WrapPanel Orientation="Vertical" Background="#FF52B64E" MaxHeight="250">
                         <Grid x:Name="grid1" DataContext="{StaticResource equipsViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -302,8 +304,8 @@
                 <Button x:Name="btnGuardarEntrenador" Click="btnGuardar_Click" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10" IsEnabled="False">Guardar</Button>
                 <Button x:Name="btnDadesEntrenador" Content="Dades Entrenador" FontSize="16" FontWeight="Bold" Margin="10,50,10,0" Click="btnDadesEntrenador_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,30" x:Name="wpDadesEntrenador" BorderThickness="2">
-                    <WrapPanel Height="160"  Background="#FF52B64E" DataContext="{StaticResource entrenadorsequipsViewSource}">
-                        <Grid x:Name="grid2" DataContext="{StaticResource entrenadorsViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <WrapPanel Height="160"  Background="#FF52B64E">
+                        <Grid x:Name="grid2" DataContext="{StaticResource entrenadorsViewSource1}" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
@@ -324,7 +326,7 @@
                             <Label Content="data naixement:" Grid.Column="0"  HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="4" VerticalAlignment="Center"/>
                             <DatePicker x:Name="data_naixementDatePicker" Grid.Column="1"  MinWidth="150" Margin="0,4,0,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="4" SelectedDate="{Binding data_naixement, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
                         </Grid>
-                        <DataGrid x:Name="equipsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10" Width="216">
+                        <DataGrid x:Name="equipsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource entrenadorsequipsViewSource1}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10" Width="216">
                             <DataGrid.Columns>
                                 <DataGridTextColumn x:Name="nomColumn1" Binding="{Binding nom}" Header="nom" Width="150"/>
                                 <DataGridTextColumn x:Name="puntuacioColumn" Binding="{Binding puntuacio}" Header="puntuacio"/>
