@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -27,6 +29,11 @@ namespace Gsport
         Gsport.efadbDataSetTableAdapters.jugadorsTableAdapter efadbDataSetjugadorsTableAdapter;
         Gsport.efadbDataSetTableAdapters.usuarisTableAdapter efadbDataSetusuarisTableAdapter;
         System.Windows.Data.CollectionViewSource jugadorsViewSource;
+        Gsport.efadbDataSetTableAdapters.equipsTableAdapter efadbDataSetequipsTableAdapter;
+        System.Windows.Data.CollectionViewSource equipsViewSource;
+        Gsport.efadbDataSetTableAdapters.entrenadorsTableAdapter efadbDataSetentrenadorsTableAdapter;
+        System.Windows.Data.CollectionViewSource entrenadorsViewSource;
+        string rutaImg;
         int codiUsuari;
         public MainWindow()
         {
@@ -146,16 +153,15 @@ namespace Gsport
                     btnAfageixEntrenador.IsEnabled = true;
                     break;
             }
-
             // Cargar datos en la tabla equips. Puede modificar este código según sea necesario.
-            Gsport.efadbDataSetTableAdapters.equipsTableAdapter efadbDataSetequipsTableAdapter = new Gsport.efadbDataSetTableAdapters.equipsTableAdapter();
+            efadbDataSetequipsTableAdapter = new Gsport.efadbDataSetTableAdapters.equipsTableAdapter();
             efadbDataSetequipsTableAdapter.Fill(efadbDataSet.equips);
-            System.Windows.Data.CollectionViewSource equipsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("equipsViewSource")));
+            equipsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("equipsViewSource")));
             equipsViewSource.View.MoveCurrentToFirst();
             // Cargar datos en la tabla entrenadors. Puede modificar este código según sea necesario.
-            Gsport.efadbDataSetTableAdapters.entrenadorsTableAdapter efadbDataSetentrenadorsTableAdapter = new Gsport.efadbDataSetTableAdapters.entrenadorsTableAdapter();
+            efadbDataSetentrenadorsTableAdapter = new Gsport.efadbDataSetTableAdapters.entrenadorsTableAdapter();
             efadbDataSetentrenadorsTableAdapter.Fill(efadbDataSet.entrenadors);
-            System.Windows.Data.CollectionViewSource entrenadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("entrenadorsViewSource")));
+            entrenadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("entrenadorsViewSource")));
             entrenadorsViewSource.View.MoveCurrentToFirst();
             // Cargar datos en la tabla jugador_temporada. Puede modificar este código según sea necesario.
             Gsport.efadbDataSetTableAdapters.jugador_temporadaTableAdapter efadbDataSetjugador_temporadaTableAdapter = new Gsport.efadbDataSetTableAdapters.jugador_temporadaTableAdapter();
@@ -167,6 +173,16 @@ namespace Gsport
             efadbDataSetposicionsTableAdapter.Fill(efadbDataSet.posicions);
             System.Windows.Data.CollectionViewSource posicionsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("posicionsViewSource")));
             posicionsViewSource.View.MoveCurrentToFirst();
+            // Cargar datos en la tabla divisio. Puede modificar este código según sea necesario.
+            Gsport.efadbDataSetTableAdapters.divisioTableAdapter efadbDataSetdivisioTableAdapter = new Gsport.efadbDataSetTableAdapters.divisioTableAdapter();
+            efadbDataSetdivisioTableAdapter.Fill(efadbDataSet.divisio);
+            System.Windows.Data.CollectionViewSource divisioViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("divisioViewSource")));
+            divisioViewSource.View.MoveCurrentToFirst();
+            // Cargar datos en la tabla categories. Puede modificar este código según sea necesario.
+            Gsport.efadbDataSetTableAdapters.categoriesTableAdapter efadbDataSetcategoriesTableAdapter = new Gsport.efadbDataSetTableAdapters.categoriesTableAdapter();
+            efadbDataSetcategoriesTableAdapter.Fill(efadbDataSet.categories);
+            System.Windows.Data.CollectionViewSource categoriesViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("categoriesViewSource")));
+            categoriesViewSource.View.MoveCurrentToFirst();
         }
 
         private void btnDadesEquip_Click(object sender, RoutedEventArgs e)
@@ -196,34 +212,73 @@ namespace Gsport
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            DataRow dr = efadbDataSet.Tables["jugadors"].NewRow();
-            dr["dni"] = tbDni.Text.Trim();
-            dr["nom"] = tbNom.Text.Trim();
-            dr["cognoms"] = tbCognom.Text.Trim();
-            dr["sexe"] = Convert.ToInt16(tbSexe.SelectedIndex);
-            dr["nomImatge"] = "..\\..\\Fotos\\eric.jpg";
-            dr["data_inscripcio"] = DateTime.Parse(dpAnyInscripcio.SelectedDate.ToString());
-            dr["data_naixement"] = DateTime.Parse(dpAnyNeixament.SelectedDate.ToString());
-            dr["tarjeta_sanitaria"] = tbTarjetaSanitaria.Text.Trim();
-            dr["malaltia_alergia"] = tbMalalties.Text.Trim();
-            dr["mobil"] = tbMobil.Text.Trim();
-            dr["telefon"] = tbTelefon.Text.Trim();
-            dr["correu_electronic"] = tbcorreuElec.Text.Trim();
-            dr["numero_soci"] = tbnSoci.Text.Trim();
-            dr["lateralitat"] = tbLateralitat.Text.Trim();
-
-            dr["edat"] = Convert.ToInt32(tbEdat.Text.Trim());
-            dr["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
-            dr["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);     
-            try
+            if (cdjugadors.Width.Value > 0)
             {
-                efadbDataSet.jugadors.Rows.Add(dr);
-                efadbDataSetjugadorsTableAdapter.Update(dr);             
-                MessageBox.Show("Guardat");
+                DataRow dr = efadbDataSet.Tables["jugadors"].NewRow();
+                dr["dni"] = tbDni.Text.Trim();
+                dr["nom"] = tbNom.Text.Trim();
+                dr["cognoms"] = tbCognom.Text.Trim();
+                dr["sexe"] = Convert.ToInt16(tbSexe.SelectedIndex);
+                dr["nomImatge"] = rutaImg;
+                dr["data_inscripcio"] = DateTime.Parse(dpAnyInscripcio.SelectedDate.ToString());
+                dr["data_naixement"] = DateTime.Parse(dpAnyNeixament.SelectedDate.ToString());
+                dr["tarjeta_sanitaria"] = tbTarjetaSanitaria.Text.Trim();
+                dr["malaltia_alergia"] = tbMalalties.Text.Trim();
+                dr["mobil"] = tbMobil.Text.Trim();
+                dr["telefon"] = tbTelefon.Text.Trim();
+                dr["correu_electronic"] = tbcorreuElec.Text.Trim();
+                dr["numero_soci"] = tbnSoci.Text.Trim();
+                dr["lateralitat"] = tbLateralitat.Text.Trim();
+                dr["edat"] = Convert.ToInt32(tbEdat.Text.Trim());
+                dr["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
+                dr["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);
+                try
+                {
+                    efadbDataSet.jugadors.Rows.Add(dr);
+                    efadbDataSetjugadorsTableAdapter.Update(dr);
+                    MessageBox.Show("Guardat");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
+                }
             }
-            catch(Exception ex)
+            if(cdntrenadors.Width.Value > 0)
             {
-                MessageBox.Show("No s'ha pogut guardar:"+ex.ToString());
+                DataRow dr = efadbDataSet.Tables["entrenadors"].NewRow();
+                dr["dni"] = dniTextBox.Text.Trim();
+                dr["nom"] = nomTextBox1.Text.Trim();
+                dr["cognom"] = cognomTextBox.Text.Trim();
+                dr["data_naixement"] = DateTime.Parse(data_naixementDatePicker.SelectedDate.ToString());
+                try
+                {
+                    efadbDataSet.entrenadors.Rows.Add(dr);
+                    efadbDataSetentrenadorsTableAdapter.Update(dr);
+                    MessageBox.Show("Guardat");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
+                }
+            }
+            if (cdequips.Width.Value > 0)
+            {
+                DataRow dr = efadbDataSet.Tables["equips"].NewRow();
+                dr["nom"] = nomTextBox.Text.Trim();
+                dr["id_divisio"] = Convert.ToInt32(id_divisioComboBox.SelectedValue);
+                dr["id_categoria"] = Convert.ToInt32(id_categoriaComboBox.SelectedValue);
+                dr["id_entrenador"] = Convert.ToInt32(id_entrenadorComboBox.SelectedValue);
+                dr["puntuacio"] = puntuacioTextBox.Text.Trim();
+                try
+                {
+                    efadbDataSet.equips.Rows.Add(dr);
+                    efadbDataSetequipsTableAdapter.Update(dr);
+                    MessageBox.Show("Guardat");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
+                }
             }
         }
 
@@ -236,7 +291,7 @@ namespace Gsport
                 
                 foreach (DataRow dr in efadbDataSet.Tables["jugadors"].Rows)
                 {
-                    if (dr["dni"].ToString() == tbDni.Text.Trim())
+                    if (dr["dni"].ToString().ToLower() == tbDni.Text.Trim().ToLower())
                     {
                         trobat = true;
                     }
@@ -244,13 +299,67 @@ namespace Gsport
 
                 if (trobat)
                 {
-                    MessageBox.Show("No es valid");
+                    MessageBox.Show("Ja existeix");
                     btnGuardar.IsEnabled = false;
                 }
             }
             else
             {
                 btnGuardar.IsEnabled = false;
+            }
+        }
+
+        private void dniTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            bool trobat = false;
+            btnGuardarEntrenador.IsEnabled = true;
+            if (dniTextBox.Text.Length > 8)
+            {
+
+                foreach (DataRow dr in efadbDataSet.Tables["entrenadors"].Rows)
+                {
+                    if (dr["dni"].ToString().ToLower() == dniTextBox.Text.Trim().ToLower())
+                    {
+                        trobat = true;
+                    }
+                }
+
+                if (trobat)
+                {
+                    MessageBox.Show("Ja existeix");
+                    btnGuardarEntrenador.IsEnabled = false;
+                }
+            }
+            else
+            {
+                btnGuardarEntrenador.IsEnabled = false;
+            }
+        }
+
+        private void nomTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(nomTextBox.Text.Length > 0)
+                btnGuardarEquip.IsEnabled = true;
+            else
+                btnGuardarEquip.IsEnabled = false;
+        }
+
+        private void imgImatge_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.DefaultExt = ".png";
+            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+            Nullable<bool> result = dlg.ShowDialog();
+            if (result == true)
+            {
+                string filename = dlg.FileName;
+                imgImatge.Source = new BitmapImage(new Uri(filename));
+                JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                Guid photoID = System.Guid.NewGuid();
+                encoder.Frames.Add(BitmapFrame.Create((BitmapImage)imgImatge.Source));
+                rutaImg = @"C:/Fotos/" + tbNom.Text.ToLower().Trim()+"img.jpg";
+                using (FileStream filestream = new FileStream(rutaImg, FileMode.Create))
+                    encoder.Save(filestream);
             }
         }
     }

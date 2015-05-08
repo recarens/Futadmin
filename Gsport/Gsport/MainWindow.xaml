@@ -14,6 +14,8 @@
         <CollectionViewSource x:Key="posicionsjugadorsViewSource" Source="{Binding fk_jugadors_posicions1, Source={StaticResource posicionsViewSource}}"/>
         <CollectionViewSource x:Key="equipsjugadorsViewSource1" Source="{Binding fk_jugadors_equips1, Source={StaticResource equipsViewSource}}"/>
         <CollectionViewSource x:Key="jugadorsjugador_temporadaViewSource" Source="{Binding fk_jugador_temporada_jugadors1, Source={StaticResource jugadorsViewSource}}"/>
+        <CollectionViewSource x:Key="divisioViewSource" Source="{Binding divisio, Source={StaticResource efadbDataSet}}"/>
+        <CollectionViewSource x:Key="categoriesViewSource" Source="{Binding categories, Source={StaticResource efadbDataSet}}"/>
     </Window.Resources>
     <Window.Background>
         <ImageBrush ImageSource="Fotos/grass.jpg" Stretch="UniformToFill"/>
@@ -21,7 +23,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="cdmenu" Width="165" MaxWidth="165"/>
-            <ColumnDefinition x:Name="cdjugadors" Width="0"/>
+            <ColumnDefinition x:Name="cdjugadors" Width="1000"/>
             <ColumnDefinition x:Name="cdequips" Width="0"/>
             <ColumnDefinition x:Name="cdntrenadors" Width="0"/>
         </Grid.ColumnDefinitions>
@@ -37,7 +39,7 @@
         <ScrollViewer Grid.Column="1">
             <StackPanel x:Name="spDadesJugador" Orientation="Vertical">
                 <Button x:Name="btnGuardar" Click="btnGuardar_Click" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10" IsEnabled="False">Guardar</Button>
-                <Image x:Name="imgImatge" Width="100" Height="100" Margin="5"/>
+                <Image x:Name="imgImatge" Width="100" Height="100" Margin="5" MouseRightButtonDown="imgImatge_MouseRightButtonDown" Source="Fotos/eric.jpg"/>
                 <Button x:Name="btnDadesJugador" Content="Dades Personals" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesPersonals_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,30" x:Name="wpDadesPersonals" BorderThickness="2">
                     <WrapPanel Orientation="Vertical" Background="#FF52B64E" MaxHeight="265" DataContext="{StaticResource jugadorsViewSource}">
@@ -149,7 +151,6 @@
                                 <TextBox x:Name="faltes_rebudesTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="6" Text="{Binding faltes_rebudes, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                                 <Label Content="targetes grogues:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="7" VerticalAlignment="Center"/>
                                 <TextBox x:Name="targetes_groguesTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="7" Text="{Binding targetes_grogues, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                                
                             </Grid>
                             <Grid x:Name="grid5" DataContext="{StaticResource jugadorsjugador_temporadaViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
                                 <Grid.ColumnDefinitions>
@@ -181,6 +182,7 @@
         </ScrollViewer>
         <ScrollViewer Grid.Column="2">
             <StackPanel  x:Name="spDadesEquip" Orientation="Vertical">
+                <Button x:Name="btnGuardarEquip" Click="btnGuardar_Click" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10" IsEnabled="False">Guardar</Button>
                 <Button x:Name="btnDadesEquip" Content="Dades Equip" FontSize="16" FontWeight="Bold" Margin="10,50,10,0" Click="btnDadesEquip_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,30" x:Name="wpDadesEquip" BorderThickness="2">
                     <WrapPanel Orientation="Vertical" Background="#FF52B64E" MaxHeight="250" DataContext="{StaticResource equipsjugadorsViewSource}">
@@ -198,15 +200,60 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Label Content="nom:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="1" VerticalAlignment="Center"/>
-                            <TextBox x:Name="nomTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="1" Text="{Binding nom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            <Label Content="id divisio:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10"  Grid.Row="2" VerticalAlignment="Center"/>
-                            <TextBox x:Name="id_divisioTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="2" Text="{Binding id_divisio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            <Label Content="id categoria:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="3" VerticalAlignment="Center"/>
-                            <TextBox x:Name="id_categoriaTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="3" Text="{Binding id_categoria, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-                            <Label Content="id entrenador:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="4" VerticalAlignment="Center"/>
-                            <TextBox x:Name="id_entrenadorTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="4" Text="{Binding id_entrenador, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            <TextBox x:Name="nomTextBox" Grid.Column="1" MinWidth="150" Margin="32,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="1" Text="{Binding nom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" TextChanged="nomTextBox_TextChanged"/>
                             <Label Content="puntuacio:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="5" VerticalAlignment="Center"/>
-                            <TextBox x:Name="puntuacioTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="5" Text="{Binding puntuacio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            <TextBox x:Name="puntuacioTextBox" Grid.Column="1" MinWidth="150" Margin="33,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="5" Text="{Binding puntuacio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </Grid>
+                        <Grid x:Name="grid3" DataContext="{StaticResource divisioViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="id divisio:" Grid.Column="0" HorizontalAlignment="Left" Margin="20,4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="0" VerticalAlignment="Center"/>
+                            <ComboBox x:Name="id_divisioComboBox" Grid.Column="1" DisplayMemberPath="nom" SelectedValuePath="id_divisio"  MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" ItemsSource="{Binding}"  Grid.Row="0">
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
+                        </Grid>
+                        <Grid x:Name="grid6" DataContext="{StaticResource categoriesViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="id categoria:" Grid.Column="0" HorizontalAlignment="Left" Margin="11,4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="0" VerticalAlignment="Center"/>
+                            <ComboBox x:Name="id_categoriaComboBox" Grid.Column="1" DisplayMemberPath="nom" SelectedValuePath="id_categoria" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" ItemsSource="{Binding}" Grid.Row="0">
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
+                        </Grid>
+                        <Grid x:Name="grid7" DataContext="{StaticResource entrenadorsViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="id entrenador:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="0" VerticalAlignment="Center"/>
+                            <ComboBox x:Name="id_entrenadorComboBox" Grid.Column="1" DisplayMemberPath="nom" SelectedValuePath="id_entrenador"  MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" ItemsSource="{Binding}" Grid.Row="0">
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
                         </Grid>
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" MaxWidth="600" VerticalScrollBarVisibility="Auto" Height="180" Margin="6">
                             <DataGrid x:Name="jugadorsDataGrid" AutoGenerateColumns="False" MinHeight="70" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource equipsjugadorsViewSource1}}" RowDetailsVisibilityMode="VisibleWhenSelected">
@@ -252,9 +299,10 @@
         </ScrollViewer>
         <ScrollViewer Grid.Column="3">
             <StackPanel x:Name="spDadesEntrenador" Orientation="Vertical">
+                <Button x:Name="btnGuardarEntrenador" Click="btnGuardar_Click" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10" IsEnabled="False">Guardar</Button>
                 <Button x:Name="btnDadesEntrenador" Content="Dades Entrenador" FontSize="16" FontWeight="Bold" Margin="10,50,10,0" Click="btnDadesEntrenador_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,30" x:Name="wpDadesEntrenador" BorderThickness="2">
-                    <WrapPanel Height="240"  Background="#FF52B64E">
+                    <WrapPanel Height="160"  Background="#FF52B64E" DataContext="{StaticResource entrenadorsequipsViewSource}">
                         <Grid x:Name="grid2" DataContext="{StaticResource entrenadorsViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -267,10 +315,8 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <Label Content="id entrenador:" Grid.Column="0"  HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="0" VerticalAlignment="Center"/>
-                            <TextBox x:Name="id_entrenadorTextBox1" Grid.Column="1"  MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="0" Text="{Binding id_entrenador, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                             <Label Content="dni:" Grid.Column="0"  HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="1" VerticalAlignment="Center"/>
-                            <TextBox x:Name="dniTextBox" Grid.Column="1"  MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="1" Text="{Binding dni, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                            <TextBox x:Name="dniTextBox" Grid.Column="1"  MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="1" Text="{Binding dni, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="dniTextBox_TextChanged"/>
                             <Label Content="nom:" Grid.Column="0"  HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="2" VerticalAlignment="Center"/>
                             <TextBox x:Name="nomTextBox1" Grid.Column="1"  MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="2" Text="{Binding nom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                             <Label Content="cognom:" Grid.Column="0"  HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="3" VerticalAlignment="Center"/>
@@ -278,32 +324,12 @@
                             <Label Content="data naixement:" Grid.Column="0"  HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="4" VerticalAlignment="Center"/>
                             <DatePicker x:Name="data_naixementDatePicker" Grid.Column="1"  MinWidth="150" Margin="0,4,0,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="4" SelectedDate="{Binding data_naixement, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
                         </Grid>
-                        <Grid x:Name="grid3" DataContext="{StaticResource entrenadorsequipsViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Label Content="id equip:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="0" VerticalAlignment="Center"/>
-                            <TextBox x:Name="id_equipTextBox" Grid.Column="1"  MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="0" Text="{Binding id_equip, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                            <Label Content="nom:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="1" VerticalAlignment="Center"/>
-                            <TextBox x:Name="nomTextBox2" Grid.Column="1"  MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="1" Text="{Binding nom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                            <Label Content="id divisio:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="2" VerticalAlignment="Center"/>
-                            <TextBox x:Name="id_divisioTextBox1" Grid.Column="1"  MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="2" Text="{Binding id_divisio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                            <Label Content="id categoria:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="3" VerticalAlignment="Center"/>
-                            <TextBox x:Name="id_categoriaTextBox1" Grid.Column="1"  MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="3" Text="{Binding id_categoria, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                            <Label Content="id entrenador:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="4" VerticalAlignment="Center"/>
-                            <TextBox x:Name="id_entrenadorTextBox2" Grid.Column="1"  MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="4" Text="{Binding id_entrenador, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                            <Label Content="puntuacio:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="5" VerticalAlignment="Center"/>
-                            <TextBox x:Name="puntuacioTextBox1" Grid.Column="1"  MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="5" Text="{Binding puntuacio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                        </Grid>
+                        <DataGrid x:Name="equipsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10" Width="216">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn x:Name="nomColumn1" Binding="{Binding nom}" Header="nom" Width="150"/>
+                                <DataGridTextColumn x:Name="puntuacioColumn" Binding="{Binding puntuacio}" Header="puntuacio"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </WrapPanel>
                 </Border>
             </StackPanel>
