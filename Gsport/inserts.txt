@@ -1,0 +1,11 @@
+
+INSERT INTO `gsportse_efadb`.`rols` (`id_rol`, `nom`) VALUES (NULL, 'Jugador');
+INSERT INTO `gsportse_efadb`.`rols` (`id_rol`, `nom`) VALUES (NULL, 'Delegat');
+INSERT INTO `gsportse_efadb`.`rols` (`id_rol`, `nom`) VALUES (NULL, 'Entrenador');
+INSERT INTO `gsportse_efadb`.`rols` (`id_rol`, `nom`) VALUES (NULL, 'Coordinador');
+INSERT INTO `gsportse_efadb`.`rols` (`id_rol`, `nom`) VALUES (NULL, 'Gsportadmin');
+INSERT INTO `gsportse_efadb`.`usuaris` (`id_usuari`, `username`, `password`, `id_rol`) VALUES (NULL, 'admin', 'admin', '5');
+INSERT INTO `posicions`(`id_posicio`, `nom`) VALUES (NULL,'Porter');
+INSERT INTO `posicions`(`id_posicio`, `nom`) VALUES (NULL,'Defensa');
+INSERT INTO `posicions`(`id_posicio`, `nom`) VALUES (NULL,'Migcampista');
+INSERT INTO `posicions`(`id_posicio`, `nom`) VALUES (NULL,'Davanter');
