@@ -5023,6 +5023,10 @@ namespace Gsport {
             
             private global::System.Data.DataColumn columnaltura;
             
+            private global::System.Data.DataColumn columndorsal;
+            
+            private global::System.Data.DataColumn columnfaltes_entreno;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public jugador_temporadaDataTable() {
@@ -5146,6 +5150,22 @@ namespace Gsport {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn dorsalColumn {
+                get {
+                    return this.columndorsal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn faltes_entrenoColumn {
+                get {
+                    return this.columnfaltes_entreno;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5181,7 +5201,7 @@ namespace Gsport {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public jugador_temporadaRow Addjugador_temporadaRow(jugadorsRow parentjugadorsRowByfk_jugador_temporada_jugadors1, temporadesRow parenttemporadesRowByfk_jugador_temporada_temporades1, int gols, int ocasions_de_gol, int minuts_jugats, int faltes_comeses, int faltes_rebudes, int targetes_grogues, int targetes_vermelles, double pes, double altura) {
+            public jugador_temporadaRow Addjugador_temporadaRow(jugadorsRow parentjugadorsRowByfk_jugador_temporada_jugadors1, temporadesRow parenttemporadesRowByfk_jugador_temporada_temporades1, int gols, int ocasions_de_gol, int minuts_jugats, int faltes_comeses, int faltes_rebudes, int targetes_grogues, int targetes_vermelles, double pes, double altura, int dorsal, int faltes_entreno) {
                 jugador_temporadaRow rowjugador_temporadaRow = ((jugador_temporadaRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -5194,7 +5214,9 @@ namespace Gsport {
                         targetes_grogues,
                         targetes_vermelles,
                         pes,
-                        altura};
+                        altura,
+                        dorsal,
+                        faltes_entreno};
                 if ((parentjugadorsRowByfk_jugador_temporada_jugadors1 != null)) {
                     columnValuesArray[0] = parentjugadorsRowByfk_jugador_temporada_jugadors1[0];
                 }
@@ -5242,6 +5264,8 @@ namespace Gsport {
                 this.columntargetes_vermelles = base.Columns["targetes_vermelles"];
                 this.columnpes = base.Columns["pes"];
                 this.columnaltura = base.Columns["altura"];
+                this.columndorsal = base.Columns["dorsal"];
+                this.columnfaltes_entreno = base.Columns["faltes_entreno"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5269,6 +5293,10 @@ namespace Gsport {
                 base.Columns.Add(this.columnpes);
                 this.columnaltura = new global::System.Data.DataColumn("altura", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnaltura);
+                this.columndorsal = new global::System.Data.DataColumn("dorsal", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndorsal);
+                this.columnfaltes_entreno = new global::System.Data.DataColumn("faltes_entreno", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfaltes_entreno);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid_jugador,
                                 this.columnid_temporada}, true));
@@ -5276,6 +5304,8 @@ namespace Gsport {
                 this.columnid_temporada.AllowDBNull = false;
                 this.columnpes.AllowDBNull = false;
                 this.columnaltura.AllowDBNull = false;
+                this.columndorsal.AllowDBNull = false;
+                this.columnfaltes_entreno.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5440,10 +5470,6 @@ namespace Gsport {
             private global::System.Data.DataColumn columnlateralitat;
             
             private global::System.Data.DataColumn columnedat;
-            
-            private global::System.Data.DataColumn columndorsal;
-            
-            private global::System.Data.DataColumn columnfaltes_entreno;
             
             private global::System.Data.DataColumn columnid_posicio;
             
@@ -5612,22 +5638,6 @@ namespace Gsport {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn dorsalColumn {
-                get {
-                    return this.columndorsal;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn faltes_entrenoColumn {
-                get {
-                    return this.columnfaltes_entreno;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn id_posicioColumn {
                 get {
                     return this.columnid_posicio;
@@ -5695,8 +5705,6 @@ namespace Gsport {
                         string numero_soci, 
                         string lateralitat, 
                         int edat, 
-                        string dorsal, 
-                        int faltes_entreno, 
                         posicionsRow parentposicionsRowByfk_jugadors_posicions1, 
                         equipsRow parentequipsRowByfk_jugadors_equips1) {
                 jugadorsRow rowjugadorsRow = ((jugadorsRow)(this.NewRow()));
@@ -5717,15 +5725,13 @@ namespace Gsport {
                         numero_soci,
                         lateralitat,
                         edat,
-                        dorsal,
-                        faltes_entreno,
                         null,
                         null};
                 if ((parentposicionsRowByfk_jugadors_posicions1 != null)) {
-                    columnValuesArray[18] = parentposicionsRowByfk_jugadors_posicions1[0];
+                    columnValuesArray[16] = parentposicionsRowByfk_jugadors_posicions1[0];
                 }
                 if ((parentequipsRowByfk_jugadors_equips1 != null)) {
-                    columnValuesArray[19] = parentequipsRowByfk_jugadors_equips1[0];
+                    columnValuesArray[17] = parentequipsRowByfk_jugadors_equips1[0];
                 }
                 rowjugadorsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowjugadorsRow);
@@ -5772,8 +5778,6 @@ namespace Gsport {
                 this.columnnumero_soci = base.Columns["numero_soci"];
                 this.columnlateralitat = base.Columns["lateralitat"];
                 this.columnedat = base.Columns["edat"];
-                this.columndorsal = base.Columns["dorsal"];
-                this.columnfaltes_entreno = base.Columns["faltes_entreno"];
                 this.columnid_posicio = base.Columns["id_posicio"];
                 this.columnid_equip = base.Columns["id_equip"];
             }
@@ -5813,10 +5817,6 @@ namespace Gsport {
                 base.Columns.Add(this.columnlateralitat);
                 this.columnedat = new global::System.Data.DataColumn("edat", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnedat);
-                this.columndorsal = new global::System.Data.DataColumn("dorsal", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndorsal);
-                this.columnfaltes_entreno = new global::System.Data.DataColumn("faltes_entreno", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnfaltes_entreno);
                 this.columnid_posicio = new global::System.Data.DataColumn("id_posicio", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid_posicio);
                 this.columnid_equip = new global::System.Data.DataColumn("id_equip", typeof(int), null, global::System.Data.MappingType.Element);
@@ -5853,8 +5853,6 @@ namespace Gsport {
                 this.columnnumero_soci.MaxLength = 50;
                 this.columnlateralitat.MaxLength = 45;
                 this.columnedat.AllowDBNull = false;
-                this.columndorsal.MaxLength = 30;
-                this.columnfaltes_entreno.AllowDBNull = false;
                 this.columnid_posicio.AllowDBNull = false;
                 this.columnid_equip.AllowDBNull = false;
             }
@@ -9994,6 +9992,28 @@ namespace Gsport {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int dorsal {
+                get {
+                    return ((int)(this[this.tablejugador_temporada.dorsalColumn]));
+                }
+                set {
+                    this[this.tablejugador_temporada.dorsalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int faltes_entreno {
+                get {
+                    return ((int)(this[this.tablejugador_temporada.faltes_entrenoColumn]));
+                }
+                set {
+                    this[this.tablejugador_temporada.faltes_entrenoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public jugadorsRow jugadorsRow {
                 get {
                     return ((jugadorsRow)(this.GetParentRow(this.Table.ParentRelations["fk_jugador_temporada_jugadors1"])));
@@ -10296,33 +10316,6 @@ namespace Gsport {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string dorsal {
-                get {
-                    try {
-                        return ((string)(this[this.tablejugadors.dorsalColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'dorsal\' de la tabla \'jugadors\' es DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablejugadors.dorsalColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int faltes_entreno {
-                get {
-                    return ((int)(this[this.tablejugadors.faltes_entrenoColumn]));
-                }
-                set {
-                    this[this.tablejugadors.faltes_entrenoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int id_posicio {
                 get {
                     return ((int)(this[this.tablejugadors.id_posicioColumn]));
@@ -10375,18 +10368,6 @@ namespace Gsport {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetlateralitatNull() {
                 this[this.tablejugadors.lateralitatColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsdorsalNull() {
-                return this.IsNull(this.tablejugadors.dorsalColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetdorsalNull() {
-                this[this.tablejugadors.dorsalColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -17760,10 +17741,12 @@ namespace Gsport.efadbDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("targetes_vermelles", "targetes_vermelles");
             tableMapping.ColumnMappings.Add("pes", "pes");
             tableMapping.ColumnMappings.Add("altura", "altura");
+            tableMapping.ColumnMappings.Add("dorsal", "dorsal");
+            tableMapping.ColumnMappings.Add("faltes_entreno", "faltes_entreno");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `jugador_temporada` WHERE ((`id_jugador` = @p1) AND (`id_temporada` = @p2) AND ((@p3 = 1 AND `gols` IS NULL) OR (`gols` = @p4)) AND ((@p5 = 1 AND `ocasions_de_gol` IS NULL) OR (`ocasions_de_gol` = @p6)) AND ((@p7 = 1 AND `minuts_jugats` IS NULL) OR (`minuts_jugats` = @p8)) AND ((@p9 = 1 AND `faltes_comeses` IS NULL) OR (`faltes_comeses` = @p10)) AND ((@p11 = 1 AND `faltes_rebudes` IS NULL) OR (`faltes_rebudes` = @p12)) AND ((@p13 = 1 AND `targetes_grogues` IS NULL) OR (`targetes_grogues` = @p14)) AND ((@p15 = 1 AND `targetes_vermelles` IS NULL) OR (`targetes_vermelles` = @p16)) AND (`pes` = @p17) AND (`altura` = @p18))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `jugador_temporada` WHERE ((`id_jugador` = @p1) AND (`id_temporada` = @p2) AND ((@p3 = 1 AND `gols` IS NULL) OR (`gols` = @p4)) AND ((@p5 = 1 AND `ocasions_de_gol` IS NULL) OR (`ocasions_de_gol` = @p6)) AND ((@p7 = 1 AND `minuts_jugats` IS NULL) OR (`minuts_jugats` = @p8)) AND ((@p9 = 1 AND `faltes_comeses` IS NULL) OR (`faltes_comeses` = @p10)) AND ((@p11 = 1 AND `faltes_rebudes` IS NULL) OR (`faltes_rebudes` = @p12)) AND ((@p13 = 1 AND `targetes_grogues` IS NULL) OR (`targetes_grogues` = @p14)) AND ((@p15 = 1 AND `targetes_vermelles` IS NULL) OR (`targetes_vermelles` = @p16)) AND (`pes` = @p17) AND (`altura` = @p18) AND (`dorsal` = @p19) AND (`faltes_entreno` = @p20))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p1";
@@ -17916,9 +17899,25 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceColumn = "altura";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@p19";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
+            param.IsNullable = true;
+            param.SourceColumn = "dorsal";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.DeleteCommand.Parameters.Add(param);
+            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@p20";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
+            param.IsNullable = true;
+            param.SourceColumn = "faltes_entreno";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.DeleteCommand.Parameters.Add(param);
             this._adapter.InsertCommand = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO `jugador_temporada` (`id_jugador`, `id_temporada`, `gols`, `ocasions_de_gol`, `minuts_jugats`, `faltes_comeses`, `faltes_rebudes`, `targetes_grogues`, `targetes_vermelles`, `pes`, `altura`) VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO `jugador_temporada` (`id_jugador`, `id_temporada`, `gols`, `ocasions_de_gol`, `minuts_jugats`, `faltes_comeses`, `faltes_rebudes`, `targetes_grogues`, `targetes_vermelles`, `pes`, `altura`, `dorsal`, `faltes_entreno`) VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p1";
@@ -17997,9 +17996,23 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.IsNullable = true;
             param.SourceColumn = "altura";
             this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@p12";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
+            param.IsNullable = true;
+            param.SourceColumn = "dorsal";
+            this._adapter.InsertCommand.Parameters.Add(param);
+            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@p13";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
+            param.IsNullable = true;
+            param.SourceColumn = "faltes_entreno";
+            this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `jugador_temporada` SET `id_jugador` = @p1, `id_temporada` = @p2, `gols` = @p3, `ocasions_de_gol` = @p4, `minuts_jugats` = @p5, `faltes_comeses` = @p6, `faltes_rebudes` = @p7, `targetes_grogues` = @p8, `targetes_vermelles` = @p9, `pes` = @p10, `altura` = @p11 WHERE ((`id_jugador` = @p12) AND (`id_temporada` = @p13) AND ((@p14 = 1 AND `gols` IS NULL) OR (`gols` = @p15)) AND ((@p16 = 1 AND `ocasions_de_gol` IS NULL) OR (`ocasions_de_gol` = @p17)) AND ((@p18 = 1 AND `minuts_jugats` IS NULL) OR (`minuts_jugats` = @p19)) AND ((@p20 = 1 AND `faltes_comeses` IS NULL) OR (`faltes_comeses` = @p21)) AND ((@p22 = 1 AND `faltes_rebudes` IS NULL) OR (`faltes_rebudes` = @p23)) AND ((@p24 = 1 AND `targetes_grogues` IS NULL) OR (`targetes_grogues` = @p25)) AND ((@p26 = 1 AND `targetes_vermelles` IS NULL) OR (`targetes_vermelles` = @p27)) AND (`pes` = @p28) AND (`altura` = @p29))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE `jugador_temporada` SET `id_jugador` = @p1, `id_temporada` = @p2, `gols` = @p3, `ocasions_de_gol` = @p4, `minuts_jugats` = @p5, `faltes_comeses` = @p6, `faltes_rebudes` = @p7, `targetes_grogues` = @p8, `targetes_vermelles` = @p9, `pes` = @p10, `altura` = @p11, `dorsal` = @p12, `faltes_entreno` = @p13 WHERE ((`id_jugador` = @p14) AND (`id_temporada` = @p15) AND ((@p16 = 1 AND `gols` IS NULL) OR (`gols` = @p17)) AND ((@p18 = 1 AND `ocasions_de_gol` IS NULL) OR (`ocasions_de_gol` = @p19)) AND ((@p20 = 1 AND `minuts_jugats` IS NULL) OR (`minuts_jugats` = @p21)) AND ((@p22 = 1 AND `faltes_comeses` IS NULL) OR (`faltes_comeses` = @p23)) AND ((@p24 = 1 AND `faltes_rebudes` IS NULL) OR (`faltes_rebudes` = @p25)) AND ((@p26 = 1 AND `targetes_grogues` IS NULL) OR (`targetes_grogues` = @p27)) AND ((@p28 = 1 AND `targetes_vermelles` IS NULL) OR (`targetes_vermelles` = @p29)) AND (`pes` = @p30) AND (`altura` = @p31) AND (`dorsal` = @p32) AND (`faltes_entreno` = @p33))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p1";
@@ -18083,11 +18096,25 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
+            param.SourceColumn = "dorsal";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@p13";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
+            param.IsNullable = true;
+            param.SourceColumn = "faltes_entreno";
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@p14";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
+            param.IsNullable = true;
             param.SourceColumn = "id_jugador";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p13";
+            param.ParameterName = "@p15";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
@@ -18095,28 +18122,11 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p14";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "gols";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p15";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "gols";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p16";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "ocasions_de_gol";
+            param.SourceColumn = "gols";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             param.SourceColumnNullMapping = true;
             this._adapter.UpdateCommand.Parameters.Add(param);
@@ -18125,7 +18135,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "ocasions_de_gol";
+            param.SourceColumn = "gols";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
@@ -18133,7 +18143,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "minuts_jugats";
+            param.SourceColumn = "ocasions_de_gol";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             param.SourceColumnNullMapping = true;
             this._adapter.UpdateCommand.Parameters.Add(param);
@@ -18142,7 +18152,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "minuts_jugats";
+            param.SourceColumn = "ocasions_de_gol";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
@@ -18150,7 +18160,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "faltes_comeses";
+            param.SourceColumn = "minuts_jugats";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             param.SourceColumnNullMapping = true;
             this._adapter.UpdateCommand.Parameters.Add(param);
@@ -18159,7 +18169,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "faltes_comeses";
+            param.SourceColumn = "minuts_jugats";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
@@ -18167,7 +18177,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "faltes_rebudes";
+            param.SourceColumn = "faltes_comeses";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             param.SourceColumnNullMapping = true;
             this._adapter.UpdateCommand.Parameters.Add(param);
@@ -18176,7 +18186,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "faltes_rebudes";
+            param.SourceColumn = "faltes_comeses";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
@@ -18184,7 +18194,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "targetes_grogues";
+            param.SourceColumn = "faltes_rebudes";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             param.SourceColumnNullMapping = true;
             this._adapter.UpdateCommand.Parameters.Add(param);
@@ -18193,7 +18203,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "targetes_grogues";
+            param.SourceColumn = "faltes_rebudes";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
@@ -18201,7 +18211,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "targetes_vermelles";
+            param.SourceColumn = "targetes_grogues";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             param.SourceColumnNullMapping = true;
             this._adapter.UpdateCommand.Parameters.Add(param);
@@ -18210,11 +18220,28 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "targetes_vermelles";
+            param.SourceColumn = "targetes_grogues";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p28";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
+            param.IsNullable = true;
+            param.SourceColumn = "targetes_vermelles";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@p29";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
+            param.IsNullable = true;
+            param.SourceColumn = "targetes_vermelles";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@p30";
             param.DbType = global::System.Data.DbType.Double;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Double;
             param.IsNullable = true;
@@ -18222,11 +18249,27 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p29";
+            param.ParameterName = "@p31";
             param.DbType = global::System.Data.DbType.Double;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Double;
             param.IsNullable = true;
             param.SourceColumn = "altura";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@p32";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
+            param.IsNullable = true;
+            param.SourceColumn = "dorsal";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._adapter.UpdateCommand.Parameters.Add(param);
+            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@p33";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
+            param.IsNullable = true;
+            param.SourceColumn = "faltes_entreno";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
@@ -18246,7 +18289,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT `id_jugador`, `id_temporada`, `gols`, `ocasions_de_gol`, `minuts_jugats`, " +
                 "`faltes_comeses`, `faltes_rebudes`, `targetes_grogues`, `targetes_vermelles`, `p" +
-                "es`, `altura` FROM `jugador_temporada`";
+                "es`, `altura`, `dorsal`, `faltes_entreno` FROM `jugador_temporada`";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -18307,7 +18350,7 @@ namespace Gsport.efadbDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int p1, int p2, global::System.Nullable<int> p4, global::System.Nullable<int> p6, global::System.Nullable<int> p8, global::System.Nullable<int> p10, global::System.Nullable<int> p12, global::System.Nullable<int> p14, global::System.Nullable<int> p16, double p17, double p18) {
+        public virtual int Delete(int p1, int p2, global::System.Nullable<int> p4, global::System.Nullable<int> p6, global::System.Nullable<int> p8, global::System.Nullable<int> p10, global::System.Nullable<int> p12, global::System.Nullable<int> p14, global::System.Nullable<int> p16, double p17, double p18, int p19, int p20) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(p1));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(p2));
             if ((p4.HasValue == true)) {
@@ -18368,6 +18411,8 @@ namespace Gsport.efadbDataSetTableAdapters {
             }
             this.Adapter.DeleteCommand.Parameters[16].Value = ((double)(p17));
             this.Adapter.DeleteCommand.Parameters[17].Value = ((double)(p18));
+            this.Adapter.DeleteCommand.Parameters[18].Value = ((int)(p19));
+            this.Adapter.DeleteCommand.Parameters[19].Value = ((int)(p20));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -18388,7 +18433,7 @@ namespace Gsport.efadbDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int p1, int p2, global::System.Nullable<int> p3, global::System.Nullable<int> p4, global::System.Nullable<int> p5, global::System.Nullable<int> p6, global::System.Nullable<int> p7, global::System.Nullable<int> p8, global::System.Nullable<int> p9, double p10, double p11) {
+        public virtual int Insert(int p1, int p2, global::System.Nullable<int> p3, global::System.Nullable<int> p4, global::System.Nullable<int> p5, global::System.Nullable<int> p6, global::System.Nullable<int> p7, global::System.Nullable<int> p8, global::System.Nullable<int> p9, double p10, double p11, int p12, int p13) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(p1));
             this.Adapter.InsertCommand.Parameters[1].Value = ((int)(p2));
             if ((p3.HasValue == true)) {
@@ -18435,6 +18480,8 @@ namespace Gsport.efadbDataSetTableAdapters {
             }
             this.Adapter.InsertCommand.Parameters[9].Value = ((double)(p10));
             this.Adapter.InsertCommand.Parameters[10].Value = ((double)(p11));
+            this.Adapter.InsertCommand.Parameters[11].Value = ((int)(p12));
+            this.Adapter.InsertCommand.Parameters[12].Value = ((int)(p13));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -18469,15 +18516,19 @@ namespace Gsport.efadbDataSetTableAdapters {
                     double p11, 
                     int p12, 
                     int p13, 
-                    global::System.Nullable<int> p15, 
+                    int p14, 
+                    int p15, 
                     global::System.Nullable<int> p17, 
                     global::System.Nullable<int> p19, 
                     global::System.Nullable<int> p21, 
                     global::System.Nullable<int> p23, 
                     global::System.Nullable<int> p25, 
                     global::System.Nullable<int> p27, 
-                    double p28, 
-                    double p29) {
+                    global::System.Nullable<int> p29, 
+                    double p30, 
+                    double p31, 
+                    int p32, 
+                    int p33) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(p1));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(p2));
             if ((p3.HasValue == true)) {
@@ -18526,14 +18577,8 @@ namespace Gsport.efadbDataSetTableAdapters {
             this.Adapter.UpdateCommand.Parameters[10].Value = ((double)(p11));
             this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(p12));
             this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(p13));
-            if ((p15.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(p15.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(p14));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(p15));
             if ((p17.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
                 this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(p17.Value));
@@ -18582,8 +18627,18 @@ namespace Gsport.efadbDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[27].Value = ((double)(p28));
-            this.Adapter.UpdateCommand.Parameters[28].Value = ((double)(p29));
+            if ((p29.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((int)(p29.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[29].Value = ((double)(p30));
+            this.Adapter.UpdateCommand.Parameters[30].Value = ((double)(p31));
+            this.Adapter.UpdateCommand.Parameters[31].Value = ((int)(p32));
+            this.Adapter.UpdateCommand.Parameters[32].Value = ((int)(p33));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -18616,16 +18671,20 @@ namespace Gsport.efadbDataSetTableAdapters {
                     double p11, 
                     int p12, 
                     int p13, 
-                    global::System.Nullable<int> p15, 
+                    int p14, 
+                    int p15, 
                     global::System.Nullable<int> p17, 
                     global::System.Nullable<int> p19, 
                     global::System.Nullable<int> p21, 
                     global::System.Nullable<int> p23, 
                     global::System.Nullable<int> p25, 
                     global::System.Nullable<int> p27, 
-                    double p28, 
-                    double p29) {
-            return this.Update(p12, p13, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p15, p17, p19, p21, p23, p25, p27, p28, p29);
+                    global::System.Nullable<int> p29, 
+                    double p30, 
+                    double p31, 
+                    int p32, 
+                    int p33) {
+            return this.Update(p14, p15, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p17, p19, p21, p23, p25, p27, p29, p30, p31, p32, p33);
         }
     }
     
@@ -18766,14 +18825,12 @@ namespace Gsport.efadbDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("numero_soci", "numero_soci");
             tableMapping.ColumnMappings.Add("lateralitat", "lateralitat");
             tableMapping.ColumnMappings.Add("edat", "edat");
-            tableMapping.ColumnMappings.Add("dorsal", "dorsal");
-            tableMapping.ColumnMappings.Add("faltes_entreno", "faltes_entreno");
             tableMapping.ColumnMappings.Add("id_posicio", "id_posicio");
             tableMapping.ColumnMappings.Add("id_equip", "id_equip");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `jugadors` WHERE ((`id_jugador` = @p1) AND (`dni` = @p2) AND (`nom` = @p3) AND (`cognoms` = @p4) AND (`sexe` = @p5) AND (`nomImatge` = @p6) AND (`data_inscripcio` = @p7) AND (`data_naixement` = @p8) AND (`tarjeta_sanitaria` = @p9) AND (`malaltia_alergia` = @p10) AND (`mobil` = @p11) AND (`telefon` = @p12) AND (`correu_electronic` = @p13) AND (`numero_soci` = @p14) AND ((@p15 = 1 AND `lateralitat` IS NULL) OR (`lateralitat` = @p16)) AND (`edat` = @p17) AND ((@p18 = 1 AND `dorsal` IS NULL) OR (`dorsal` = @p19)) AND (`faltes_entreno` = @p20) AND (`id_posicio` = @p21) AND (`id_equip` = @p22))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `jugadors` WHERE ((`id_jugador` = @p1) AND (`dni` = @p2) AND (`nom` = @p3) AND (`cognoms` = @p4) AND (`sexe` = @p5) AND (`nomImatge` = @p6) AND (`data_inscripcio` = @p7) AND (`data_naixement` = @p8) AND (`tarjeta_sanitaria` = @p9) AND (`malaltia_alergia` = @p10) AND (`mobil` = @p11) AND (`telefon` = @p12) AND (`correu_electronic` = @p13) AND (`numero_soci` = @p14) AND ((@p15 = 1 AND `lateralitat` IS NULL) OR (`lateralitat` = @p16)) AND (`edat` = @p17) AND (`id_posicio` = @p18) AND (`id_equip` = @p19))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p1";
@@ -18917,36 +18974,11 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "dorsal";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p19";
-            param.DbType = global::System.Data.DbType.String;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
-            param.IsNullable = true;
-            param.SourceColumn = "dorsal";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p20";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "faltes_entreno";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p21";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
             param.SourceColumn = "id_posicio";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p22";
+            param.ParameterName = "@p19";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
@@ -18955,7 +18987,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(param);
             this._adapter.InsertCommand = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO `jugadors` (`dni`, `nom`, `cognoms`, `sexe`, `nomImatge`, `data_inscripcio`, `data_naixement`, `tarjeta_sanitaria`, `malaltia_alergia`, `mobil`, `telefon`, `correu_electronic`, `numero_soci`, `lateralitat`, `edat`, `dorsal`, `faltes_entreno`, `id_posicio`, `id_equip`) VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO `jugadors` (`dni`, `nom`, `cognoms`, `sexe`, `nomImatge`, `data_inscripcio`, `data_naixement`, `tarjeta_sanitaria`, `malaltia_alergia`, `mobil`, `telefon`, `correu_electronic`, `numero_soci`, `lateralitat`, `edat`, `id_posicio`, `id_equip`) VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p1";
@@ -19064,27 +19096,13 @@ namespace Gsport.efadbDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p16";
-            param.DbType = global::System.Data.DbType.String;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
-            param.IsNullable = true;
-            param.SourceColumn = "dorsal";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p17";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "faltes_entreno";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p18";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "id_posicio";
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p19";
+            param.ParameterName = "@p17";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
@@ -19092,7 +19110,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `jugadors` SET `dni` = @p1, `nom` = @p2, `cognoms` = @p3, `sexe` = @p4, `nomImatge` = @p5, `data_inscripcio` = @p6, `data_naixement` = @p7, `tarjeta_sanitaria` = @p8, `malaltia_alergia` = @p9, `mobil` = @p10, `telefon` = @p11, `correu_electronic` = @p12, `numero_soci` = @p13, `lateralitat` = @p14, `edat` = @p15, `dorsal` = @p16, `faltes_entreno` = @p17, `id_posicio` = @p18, `id_equip` = @p19 WHERE ((`id_jugador` = @p20) AND (`dni` = @p21) AND (`nom` = @p22) AND (`cognoms` = @p23) AND (`sexe` = @p24) AND (`nomImatge` = @p25) AND (`data_inscripcio` = @p26) AND (`data_naixement` = @p27) AND (`tarjeta_sanitaria` = @p28) AND (`malaltia_alergia` = @p29) AND (`mobil` = @p30) AND (`telefon` = @p31) AND (`correu_electronic` = @p32) AND (`numero_soci` = @p33) AND ((@p34 = 1 AND `lateralitat` IS NULL) OR (`lateralitat` = @p35)) AND (`edat` = @p36) AND ((@p37 = 1 AND `dorsal` IS NULL) OR (`dorsal` = @p38)) AND (`faltes_entreno` = @p39) AND (`id_posicio` = @p40) AND (`id_equip` = @p41))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE `jugadors` SET `dni` = @p1, `nom` = @p2, `cognoms` = @p3, `sexe` = @p4, `nomImatge` = @p5, `data_inscripcio` = @p6, `data_naixement` = @p7, `tarjeta_sanitaria` = @p8, `malaltia_alergia` = @p9, `mobil` = @p10, `telefon` = @p11, `correu_electronic` = @p12, `numero_soci` = @p13, `lateralitat` = @p14, `edat` = @p15, `id_posicio` = @p16, `id_equip` = @p17 WHERE ((`id_jugador` = @p18) AND (`dni` = @p19) AND (`nom` = @p20) AND (`cognoms` = @p21) AND (`sexe` = @p22) AND (`nomImatge` = @p23) AND (`data_inscripcio` = @p24) AND (`data_naixement` = @p25) AND (`tarjeta_sanitaria` = @p26) AND (`malaltia_alergia` = @p27) AND (`mobil` = @p28) AND (`telefon` = @p29) AND (`correu_electronic` = @p30) AND (`numero_soci` = @p31) AND ((@p32 = 1 AND `lateralitat` IS NULL) OR (`lateralitat` = @p33)) AND (`edat` = @p34) AND (`id_posicio` = @p35) AND (`id_equip` = @p36))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p1";
@@ -19201,34 +19219,20 @@ namespace Gsport.efadbDataSetTableAdapters {
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p16";
-            param.DbType = global::System.Data.DbType.String;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
-            param.IsNullable = true;
-            param.SourceColumn = "dorsal";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p17";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "faltes_entreno";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p18";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "id_posicio";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p19";
+            param.ParameterName = "@p17";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
             param.SourceColumn = "id_equip";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p20";
+            param.ParameterName = "@p18";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
@@ -19236,7 +19240,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p21";
+            param.ParameterName = "@p19";
             param.DbType = global::System.Data.DbType.String;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
             param.IsNullable = true;
@@ -19244,7 +19248,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p22";
+            param.ParameterName = "@p20";
             param.DbType = global::System.Data.DbType.String;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
             param.IsNullable = true;
@@ -19252,7 +19256,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p23";
+            param.ParameterName = "@p21";
             param.DbType = global::System.Data.DbType.String;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
             param.IsNullable = true;
@@ -19260,7 +19264,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p24";
+            param.ParameterName = "@p22";
             param.DbType = global::System.Data.DbType.SByte;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Byte;
             param.IsNullable = true;
@@ -19268,7 +19272,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p25";
+            param.ParameterName = "@p23";
             param.DbType = global::System.Data.DbType.String;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
             param.IsNullable = true;
@@ -19276,7 +19280,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p26";
+            param.ParameterName = "@p24";
             param.DbType = global::System.Data.DbType.Date;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Date;
             param.IsNullable = true;
@@ -19284,7 +19288,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p27";
+            param.ParameterName = "@p25";
             param.DbType = global::System.Data.DbType.Date;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Date;
             param.IsNullable = true;
@@ -19292,7 +19296,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p28";
+            param.ParameterName = "@p26";
             param.DbType = global::System.Data.DbType.String;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
             param.IsNullable = true;
@@ -19300,7 +19304,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p29";
+            param.ParameterName = "@p27";
             param.DbType = global::System.Data.DbType.String;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
             param.IsNullable = true;
@@ -19308,7 +19312,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p30";
+            param.ParameterName = "@p28";
             param.DbType = global::System.Data.DbType.String;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
             param.IsNullable = true;
@@ -19316,7 +19320,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p31";
+            param.ParameterName = "@p29";
             param.DbType = global::System.Data.DbType.String;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
             param.IsNullable = true;
@@ -19324,7 +19328,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p32";
+            param.ParameterName = "@p30";
             param.DbType = global::System.Data.DbType.String;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
             param.IsNullable = true;
@@ -19332,7 +19336,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p33";
+            param.ParameterName = "@p31";
             param.DbType = global::System.Data.DbType.String;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
             param.IsNullable = true;
@@ -19340,7 +19344,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p34";
+            param.ParameterName = "@p32";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
@@ -19349,7 +19353,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceColumnNullMapping = true;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p35";
+            param.ParameterName = "@p33";
             param.DbType = global::System.Data.DbType.String;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
             param.IsNullable = true;
@@ -19357,7 +19361,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p36";
+            param.ParameterName = "@p34";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
@@ -19365,32 +19369,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p37";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "dorsal";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p38";
-            param.DbType = global::System.Data.DbType.String;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
-            param.IsNullable = true;
-            param.SourceColumn = "dorsal";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p39";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "faltes_entreno";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p40";
+            param.ParameterName = "@p35";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
@@ -19398,7 +19377,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p41";
+            param.ParameterName = "@p36";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
@@ -19420,7 +19399,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT `id_jugador`, `dni`, `nom`, `cognoms`, `sexe`, `nomImatge`, `data_inscripcio`, `data_naixement`, `tarjeta_sanitaria`, `malaltia_alergia`, `mobil`, `telefon`, `correu_electronic`, `numero_soci`, `lateralitat`, `edat`, `dorsal`, `faltes_entreno`, `id_posicio`, `id_equip` FROM `jugadors`";
+            this._commandCollection[0].CommandText = @"SELECT `id_jugador`, `dni`, `nom`, `cognoms`, `sexe`, `nomImatge`, `data_inscripcio`, `data_naixement`, `tarjeta_sanitaria`, `malaltia_alergia`, `mobil`, `telefon`, `correu_electronic`, `numero_soci`, `lateralitat`, `edat`, `id_posicio`, `id_equip` FROM `jugadors`";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -19498,10 +19477,8 @@ namespace Gsport.efadbDataSetTableAdapters {
                     string p14, 
                     string p16, 
                     int p17, 
-                    string p19, 
-                    int p20, 
-                    int p21, 
-                    int p22) {
+                    int p18, 
+                    int p19) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(p1));
             if ((p2 == null)) {
                 throw new global::System.ArgumentNullException("p2");
@@ -19575,17 +19552,8 @@ namespace Gsport.efadbDataSetTableAdapters {
                 this.Adapter.DeleteCommand.Parameters[15].Value = ((string)(p16));
             }
             this.Adapter.DeleteCommand.Parameters[16].Value = ((int)(p17));
-            if ((p19 == null)) {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[18].Value = ((string)(p19));
-            }
-            this.Adapter.DeleteCommand.Parameters[19].Value = ((int)(p20));
-            this.Adapter.DeleteCommand.Parameters[20].Value = ((int)(p21));
-            this.Adapter.DeleteCommand.Parameters[21].Value = ((int)(p22));
+            this.Adapter.DeleteCommand.Parameters[17].Value = ((int)(p18));
+            this.Adapter.DeleteCommand.Parameters[18].Value = ((int)(p19));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -19622,10 +19590,8 @@ namespace Gsport.efadbDataSetTableAdapters {
                     string p13, 
                     string p14, 
                     int p15, 
-                    string p16, 
-                    int p17, 
-                    int p18, 
-                    int p19) {
+                    int p16, 
+                    int p17) {
             if ((p1 == null)) {
                 throw new global::System.ArgumentNullException("p1");
             }
@@ -19696,15 +19662,8 @@ namespace Gsport.efadbDataSetTableAdapters {
                 this.Adapter.InsertCommand.Parameters[13].Value = ((string)(p14));
             }
             this.Adapter.InsertCommand.Parameters[14].Value = ((int)(p15));
-            if ((p16 == null)) {
-                this.Adapter.InsertCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[15].Value = ((string)(p16));
-            }
+            this.Adapter.InsertCommand.Parameters[15].Value = ((int)(p16));
             this.Adapter.InsertCommand.Parameters[16].Value = ((int)(p17));
-            this.Adapter.InsertCommand.Parameters[17].Value = ((int)(p18));
-            this.Adapter.InsertCommand.Parameters[18].Value = ((int)(p19));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -19741,30 +19700,26 @@ namespace Gsport.efadbDataSetTableAdapters {
                     string p13, 
                     string p14, 
                     int p15, 
-                    string p16, 
+                    int p16, 
                     int p17, 
                     int p18, 
-                    int p19, 
-                    int p20, 
+                    string p19, 
+                    string p20, 
                     string p21, 
-                    string p22, 
+                    byte p22, 
                     string p23, 
-                    byte p24, 
-                    string p25, 
-                    System.DateTime p26, 
-                    System.DateTime p27, 
+                    System.DateTime p24, 
+                    System.DateTime p25, 
+                    string p26, 
+                    string p27, 
                     string p28, 
                     string p29, 
                     string p30, 
                     string p31, 
-                    string p32, 
                     string p33, 
-                    string p35, 
-                    int p36, 
-                    string p38, 
-                    int p39, 
-                    int p40, 
-                    int p41) {
+                    int p34, 
+                    int p35, 
+                    int p36) {
             if ((p1 == null)) {
                 throw new global::System.ArgumentNullException("p1");
             }
@@ -19835,43 +19790,48 @@ namespace Gsport.efadbDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(p14));
             }
             this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(p15));
-            if ((p16 == null)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(p16));
-            }
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(p16));
             this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(p17));
             this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(p18));
-            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(p19));
-            this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(p20));
+            if ((p19 == null)) {
+                throw new global::System.ArgumentNullException("p19");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(p19));
+            }
+            if ((p20 == null)) {
+                throw new global::System.ArgumentNullException("p20");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((string)(p20));
+            }
             if ((p21 == null)) {
                 throw new global::System.ArgumentNullException("p21");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[20].Value = ((string)(p21));
             }
-            if ((p22 == null)) {
-                throw new global::System.ArgumentNullException("p22");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((string)(p22));
-            }
+            this.Adapter.UpdateCommand.Parameters[21].Value = ((byte)(p22));
             if ((p23 == null)) {
                 throw new global::System.ArgumentNullException("p23");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[22].Value = ((string)(p23));
             }
-            this.Adapter.UpdateCommand.Parameters[23].Value = ((byte)(p24));
-            if ((p25 == null)) {
-                throw new global::System.ArgumentNullException("p25");
+            this.Adapter.UpdateCommand.Parameters[23].Value = ((System.DateTime)(p24));
+            this.Adapter.UpdateCommand.Parameters[24].Value = ((System.DateTime)(p25));
+            if ((p26 == null)) {
+                throw new global::System.ArgumentNullException("p26");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((string)(p25));
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((string)(p26));
             }
-            this.Adapter.UpdateCommand.Parameters[25].Value = ((System.DateTime)(p26));
-            this.Adapter.UpdateCommand.Parameters[26].Value = ((System.DateTime)(p27));
+            if ((p27 == null)) {
+                throw new global::System.ArgumentNullException("p27");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((string)(p27));
+            }
             if ((p28 == null)) {
                 throw new global::System.ArgumentNullException("p28");
             }
@@ -19896,38 +19856,17 @@ namespace Gsport.efadbDataSetTableAdapters {
             else {
                 this.Adapter.UpdateCommand.Parameters[30].Value = ((string)(p31));
             }
-            if ((p32 == null)) {
-                throw new global::System.ArgumentNullException("p32");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((string)(p32));
-            }
             if ((p33 == null)) {
-                throw new global::System.ArgumentNullException("p33");
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[32].Value = global::System.DBNull.Value;
             }
             else {
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
                 this.Adapter.UpdateCommand.Parameters[32].Value = ((string)(p33));
             }
-            if ((p35 == null)) {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((string)(p35));
-            }
+            this.Adapter.UpdateCommand.Parameters[33].Value = ((int)(p34));
+            this.Adapter.UpdateCommand.Parameters[34].Value = ((int)(p35));
             this.Adapter.UpdateCommand.Parameters[35].Value = ((int)(p36));
-            if ((p38 == null)) {
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[37].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[37].Value = ((string)(p38));
-            }
-            this.Adapter.UpdateCommand.Parameters[38].Value = ((int)(p39));
-            this.Adapter.UpdateCommand.Parameters[39].Value = ((int)(p40));
-            this.Adapter.UpdateCommand.Parameters[40].Value = ((int)(p41));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {

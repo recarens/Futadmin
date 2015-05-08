@@ -8,11 +8,11 @@
     <WrapPanel Orientation="Vertical" MaxHeight="170">
         <StackPanel Orientation="Horizontal" Background="#FF52B64E">
             <Label Name="lblUser" Width="90" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="{Binding lblUser, Source={StaticResource IdiomesRes}}"/>
-            <TextBox x:Name="tbUsuari" MinWidth="190" Margin="15,5,10,5" FontSize="16" BorderBrush="{x:Null}"/>
+            <TextBox x:Name="tbUsuari" MinWidth="190" Margin="15,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="admin"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Background="#FF52B64E" >
             <Label Name="lblPassword" Width="110" Margin="4,4,0,4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="{Binding lblPassword, Source={StaticResource IdiomesRes}}"/>
-            <PasswordBox x:Name="pbContrasenya" MinWidth="190" Margin="0,5,10,5" FontSize="16" BorderBrush="{x:Null}" />
+            <PasswordBox x:Name="pbContrasenya" MinWidth="190" Margin="0,5,10,5" FontSize="16" BorderBrush="{x:Null}"/>
         </StackPanel>
         <Button x:Name="btnLogin" Content="{Binding btnLogin, Source={StaticResource IdiomesRes}}" Margin="9" Click="btnLogin_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold"/>
         <WrapPanel HorizontalAlignment="Right" Orientation="Horizontal">

@@ -24,12 +24,18 @@ namespace Gsport
     public partial class MainWindow : Window
     {
         Gsport.efadbDataSet efadbDataSet;
+        Gsport.efadbDataSetTableAdapters.jugadorsTableAdapter efadbDataSetjugadorsTableAdapter;
+        Gsport.efadbDataSetTableAdapters.usuarisTableAdapter efadbDataSetusuarisTableAdapter;
+        System.Windows.Data.CollectionViewSource jugadorsViewSource;
         int codiUsuari;
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent(); 
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("ca-ES");
             idiomes.WrapperIdiomes.ChangeCulture(Thread.CurrentThread.CurrentUICulture);
+            tbSexe.Items.Add("Masculi");
+            tbSexe.Items.Add("Femeni");
+            tbSexe.SelectedIndex = 0;
         }
 
         private void btnCerca_Click(object sender, RoutedEventArgs e)
@@ -109,12 +115,12 @@ namespace Gsport
         {
             efadbDataSet = ((Gsport.efadbDataSet)(this.FindResource("efadbDataSet")));
             // Cargar datos en la tabla jugadors. Puede modificar este código según sea necesario.
-            Gsport.efadbDataSetTableAdapters.jugadorsTableAdapter efadbDataSetjugadorsTableAdapter = new Gsport.efadbDataSetTableAdapters.jugadorsTableAdapter();
+            efadbDataSetjugadorsTableAdapter = new Gsport.efadbDataSetTableAdapters.jugadorsTableAdapter();
             efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
-            Gsport.efadbDataSetTableAdapters.usuarisTableAdapter efadbDataSetusuarisTableAdapter = new Gsport.efadbDataSetTableAdapters.usuarisTableAdapter();
+            efadbDataSetusuarisTableAdapter = new Gsport.efadbDataSetTableAdapters.usuarisTableAdapter();
             efadbDataSetusuarisTableAdapter.Fill(efadbDataSet.usuaris);
-            System.Windows.Data.CollectionViewSource jugadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugadorsViewSource")));
-            jugadorsViewSource.View.MoveCurrentToFirst();
+            jugadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugadorsViewSource")));
+            //jugadorsViewSource.View.MoveCurrentToFirst();
             wndLogin wnd = new wndLogin(efadbDataSet);
             wnd.ShowDialog();
             codiUsuari = wnd.codiUsuari;
@@ -156,6 +162,11 @@ namespace Gsport
             efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
             System.Windows.Data.CollectionViewSource jugador_temporadaViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugador_temporadaViewSource")));
             jugador_temporadaViewSource.View.MoveCurrentToFirst();
+            // Cargar datos en la tabla posicions. Puede modificar este código según sea necesario.
+            Gsport.efadbDataSetTableAdapters.posicionsTableAdapter efadbDataSetposicionsTableAdapter = new Gsport.efadbDataSetTableAdapters.posicionsTableAdapter();
+            efadbDataSetposicionsTableAdapter.Fill(efadbDataSet.posicions);
+            System.Windows.Data.CollectionViewSource posicionsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("posicionsViewSource")));
+            posicionsViewSource.View.MoveCurrentToFirst();
         }
 
         private void btnDadesEquip_Click(object sender, RoutedEventArgs e)
@@ -186,8 +197,61 @@ namespace Gsport
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
             DataRow dr = efadbDataSet.Tables["jugadors"].NewRow();
-            dr[0] = tbDni.Text.Trim();
-            efadbDataSet.jugadors.Rows.Add(dr);   
+            dr["dni"] = tbDni.Text.Trim();
+            dr["nom"] = tbNom.Text.Trim();
+            dr["cognoms"] = tbCognom.Text.Trim();
+            dr["sexe"] = Convert.ToInt16(tbSexe.SelectedIndex);
+            dr["nomImatge"] = "..\\..\\Fotos\\eric.jpg";
+            dr["data_inscripcio"] = DateTime.Parse(dpAnyInscripcio.SelectedDate.ToString());
+            dr["data_naixement"] = DateTime.Parse(dpAnyNeixament.SelectedDate.ToString());
+            dr["tarjeta_sanitaria"] = tbTarjetaSanitaria.Text.Trim();
+            dr["malaltia_alergia"] = tbMalalties.Text.Trim();
+            dr["mobil"] = tbMobil.Text.Trim();
+            dr["telefon"] = tbTelefon.Text.Trim();
+            dr["correu_electronic"] = tbcorreuElec.Text.Trim();
+            dr["numero_soci"] = tbnSoci.Text.Trim();
+            dr["lateralitat"] = tbLateralitat.Text.Trim();
+
+            dr["edat"] = Convert.ToInt32(tbEdat.Text.Trim());
+            dr["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
+            dr["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);     
+            try
+            {
+                efadbDataSet.jugadors.Rows.Add(dr);
+                efadbDataSetjugadorsTableAdapter.Update(dr);             
+                MessageBox.Show("Guardat");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("No s'ha pogut guardar:"+ex.ToString());
+            }
+        }
+
+        private void tbDni_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            bool trobat = false;
+            btnGuardar.IsEnabled = true;
+            if (tbDni.Text.Length > 8)
+            {
+                
+                foreach (DataRow dr in efadbDataSet.Tables["jugadors"].Rows)
+                {
+                    if (dr["dni"].ToString() == tbDni.Text.Trim())
+                    {
+                        trobat = true;
+                    }
+                }
+
+                if (trobat)
+                {
+                    MessageBox.Show("No es valid");
+                    btnGuardar.IsEnabled = false;
+                }
+            }
+            else
+            {
+                btnGuardar.IsEnabled = false;
+            }
         }
     }
 }
