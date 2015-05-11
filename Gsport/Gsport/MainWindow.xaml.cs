@@ -33,6 +33,8 @@ namespace Gsport
         System.Windows.Data.CollectionViewSource equipsViewSource;
         Gsport.efadbDataSetTableAdapters.entrenadorsTableAdapter efadbDataSetentrenadorsTableAdapter;
         System.Windows.Data.CollectionViewSource entrenadorsViewSource;
+        Gsport.efadbDataSetTableAdapters.jugador_temporadaTableAdapter efadbDataSetjugador_temporadaTableAdapter;
+        System.Windows.Data.CollectionViewSource jugador_temporadaViewSource;
         string rutaImg = @"C:/Fotos/img.jpg";
         int codiUsuari;
         public MainWindow()
@@ -164,9 +166,9 @@ namespace Gsport
             entrenadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("entrenadorsViewSource")));
             //entrenadorsViewSource.View.MoveCurrentToFirst();
             // Cargar datos en la tabla jugador_temporada. Puede modificar este código según sea necesario.
-            Gsport.efadbDataSetTableAdapters.jugador_temporadaTableAdapter efadbDataSetjugador_temporadaTableAdapter = new Gsport.efadbDataSetTableAdapters.jugador_temporadaTableAdapter();
+            efadbDataSetjugador_temporadaTableAdapter = new Gsport.efadbDataSetTableAdapters.jugador_temporadaTableAdapter();
             efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
-            System.Windows.Data.CollectionViewSource jugador_temporadaViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugador_temporadaViewSource")));
+            jugador_temporadaViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugador_temporadaViewSource")));
             //jugador_temporadaViewSource.View.MoveCurrentToFirst();
             // Cargar datos en la tabla posicions. Puede modificar este código según sea necesario.
             Gsport.efadbDataSetTableAdapters.posicionsTableAdapter efadbDataSetposicionsTableAdapter = new Gsport.efadbDataSetTableAdapters.posicionsTableAdapter();
@@ -214,6 +216,12 @@ namespace Gsport
         {
             if (cdjugadors.Width.Value > 0)
             {
+                int idJugador = 0;
+                idJugador = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count-1]["id_jugador"]);
+
+                efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrement = true;
+                efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrementSeed = idJugador+1;
+                efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrementStep = 1;
                 DataRow dr = efadbDataSet.Tables["jugadors"].NewRow();
                 dr["dni"] = tbDni.Text.Trim();
                 dr["nom"] = tbNom.Text.Trim();
@@ -232,10 +240,29 @@ namespace Gsport
                 dr["edat"] = Convert.ToInt32(tbEdat.Text.Trim());
                 dr["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
                 dr["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);
+                
                 try
                 {
-                    efadbDataSet.jugadors.Rows.Add(dr);
+                    efadbDataSet.Tables["jugadors"].Rows.Add(dr);    
                     efadbDataSetjugadorsTableAdapter.Update(dr);
+
+                    DataRow dr2 = efadbDataSet.Tables["jugador_temporada"].NewRow();
+
+                    dr2["id_jugador"] = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count - 1]["id_jugador"]);
+                    dr2["id_temporada"] = 1;//falta determinar
+                    dr2["gols"] = 0;
+                    dr2["ocasions_de_gol"] = 0;
+                    dr2["minuts_jugats"] = 0;
+                    dr2["faltes_comeses"] = 0;
+                    dr2["faltes_rebudes"] = 0;
+                    dr2["targetes_grogues"] = 0;
+                    dr2["targetes_vermelles"] = 0;
+                    dr2["pes"] = 0;
+                    dr2["altura"] = 0;
+                    dr2["dorsal"] = 0;
+                    dr2["faltes_entreno"] = 0;
+                    efadbDataSet.Tables["jugador_temporada"].Rows.Add(dr2);
+                    efadbDataSetjugador_temporadaTableAdapter.Update(dr2);
                     MessageBox.Show("Guardat");
                 }
                 catch (Exception ex)
@@ -357,7 +384,7 @@ namespace Gsport
                 JpegBitmapEncoder encoder = new JpegBitmapEncoder();
                 Guid photoID = System.Guid.NewGuid();
                 encoder.Frames.Add(BitmapFrame.Create((BitmapImage)imgImatge.Source));
-                rutaImg = @"C:/Fotos/" + tbNom.Text.ToLower().Trim()+"img.jpg";
+                rutaImg = @"C:/Fotos/" + tbDni.Text.ToLower().Trim()+"img.jpg";
                 using (FileStream filestream = new FileStream(rutaImg, FileMode.Create))
                     encoder.Save(filestream);
             }

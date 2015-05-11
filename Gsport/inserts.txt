@@ -9,3 +9,7 @@ INSERT INTO `posicions`(`id_posicio`, `nom`) VALUES (NULL,'Porter');
 INSERT INTO `posicions`(`id_posicio`, `nom`) VALUES (NULL,'Defensa');
 INSERT INTO `posicions`(`id_posicio`, `nom`) VALUES (NULL,'Migcampista');
 INSERT INTO `posicions`(`id_posicio`, `nom`) VALUES (NULL,'Davanter');
+ALTER TABLE  `jugador_temporada` DROP FOREIGN KEY  `fk_jugador_temporada_jugadors1` ;
+ALTER TABLE  `jugador_temporada` ADD CONSTRAINT  `fk_jugador_temporada_jugadors1` FOREIGN KEY (  `id_jugador` ) REFERENCES `gsportse_efadb`.`jugadors` (
+`id_jugador`
+) ON DELETE CASCADE ON UPDATE CASCADE ;
