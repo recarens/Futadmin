@@ -19,11 +19,16 @@ namespace Gsport
     /// </summary>
     public partial class wndCercar : Window
     {
+        efadbDataSet dataSetAux;
         public wndCercar()
         {
             InitializeComponent();
         }
-
+        public wndCercar(efadbDataSet dataSet)
+        {
+            InitializeComponent();
+            dataSetAux = dataSet;
+        }
         private void rbEntrenador_Click(object sender, RoutedEventArgs e)
         {
 

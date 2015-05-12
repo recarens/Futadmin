@@ -19,6 +19,7 @@
         <CollectionViewSource x:Key="jugadorsjugador_temporadaViewSource" Source="{Binding fk_jugador_temporada_jugadors1, Source={StaticResource jugadorsViewSource}}"/>
         <CollectionViewSource x:Key="divisioViewSource" Source="{Binding divisio, Source={StaticResource efadbDataSet}}"/>
         <CollectionViewSource x:Key="categoriesViewSource" Source="{Binding categories, Source={StaticResource efadbDataSet}}"/>
+        <CollectionViewSource x:Key="temporadesViewSource" Source="{Binding temporades, Source={StaticResource efadbDataSet}}"/>
     </Window.Resources>
     <Window.Background>
         <ImageBrush ImageSource="Fotos/grass.jpg" Stretch="UniformToFill"/>
@@ -29,6 +30,7 @@
             <ColumnDefinition x:Name="cdjugadors" Width="0"/>
             <ColumnDefinition x:Name="cdequips" Width="0"/>
             <ColumnDefinition x:Name="cdntrenadors" Width="0"/>
+            <ColumnDefinition x:Name="cdTemporada" Width="0"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Margin="5">
             <Button x:Name="btnCerca" Content="Cercar" Margin="9" Click="btnCerca_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold" />
@@ -337,7 +339,49 @@
                 </Border>
             </StackPanel>
         </ScrollViewer>
-
+        <ScrollViewer Grid.Column="4">
+            <StackPanel x:Name="spDadesTemporada" Orientation="Vertical">
+                <Button x:Name="btnGuardarTemporada" Click="btnGuardarTemporada_Click" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10" IsEnabled="False">Guardar</Button>
+                <Button x:Name="btnDadesNovaTemporada" Content="Nova Temporada" FontSize="16" FontWeight="Bold" Margin="10,50,10,0" Click="btnDadesNovaTemporada_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
+                <Border Margin="10,0,10,30" x:Name="wpNovaTemporada" BorderThickness="2">
+                    <WrapPanel Background="#FF52B64E">
+                        <Grid x:Name="grid8" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="nom:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="0" VerticalAlignment="Center"/>
+                            <TextBox x:Name="tbNomTemp" Grid.Column="1" MinWidth="150" Margin="0,4,0,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="0"  VerticalAlignment="Center" Width="120" TextChanged="tbNomTemp_TextChanged"/>
+                        </Grid>
+                        <Grid x:Name="grid9" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="data Inici:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="0" VerticalAlignment="Center"/>
+                            <DatePicker x:Name="data_IniciDatePicker" Grid.Column="1" MinWidth="150" Margin="0,4,0,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="0" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid x:Name="grid10" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="data Fi:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="0" VerticalAlignment="Center"/>
+                            <DatePicker x:Name="data_FiDatePicker" Grid.Column="1" MinWidth="150" Margin="0,4,0,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="0" VerticalAlignment="Center"/>
+                        </Grid>
+                    </WrapPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
 

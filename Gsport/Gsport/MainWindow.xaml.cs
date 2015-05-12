@@ -35,7 +35,9 @@ namespace Gsport
         System.Windows.Data.CollectionViewSource entrenadorsViewSource;
         Gsport.efadbDataSetTableAdapters.jugador_temporadaTableAdapter efadbDataSetjugador_temporadaTableAdapter;
         System.Windows.Data.CollectionViewSource jugador_temporadaViewSource;
+        Gsport.efadbDataSetTableAdapters.temporadesTableAdapter efadbDataSettemporadesTableAdapter;
         string rutaImg = @"C:/Fotos/img.jpg";
+        int idTemporada = 1;
         int codiUsuari;
         public MainWindow()
         {
@@ -45,13 +47,26 @@ namespace Gsport
             tbSexe.Items.Add("Masculi");
             tbSexe.Items.Add("Femeni");
             tbSexe.SelectedIndex = 0;
+            data_IniciDatePicker.SelectedDate = DateTime.Now;
+            data_FiDatePicker.SelectedDate = DateTime.Now;
+            dpAnyNeixament.SelectedDate = DateTime.Now;
         }
 
+        /// <summary>
+        /// obre la finestra de cerca
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCerca_Click(object sender, RoutedEventArgs e)
         {
-            wndCercar wnd = new wndCercar();
+            wndCercar wnd = new wndCercar(efadbDataSet);
         }
 
+        /// <summary>
+        /// segons el boto fa mes gran o mes petit una columna del grid principal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAfageix_Click(object sender, RoutedEventArgs e)
         {
             GridLength gE2 = new GridLength(0, GridUnitType.Star);
@@ -60,10 +75,17 @@ namespace Gsport
             cdjugadors.Width = gJ2;
             GridLength gC2 = new GridLength(0, GridUnitType.Star);
             cdntrenadors.Width = gC2;
-
-            
+            GridLength gT2 = new GridLength(0, GridUnitType.Star);
+            cdTemporada.Width = gT2;
+            wpDadesTemporada.Height = 0;
+            btnDadesTemporada.IsEnabled = false;
         }
 
+        /// <summary>
+        /// segons el boto fa mes gran o mes petit una columna del grid principal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAfageixEntrenador_Click(object sender, RoutedEventArgs e)
         {
             GridLength gE2 = new GridLength(0, GridUnitType.Star);
@@ -72,8 +94,15 @@ namespace Gsport
             cdjugadors.Width = gJ2;
             GridLength gC2 = new GridLength(this.ActualWidth, GridUnitType.Star);
             cdntrenadors.Width = gC2;
+            GridLength gT2 = new GridLength(0, GridUnitType.Star);
+            cdTemporada.Width = gT2;
         }
 
+        /// <summary>
+        /// segons el boto fa mes gran o mes petit una columna del grid principal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCrearEquip_Click(object sender, RoutedEventArgs e)
         {
             GridLength gE2 = new GridLength(this.ActualWidth, GridUnitType.Star);
@@ -82,18 +111,42 @@ namespace Gsport
             cdjugadors.Width = gJ2;
             GridLength gC2 = new GridLength(0, GridUnitType.Star);
             cdntrenadors.Width = gC2;
+            GridLength gT2 = new GridLength(0, GridUnitType.Star);
+            cdTemporada.Width = gT2;
         }
 
+        /// <summary>
+        /// segons el boto fa mes gran o mes petit una columna del grid principal
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnNovaTemporada_Click(object sender, RoutedEventArgs e)
         {
-
+            GridLength gT2 = new GridLength(this.ActualWidth, GridUnitType.Star);
+            cdTemporada.Width = gT2;
+            GridLength gJ2 = new GridLength(0, GridUnitType.Star);
+            cdjugadors.Width = gJ2;
+            GridLength gC2 = new GridLength(0, GridUnitType.Star);
+            cdntrenadors.Width = gC2;
+            GridLength gE2 = new GridLength(0, GridUnitType.Star);
+            cdequips.Width = gE2;
         }
 
+        /// <summary>
+        /// tenca la app
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSortir_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// fa l'efecta de reduir el Height del border
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDadesPersonals_Click(object sender, RoutedEventArgs e)
         {
 
@@ -108,6 +161,11 @@ namespace Gsport
 
         }
 
+        /// <summary>
+        /// fa l'efecta de reduir el Height del border
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDadesTemporada_Click(object sender, RoutedEventArgs e)
         {
             if (wpDadesTemporada.Height > 0 || wpDadesTemporada.Height.Equals(Double.NaN))
@@ -120,6 +178,11 @@ namespace Gsport
             }
         }
 
+        /// <summary>
+        /// Obre la finestra de carga guarda l'usuari que s'ha introduit i segons el nivell de privilegi habilita i deshabilita controls a mes crear els view i els adapters
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             efadbDataSet = ((Gsport.efadbDataSet)(this.FindResource("efadbDataSet")));
@@ -185,8 +248,18 @@ namespace Gsport
             efadbDataSetcategoriesTableAdapter.Fill(efadbDataSet.categories);
             System.Windows.Data.CollectionViewSource categoriesViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("categoriesViewSource")));
             //categoriesViewSource.View.MoveCurrentToFirst();
+            // Cargar datos en la tabla temporades. Puede modificar este código según sea necesario.
+            efadbDataSettemporadesTableAdapter = new Gsport.efadbDataSetTableAdapters.temporadesTableAdapter();
+            efadbDataSettemporadesTableAdapter.Fill(efadbDataSet.temporades);
+            System.Windows.Data.CollectionViewSource temporadesViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("temporadesViewSource")));
+            temporadesViewSource.View.MoveCurrentToFirst();
         }
 
+        /// <summary>
+        ///  fa l'efecta de reduir el Height del border
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDadesEquip_Click(object sender, RoutedEventArgs e)
         {
             if (wpDadesEquip.Height > 0 || wpDadesEquip.Height.Equals(Double.NaN))
@@ -200,6 +273,11 @@ namespace Gsport
             }
         }
 
+        /// <summary>
+        /// fa l'efecta de reduir el Height del border
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDadesEntrenador_Click(object sender, RoutedEventArgs e)
         {
             if (wpDadesEntrenador.Height > 0 || wpDadesEntrenador.Height.Equals(Double.NaN))
@@ -212,13 +290,18 @@ namespace Gsport
             }
         }
 
+        /// <summary>
+        /// És l'event de validar l'insert dels varis elements que tenim , jugadors entrenadors, equips
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
             if (cdjugadors.Width.Value > 0)
             {
                 int idJugador = 0;
-                idJugador = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count-1]["id_jugador"]);
-
+                if(efadbDataSet.Tables["jugadors"].Rows.Count > 0)
+                    idJugador = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count-1]["id_jugador"]);
                 efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrement = true;
                 efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrementSeed = idJugador+1;
                 efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrementStep = 1;
@@ -239,17 +322,17 @@ namespace Gsport
                 dr["lateralitat"] = tbLateralitat.Text.Trim();
                 dr["edat"] = Convert.ToInt32(tbEdat.Text.Trim());
                 dr["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
-                dr["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);
-                
+                dr["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);           
                 try
                 {
                     efadbDataSet.Tables["jugadors"].Rows.Add(dr);    
                     efadbDataSetjugadorsTableAdapter.Update(dr);
 
                     DataRow dr2 = efadbDataSet.Tables["jugador_temporada"].NewRow();
-
                     dr2["id_jugador"] = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count - 1]["id_jugador"]);
-                    dr2["id_temporada"] = 1;//falta determinar
+                    if (efadbDataSet.Tables["temporades"].Rows.Count > 0)
+                        idTemporada = Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows[efadbDataSet.Tables["temporades"].Rows.Count - 1]["id_temporada"]);
+                    dr2["id_temporada"] = idTemporada;
                     dr2["gols"] = 0;
                     dr2["ocasions_de_gol"] = 0;
                     dr2["minuts_jugats"] = 0;
@@ -309,13 +392,17 @@ namespace Gsport
             }
         }
 
+        /// <summary>
+        /// el ser modificat el text busca a la base de dades si hi ha una coincidencia i si es aixo no deixa guardar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tbDni_TextChanged(object sender, TextChangedEventArgs e)
         {
             bool trobat = false;
             btnGuardar.IsEnabled = true;
             if (tbDni.Text.Length > 8)
-            {
-                
+            {     
                 foreach (DataRow dr in efadbDataSet.Tables["jugadors"].Rows)
                 {
                     if (dr["dni"].ToString().ToLower() == tbDni.Text.Trim().ToLower())
@@ -336,13 +423,17 @@ namespace Gsport
             }
         }
 
+        /// <summary>
+        /// el ser modificat el text busca a la base de dades si hi ha una coincidencia i si es aixo no deixa guardar ,entrenadors
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dniTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             bool trobat = false;
             btnGuardarEntrenador.IsEnabled = true;
             if (dniTextBox.Text.Length > 8)
             {
-
                 foreach (DataRow dr in efadbDataSet.Tables["entrenadors"].Rows)
                 {
                     if (dr["dni"].ToString().ToLower() == dniTextBox.Text.Trim().ToLower())
@@ -350,7 +441,6 @@ namespace Gsport
                         trobat = true;
                     }
                 }
-
                 if (trobat)
                 {
                     MessageBox.Show("Ja existeix");
@@ -363,6 +453,11 @@ namespace Gsport
             }
         }
 
+        /// <summary>
+        /// El ser modificat el text mira que no sigui null per tant que l'equip tingui un nom
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void nomTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if(nomTextBox.Text.Length > 0)
@@ -371,6 +466,11 @@ namespace Gsport
                 btnGuardarEquip.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Obre un dialeg amb el boto dret del ratoli per selecionar una imatge
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void imgImatge_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
@@ -387,6 +487,82 @@ namespace Gsport
                 rutaImg = @"C:/Fotos/" + tbDni.Text.ToLower().Trim()+"img.jpg";
                 using (FileStream filestream = new FileStream(rutaImg, FileMode.Create))
                     encoder.Save(filestream);
+            }
+        }
+
+        /// <summary>
+        /// És l'event de validar l'insert a les temporades
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnGuardarTemporada_Click(object sender, RoutedEventArgs e)
+        {
+            if (efadbDataSet.Tables["temporades"].Rows.Count > 0)
+                idTemporada = Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows[efadbDataSet.Tables["temporades"].Rows.Count - 1]["id_temporada"]);
+
+            efadbDataSet.Tables["temporades"].Columns[0].AutoIncrement = true;
+            efadbDataSet.Tables["temporades"].Columns[0].AutoIncrementSeed = idTemporada + 1;
+            efadbDataSet.Tables["temporades"].Columns[0].AutoIncrementStep = 1;
+            DataRow dr = efadbDataSet.Tables["temporades"].NewRow();
+            dr["nom"] = tbNomTemp.Text.Trim();
+            dr["data_Inici"] = DateTime.Parse(data_IniciDatePicker.SelectedDate.ToString());
+            dr["data_Fi"] = DateTime.Parse(data_FiDatePicker.SelectedDate.ToString());
+            try
+            {
+                efadbDataSet.temporades.Rows.Add(dr);
+                efadbDataSettemporadesTableAdapter.Update(dr);
+                MessageBox.Show("Guardat");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// fa l'efecta de reduir el Height del border
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDadesNovaTemporada_Click(object sender, RoutedEventArgs e)
+        {
+            if (wpNovaTemporada.Height > 0 || wpNovaTemporada.Height.Equals(Double.NaN))
+            {
+                wpNovaTemporada.Height = 0;
+            }
+            else
+            {
+                wpNovaTemporada.Height = Double.NaN; // aixo es  height l'auto del xaml
+            }
+        }
+
+        /// <summary>
+        ///el ser modificat el text busca a la base de dades si hi ha una coincidencia i si es aixo no deixa guardar temporades nom
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tbNomTemp_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            bool trobat = false;
+            btnGuardarTemporada.IsEnabled = true;
+            if (tbNomTemp.Text.Length > 0)
+            {
+                foreach (DataRow dr in efadbDataSet.Tables["temporades"].Rows)
+                {
+                    if (dr["nom"].ToString().ToLower() == tbNomTemp.Text.Trim().ToLower())
+                    {
+                        trobat = true;
+                    }
+                }
+                if (trobat)
+                {
+                    MessageBox.Show("Ja existeix");
+                    btnGuardarTemporada.IsEnabled = false;
+                }
+            }
+            else
+            {
+                btnGuardarTemporada.IsEnabled = false;
             }
         }
     }
