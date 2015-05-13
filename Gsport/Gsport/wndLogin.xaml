@@ -1,11 +1,12 @@
 ﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Gsport" x:Class="Gsport.wndLogin"
-        Title="Login" Height="250" Width="325" MaxWidth="325" MaxHeight="250" MinWidth="325" MinHeight="240" WindowStyle="None">
+        Title="Login" Height="250" Width="325" MaxWidth="325" MaxHeight="250" MinWidth="325" MinHeight="240" WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <ImageBrush ImageSource="Fotos/grass.jpg"/>
     </Window.Background>
-    <StackPanel Orientation="Vertical" MaxHeight="170">
+    <StackPanel Orientation="Vertical" Margin="0,10,0,0" VerticalAlignment="Bottom">
+        <Button Margin="10" Width="25" Height="25" HorizontalAlignment="Right" Background="#FF52B64E" Content="X" FontSize="15" FontWeight="Bold" BorderBrush="#FFC50000" Foreground="Red" BorderThickness="3" Name="btnClose" Click="btnClose_Click"/>
         <StackPanel Orientation="Horizontal" Background="#FF52B64E">
             <Label Name="lblUser" Width="90" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="{Binding lblUser, Source={StaticResource IdiomesRes}}"/>
             <TextBox x:Name="tbUsuari" MinWidth="190" Margin="15,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="admin"/>
@@ -15,13 +16,13 @@
             <PasswordBox x:Name="pbContrasenya" MinWidth="190" Margin="0,5,10,5" FontSize="16" BorderBrush="{x:Null}"/>
         </StackPanel>
         <Button x:Name="btnLogin" Content="{Binding btnLogin, Source={StaticResource IdiomesRes}}" Margin="9" Click="btnLogin_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold"/>
-        <WrapPanel Orientation="Horizontal" Margin="3" Height="52">
+        <WrapPanel Orientation="Horizontal" Margin="3" Height="52" VerticalAlignment="Bottom">
             <StackPanel Orientation="Horizontal">
                 <Image x:Name="imgCat" Source="Fotos/cat.jpg" Height="20" Margin="0,28,5,0" MouseLeftButtonDown="imgCat_MouseLeftButtonDown"/>
                 <Image x:Name="imgEn" Source="Fotos/eng.jpg"  Height="20" Margin="0,28,5,0" MouseLeftButtonDown="imgEn_MouseLeftButtonDown"/>
                 <Image x:Name="imgEs" Source="Fotos/es.png" Height="20" Margin="0,28,5,0" MouseLeftButtonDown="imgEs_MouseLeftButtonDown"/>
-        </StackPanel>
-        <Button x:Name="btnMisPas" Width="160" Margin="0,23,0,0" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" BorderBrush="#FFB80404" BorderThickness="2" Content="{Binding btnMisPas, Source={StaticResource IdiomesRes}}"/>
+            </StackPanel>
+            <Button x:Name="btnMisPas" Width="160" Margin="0,23,0,0" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" BorderBrush="#FFB80404" BorderThickness="2" Content="{Binding btnMisPas, Source={StaticResource IdiomesRes}}"/>
         </WrapPanel>
     </StackPanel>
 </Window>

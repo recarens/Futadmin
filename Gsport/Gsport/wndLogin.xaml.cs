@@ -36,6 +36,12 @@ namespace Gsport
             InitializeComponent();
             dataSetAux = dataSet;
         }
+
+        /// <summary>
+        /// Fa una mira si hi ha un usuari amb el nom del texbox i despres mira que la password sigui correcte
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             bool trobat = false;
@@ -47,7 +53,6 @@ namespace Gsport
                         trobat = true;
                         codiUsuari = (int)Linia["id_usuari"];
                         privilegi = (int)Linia["id_rol"];
-
                     }
             }
             if (trobat)
@@ -67,13 +72,22 @@ namespace Gsport
             }
         }
 
+        /// <summary>
+        /// canvia l'idioma a catala
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void imgCat_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("ca-ES");
-            idiomes.WrapperIdiomes.ChangeCulture(Thread.CurrentThread.CurrentUICulture);
-            
+            idiomes.WrapperIdiomes.ChangeCulture(Thread.CurrentThread.CurrentUICulture);       
         }
 
+        /// <summary>
+        /// canvia l'idioma a ingles
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void imgEn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-GB");
@@ -81,11 +95,21 @@ namespace Gsport
 
         }
 
+        /// <summary>
+        /// canvia l'idioma a espanyol
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void imgEs_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-ES");
             idiomes.WrapperIdiomes.ChangeCulture(Thread.CurrentThread.CurrentUICulture);
 
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }

@@ -19,51 +19,89 @@ namespace Gsport
     /// </summary>
     public partial class wndCercar : Window
     {
-        efadbDataSet dataSetAux;
+        efadbDataSet dataSetAux = new efadbDataSet();
+        System.Windows.Data.CollectionViewSource entrenadorsViewSource;
         public wndCercar()
         {
             InitializeComponent();
         }
         public wndCercar(efadbDataSet dataSet)
         {
+            dgResultat = new DataGrid();
             InitializeComponent();
             dataSetAux = dataSet;
-        }
-        private void rbEntrenador_Click(object sender, RoutedEventArgs e)
-        {
-
+            
+            
         }
 
         private void rbJugador_Checked(object sender, RoutedEventArgs e)
         {
+            dgResultat.ItemsSource = dataSetAux.jugadors.DefaultView;
+            foreach (DataGridColumn col in dgResultat.Columns)
+            {
+                if (col.DisplayIndex == 0)
+                {
+                    //DataGridTemplateColumn col1 = new DataGridTemplateColumn();
+                    //col1.Header = "Foto";
+                    //FrameworkElementFactory factory1 = new FrameworkElementFactory(typeof(Image));
+                    //Binding b1 = new Binding(dataSetAux.jugadors.Rows["nomImatge"]);
+                    //b1.Mode = BindingMode.TwoWay;
+                    //factory1.SetValue(Image.SourceProperty, b1);
+                    //DataTemplate cellTemplate1 = new DataTemplate();
+                    //cellTemplate1.VisualTree = factory1;
+                    //col1.CellTemplate = cellTemplate1;
+                }
 
+                if (col.DisplayIndex <= 1 && col.DisplayIndex >= 3)
+                    col.Visibility = Visibility.Hidden;
+                if (col.DisplayIndex == 3)
+                    col.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            }
         }
 
         private void rbEntrenador_Checked(object sender, RoutedEventArgs e)
         {
-
+            dgResultat.ItemsSource = dataSetAux.entrenadors.DefaultView;
+            foreach (DataGridColumn col in dgResultat.Columns)
+            {
+                if (col.DisplayIndex == 0)
+                    col.Visibility = Visibility.Hidden;
+                if (col.DisplayIndex == 5)
+                    col.Visibility = Visibility.Hidden;
+                if (col.DisplayIndex == 6)
+                    col.Visibility = Visibility.Hidden;
+                if (col.DisplayIndex == 4)
+                    col.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            }
         }
 
         private void rbEquip_Checked(object sender, RoutedEventArgs e)
         {
-
+            dgResultat.ItemsSource = dataSetAux.equips.DefaultView;
+            foreach (DataGridColumn col in dgResultat.Columns)
+            {
+                if (col.DisplayIndex == 0)
+                    col.Visibility = Visibility.Hidden;
+                if (col.DisplayIndex == 2)
+                    col.Visibility = Visibility.Hidden;
+                if (col.DisplayIndex == 3)
+                    col.Visibility = Visibility.Hidden;
+                if (col.DisplayIndex == 4)
+                    col.Visibility = Visibility.Hidden;
+                if (col.DisplayIndex == 6)
+                    col.Visibility = Visibility.Hidden;
+                if (col.DisplayIndex == 7)
+                    col.Visibility = Visibility.Hidden;
+                if (col.DisplayIndex == 8)
+                    col.Visibility = Visibility.Hidden;
+                if (col.DisplayIndex == 5)
+                    col.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            }
         }
-
-        private void rbJugador_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void rbEquip_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void tbBusca_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
-
         private void dgResultat_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
@@ -71,18 +109,9 @@ namespace Gsport
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
-            Gsport.efadbDataSet efadbDataSet = ((Gsport.efadbDataSet)(this.FindResource("efadbDataSet")));
-            // Cargar datos en la tabla equips. Puede modificar este código según sea necesario.
-            Gsport.efadbDataSetTableAdapters.equipsTableAdapter efadbDataSetequipsTableAdapter = new Gsport.efadbDataSetTableAdapters.equipsTableAdapter();
-            efadbDataSetequipsTableAdapter.Fill(efadbDataSet.equips);
-            System.Windows.Data.CollectionViewSource equipsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("equipsViewSource")));
-            equipsViewSource.View.MoveCurrentToFirst();
-            // Cargar datos en la tabla jugadors. Puede modificar este código según sea necesario.
-            Gsport.efadbDataSetTableAdapters.jugadorsTableAdapter efadbDataSetjugadorsTableAdapter = new Gsport.efadbDataSetTableAdapters.jugadorsTableAdapter();
-            efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
-            System.Windows.Data.CollectionViewSource jugadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugadorsViewSource")));
-            jugadorsViewSource.View.MoveCurrentToFirst();
+            Gsport.efadbDataSetTableAdapters.entrenadorsTableAdapter efadbDataSetentrenadorsTableAdapter = new Gsport.efadbDataSetTableAdapters.entrenadorsTableAdapter();
+            efadbDataSetentrenadorsTableAdapter.Fill(dataSetAux.entrenadors);
+            entrenadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("entrenadorsViewSource")));
         }
     }
 }

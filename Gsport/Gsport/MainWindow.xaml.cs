@@ -60,6 +60,7 @@ namespace Gsport
         private void btnCerca_Click(object sender, RoutedEventArgs e)
         {
             wndCercar wnd = new wndCercar(efadbDataSet);
+            wnd.ShowDialog();
         }
 
         /// <summary>
