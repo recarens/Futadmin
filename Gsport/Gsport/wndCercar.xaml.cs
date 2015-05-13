@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,48 +21,53 @@ namespace Gsport
     public partial class wndCercar : Window
     {
         efadbDataSet dataSetAux = new efadbDataSet();
-        System.Windows.Data.CollectionViewSource entrenadorsViewSource;
+        DataView dvEquips;
+        DataView dvEntrenadors;
+        DataView dvJugadors;
+        public int id;
+        public string queEs = "";
         public wndCercar()
         {
             InitializeComponent();
         }
         public wndCercar(efadbDataSet dataSet)
         {
+            cbCategoriaCerca = new ComboBox();
             dgResultat = new DataGrid();
             InitializeComponent();
-            dataSetAux = dataSet;
-            
-            
+            dataSetAux = dataSet;          
         }
 
         private void rbJugador_Checked(object sender, RoutedEventArgs e)
         {
-            dgResultat.ItemsSource = dataSetAux.jugadors.DefaultView;
+            cbCategoriaCerca.Items.Clear();
+            cbCategoriaCerca.IsEnabled = true;
+            cbCategoriaCerca.Items.Add("DNI");
+            cbCategoriaCerca.Items.Add("NOM");
+            cbCategoriaCerca.Items.Add("COGNOM");
+            cbCategoriaCerca.SelectedIndex = 0;
+            dvJugadors = new DataView(dataSetAux.jugadors);
+            dgResultat.ItemsSource = dvJugadors;
             foreach (DataGridColumn col in dgResultat.Columns)
             {
-                if (col.DisplayIndex == 0)
-                {
-                    //DataGridTemplateColumn col1 = new DataGridTemplateColumn();
-                    //col1.Header = "Foto";
-                    //FrameworkElementFactory factory1 = new FrameworkElementFactory(typeof(Image));
-                    //Binding b1 = new Binding(dataSetAux.jugadors.Rows["nomImatge"]);
-                    //b1.Mode = BindingMode.TwoWay;
-                    //factory1.SetValue(Image.SourceProperty, b1);
-                    //DataTemplate cellTemplate1 = new DataTemplate();
-                    //cellTemplate1.VisualTree = factory1;
-                    //col1.CellTemplate = cellTemplate1;
-                }
-
-                if (col.DisplayIndex <= 1 && col.DisplayIndex >= 3)
+                if (col.DisplayIndex < 1 || col.DisplayIndex > 3)
                     col.Visibility = Visibility.Hidden;
                 if (col.DisplayIndex == 3)
                     col.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
             }
+            
         }
 
         private void rbEntrenador_Checked(object sender, RoutedEventArgs e)
         {
-            dgResultat.ItemsSource = dataSetAux.entrenadors.DefaultView;
+            cbCategoriaCerca.Items.Clear();
+            cbCategoriaCerca.IsEnabled = true;
+            cbCategoriaCerca.Items.Add("DNI");
+            cbCategoriaCerca.Items.Add("NOM");
+            cbCategoriaCerca.Items.Add("COGNOM");
+            cbCategoriaCerca.SelectedIndex = 0;
+            dvEntrenadors = new DataView(dataSetAux.entrenadors);
+            dgResultat.ItemsSource = dvEntrenadors;
             foreach (DataGridColumn col in dgResultat.Columns)
             {
                 if (col.DisplayIndex == 0)
@@ -77,7 +83,10 @@ namespace Gsport
 
         private void rbEquip_Checked(object sender, RoutedEventArgs e)
         {
-            dgResultat.ItemsSource = dataSetAux.equips.DefaultView;
+            cbCategoriaCerca.Items.Clear();
+            cbCategoriaCerca.IsEnabled = false;
+            dvEquips = new DataView(dataSetAux.equips);
+            dgResultat.ItemsSource = dvEquips;
             foreach (DataGridColumn col in dgResultat.Columns)
             {
                 if (col.DisplayIndex == 0)
@@ -100,18 +109,48 @@ namespace Gsport
         }
         private void tbBusca_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            if(rbEntrenador.IsChecked == true)
+            {
+                if (cbCategoriaCerca.SelectedIndex == 0)
+                    dvEntrenadors.RowFilter = "dni LIKE '%" + tbBusca.Text.Trim().ToLower() + "%'";
+                else if(cbCategoriaCerca.SelectedIndex == 1)
+                    dvEntrenadors.RowFilter = "nom LIKE '%" + tbBusca.Text.Trim().ToLower() + "%'";
+                else if (cbCategoriaCerca.SelectedIndex == 2)
+                    dvEntrenadors.RowFilter = "cognom LIKE '%" + tbBusca.Text.Trim().ToLower() + "%'";
+                dgResultat.ItemsSource = dvEntrenadors;
+            }
+            else if(rbJugador.IsChecked == true)
+            {
+                if (cbCategoriaCerca.SelectedIndex == 0)
+                    dvJugadors.RowFilter = "dni LIKE '%" + tbBusca.Text.Trim().ToLower() + "%'";
+                else if (cbCategoriaCerca.SelectedIndex == 1)
+                    dvJugadors.RowFilter = "nom LIKE '%" + tbBusca.Text.Trim().ToLower() + "%'";
+                else if (cbCategoriaCerca.SelectedIndex == 2)
+                    dvJugadors.RowFilter = "cognom LIKE '%" + tbBusca.Text.Trim().ToLower() + "%'";
+                dgResultat.ItemsSource = dvJugadors;
+            }
+            else if(rbEquip.IsChecked == true)
+            {
+                dvEquips.RowFilter = "nom LIKE '%"+tbBusca.Text.Trim().ToLower()+"%'";
+                dgResultat.ItemsSource = dvEquips;
+            }
         }
         private void dgResultat_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            DataRowView dtr = (DataRowView)dgResultat.SelectedItem;
+            id = Convert.ToInt32(dtr.Row.ItemArray[0]);
+            if (rbEntrenador.IsChecked == true)
+                queEs = "entrenador";
+            else if (rbJugador.IsChecked == true)
+                queEs = "jugador";
+            else if (rbEquip.IsChecked == true)
+                queEs = "equip";
+            this.Close();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void cbCategoriaCerca_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Gsport.efadbDataSetTableAdapters.entrenadorsTableAdapter efadbDataSetentrenadorsTableAdapter = new Gsport.efadbDataSetTableAdapters.entrenadorsTableAdapter();
-            efadbDataSetentrenadorsTableAdapter.Fill(dataSetAux.entrenadors);
-            entrenadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("entrenadorsViewSource")));
+            tbBusca.Text = "";
         }
     }
 }

@@ -6,7 +6,7 @@
         <ImageBrush ImageSource="Fotos/grass.jpg"/>
     </Window.Background>
     <StackPanel Orientation="Vertical" Margin="0,10,0,0" VerticalAlignment="Bottom">
-        <Button Margin="10" Width="25" Height="25" HorizontalAlignment="Right" Background="#FF52B64E" Content="X" FontSize="15" FontWeight="Bold" BorderBrush="#FFC50000" Foreground="Red" BorderThickness="3" Name="btnClose" Click="btnClose_Click"/>
+        <Button Margin="10" Width="25" Height="25" HorizontalAlignment="Right" Background="#FF52B64E" Content="X" FontSize="14" FontWeight="Bold" BorderBrush="#FFC50000" Foreground="Red" BorderThickness="2" Name="btnClose" Click="btnClose_Click"/>
         <StackPanel Orientation="Horizontal" Background="#FF52B64E">
             <Label Name="lblUser" Width="90" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="{Binding lblUser, Source={StaticResource IdiomesRes}}"/>
             <TextBox x:Name="tbUsuari" MinWidth="190" Margin="15,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="admin"/>

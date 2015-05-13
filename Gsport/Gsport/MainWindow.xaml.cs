@@ -39,6 +39,8 @@ namespace Gsport
         string rutaImg = @"C:/Fotos/img.jpg";
         int idTemporada = 1;
         int codiUsuari;
+        int idCercat;
+        string queEs;
         public MainWindow()
         {
             InitializeComponent(); 
@@ -61,6 +63,20 @@ namespace Gsport
         {
             wndCercar wnd = new wndCercar(efadbDataSet);
             wnd.ShowDialog();
+            idCercat = wnd.id;
+            queEs = wnd.queEs;
+            if(queEs == "jugador")
+            {
+                jugadorsViewSource.View.Filter = new Predicate<object>(x => ((ViewItem)x).id == idCercat);
+            }
+            else if(queEs == "equip")
+            {
+
+            }
+            else
+            {
+
+            }
         }
 
         /// <summary>
@@ -411,7 +427,6 @@ namespace Gsport
                         trobat = true;
                     }
                 }
-
                 if (trobat)
                 {
                     MessageBox.Show("Ja existeix");
