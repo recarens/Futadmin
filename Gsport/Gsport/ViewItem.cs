@@ -7,6 +7,7 @@ namespace Gsport
 {
     public class ViewItem
     {
-        public int id { get; set; }
+        int id;
+        public int ID { get; set; }
     }
 }

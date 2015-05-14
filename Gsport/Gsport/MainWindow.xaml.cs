@@ -65,17 +65,48 @@ namespace Gsport
             wnd.ShowDialog();
             idCercat = wnd.id;
             queEs = wnd.queEs;
-            if(queEs == "jugador")
+            if (queEs == "jugador")
             {
-                jugadorsViewSource.View.Filter = new Predicate<object>(x => ((ViewItem)x).id == idCercat);
+                bool trobat = false;
+                int i = 0;
+                while (!trobat)
+                {
+                    if (idCercat == Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[i][0]))
+                    {
+                        trobat = true;
+                    }
+                    else
+                    {
+                        i++;
+                    }
+                }
+                jugadorsViewSource.View.MoveCurrentToPosition(i);
+                //falta imatge
             }
-            else if(queEs == "equip")
+            else if (queEs == "equip")
             {
 
             }
             else
             {
 
+            }
+        }
+
+        //metode per filtrar SENSE EXIT
+        private void IdFilter(object sender, FilterEventArgs e)
+        {
+            ViewItem item = e.Item as ViewItem;
+            if (item != null)
+            {
+                if (item.ID == idCercat)
+                {
+                    e.Accepted = true;
+                }
+                else
+                {
+                    e.Accepted = false;
+                }
             }
         }
 
