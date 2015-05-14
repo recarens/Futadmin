@@ -5,21 +5,17 @@
     <Window.Resources>
         <local:efadbDataSet x:Key="efadbDataSet"/>
         <CollectionViewSource x:Key="jugadorsViewSource" Source="{Binding jugadors, Source={StaticResource efadbDataSet}}"/>
-        <CollectionViewSource x:Key="equipsViewSource" Source="{Binding equips, Source={StaticResource efadbDataSet}}"/>
         <CollectionViewSource x:Key="equipsViewSource1" Source="{Binding equips, Source={StaticResource efadbDataSet}}"/>
-        <CollectionViewSource x:Key="equipsjugadorsViewSource" Source="{Binding eqJUgador, Source={StaticResource equipsViewSource}}"/>
         <CollectionViewSource x:Key="entrenadorsViewSource" Source="{Binding entrenadors, Source={StaticResource efadbDataSet}}"/>
-        <CollectionViewSource x:Key="entrenadorsViewSource1" Source="{Binding entrenadors, Source={StaticResource efadbDataSet}}"/>
-        <CollectionViewSource x:Key="entrenadorsequipsViewSource" Source="{Binding fk_equips_entrenadors1, Source={StaticResource entrenadorsViewSource}}"/>
         <CollectionViewSource x:Key="entrenadorsequipsViewSource1" Source="{Binding fk_equips_entrenadors1, Source={StaticResource entrenadorsViewSource}}"/>
         <CollectionViewSource x:Key="jugador_temporadaViewSource" Source="{Binding jugador_temporada, Source={StaticResource efadbDataSet}}"/>
         <CollectionViewSource x:Key="posicionsViewSource" Source="{Binding posicions, Source={StaticResource efadbDataSet}}"/>
         <CollectionViewSource x:Key="posicionsjugadorsViewSource" Source="{Binding fk_jugadors_posicions1, Source={StaticResource posicionsViewSource}}"/>
-        <CollectionViewSource x:Key="equipsjugadorsViewSource1" Source="{Binding fk_jugadors_equips1, Source={StaticResource equipsViewSource}}"/>
         <CollectionViewSource x:Key="jugadorsjugador_temporadaViewSource" Source="{Binding fk_jugador_temporada_jugadors1, Source={StaticResource jugadorsViewSource}}"/>
         <CollectionViewSource x:Key="divisioViewSource" Source="{Binding divisio, Source={StaticResource efadbDataSet}}"/>
         <CollectionViewSource x:Key="categoriesViewSource" Source="{Binding categories, Source={StaticResource efadbDataSet}}"/>
         <CollectionViewSource x:Key="temporadesViewSource" Source="{Binding temporades, Source={StaticResource efadbDataSet}}"/>
+        <CollectionViewSource x:Key="equipsjugadorsViewSource" Source="{Binding fk_jugadors_equips1, Source={StaticResource equipsViewSource1}}"/>
     </Window.Resources>
     <Window.Background>
         <ImageBrush ImageSource="Fotos/grass.jpg" Stretch="UniformToFill"/>
@@ -106,7 +102,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Equip:"/>
-                            <ComboBox x:Name="cbequip" MinWidth="150" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}" ItemsSource="{Binding Source={StaticResource equipsViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_equip"/>
+                            <ComboBox x:Name="cbequip" MinWidth="150" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}" ItemsSource="{Binding Source={StaticResource equipsViewSource1}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_equip"/>
                         </StackPanel>
                         <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Malalties o alergies:"/>
                         <ScrollViewer MaxWidth="300" MinWidth="300" MaxHeight="100" MinHeight="100" Margin="1,5,10,5" DataContext="{StaticResource jugadorsViewSource}">
@@ -190,7 +186,7 @@
                 <Button x:Name="btnGuardarEquip" Click="btnGuardar_Click" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10" IsEnabled="False">Guardar</Button>
                 <Button x:Name="btnDadesEquip" Content="Dades Equip" FontSize="16" FontWeight="Bold" Margin="10,50,10,0" Click="btnDadesEquip_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,30" x:Name="wpDadesEquip" BorderThickness="2">
-                    <WrapPanel Orientation="Vertical" Background="#FF52B64E" MaxHeight="250">
+                    <WrapPanel Orientation="Vertical" Background="#FF52B64E" MaxHeight="250" DataContext="{StaticResource equipsjugadorsViewSource}" x:Name="wpPrincipalEquip">
                         <Grid x:Name="grid1" DataContext="{StaticResource equipsViewSource1}" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -261,11 +257,14 @@
                             </ComboBox>
                         </Grid>
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" MaxWidth="600" VerticalScrollBarVisibility="Auto" Height="180" Margin="6">
-                            <DataGrid x:Name="jugadorsDataGrid" AutoGenerateColumns="False" MinHeight="70" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource equipsjugadorsViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected">
+                            <DataGrid x:Name="jugadorsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="500">
                                 <DataGrid.Columns>
+                                    <DataGridTextColumn x:Name="id_jugadorColumn" Binding="{Binding id_jugador}" Header="id jugador" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="dniColumn" Binding="{Binding dni}" Header="dni" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="nomColumn" Binding="{Binding nom}" Header="nom" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="cognomsColumn" Binding="{Binding cognoms}" Header="cognoms" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="sexeColumn" Binding="{Binding sexe}" Header="sexe" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="nomImatgeColumn" Binding="{Binding nomImatge}" Header="nom Imatge" Width="SizeToHeader"/>
                                     <DataGridTemplateColumn x:Name="data_inscripcioColumn" Header="data inscripcio" Width="SizeToHeader">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
@@ -286,15 +285,26 @@
                                     <DataGridTextColumn x:Name="telefonColumn" Binding="{Binding telefon}" Header="telefon" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="correu_electronicColumn" Binding="{Binding correu_electronic}" Header="correu electronic" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="numero_sociColumn" Binding="{Binding numero_soci}" Header="numero soci" Width="SizeToHeader"/>
+                                    <DataGridTextColumn x:Name="lateralitatColumn" Binding="{Binding lateralitat}" Header="lateralitat" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="edatColumn" Binding="{Binding edat}" Header="edat" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="pesColumn" Binding="{Binding pes}" Header="pes" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="alturaColumn" Binding="{Binding altura}" Header="altura" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="posicioColumn" Binding="{Binding posicio}" Header="posicio" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="dorsalColumn" Binding="{Binding dorsal}" Header="dorsal" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="minuts_jugatsColumn" Binding="{Binding minuts_jugats}" Header="minuts jugats" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="golsColumn" Binding="{Binding gols}" Header="gols" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="faltes_entrenoColumn" Binding="{Binding faltes_entreno}" Header="faltes entreno" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="id_equipColumn" Binding="{Binding id_equip}" Header="id equip" Width="SizeToHeader"/>
+                                    <DataGridTemplateColumn x:Name="id_posicioColumn" Header="id posicio" Width="SizeToHeader">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ComboBox>
+                                                    <ComboBoxItem Content="{Binding id_posicio}"/>
+                                                </ComboBox>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn x:Name="id_equipColumn" Header="id equip" Width="SizeToHeader">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ComboBox>
+                                                    <ComboBoxItem Content="{Binding id_equip}"/>
+                                                </ComboBox>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </ScrollViewer>
@@ -307,8 +317,8 @@
                 <Button x:Name="btnGuardarEntrenador" Click="btnGuardar_Click" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10" IsEnabled="False">Guardar</Button>
                 <Button x:Name="btnDadesEntrenador" Content="Dades Entrenador" FontSize="16" FontWeight="Bold" Margin="10,50,10,0" Click="btnDadesEntrenador_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,30" x:Name="wpDadesEntrenador" BorderThickness="2">
-                    <WrapPanel Height="160"  Background="#FF52B64E">
-                        <Grid x:Name="grid2" DataContext="{StaticResource entrenadorsViewSource1}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <WrapPanel Height="160"  Background="#FF52B64E" DataContext="{StaticResource entrenadorsequipsViewSource1}" x:Name="wpPrincipalEntenador">
+                        <Grid x:Name="grid2" DataContext="{StaticResource entrenadorsViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
@@ -329,12 +339,13 @@
                             <Label Content="data naixement:" Grid.Column="0"  HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="4" VerticalAlignment="Center"/>
                             <DatePicker x:Name="data_naixementDatePicker" Grid.Column="1"  MinWidth="150" Margin="0,4,0,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="4" SelectedDate="{Binding data_naixement, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
                         </Grid>
-                        <DataGrid x:Name="equipsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource entrenadorsequipsViewSource}}" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10" Width="216">
+                        <DataGrid x:Name="equipsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="140" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="250" Margin="10">
                             <DataGrid.Columns>
                                 <DataGridTextColumn x:Name="nomColumn1" Binding="{Binding nom}" Header="nom" Width="150"/>
-                                <DataGridTextColumn x:Name="puntuacioColumn" Binding="{Binding puntuacio}" Header="puntuacio"/>
+                                <DataGridTextColumn x:Name="puntuacioColumn" Binding="{Binding puntuacio}" Header="puntuacio" Width="100"/>
                             </DataGrid.Columns>
                         </DataGrid>
+
                     </WrapPanel>
                 </Border>
             </StackPanel>
