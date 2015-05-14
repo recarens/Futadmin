@@ -41,6 +41,7 @@ namespace Gsport
         int codiUsuari;
         int idCercat;
         string queEs;
+        bool objectaCercat = false;
         public MainWindow()
         {
             InitializeComponent(); 
@@ -72,14 +73,14 @@ namespace Gsport
                 while (!trobat)
                 {
                     if (idCercat == Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[i][0]))
-                    {
                         trobat = true;
-                    }
                     else
-                    {
                         i++;
-                    }
                 }
+
+                btnAfageix_Click(this, null);
+                
+                btnDadesTemporada.IsEnabled = true;
                 jugadorsViewSource.View.MoveCurrentToPosition(i);
                 //falta imatge
             }
@@ -90,23 +91,6 @@ namespace Gsport
             else
             {
 
-            }
-        }
-
-        //metode per filtrar SENSE EXIT
-        private void IdFilter(object sender, FilterEventArgs e)
-        {
-            ViewItem item = e.Item as ViewItem;
-            if (item != null)
-            {
-                if (item.ID == idCercat)
-                {
-                    e.Accepted = true;
-                }
-                else
-                {
-                    e.Accepted = false;
-                }
             }
         }
 
@@ -240,7 +224,6 @@ namespace Gsport
             efadbDataSetusuarisTableAdapter = new Gsport.efadbDataSetTableAdapters.usuarisTableAdapter();
             efadbDataSetusuarisTableAdapter.Fill(efadbDataSet.usuaris);
             jugadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugadorsViewSource")));
-            //jugadorsViewSource.View.MoveCurrentToFirst();
             wndLogin wnd = new wndLogin(efadbDataSet);
             wnd.ShowDialog();
             codiUsuari = wnd.codiUsuari;
@@ -280,7 +263,6 @@ namespace Gsport
             efadbDataSetjugador_temporadaTableAdapter = new Gsport.efadbDataSetTableAdapters.jugador_temporadaTableAdapter();
             efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
             jugador_temporadaViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugador_temporadaViewSource")));
-            //jugador_temporadaViewSource.View.MoveCurrentToFirst();
             // Cargar datos en la tabla posicions. Puede modificar este código según sea necesario.
             Gsport.efadbDataSetTableAdapters.posicionsTableAdapter efadbDataSetposicionsTableAdapter = new Gsport.efadbDataSetTableAdapters.posicionsTableAdapter();
             efadbDataSetposicionsTableAdapter.Fill(efadbDataSet.posicions);

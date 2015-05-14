@@ -92,7 +92,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>idiomes.en-GB.resx</DependentUpon>
     </Compile>
-    <Compile Include="ViewItem.cs" />
     <Compile Include="wndCercar.xaml.cs">
       <DependentUpon>wndCercar.xaml</DependentUpon>
     </Compile>
