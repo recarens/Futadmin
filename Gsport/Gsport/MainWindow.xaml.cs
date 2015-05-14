@@ -79,7 +79,7 @@ namespace Gsport
                 }
 
                 btnAfageix_Click(this, null);
-                
+                objectaCercat = true;
                 btnDadesTemporada.IsEnabled = true;
                 jugadorsViewSource.View.MoveCurrentToPosition(i);
                 //falta imatge
@@ -101,6 +101,7 @@ namespace Gsport
         /// <param name="e"></param>
         private void btnAfageix_Click(object sender, RoutedEventArgs e)
         {
+            objectaCercat = false;
             GridLength gE2 = new GridLength(0, GridUnitType.Star);
             cdequips.Width = gE2;
             GridLength gJ2 = new GridLength(this.ActualWidth,GridUnitType.Star);
@@ -327,97 +328,115 @@ namespace Gsport
         /// <param name="e"></param>
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            if (cdjugadors.Width.Value > 0)
+            if (!objectaCercat)
             {
-                int idJugador = 0;
-                if(efadbDataSet.Tables["jugadors"].Rows.Count > 0)
-                    idJugador = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count-1]["id_jugador"]);
-                efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrement = true;
-                efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrementSeed = idJugador+1;
-                efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrementStep = 1;
-                DataRow dr = efadbDataSet.Tables["jugadors"].NewRow();
-                dr["dni"] = tbDni.Text.Trim();
-                dr["nom"] = tbNom.Text.Trim();
-                dr["cognoms"] = tbCognom.Text.Trim();
-                dr["sexe"] = Convert.ToInt16(tbSexe.SelectedIndex);
-                dr["nomImatge"] = rutaImg;
-                dr["data_inscripcio"] = DateTime.Parse(dpAnyInscripcio.SelectedDate.ToString());
-                dr["data_naixement"] = DateTime.Parse(dpAnyNeixament.SelectedDate.ToString());
-                dr["tarjeta_sanitaria"] = tbTarjetaSanitaria.Text.Trim();
-                dr["malaltia_alergia"] = tbMalalties.Text.Trim();
-                dr["mobil"] = tbMobil.Text.Trim();
-                dr["telefon"] = tbTelefon.Text.Trim();
-                dr["correu_electronic"] = tbcorreuElec.Text.Trim();
-                dr["numero_soci"] = tbnSoci.Text.Trim();
-                dr["lateralitat"] = tbLateralitat.Text.Trim();
-                dr["edat"] = Convert.ToInt32(tbEdat.Text.Trim());
-                dr["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
-                dr["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);           
-                try
+                if (cdjugadors.Width.Value > 0)
                 {
-                    efadbDataSet.Tables["jugadors"].Rows.Add(dr);    
-                    efadbDataSetjugadorsTableAdapter.Update(dr);
+                    int idJugador = 0;
+                    if (efadbDataSet.Tables["jugadors"].Rows.Count > 0)
+                        idJugador = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count - 1]["id_jugador"]);
+                    efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrement = true;
+                    efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrementSeed = idJugador + 1;
+                    efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrementStep = 1;
+                    DataRow dr = efadbDataSet.Tables["jugadors"].NewRow();
+                    dr["dni"] = tbDni.Text.Trim();
+                    dr["nom"] = tbNom.Text.Trim();
+                    dr["cognoms"] = tbCognom.Text.Trim();
+                    dr["sexe"] = Convert.ToInt16(tbSexe.SelectedIndex);
+                    dr["nomImatge"] = rutaImg;
+                    dr["data_inscripcio"] = DateTime.Parse(dpAnyInscripcio.SelectedDate.ToString());
+                    dr["data_naixement"] = DateTime.Parse(dpAnyNeixament.SelectedDate.ToString());
+                    dr["tarjeta_sanitaria"] = tbTarjetaSanitaria.Text.Trim();
+                    dr["malaltia_alergia"] = tbMalalties.Text.Trim();
+                    dr["mobil"] = tbMobil.Text.Trim();
+                    dr["telefon"] = tbTelefon.Text.Trim();
+                    dr["correu_electronic"] = tbcorreuElec.Text.Trim();
+                    dr["numero_soci"] = tbnSoci.Text.Trim();
+                    dr["lateralitat"] = tbLateralitat.Text.Trim();
+                    dr["edat"] = Convert.ToInt32(tbEdat.Text.Trim());
+                    dr["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
+                    dr["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);
+                    try
+                    {
+                        efadbDataSet.Tables["jugadors"].Rows.Add(dr);
+                        efadbDataSetjugadorsTableAdapter.Update(dr);
 
-                    DataRow dr2 = efadbDataSet.Tables["jugador_temporada"].NewRow();
-                    dr2["id_jugador"] = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count - 1]["id_jugador"]);
-                    if (efadbDataSet.Tables["temporades"].Rows.Count > 0)
-                        idTemporada = Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows[efadbDataSet.Tables["temporades"].Rows.Count - 1]["id_temporada"]);
-                    dr2["id_temporada"] = idTemporada;
-                    dr2["gols"] = 0;
-                    dr2["ocasions_de_gol"] = 0;
-                    dr2["minuts_jugats"] = 0;
-                    dr2["faltes_comeses"] = 0;
-                    dr2["faltes_rebudes"] = 0;
-                    dr2["targetes_grogues"] = 0;
-                    dr2["targetes_vermelles"] = 0;
-                    dr2["pes"] = 0;
-                    dr2["altura"] = 0;
-                    dr2["dorsal"] = 0;
-                    dr2["faltes_entreno"] = 0;
-                    efadbDataSet.Tables["jugador_temporada"].Rows.Add(dr2);
-                    efadbDataSetjugador_temporadaTableAdapter.Update(dr2);
-                    MessageBox.Show("Guardat");
+                        DataRow dr2 = efadbDataSet.Tables["jugador_temporada"].NewRow();
+                        dr2["id_jugador"] = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count - 1]["id_jugador"]);
+                        if (efadbDataSet.Tables["temporades"].Rows.Count > 0)
+                            idTemporada = Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows[efadbDataSet.Tables["temporades"].Rows.Count - 1]["id_temporada"]);
+                        dr2["id_temporada"] = idTemporada;
+                        dr2["gols"] = 0;
+                        dr2["ocasions_de_gol"] = 0;
+                        dr2["minuts_jugats"] = 0;
+                        dr2["faltes_comeses"] = 0;
+                        dr2["faltes_rebudes"] = 0;
+                        dr2["targetes_grogues"] = 0;
+                        dr2["targetes_vermelles"] = 0;
+                        dr2["pes"] = 0;
+                        dr2["altura"] = 0;
+                        dr2["dorsal"] = 0;
+                        dr2["faltes_entreno"] = 0;
+                        efadbDataSet.Tables["jugador_temporada"].Rows.Add(dr2);
+                        efadbDataSetjugador_temporadaTableAdapter.Update(dr2);
+                        MessageBox.Show("Guardat");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
+                    }
                 }
-                catch (Exception ex)
+                if (cdntrenadors.Width.Value > 0)
                 {
-                    MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
+                    DataRow dr = efadbDataSet.Tables["entrenadors"].NewRow();
+                    dr["dni"] = dniTextBox.Text.Trim();
+                    dr["nom"] = nomTextBox1.Text.Trim();
+                    dr["cognom"] = cognomTextBox.Text.Trim();
+                    dr["data_naixement"] = DateTime.Parse(data_naixementDatePicker.SelectedDate.ToString());
+                    try
+                    {
+                        efadbDataSet.entrenadors.Rows.Add(dr);
+                        efadbDataSetentrenadorsTableAdapter.Update(dr);
+                        MessageBox.Show("Guardat");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
+                    }
+                }
+                if (cdequips.Width.Value > 0)
+                {
+                    DataRow dr = efadbDataSet.Tables["equips"].NewRow();
+                    dr["nom"] = nomTextBox.Text.Trim();
+                    dr["id_divisio"] = Convert.ToInt32(id_divisioComboBox.SelectedValue);
+                    dr["id_categoria"] = Convert.ToInt32(id_categoriaComboBox.SelectedValue);
+                    dr["id_entrenador"] = Convert.ToInt32(id_entrenadorComboBox.SelectedValue);
+                    dr["puntuacio"] = puntuacioTextBox.Text.Trim();
+                    try
+                    {
+                        efadbDataSet.equips.Rows.Add(dr);
+                        efadbDataSetequipsTableAdapter.Update(dr);
+                        MessageBox.Show("Guardat");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
+                    }
                 }
             }
-            if(cdntrenadors.Width.Value > 0)
+            else
             {
-                DataRow dr = efadbDataSet.Tables["entrenadors"].NewRow();
-                dr["dni"] = dniTextBox.Text.Trim();
-                dr["nom"] = nomTextBox1.Text.Trim();
-                dr["cognom"] = cognomTextBox.Text.Trim();
-                dr["data_naixement"] = DateTime.Parse(data_naixementDatePicker.SelectedDate.ToString());
-                try
+                if (queEs == "jugador")
                 {
-                    efadbDataSet.entrenadors.Rows.Add(dr);
-                    efadbDataSetentrenadorsTableAdapter.Update(dr);
-                    MessageBox.Show("Guardat");
+                    
                 }
-                catch (Exception ex)
+                else if (queEs == "equip")
                 {
-                    MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
+
                 }
-            }
-            if (cdequips.Width.Value > 0)
-            {
-                DataRow dr = efadbDataSet.Tables["equips"].NewRow();
-                dr["nom"] = nomTextBox.Text.Trim();
-                dr["id_divisio"] = Convert.ToInt32(id_divisioComboBox.SelectedValue);
-                dr["id_categoria"] = Convert.ToInt32(id_categoriaComboBox.SelectedValue);
-                dr["id_entrenador"] = Convert.ToInt32(id_entrenadorComboBox.SelectedValue);
-                dr["puntuacio"] = puntuacioTextBox.Text.Trim();
-                try
+                else
                 {
-                    efadbDataSet.equips.Rows.Add(dr);
-                    efadbDataSetequipsTableAdapter.Update(dr);
-                    MessageBox.Show("Guardat");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
+
                 }
             }
         }
