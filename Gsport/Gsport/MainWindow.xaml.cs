@@ -44,16 +44,16 @@ namespace Gsport
         int posicioRow;
         bool objectaCercat = false;
         public MainWindow()
-        {
+        {     
             InitializeComponent(); 
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("ca-ES");
             idiomes.WrapperIdiomes.ChangeCulture(Thread.CurrentThread.CurrentUICulture);
-            tbSexe.Items.Add("Masculi");
-            tbSexe.Items.Add("Femeni");
-            tbSexe.SelectedIndex = 0;
             data_IniciDatePicker.SelectedDate = DateTime.Now;
             data_FiDatePicker.SelectedDate = DateTime.Now;
             dpAnyNeixament.SelectedDate = DateTime.Now;
+            tbSexe.Items.Add("M");
+            tbSexe.Items.Add("F");
+            tbSexe.SelectedItem = tbSexe.Items.GetItemAt(0);
         }
 
         /// <summary>
@@ -84,8 +84,13 @@ namespace Gsport
                 btnDadesTemporada.IsEnabled = true;
                 jugadorsViewSource.View.MoveCurrentToPosition(i);
                 posicioRow = i;
-                
-                //falta imatge
+                imgImatge.Source = new BitmapImage(new Uri(efadbDataSet.Tables["jugadors"].Rows[posicioRow]["nomImatge"].ToString()));//actualitza la foto.
+                if (Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[posicioRow]["sexe"]) == 0)
+                    tbSexe.SelectedItem = "M";
+                else
+                    tbSexe.SelectedItem = "F";
+                tbposicioNom.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_posicio"]);
+                cbequip.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_equip"]);
             }
             else if (queEs == "equip")
             {
@@ -104,6 +109,9 @@ namespace Gsport
                 grid1.DataContext = FindResource("equipsViewSource1");
                 equipsViewSource.View.MoveCurrentToPosition(i);
                 posicioRow = i;
+                id_categoriaComboBox.SelectedValue =Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[posicioRow]["id_categoria"]);
+                id_divisioComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[posicioRow]["id_divisio"]);
+                id_entrenadorComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[posicioRow]["id_entrenador"]);
             }
             else if(queEs == "entrenador")
             {
@@ -124,7 +132,6 @@ namespace Gsport
                 posicioRow = i;
             }
             objectaCercat = true;
-            btnGuardar.IsEnabled = true;
         }
 
         /// <summary>
@@ -270,8 +277,12 @@ namespace Gsport
             switch (wnd.privilegi)
             {
                 case 1: //Jugadors
+                    equipsDataGrid.IsReadOnly = true;
+                    jugadorsDataGrid.IsReadOnly = true;
                     break;
                 case 2: //Delegat
+                    equipsDataGrid.IsReadOnly = true;
+                    jugadorsDataGrid.IsReadOnly = true;
                     break;
                 case 3: //Entrenador
                     btnAfageix.IsEnabled = true;
@@ -655,6 +666,11 @@ namespace Gsport
             {
                 btnGuardarTemporada.IsEnabled = false;
             }
+        }
+
+        private void btnPartits_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

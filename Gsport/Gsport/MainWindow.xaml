@@ -34,6 +34,7 @@
             <Button x:Name="btnAfageixEntrenador" Content="+ Entrenador" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold" Click="btnAfageixEntrenador_Click" IsEnabled="False"/>
             <Button x:Name="btnCrearEquip" Content="Crear equip" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}"  Foreground="#FF0B2E10" FontWeight="Bold" Click="btnCrearEquip_Click"  IsEnabled="False"/>
             <Button x:Name="btnNovaTemporada" Content="Nova Temporada" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}"  Foreground="#FF0B2E10" FontWeight="Bold" Click="btnNovaTemporada_Click"  IsEnabled="False"/>
+            <Button x:Name="btnPartits" Content="Crear Partit" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}"  Foreground="#FF0B2E10" FontWeight="Bold" IsEnabled="False" Click="btnPartits_Click"/>
             <Button x:Name="btnSortir" Content="Sortir" Margin="9" Click="btnSortir_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold"/>
         </StackPanel>
         <GridSplitter Grid.Column="0" Width="10" BorderBrush="#FF171212" Background="White"/>
@@ -72,9 +73,9 @@
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Mòbil:"/>
                             <TextBox x:Name="tbMobil" MinWidth="203" Margin="20,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding mobil, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
+                        <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Sexe:"/>
-                            <ComboBox x:Name="tbSexe" MinWidth="201" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}" SelectedItem="{Binding sexe, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" SelectedIndex="0"/>
+                            <ComboBox x:Name="tbSexe" MinWidth="201" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}" SelectedItem="{Binding sexe, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Data inscripció:"/>
