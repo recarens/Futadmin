@@ -36,6 +36,8 @@ namespace Gsport
         Gsport.efadbDataSetTableAdapters.jugador_temporadaTableAdapter efadbDataSetjugador_temporadaTableAdapter;
         System.Windows.Data.CollectionViewSource jugador_temporadaViewSource;
         Gsport.efadbDataSetTableAdapters.temporadesTableAdapter efadbDataSettemporadesTableAdapter;
+        System.Windows.Data.CollectionViewSource equips_rivalsViewSource;
+        Gsport.efadbDataSetTableAdapters.equips_rivalsTableAdapter efadbDataSetequips_rivalsTableAdapter;
         string rutaImg = @"C:/Fotos/img.jpg";
         int idTemporada = 1;
         int codiUsuari;
@@ -131,7 +133,24 @@ namespace Gsport
                 entrenadorsViewSource.View.MoveCurrentToPosition(i);
                 posicioRow = i;
             }
-            objectaCercat = true;
+            else if (queEs == "equiprival")
+            {
+                bool trobat = false;
+                int i = 0;
+                while (!trobat)
+                {
+                    if (idCercat == Convert.ToInt32(efadbDataSet.Tables["equips_rivals"].Rows[i][0]))
+                        trobat = true;
+                    else
+                        i++;
+                }
+                btnCrearEquipRival_Click(this, null);
+                objectaCercat = true;
+                gridEquisRivals.DataContext = FindResource("equips_rivalsViewSource");
+                equips_rivalsViewSource.View.MoveCurrentToPosition(i);
+                posicioRow = i;
+                id_faseComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips_rivals"].Rows[posicioRow]["id_fase"]);
+            }
         }
 
         /// <summary>
@@ -150,6 +169,10 @@ namespace Gsport
             cdntrenadors.Width = gC2;
             GridLength gT2 = new GridLength(0, GridUnitType.Star);
             cdTemporada.Width = gT2;
+            GridLength gP2 = new GridLength(0, GridUnitType.Star);
+            cdPartits.Width = gP2;
+            GridLength gER2 = new GridLength(0, GridUnitType.Star);
+            cdEquipsRivals.Width = gER2;
             wpDadesTemporada.Height = 0;
             btnDadesTemporada.IsEnabled = false;
         }
@@ -172,6 +195,10 @@ namespace Gsport
             cdntrenadors.Width = gC2;
             GridLength gT2 = new GridLength(0, GridUnitType.Star);
             cdTemporada.Width = gT2;
+            GridLength gP2 = new GridLength(0, GridUnitType.Star);
+            cdPartits.Width = gP2;
+            GridLength gER2 = new GridLength(0, GridUnitType.Star);
+            cdEquipsRivals.Width = gER2;
         }
 
         /// <summary>
@@ -192,6 +219,10 @@ namespace Gsport
             cdntrenadors.Width = gC2;
             GridLength gT2 = new GridLength(0, GridUnitType.Star);
             cdTemporada.Width = gT2;
+            GridLength gP2 = new GridLength(0, GridUnitType.Star);
+            cdPartits.Width = gP2;
+            GridLength gER2 = new GridLength(0, GridUnitType.Star);
+            cdEquipsRivals.Width = gER2;
         }
 
         /// <summary>
@@ -202,6 +233,49 @@ namespace Gsport
         private void btnNovaTemporada_Click(object sender, RoutedEventArgs e)
         {
             GridLength gT2 = new GridLength(this.ActualWidth, GridUnitType.Star);
+            cdTemporada.Width = gT2;
+            GridLength gJ2 = new GridLength(0, GridUnitType.Star);
+            cdjugadors.Width = gJ2;
+            GridLength gC2 = new GridLength(0, GridUnitType.Star);
+            cdntrenadors.Width = gC2;
+            GridLength gE2 = new GridLength(0, GridUnitType.Star);
+            cdequips.Width = gE2;
+            GridLength gP2 = new GridLength(0, GridUnitType.Star);
+            cdPartits.Width = gP2;
+            GridLength gER2 = new GridLength(0, GridUnitType.Star);
+            cdEquipsRivals.Width = gER2;
+        }
+
+        /// <summary>
+        /// Obre una columna del grid per crear un partit o llista d'ells
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPartits_Click(object sender, RoutedEventArgs e)
+        {
+            GridLength gP2 = new GridLength(this.ActualWidth, GridUnitType.Star);
+            cdPartits.Width = gP2;
+            GridLength gT2 = new GridLength(0, GridUnitType.Star);
+            cdTemporada.Width = gT2;
+            GridLength gJ2 = new GridLength(0, GridUnitType.Star);
+            cdjugadors.Width = gJ2;
+            GridLength gC2 = new GridLength(0, GridUnitType.Star);
+            cdntrenadors.Width = gC2;
+            GridLength gE2 = new GridLength(0, GridUnitType.Star);
+            cdequips.Width = gE2;
+            GridLength gER2 = new GridLength(0, GridUnitType.Star);
+            cdEquipsRivals.Width = gER2;
+        }
+
+        private void btnCrearEquipRival_Click(object sender, RoutedEventArgs e)
+        {
+            objectaCercat = false;
+            gridEquisRivals.DataContext = null;
+            GridLength gP2 = new GridLength(0, GridUnitType.Star);
+            cdPartits.Width = gP2;
+            GridLength gER2 = new GridLength(this.ActualWidth, GridUnitType.Star);
+            cdEquipsRivals.Width = gER2;
+            GridLength gT2 = new GridLength(0, GridUnitType.Star);
             cdTemporada.Width = gT2;
             GridLength gJ2 = new GridLength(0, GridUnitType.Star);
             cdjugadors.Width = gJ2;
@@ -258,81 +332,6 @@ namespace Gsport
         }
 
         /// <summary>
-        /// Obre la finestra de carga guarda l'usuari que s'ha introduit i segons el nivell de privilegi habilita i deshabilita controls a mes crear els view i els adapters
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            efadbDataSet = ((Gsport.efadbDataSet)(this.FindResource("efadbDataSet")));
-            // Cargar datos en la tabla jugadors. Puede modificar este código según sea necesario.
-            efadbDataSetjugadorsTableAdapter = new Gsport.efadbDataSetTableAdapters.jugadorsTableAdapter();
-            efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
-            efadbDataSetusuarisTableAdapter = new Gsport.efadbDataSetTableAdapters.usuarisTableAdapter();
-            efadbDataSetusuarisTableAdapter.Fill(efadbDataSet.usuaris);
-            jugadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugadorsViewSource")));
-            wndLogin wnd = new wndLogin(efadbDataSet);
-            wnd.ShowDialog();
-            codiUsuari = wnd.codiUsuari;
-            switch (wnd.privilegi)
-            {
-                case 1: //Jugadors
-                    equipsDataGrid.IsReadOnly = true;
-                    jugadorsDataGrid.IsReadOnly = true;
-                    break;
-                case 2: //Delegat
-                    equipsDataGrid.IsReadOnly = true;
-                    jugadorsDataGrid.IsReadOnly = true;
-                    break;
-                case 3: //Entrenador
-                    btnAfageix.IsEnabled = true;
-                    break;
-                case 4: //Coordinador
-                    btnAfageix.IsEnabled = true;
-                    btnCrearEquip.IsEnabled = true;
-                    btnNovaTemporada.IsEnabled = true;
-                    btnAfageixEntrenador.IsEnabled = true;
-                    break;
-                case 5: //Gsport Admin
-                    btnAfageix.IsEnabled = true;
-                    btnCrearEquip.IsEnabled = true;
-                    btnNovaTemporada.IsEnabled = true;
-                    btnAfageixEntrenador.IsEnabled = true;
-                    break;
-            }
-            // Cargar datos en la tabla equips. Puede modificar este código según sea necesario.
-            efadbDataSetequipsTableAdapter = new Gsport.efadbDataSetTableAdapters.equipsTableAdapter();
-            efadbDataSetequipsTableAdapter.Fill(efadbDataSet.equips);
-            equipsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("equipsViewSource1")));
-            // Cargar datos en la tabla entrenadors. Puede modificar este código según sea necesario.
-            efadbDataSetentrenadorsTableAdapter = new Gsport.efadbDataSetTableAdapters.entrenadorsTableAdapter();
-            efadbDataSetentrenadorsTableAdapter.Fill(efadbDataSet.entrenadors);
-            entrenadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("entrenadorsViewSource")));
-            // Cargar datos en la tabla jugador_temporada. Puede modificar este código según sea necesario.
-            efadbDataSetjugador_temporadaTableAdapter = new Gsport.efadbDataSetTableAdapters.jugador_temporadaTableAdapter();
-            efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
-            jugador_temporadaViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugador_temporadaViewSource")));
-            // Cargar datos en la tabla posicions. Puede modificar este código según sea necesario.
-            Gsport.efadbDataSetTableAdapters.posicionsTableAdapter efadbDataSetposicionsTableAdapter = new Gsport.efadbDataSetTableAdapters.posicionsTableAdapter();
-            efadbDataSetposicionsTableAdapter.Fill(efadbDataSet.posicions);
-            System.Windows.Data.CollectionViewSource posicionsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("posicionsViewSource")));
-            //posicionsViewSource.View.MoveCurrentToFirst();
-            // Cargar datos en la tabla divisio. Puede modificar este código según sea necesario.
-            Gsport.efadbDataSetTableAdapters.divisioTableAdapter efadbDataSetdivisioTableAdapter = new Gsport.efadbDataSetTableAdapters.divisioTableAdapter();
-            efadbDataSetdivisioTableAdapter.Fill(efadbDataSet.divisio);
-            System.Windows.Data.CollectionViewSource divisioViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("divisioViewSource")));
-            //divisioViewSource.View.MoveCurrentToFirst();
-            // Cargar datos en la tabla categories. Puede modificar este código según sea necesario.
-            Gsport.efadbDataSetTableAdapters.categoriesTableAdapter efadbDataSetcategoriesTableAdapter = new Gsport.efadbDataSetTableAdapters.categoriesTableAdapter();
-            efadbDataSetcategoriesTableAdapter.Fill(efadbDataSet.categories);
-            System.Windows.Data.CollectionViewSource categoriesViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("categoriesViewSource")));
-            // Cargar datos en la tabla temporades. Puede modificar este código según sea necesario.
-            efadbDataSettemporadesTableAdapter = new Gsport.efadbDataSetTableAdapters.temporadesTableAdapter();
-            efadbDataSettemporadesTableAdapter.Fill(efadbDataSet.temporades);
-            System.Windows.Data.CollectionViewSource temporadesViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("temporadesViewSource")));
-        }
-
-        /// <summary>
         ///  fa l'efecta de reduir el Height del border
         /// </summary>
         /// <param name="sender"></param>
@@ -368,132 +367,28 @@ namespace Gsport
         }
 
         /// <summary>
+        /// fa l'efecta de reduir el Height del border
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDadesNovaTemporada_Click(object sender, RoutedEventArgs e)
+        {
+            if (wpNovaTemporada.Height > 0 || wpNovaTemporada.Height.Equals(Double.NaN))
+            {
+                wpNovaTemporada.Height = 0;
+            }
+            else
+            {
+                wpNovaTemporada.Height = Double.NaN; // aixo es  height l'auto del xaml
+            }
+        }
+
+        /// <summary>
         /// És l'event de validar l'insert dels varis elements que tenim , jugadors entrenadors, equips
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnGuardar_Click(object sender, RoutedEventArgs e)
-        {
-            if (!objectaCercat)
-            {
-                if (cdjugadors.Width.Value > 0)
-                {
-                    int idJugador = 0;
-                    if (efadbDataSet.Tables["jugadors"].Rows.Count > 0)
-                        idJugador = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count - 1]["id_jugador"]);
-                    efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrement = true;
-                    efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrementSeed = idJugador + 1;
-                    efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrementStep = 1;
-                    DataRow dr = efadbDataSet.Tables["jugadors"].NewRow();
-                    dr["dni"] = tbDni.Text.Trim();
-                    dr["nom"] = tbNom.Text.Trim();
-                    dr["cognoms"] = tbCognom.Text.Trim();
-                    dr["sexe"] = Convert.ToInt16(tbSexe.SelectedIndex);
-                    dr["nomImatge"] = rutaImg;
-                    dr["data_inscripcio"] = DateTime.Parse(dpAnyInscripcio.SelectedDate.ToString());
-                    dr["data_naixement"] = DateTime.Parse(dpAnyNeixament.SelectedDate.ToString());
-                    dr["tarjeta_sanitaria"] = tbTarjetaSanitaria.Text.Trim();
-                    dr["malaltia_alergia"] = tbMalalties.Text.Trim();
-                    dr["mobil"] = tbMobil.Text.Trim();
-                    dr["telefon"] = tbTelefon.Text.Trim();
-                    dr["correu_electronic"] = tbcorreuElec.Text.Trim();
-                    dr["numero_soci"] = tbnSoci.Text.Trim();
-                    dr["lateralitat"] = tbLateralitat.Text.Trim();
-                    dr["edat"] = Convert.ToInt32(tbEdat.Text.Trim());
-                    dr["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
-                    dr["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);
-                    try
-                    {
-                        efadbDataSet.Tables["jugadors"].Rows.Add(dr);
-                        efadbDataSetjugadorsTableAdapter.Update(dr);
-
-                        DataRow dr2 = efadbDataSet.Tables["jugador_temporada"].NewRow();
-                        dr2["id_jugador"] = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count - 1]["id_jugador"]);
-                        if (efadbDataSet.Tables["temporades"].Rows.Count > 0)
-                            idTemporada = Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows[efadbDataSet.Tables["temporades"].Rows.Count - 1]["id_temporada"]);
-                        dr2["id_temporada"] = idTemporada;
-                        dr2["gols"] = 0;
-                        dr2["ocasions_de_gol"] = 0;
-                        dr2["minuts_jugats"] = 0;
-                        dr2["faltes_comeses"] = 0;
-                        dr2["faltes_rebudes"] = 0;
-                        dr2["targetes_grogues"] = 0;
-                        dr2["targetes_vermelles"] = 0;
-                        dr2["pes"] = 0;
-                        dr2["altura"] = 0;
-                        dr2["dorsal"] = 0;
-                        dr2["faltes_entreno"] = 0;
-                        efadbDataSet.Tables["jugador_temporada"].Rows.Add(dr2);
-                        efadbDataSetjugador_temporadaTableAdapter.Update(dr2);
-                        MessageBox.Show("Guardat");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
-                    }
-                }
-                if (cdntrenadors.Width.Value > 0)
-                {
-                    DataRow dr = efadbDataSet.Tables["entrenadors"].NewRow();
-                    dr["dni"] = dniTextBox.Text.Trim();
-                    dr["nom"] = nomTextBox1.Text.Trim();
-                    dr["cognom"] = cognomTextBox.Text.Trim();
-                    dr["data_naixement"] = DateTime.Parse(data_naixementDatePicker.SelectedDate.ToString());
-                    try
-                    {
-                        efadbDataSet.entrenadors.Rows.Add(dr);
-                        efadbDataSetentrenadorsTableAdapter.Update(dr);
-                        MessageBox.Show("Guardat");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
-                    }
-                }
-                if (cdequips.Width.Value > 0)
-                {
-                    DataRow dr = efadbDataSet.Tables["equips"].NewRow();
-                    dr["nom"] = nomTextBox.Text.Trim();
-                    dr["id_divisio"] = Convert.ToInt32(id_divisioComboBox.SelectedValue);
-                    dr["id_categoria"] = Convert.ToInt32(id_categoriaComboBox.SelectedValue);
-                    dr["id_entrenador"] = Convert.ToInt32(id_entrenadorComboBox.SelectedValue);
-                    dr["puntuacio"] = puntuacioTextBox.Text.Trim();
-                    try
-                    {
-                        efadbDataSet.equips.Rows.Add(dr);
-                        efadbDataSetequipsTableAdapter.Update(dr);
-                        MessageBox.Show("Guardat");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
-                    }
-                }
-            }
-            else
-            {
-                try
-                {
-                    if (queEs == "jugador")
-                    {
-                        efadbDataSetjugadorsTableAdapter.Update(efadbDataSet.jugadors);
-                    }
-                    else if (queEs == "equip")
-                    {
-                        efadbDataSetequipsTableAdapter.Update(efadbDataSet.equips);
-                    }
-                    else
-                    {
-                        efadbDataSetentrenadorsTableAdapter.Update(efadbDataSet.entrenadors);
-                    }
-                    MessageBox.Show("S'ha guardat: " + queEs+" "+tbDni.Text);
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex + "");
-                }
-            }
-        }
+        
 
         /// <summary>
         /// el ser modificat el text busca a la base de dades si hi ha una coincidencia i si es aixo no deixa guardar
@@ -622,23 +517,6 @@ namespace Gsport
         }
 
         /// <summary>
-        /// fa l'efecta de reduir el Height del border
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnDadesNovaTemporada_Click(object sender, RoutedEventArgs e)
-        {
-            if (wpNovaTemporada.Height > 0 || wpNovaTemporada.Height.Equals(Double.NaN))
-            {
-                wpNovaTemporada.Height = 0;
-            }
-            else
-            {
-                wpNovaTemporada.Height = Double.NaN; // aixo es  height l'auto del xaml
-            }
-        }
-
-        /// <summary>
         ///el ser modificat el text busca a la base de dades si hi ha una coincidencia i si es aixo no deixa guardar temporades nom
         /// </summary>
         /// <param name="sender"></param>
@@ -668,9 +546,275 @@ namespace Gsport
             }
         }
 
-        private void btnPartits_Click(object sender, RoutedEventArgs e)
+        private void btnDadesEquipRival_Click(object sender, RoutedEventArgs e)
         {
+            if (wpDadesEquipRival.Height > 0 || wpDadesEquipRival.Height.Equals(Double.NaN))
+            {
+                wpDadesEquipRival.Height = 0;
+            }
+            else
+            {
+                wpDadesEquipRival.Height = Double.NaN; // aixo es  height l'auto del xaml
+            }
+        }
 
+        private void nomTextBox2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (nomEquipRivalTextBox.Text.Length > 0)
+                btnGuardarEquipRival.IsEnabled = true;
+            else
+                btnGuardarEquipRival.IsEnabled = false;
+        }
+
+        private void btnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            if (!objectaCercat)
+            {
+                if (cdjugadors.Width.Value > 0)
+                {
+                    int idJugador = 0;
+                    if (efadbDataSet.Tables["jugadors"].Rows.Count > 0)
+                        idJugador = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count - 1]["id_jugador"]);
+                    efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrement = true;
+                    efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrementSeed = idJugador + 1;
+                    efadbDataSet.Tables["jugadors"].Columns[0].AutoIncrementStep = 1;
+                    DataRow dr = efadbDataSet.Tables["jugadors"].NewRow();
+                    dr["dni"] = tbDni.Text.Trim();
+                    dr["nom"] = tbNom.Text.Trim();
+                    dr["cognoms"] = tbCognom.Text.Trim();
+                    dr["sexe"] = Convert.ToInt16(tbSexe.SelectedIndex);
+                    dr["nomImatge"] = rutaImg;
+                    dr["data_inscripcio"] = DateTime.Parse(dpAnyInscripcio.SelectedDate.ToString());
+                    dr["data_naixement"] = DateTime.Parse(dpAnyNeixament.SelectedDate.ToString());
+                    dr["tarjeta_sanitaria"] = tbTarjetaSanitaria.Text.Trim();
+                    dr["malaltia_alergia"] = tbMalalties.Text.Trim();
+                    dr["mobil"] = tbMobil.Text.Trim();
+                    dr["telefon"] = tbTelefon.Text.Trim();
+                    dr["correu_electronic"] = tbcorreuElec.Text.Trim();
+                    dr["numero_soci"] = tbnSoci.Text.Trim();
+                    dr["lateralitat"] = tbLateralitat.Text.Trim();
+                    dr["edat"] = Convert.ToInt32(tbEdat.Text.Trim());
+                    dr["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
+                    dr["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);
+                    try
+                    {
+                        efadbDataSet.Tables["jugadors"].Rows.Add(dr);
+                        efadbDataSetjugadorsTableAdapter.Update(dr);
+
+                        DataRow dr2 = efadbDataSet.Tables["jugador_temporada"].NewRow();
+                        dr2["id_jugador"] = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count - 1]["id_jugador"]);
+                        if (efadbDataSet.Tables["temporades"].Rows.Count > 0)
+                            idTemporada = Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows[efadbDataSet.Tables["temporades"].Rows.Count - 1]["id_temporada"]);
+                        dr2["id_temporada"] = idTemporada;
+                        dr2["gols"] = 0;
+                        dr2["ocasions_de_gol"] = 0;
+                        dr2["minuts_jugats"] = 0;
+                        dr2["faltes_comeses"] = 0;
+                        dr2["faltes_rebudes"] = 0;
+                        dr2["targetes_grogues"] = 0;
+                        dr2["targetes_vermelles"] = 0;
+                        dr2["pes"] = 0;
+                        dr2["altura"] = 0;
+                        dr2["dorsal"] = 0;
+                        dr2["faltes_entreno"] = 0;
+                        efadbDataSet.Tables["jugador_temporada"].Rows.Add(dr2);
+                        efadbDataSetjugador_temporadaTableAdapter.Update(dr2);
+                        MessageBox.Show("Guardat");
+                        objectaCercat = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
+                    }
+                }
+                if (cdntrenadors.Width.Value > 0)
+                {
+                    DataRow dr = efadbDataSet.Tables["entrenadors"].NewRow();
+                    dr["dni"] = dniTextBox.Text.Trim();
+                    dr["nom"] = nomTextBox1.Text.Trim();
+                    dr["cognom"] = cognomTextBox.Text.Trim();
+                    dr["data_naixement"] = DateTime.Parse(data_naixementDatePicker.SelectedDate.ToString());
+                    try
+                    {
+                        efadbDataSet.entrenadors.Rows.Add(dr);
+                        efadbDataSetentrenadorsTableAdapter.Update(dr);
+                        MessageBox.Show("Guardat");
+                        objectaCercat = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
+                    }
+                }
+                if (cdequips.Width.Value > 0)
+                {
+                    DataRow dr = efadbDataSet.Tables["equips"].NewRow();
+                    dr["nom"] = nomTextBox.Text.Trim();
+                    dr["id_divisio"] = Convert.ToInt32(id_divisioComboBox.SelectedValue);
+                    dr["id_categoria"] = Convert.ToInt32(id_categoriaComboBox.SelectedValue);
+                    dr["id_entrenador"] = Convert.ToInt32(id_entrenadorComboBox.SelectedValue);
+                    dr["puntuacio"] = puntuacioTextBox.Text.Trim();
+                    try
+                    {
+                        efadbDataSet.equips.Rows.Add(dr);
+                        efadbDataSetequipsTableAdapter.Update(dr);
+                        MessageBox.Show("Guardat");
+                        objectaCercat = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
+                    }
+                }
+                if (cdEquipsRivals.Width.Value > 0)
+                {
+                    DataRow dr = efadbDataSet.Tables["equips_rivals"].NewRow();
+                    dr["nom"] = nomEquipRivalTextBox.Text.Trim();
+                    dr["poblacio"] = poblacioRivalTextBox.Text.Trim();
+                    dr["puntuacio"] = puntuacioRivalTextBox.Text.Trim();
+                    dr["id_fase"] = Convert.ToInt32(id_faseComboBox.SelectedValue);
+                    try
+                    {
+                        efadbDataSet.equips_rivals.Rows.Add(dr);
+                        efadbDataSetequips_rivalsTableAdapter.Update(dr);
+                        MessageBox.Show("Guardat");
+                        objectaCercat = true;
+                        //gridEquisRivals.DataContext = FindResource("equips_rivalsViewSource");
+                        //queEs = "equiprival";
+                        //equips_rivalsViewSource.View.MoveCurrentToLast();
+                        //posicioRow = efadbDataSet.equips_rivals.Count-1;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
+                    }
+                }
+            }
+            else // si es un objecta que ja existeix i que lem trobat a la finestra de cerca fa l'update de la fila del dataset i no en crea una de nova
+            {
+                try
+                {
+                    if (queEs == "jugador")
+                    {
+                        efadbDataSet.Tables["jugadors"].Rows[posicioRow]["sexe"] = Convert.ToInt16(tbSexe.SelectedIndex);
+                        efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
+                        efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);
+                        efadbDataSetjugadorsTableAdapter.Update(efadbDataSet.jugadors.Rows[posicioRow]);
+                    }
+                    else if (queEs == "equip")
+                    {
+                        efadbDataSet.Tables["equips"].Rows[posicioRow]["id_divisio"] = Convert.ToInt32(id_divisioComboBox.SelectedValue);
+                        efadbDataSet.Tables["equips"].Rows[posicioRow]["id_categoria"] = Convert.ToInt32(id_categoriaComboBox.SelectedValue);
+                        efadbDataSet.Tables["equips"].Rows[posicioRow]["id_entrenador"] = Convert.ToInt32(id_entrenadorComboBox.SelectedValue);
+                        efadbDataSetequipsTableAdapter.Update(efadbDataSet.equips.Rows[posicioRow]);
+                    }
+                    else if(queEs == "entrenador")
+                    {
+                        efadbDataSetentrenadorsTableAdapter.Update(efadbDataSet.entrenadors.Rows[posicioRow]);
+                    }
+                    else if(queEs == "equiprival")
+                    {
+                        efadbDataSet.Tables["equips_rivals"].Rows[posicioRow]["id_fase"] = Convert.ToInt32(id_faseComboBox.SelectedValue);
+                        efadbDataSetequips_rivalsTableAdapter.Update(efadbDataSet.equips_rivals.Rows[posicioRow]);
+                    }
+                    MessageBox.Show("S'ha guardat: " + queEs);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex + "");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Obre la finestra de carga guarda l'usuari que s'ha introduit i segons el nivell de privilegi habilita i deshabilita controls a mes crear els view i els adapters
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                efadbDataSet = ((Gsport.efadbDataSet)(this.FindResource("efadbDataSet")));
+                // Cargar datos en la tabla jugadors. Puede modificar este código según sea necesario.
+                efadbDataSetjugadorsTableAdapter = new Gsport.efadbDataSetTableAdapters.jugadorsTableAdapter();
+                efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
+                efadbDataSetusuarisTableAdapter = new Gsport.efadbDataSetTableAdapters.usuarisTableAdapter();
+                efadbDataSetusuarisTableAdapter.Fill(efadbDataSet.usuaris);
+                jugadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugadorsViewSource")));
+                wndLogin wnd = new wndLogin(efadbDataSet);
+                wnd.ShowDialog();
+                codiUsuari = wnd.codiUsuari;
+                switch (wnd.privilegi)
+                {
+                    case 1: //Jugadors
+                        equipsDataGrid.IsReadOnly = true;
+                        jugadorsDataGrid.IsReadOnly = true;
+                        break;
+                    case 2: //Delegat
+                        equipsDataGrid.IsReadOnly = true;
+                        jugadorsDataGrid.IsReadOnly = true;
+                        break;
+                    case 3: //Entrenador
+                        btnAfageix.IsEnabled = true;
+                        btnCrearEquipRival.IsEnabled = true;
+                        break;
+                    case 4: //Coordinador
+                        btnAfageix.IsEnabled = true;
+                        btnCrearEquip.IsEnabled = true;
+                        btnNovaTemporada.IsEnabled = true;
+                        btnAfageixEntrenador.IsEnabled = true;
+                        btnCrearEquipRival.IsEnabled = true;
+                        break;
+                    case 5: //Gsport Admin
+                        btnAfageix.IsEnabled = true;
+                        btnCrearEquip.IsEnabled = true;
+                        btnNovaTemporada.IsEnabled = true;
+                        btnAfageixEntrenador.IsEnabled = true;
+                        btnCrearEquipRival.IsEnabled = true;
+                        break;
+                }
+                // Cargar datos en la tabla equips. Puede modificar este código según sea necesario.
+                efadbDataSetequipsTableAdapter = new Gsport.efadbDataSetTableAdapters.equipsTableAdapter();
+                efadbDataSetequipsTableAdapter.Fill(efadbDataSet.equips);
+                equipsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("equipsViewSource1")));
+                // Cargar datos en la tabla entrenadors. Puede modificar este código según sea necesario.
+                efadbDataSetentrenadorsTableAdapter = new Gsport.efadbDataSetTableAdapters.entrenadorsTableAdapter();
+                efadbDataSetentrenadorsTableAdapter.Fill(efadbDataSet.entrenadors);
+                entrenadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("entrenadorsViewSource")));
+                // Cargar datos en la tabla jugador_temporada. Puede modificar este código según sea necesario.
+                efadbDataSetjugador_temporadaTableAdapter = new Gsport.efadbDataSetTableAdapters.jugador_temporadaTableAdapter();
+                efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
+                jugador_temporadaViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugador_temporadaViewSource")));
+                // Cargar datos en la tabla posicions. Puede modificar este código según sea necesario.
+                Gsport.efadbDataSetTableAdapters.posicionsTableAdapter efadbDataSetposicionsTableAdapter = new Gsport.efadbDataSetTableAdapters.posicionsTableAdapter();
+                efadbDataSetposicionsTableAdapter.Fill(efadbDataSet.posicions);
+                System.Windows.Data.CollectionViewSource posicionsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("posicionsViewSource")));
+                // Cargar datos en la tabla divisio. Puede modificar este código según sea necesario.
+                Gsport.efadbDataSetTableAdapters.divisioTableAdapter efadbDataSetdivisioTableAdapter = new Gsport.efadbDataSetTableAdapters.divisioTableAdapter();
+                efadbDataSetdivisioTableAdapter.Fill(efadbDataSet.divisio);
+                System.Windows.Data.CollectionViewSource divisioViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("divisioViewSource")));
+                // Cargar datos en la tabla categories. Puede modificar este código según sea necesario.
+                Gsport.efadbDataSetTableAdapters.categoriesTableAdapter efadbDataSetcategoriesTableAdapter = new Gsport.efadbDataSetTableAdapters.categoriesTableAdapter();
+                efadbDataSetcategoriesTableAdapter.Fill(efadbDataSet.categories);
+                System.Windows.Data.CollectionViewSource categoriesViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("categoriesViewSource")));
+                // Cargar datos en la tabla temporades. Puede modificar este código según sea necesario.
+                efadbDataSettemporadesTableAdapter = new Gsport.efadbDataSetTableAdapters.temporadesTableAdapter();
+                efadbDataSettemporadesTableAdapter.Fill(efadbDataSet.temporades);
+                System.Windows.Data.CollectionViewSource temporadesViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("temporadesViewSource")));
+                // Cargar datos en la tabla equips_rivals. Puede modificar este código según sea necesario.
+                efadbDataSetequips_rivalsTableAdapter = new Gsport.efadbDataSetTableAdapters.equips_rivalsTableAdapter();
+                efadbDataSetequips_rivalsTableAdapter.Fill(efadbDataSet.equips_rivals);
+                equips_rivalsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("equips_rivalsViewSource")));
+                // Cargar datos en la tabla fases. Puede modificar este código según sea necesario.
+                Gsport.efadbDataSetTableAdapters.fasesTableAdapter efadbDataSetfasesTableAdapter = new Gsport.efadbDataSetTableAdapters.fasesTableAdapter();
+                efadbDataSetfasesTableAdapter.Fill(efadbDataSet.fases);
+                System.Windows.Data.CollectionViewSource fasesViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("fasesViewSource")));
+            }
+            catch
+            {
+                MessageBox.Show("El servei no esta disponible");
+            }    
         }
     }
 }

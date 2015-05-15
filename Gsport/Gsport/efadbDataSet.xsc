@@ -9,33 +9,27 @@
     <TableUISetting Name="categories">
       <ColumnUISettings>
         <ColumnUISetting Name="id_categoria">
-          <ControlSettings>
-            <ControlSetting ArtifactName="Microsoft:System.Windows:WPF">
+          <ControlSettings><ControlSetting ArtifactName="Microsoft:System.Windows:WPF" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
               <BindableControlInfo Name="ComboBox" Type="System.Windows.Controls.ComboBox" AssemblyName="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
-            </ControlSetting>
-          </ControlSettings>
+            </ControlSetting></ControlSettings>
         </ColumnUISetting>
       </ColumnUISettings>
     </TableUISetting>
     <TableUISetting Name="divisio">
       <ColumnUISettings>
         <ColumnUISetting Name="id_divisio">
-          <ControlSettings>
-            <ControlSetting ArtifactName="Microsoft:System.Windows:WPF">
+          <ControlSettings><ControlSetting ArtifactName="Microsoft:System.Windows:WPF" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
               <BindableControlInfo Name="ComboBox" Type="System.Windows.Controls.ComboBox" AssemblyName="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
-            </ControlSetting>
-          </ControlSettings>
+            </ControlSetting></ControlSettings>
         </ColumnUISetting>
       </ColumnUISettings>
     </TableUISetting>
     <TableUISetting Name="entrenadors">
       <ColumnUISettings>
         <ColumnUISetting Name="id_entrenador">
-          <ControlSettings>
-            <ControlSetting ArtifactName="Microsoft:System.Windows:WPF">
+          <ControlSettings><ControlSetting ArtifactName="Microsoft:System.Windows:WPF" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
               <BindableControlInfo Name="ComboBox" Type="System.Windows.Controls.ComboBox" AssemblyName="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
-            </ControlSetting>
-          </ControlSettings>
+            </ControlSetting></ControlSettings>
         </ColumnUISetting>
       </ColumnUISettings>
     </TableUISetting>
@@ -52,6 +46,46 @@
           <ControlSettings>
             <ControlSetting ArtifactName="Microsoft:System.Windows:WPF">
               <BindableControlInfo Name="TextBox" Type="System.Windows.Controls.TextBox" AssemblyName="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+            </ControlSetting>
+          </ControlSettings>
+        </ColumnUISetting>
+      </ColumnUISettings>
+    </TableUISetting>
+    <TableUISetting Name="equips_rivals">
+      <ColumnUISettings>
+        <ColumnUISetting Name="id_fase">
+          <ControlSettings>
+            <ControlSetting ArtifactName="Microsoft:System.Windows:WPF">
+              <BindableControlInfo Name="ComboBox" Type="System.Windows.Controls.ComboBox" AssemblyName="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+            </ControlSetting>
+          </ControlSettings>
+        </ColumnUISetting>
+      </ColumnUISettings>
+    </TableUISetting>
+    <TableUISetting Name="fases">
+      <ColumnUISettings>
+        <ColumnUISetting Name="id_fase">
+          <ControlSettings>
+            <ControlSetting ArtifactName="Microsoft:System.Windows:WPF">
+              <BindableControlInfo Name="ComboBox" Type="System.Windows.Controls.ComboBox" AssemblyName="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+            </ControlSetting>
+          </ControlSettings>
+        </ColumnUISetting>
+      </ColumnUISettings>
+    </TableUISetting>
+    <TableUISetting Name="jugador_temporada">
+      <ColumnUISettings>
+        <ColumnUISetting Name="id_jugador">
+          <ControlSettings>
+            <ControlSetting ArtifactName="Microsoft:System.Windows:WPF">
+              <BindableControlInfo Name="TextBox" Type="System.Windows.Controls.TextBox" AssemblyName="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+            </ControlSetting>
+          </ControlSettings>
+        </ColumnUISetting>
+        <ColumnUISetting Name="id_temporada">
+          <ControlSettings>
+            <ControlSetting ArtifactName="Microsoft:System.Windows:WPF">
+              <BindableControlInfo Name="ComboBox" Type="System.Windows.Controls.ComboBox" AssemblyName="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
             </ControlSetting>
           </ControlSettings>
         </ColumnUISetting>
