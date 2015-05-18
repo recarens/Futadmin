@@ -118,12 +118,8 @@
                 </Border>
                 <Button x:Name="btnDadesTemporada" Content="Dades per Temporada" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesTemporada_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,30" x:Name="wpDadesTemporada" BorderThickness="2">
-                    <StackPanel Orientation="Vertical">
-                        <WrapPanel>
-                            <Button Content="Anterior" HorizontalAlignment="Left" FontSize="16"/>
-                            <Label  HorizontalAlignment="Center">Temporada</Label>
-                            <Button Content="Seguent" HorizontalAlignment="Right" FontSize="16"/>
-                        </WrapPanel>
+                    <StackPanel Orientation="Vertical" DataContext="{StaticResource jugadorsjugador_temporadaViewSource}">
+                        <ComboBox DisplayMemberPath="id_temporada" ItemsSource="{Binding}"/>
                         <WrapPanel Orientation="Horizontal" Background="#FF52B64E">
                             <Grid x:Name="grid4" DataContext="{StaticResource jugadorsjugador_temporadaViewSource}">
                                 <Grid.ColumnDefinitions>

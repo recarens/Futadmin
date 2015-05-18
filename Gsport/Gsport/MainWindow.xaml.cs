@@ -601,14 +601,15 @@ namespace Gsport
                         efadbDataSet.Tables["jugadors"].Rows.Add(dr);
                         efadbDataSetjugadorsTableAdapter.Update(dr);
 
-                        DataRow dr2 = efadbDataSet.Tables["jugador_temporada"].NewRow();
+                        
                         
                         //if(efadbDataSet.Tables["temporades"].Rows.Count > 0) 
                         //    idTemporada = Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows[efadbDataSet.Tables["temporades"].Rows.Count - 1]["id_temporada"]);
                         for (int i = 0; i < efadbDataSet.Tables["temporades"].Rows.Count; i++)
                         {
+                            DataRow dr2 = efadbDataSet.Tables["jugador_temporada"].NewRow();
                             dr2["id_jugador"] = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count - 1]["id_jugador"]);
-                            //dr2["id_temporada"] = Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows["id_temporada"]);
+                            dr2["id_temporada"] = Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows[i]["id_temporada"]);
                             dr2["gols"] = 0;
                             dr2["ocasions_de_gol"] = 0;
                             dr2["minuts_jugats"] = 0;
