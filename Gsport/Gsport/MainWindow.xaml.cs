@@ -200,7 +200,9 @@ namespace Gsport
             GridLength gER2 = new GridLength(0, GridUnitType.Star);
             cdEquipsRivals.Width = gER2;
             wpDadesTemporada.Height = 0;
+            wpLesions.Height = 0;
             btnDadesTemporada.IsEnabled = false;
+            btnDadesLesions.IsEnabled = false;
         }
 
         /// <summary>
@@ -618,6 +620,11 @@ namespace Gsport
                 btnGuardarEquipRival.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Expandeix el wrap panel de les lesions mostran dades
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDadesLesions_Click(object sender, RoutedEventArgs e)
         {
             if (wpLesions.Height > 0 || wpLesions.Height.Equals(Double.NaN))
@@ -688,6 +695,7 @@ namespace Gsport
                         }
                         MessageBox.Show("Guardat");
                         objectaCercat = true;
+                        btnGuardar.IsEnabled = false;
                     }
                     catch (Exception ex)
                     {
@@ -707,6 +715,7 @@ namespace Gsport
                         efadbDataSetentrenadorsTableAdapter.Update(dr);
                         MessageBox.Show("Guardat");
                         objectaCercat = true;
+                        btnGuardarEntrenador.IsEnabled = false;
                     }
                     catch (Exception ex)
                     {
@@ -727,6 +736,7 @@ namespace Gsport
                         efadbDataSetequipsTableAdapter.Update(dr);
                         MessageBox.Show("Guardat");
                         objectaCercat = true;
+                        btnGuardarEquip.IsEnabled = false;
                     }
                     catch (Exception ex)
                     {
@@ -746,6 +756,7 @@ namespace Gsport
                         efadbDataSetequips_rivalsTableAdapter.Update(dr);
                         MessageBox.Show("Guardat");
                         objectaCercat = true;
+                        btnGuardarEquipRival.IsEnabled = false;
                         //gridEquisRivals.DataContext = FindResource("equips_rivalsViewSource");
                         //queEs = "equiprival";
                         //equips_rivalsViewSource.View.MoveCurrentToLast();
@@ -893,6 +904,14 @@ namespace Gsport
             Gsport.efadbDataSetTableAdapters.lesionsTableAdapter efadbDataSetlesionsTableAdapter = new Gsport.efadbDataSetTableAdapters.lesionsTableAdapter();
             efadbDataSetlesionsTableAdapter.Fill(efadbDataSet.lesions);
             System.Windows.Data.CollectionViewSource jugadorslesionsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugadorslesionsViewSource")));
+        }
+
+        private void tb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+                e.Handled = false;
+            else
+                e.Handled = true;
         }
     }
 }
