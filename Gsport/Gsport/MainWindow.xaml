@@ -26,7 +26,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="cdmenu" Width="165" MaxWidth="165"/>
-            <ColumnDefinition x:Name="cdjugadors" Width="800"/>
+            <ColumnDefinition x:Name="cdjugadors" Width="0"/>
             <ColumnDefinition x:Name="cdequips" Width="0"/>
             <ColumnDefinition x:Name="cdntrenadors" Width="0"/>
             <ColumnDefinition x:Name="cdTemporada" Width="0"/>
@@ -65,7 +65,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Edat:"/>
-                            <TextBox x:Name="tbEdat" MinWidth="200" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding edat, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+                            <TextBox x:Name="tbEdat" MinWidth="200" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding edat, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" KeyDown="tb_KeyDown" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Any Neixament:"/>
@@ -73,11 +73,11 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Telèfon:"/>
-                            <TextBox x:Name="tbTelefon" MinWidth="200" Margin="10,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding telefon, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            <TextBox x:Name="tbTelefon" MinWidth="200" Margin="10,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding telefon, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" KeyDown="tb_KeyDown"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Mòbil:"/>
-                            <TextBox x:Name="tbMobil" MinWidth="203" Margin="20,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding mobil, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            <TextBox x:Name="tbMobil" MinWidth="203" Margin="20,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding mobil, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" KeyDown="tb_KeyDown"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Sexe:"/>
@@ -141,17 +141,17 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Label Content="gols:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="2" VerticalAlignment="Center"/>
-                                <TextBox x:Name="golsTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="2" Text="{Binding gols, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <TextBox x:Name="golsTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="2" Text="{Binding gols, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" KeyDown="tb_KeyDown"/>
                                 <Label Content="ocasions de gol:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="3" VerticalAlignment="Center"/>
-                                <TextBox x:Name="ocasions_de_golTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="3" Text="{Binding ocasions_de_gol, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <TextBox x:Name="ocasions_de_golTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="3" Text="{Binding ocasions_de_gol, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" KeyDown="tb_KeyDown"/>
                                 <Label Content="minuts jugats:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="4" VerticalAlignment="Center"/>
-                                <TextBox x:Name="minuts_jugatsTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="4" Text="{Binding minuts_jugats, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <TextBox x:Name="minuts_jugatsTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="4" Text="{Binding minuts_jugats, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" KeyDown="tb_KeyDown"/>
                                 <Label Content="faltes comeses:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="5" VerticalAlignment="Center"/>
-                                <TextBox x:Name="faltes_comesesTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="5" Text="{Binding faltes_comeses, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <TextBox x:Name="faltes_comesesTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="5" Text="{Binding faltes_comeses, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" KeyDown="tb_KeyDown"/>
                                 <Label Content="faltes rebudes:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="6" VerticalAlignment="Center"/>
-                                <TextBox x:Name="faltes_rebudesTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="6" Text="{Binding faltes_rebudes, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <TextBox x:Name="faltes_rebudesTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="6" Text="{Binding faltes_rebudes, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" KeyDown="tb_KeyDown"/>
                                 <Label Content="targetes grogues:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="7" VerticalAlignment="Center"/>
-                                <TextBox x:Name="targetes_groguesTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="7" Text="{Binding targetes_grogues, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <TextBox x:Name="targetes_groguesTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="7" Text="{Binding targetes_grogues, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" KeyDown="tb_KeyDown"/>
                             </Grid>
                             <Grid x:Name="grid5" DataContext="{StaticResource jugadorsjugador_temporadaViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
                                 <Grid.ColumnDefinitions>
@@ -166,15 +166,15 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Label Content="targetes vermelles:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="5" VerticalAlignment="Center"/>
-                                <TextBox x:Name="targetes_vermellesTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="4" Text="{Binding targetes_vermelles, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                                <Label Content="pes:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="3" VerticalAlignment="Center"/>
+                                <TextBox x:Name="targetes_vermellesTextBox" KeyDown="tb_KeyDown" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="4" Text="{Binding targetes_vermelles, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <Label Content="pes:" Grid.Column="0"  Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="3" VerticalAlignment="Center"/>
                                 <TextBox x:Name="pesTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="3" Text="{Binding pes, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                                 <Label Content="altura:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="2" VerticalAlignment="Center"/>
                                 <TextBox x:Name="alturaTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="2" Text="{Binding altura, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                                <Label Content="dorsal:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="0" VerticalAlignment="Center"/>
-                                <TextBox x:Name="dorsalTextBox" Grid.Column="1"  MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="0" Text="{Binding dorsal, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <Label Content="dorsal:"  Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="0" VerticalAlignment="Center"/>
+                                <TextBox x:Name="dorsalTextBox" KeyDown="tb_KeyDown" Grid.Column="1"  MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="0" Text="{Binding dorsal, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                                 <Label Content="faltes entreno:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="1" VerticalAlignment="Center"/>
-                                <TextBox x:Name="faltes_entrenoTextBox" Grid.Column="1"  MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="1" Text="{Binding faltes_entreno, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                                <TextBox x:Name="faltes_entrenoTextBox" KeyDown="tb_KeyDown" Grid.Column="1"  MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="1" Text="{Binding faltes_entreno, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                             </Grid>
                             <StackPanel Orientation="Vertical">
                                 <Label FontSize="30" Foreground="#FF0B2E10" Content="Nota GS" FontWeight="Bold"/>
@@ -233,7 +233,7 @@
                             <Label Content="nom:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="1" VerticalAlignment="Center"/>
                             <TextBox x:Name="nomTextBox" Grid.Column="1" MinWidth="150" Margin="32,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="1" Text="{Binding nom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" TextChanged="nomTextBox_TextChanged"/>
                             <Label Content="puntuacio:" Grid.Column="0" HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="5" VerticalAlignment="Center"/>
-                            <TextBox x:Name="puntuacioTextBox" Grid.Column="1" MinWidth="150" Margin="33,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="5" Text="{Binding puntuacio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            <TextBox x:Name="puntuacioTextBox" KeyDown="tb_KeyDown" Grid.Column="1" MinWidth="150" Margin="33,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="5" Text="{Binding puntuacio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </Grid>
                         <Grid x:Name="grid3" DataContext="{StaticResource divisioViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Grid.ColumnDefinitions>
@@ -289,12 +289,10 @@
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" MaxWidth="600" VerticalScrollBarVisibility="Auto" Height="180" Margin="6">
                             <DataGrid x:Name="jugadorsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="500">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn x:Name="id_jugadorColumn" Binding="{Binding id_jugador}" Header="id jugador" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="dniColumn" Binding="{Binding dni}" Header="dni" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="nomColumn" Binding="{Binding nom}" Header="nom" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="cognomsColumn" Binding="{Binding cognoms}" Header="cognoms" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="sexeColumn" Binding="{Binding sexe}" Header="sexe" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="nomImatgeColumn" Binding="{Binding nomImatge}" Header="nom Imatge" Width="SizeToHeader"/>
                                     <DataGridTemplateColumn x:Name="data_inscripcioColumn" Header="data inscripcio" Width="SizeToHeader">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
@@ -309,32 +307,12 @@
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
-                                    <DataGridTextColumn x:Name="tarjeta_sanitariaColumn" Binding="{Binding tarjeta_sanitaria}" Header="tarjeta sanitaria" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="malaltia_alergiaColumn" Binding="{Binding malaltia_alergia}" Header="malaltia alergia" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="mobilColumn" Binding="{Binding mobil}" Header="mobil" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="telefonColumn" Binding="{Binding telefon}" Header="telefon" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="correu_electronicColumn" Binding="{Binding correu_electronic}" Header="correu electronic" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="numero_sociColumn" Binding="{Binding numero_soci}" Header="numero soci" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="lateralitatColumn" Binding="{Binding lateralitat}" Header="lateralitat" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="edatColumn" Binding="{Binding edat}" Header="edat" Width="SizeToHeader"/>
-                                    <DataGridTemplateColumn x:Name="id_posicioColumn" Header="id posicio" Width="SizeToHeader">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <ComboBox>
-                                                    <ComboBoxItem Content="{Binding id_posicio}"/>
-                                                </ComboBox>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn x:Name="id_equipColumn" Header="id equip" Width="SizeToHeader">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <ComboBox>
-                                                    <ComboBoxItem Content="{Binding id_equip}"/>
-                                                </ComboBox>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </ScrollViewer>
@@ -369,7 +347,7 @@
                             <Label Content="data naixement:" Grid.Column="0"  HorizontalAlignment="Left" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="4" VerticalAlignment="Center"/>
                             <DatePicker x:Name="data_naixementDatePicker" Grid.Column="1"  MinWidth="150" Margin="0,4,0,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="4" SelectedDate="{Binding data_naixement, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
                         </Grid>
-                        <DataGrid x:Name="equipsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="140" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="250" Margin="10">
+                        <DataGrid x:Name="equipsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="140" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="250" Margin="10" IsReadOnly="True">
                             <DataGrid.Columns>
                                 <DataGridTextColumn x:Name="nomColumn1" Binding="{Binding nom}" Header="nom" Width="150"/>
                                 <DataGridTextColumn x:Name="puntuacioColumn" Binding="{Binding puntuacio}" Header="puntuacio" Width="100"/>
@@ -447,7 +425,7 @@
                             <TextBox x:Name="nomEquipRivalTextBox" Grid.Column="1" MinWidth="150" Margin="0,4,0,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="1" Text="{Binding nom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="nomTextBox2_TextChanged"/>
                             <Label Content="poblacio:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="2" VerticalAlignment="Center"/>
                             <TextBox x:Name="poblacioRivalTextBox" Grid.Column="1" MinWidth="150" Margin="0,4,0,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="2" Text="{Binding poblacio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                            <Label Content="puntuacio:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="4" VerticalAlignment="Center"/>
+                            <Label Content="puntuacio:" KeyDown="tb_KeyDown" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="4" VerticalAlignment="Center"/>
                             <TextBox x:Name="puntuacioRivalTextBox" Grid.Column="1" MinWidth="150" Margin="0,4,0,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="4" Text="{Binding puntuacio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                         </Grid>
                         <Grid x:Name="gridFasesRivals" DataContext="{StaticResource fasesViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
