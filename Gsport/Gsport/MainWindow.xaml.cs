@@ -93,6 +93,7 @@ namespace Gsport
                     tbSexe.SelectedItem = "F";
                 tbposicioNom.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_posicio"]);
                 cbequip.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_equip"]);
+                CarregarNomsTemporades();
             }
             else if (queEs == "equip")
             {
@@ -114,6 +115,7 @@ namespace Gsport
                 id_categoriaComboBox.SelectedValue =Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[posicioRow]["id_categoria"]);
                 id_divisioComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[posicioRow]["id_divisio"]);
                 id_entrenadorComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[posicioRow]["id_entrenador"]);
+                
             }
             else if(queEs == "entrenador")
             {
@@ -150,6 +152,30 @@ namespace Gsport
                 equips_rivalsViewSource.View.MoveCurrentToPosition(i);
                 posicioRow = i;
                 id_faseComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips_rivals"].Rows[posicioRow]["id_fase"]);
+            }
+        }
+
+        /// <summary>
+        /// Carrega a la taula jugadors el nom de la temproada en cada fila i aixi en el combobox jugadors temporada podem veurei el nom
+        /// </summary>
+        private void CarregarNomsTemporades()
+        {
+            bool trobat = false;
+            int i = 0;
+            foreach(DataRow dr in efadbDataSet.jugador_temporada)
+            {
+                trobat = false;
+                i = 0;
+                while(!trobat &&  i<efadbDataSet.Tables["temporades"].Rows.Count)
+                {
+                    if ((int)dr["id_temporada"] == Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows[i]["id_temporada"]))
+                    {
+                        dr["nom"] = efadbDataSet.Tables["temporades"].Rows[i]["nom"].ToString();
+                        trobat = true;
+                    }
+                    else
+                        i++;
+                }
             }
         }
 
@@ -509,6 +535,27 @@ namespace Gsport
                 efadbDataSet.temporades.Rows.Add(dr);
                 efadbDataSettemporadesTableAdapter.Update(dr);
                 MessageBox.Show("Guardat");
+                foreach(DataRow drJugador in efadbDataSet.jugadors)
+                {
+                    DataRow dr2 = efadbDataSet.Tables["jugador_temporada"].NewRow();
+                    dr2["id_jugador"] = Convert.ToInt32(drJugador["id_jugador"]);
+                    dr2["id_temporada"] = Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows[efadbDataSet.Tables["temporades"].Rows.Count-1]["id_temporada"]);
+                    dr2["gols"] = 0;
+                    dr2["ocasions_de_gol"] = 0;
+                    dr2["minuts_jugats"] = 0;
+                    dr2["faltes_comeses"] = 0;
+                    dr2["faltes_rebudes"] = 0;
+                    dr2["targetes_grogues"] = 0;
+                    dr2["targetes_vermelles"] = 0;
+                    dr2["pes"] = 0;
+                    dr2["altura"] = 0;
+                    dr2["dorsal"] = 0;
+                    dr2["faltes_entreno"] = 0;
+                    dr2["notaGS"] = 0;
+                    efadbDataSet.Tables["jugador_temporada"].Rows.Add(dr2);
+                    efadbDataSetjugador_temporadaTableAdapter.Update(dr2);
+                }
+                btnGuardarTemporada.IsEnabled = false;
             }
             catch (Exception ex)
             {
@@ -558,12 +605,29 @@ namespace Gsport
             }
         }
 
+        /// <summary>
+        /// Comprova que el camp nom de l'Equip tingui un nom si esta buit desavilita el guardat
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void nomTextBox2_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (nomEquipRivalTextBox.Text.Length > 0)
                 btnGuardarEquipRival.IsEnabled = true;
             else
                 btnGuardarEquipRival.IsEnabled = false;
+        }
+
+        private void btnDadesLesions_Click(object sender, RoutedEventArgs e)
+        {
+            if (wpLesions.Height > 0 || wpLesions.Height.Equals(Double.NaN))
+            {
+                wpLesions.Height = 0;
+            }
+            else
+            {
+                wpLesions.Height = Double.NaN; // aixo es  height l'auto del xaml
+            }
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
@@ -600,9 +664,6 @@ namespace Gsport
                     {
                         efadbDataSet.Tables["jugadors"].Rows.Add(dr);
                         efadbDataSetjugadorsTableAdapter.Update(dr);
-
-                        
-                        
                         //if(efadbDataSet.Tables["temporades"].Rows.Count > 0) 
                         //    idTemporada = Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows[efadbDataSet.Tables["temporades"].Rows.Count - 1]["id_temporada"]);
                         for (int i = 0; i < efadbDataSet.Tables["temporades"].Rows.Count; i++)
@@ -621,6 +682,7 @@ namespace Gsport
                             dr2["altura"] = 0;
                             dr2["dorsal"] = 0;
                             dr2["faltes_entreno"] = 0;
+                            dr2["notaGS"] = 0;
                             efadbDataSet.Tables["jugador_temporada"].Rows.Add(dr2);
                             efadbDataSetjugador_temporadaTableAdapter.Update(dr2);
                         }
@@ -704,7 +766,9 @@ namespace Gsport
                         efadbDataSet.Tables["jugadors"].Rows[posicioRow]["sexe"] = Convert.ToInt16(tbSexe.SelectedIndex);
                         efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
                         efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);
+                        efadbDataSet.Tables["jugadors"].Rows[posicioRow]["nomImatge"] = rutaImg;
                         efadbDataSetjugadorsTableAdapter.Update(efadbDataSet.jugadors.Rows[posicioRow]);
+                        efadbDataSetjugador_temporadaTableAdapter.Update(efadbDataSet.jugador_temporada);
                     }
                     else if (queEs == "equip")
                     {
@@ -755,6 +819,7 @@ namespace Gsport
                     case 1: //Jugadors
                         equipsDataGrid.IsReadOnly = true;
                         jugadorsDataGrid.IsReadOnly = true;
+                        wpLesions.Height = 0;
                         break;
                     case 2: //Delegat
                         equipsDataGrid.IsReadOnly = true;
@@ -815,11 +880,19 @@ namespace Gsport
                 Gsport.efadbDataSetTableAdapters.fasesTableAdapter efadbDataSetfasesTableAdapter = new Gsport.efadbDataSetTableAdapters.fasesTableAdapter();
                 efadbDataSetfasesTableAdapter.Fill(efadbDataSet.fases);
                 System.Windows.Data.CollectionViewSource fasesViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("fasesViewSource")));
+                //Afagim una columna per el nom per mostrar al combobox de jugadors ja que a la taula de jugadors_temporada no hi ha nom
+                DataColumn dt = new DataColumn("nom");
+                dt.DataType = typeof(String);
+                efadbDataSet.Tables["jugador_temporada"].Columns.Add(dt);
             }
             catch
             {
                 MessageBox.Show("El servei no esta disponible");
-            }    
+            }
+            // Cargar datos en la tabla lesions. Puede modificar este código según sea necesario.
+            Gsport.efadbDataSetTableAdapters.lesionsTableAdapter efadbDataSetlesionsTableAdapter = new Gsport.efadbDataSetTableAdapters.lesionsTableAdapter();
+            efadbDataSetlesionsTableAdapter.Fill(efadbDataSet.lesions);
+            System.Windows.Data.CollectionViewSource jugadorslesionsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugadorslesionsViewSource")));
         }
     }
 }
