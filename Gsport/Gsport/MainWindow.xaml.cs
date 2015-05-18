@@ -84,6 +84,7 @@ namespace Gsport
                 btnAfageix_Click(this, null);
                 objectaCercat = true;
                 btnDadesTemporada.IsEnabled = true;
+                btnDadesLesions.IsEnabled = true;
                 jugadorsViewSource.View.MoveCurrentToPosition(i);
                 posicioRow = i;
                 imgImatge.Source = new BitmapImage(new Uri(efadbDataSet.Tables["jugadors"].Rows[posicioRow]["nomImatge"].ToString()));//actualitza la foto.
@@ -904,6 +905,11 @@ namespace Gsport
             Gsport.efadbDataSetTableAdapters.lesionsTableAdapter efadbDataSetlesionsTableAdapter = new Gsport.efadbDataSetTableAdapters.lesionsTableAdapter();
             efadbDataSetlesionsTableAdapter.Fill(efadbDataSet.lesions);
             System.Windows.Data.CollectionViewSource jugadorslesionsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugadorslesionsViewSource")));
+            // Cargar datos en la tabla convocatories. Puede modificar este código según sea necesario.
+            Gsport.efadbDataSetTableAdapters.convocatoriesTableAdapter efadbDataSetconvocatoriesTableAdapter = new Gsport.efadbDataSetTableAdapters.convocatoriesTableAdapter();
+            efadbDataSetconvocatoriesTableAdapter.Fill(efadbDataSet.convocatories);
+            System.Windows.Data.CollectionViewSource convocatoriesViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("convocatoriesViewSource")));
+            convocatoriesViewSource.View.MoveCurrentToFirst();
         }
 
         private void tb_KeyDown(object sender, KeyEventArgs e)
