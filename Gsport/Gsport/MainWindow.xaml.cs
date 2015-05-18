@@ -602,23 +602,27 @@ namespace Gsport
                         efadbDataSetjugadorsTableAdapter.Update(dr);
 
                         DataRow dr2 = efadbDataSet.Tables["jugador_temporada"].NewRow();
-                        dr2["id_jugador"] = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count - 1]["id_jugador"]);
-                        if (efadbDataSet.Tables["temporades"].Rows.Count > 0)
-                            idTemporada = Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows[efadbDataSet.Tables["temporades"].Rows.Count - 1]["id_temporada"]);
-                        dr2["id_temporada"] = idTemporada;
-                        dr2["gols"] = 0;
-                        dr2["ocasions_de_gol"] = 0;
-                        dr2["minuts_jugats"] = 0;
-                        dr2["faltes_comeses"] = 0;
-                        dr2["faltes_rebudes"] = 0;
-                        dr2["targetes_grogues"] = 0;
-                        dr2["targetes_vermelles"] = 0;
-                        dr2["pes"] = 0;
-                        dr2["altura"] = 0;
-                        dr2["dorsal"] = 0;
-                        dr2["faltes_entreno"] = 0;
-                        efadbDataSet.Tables["jugador_temporada"].Rows.Add(dr2);
-                        efadbDataSetjugador_temporadaTableAdapter.Update(dr2);
+                        
+                        //if(efadbDataSet.Tables["temporades"].Rows.Count > 0) 
+                        //    idTemporada = Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows[efadbDataSet.Tables["temporades"].Rows.Count - 1]["id_temporada"]);
+                        for (int i = 0; i < efadbDataSet.Tables["temporades"].Rows.Count; i++)
+                        {
+                            dr2["id_jugador"] = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count - 1]["id_jugador"]);
+                            //dr2["id_temporada"] = Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows["id_temporada"]);
+                            dr2["gols"] = 0;
+                            dr2["ocasions_de_gol"] = 0;
+                            dr2["minuts_jugats"] = 0;
+                            dr2["faltes_comeses"] = 0;
+                            dr2["faltes_rebudes"] = 0;
+                            dr2["targetes_grogues"] = 0;
+                            dr2["targetes_vermelles"] = 0;
+                            dr2["pes"] = 0;
+                            dr2["altura"] = 0;
+                            dr2["dorsal"] = 0;
+                            dr2["faltes_entreno"] = 0;
+                            efadbDataSet.Tables["jugador_temporada"].Rows.Add(dr2);
+                            efadbDataSetjugador_temporadaTableAdapter.Update(dr2);
+                        }
                         MessageBox.Show("Guardat");
                         objectaCercat = true;
                     }
