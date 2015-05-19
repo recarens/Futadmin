@@ -7,11 +7,12 @@
     </Window.Background>
     <StackPanel Orientation="Vertical">
         <Label Content="Que vols importar?" FontSize="30" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White" Background="#FF379129" />
-        <UniformGrid Height="250" Width="450" Margin="20">
+        <UniformGrid Height="250" Width="450" Margin="10">
             <Button x:Name="btnImportJugadors" Click="btnImportJugadors_Click" Content="Jugadors" Margin="8" FontWeight="Bold" Foreground="White" FontSize="25" Background="#FF379129"/>
             <Button Content="Equips" Margin="8" FontWeight="Bold" Foreground="White" FontSize="25" Background="#FF379129"/>
             <Button Content="Entrenadors" Margin="8" FontWeight="Bold" Foreground="White" FontSize="25" Background="#FF379129"/>
             <Button Content="Partits" Margin="8" Background="#FF379129" FontWeight="Bold" Foreground="White" FontSize="25"/>
         </UniformGrid>
+        <ProgressBar x:Name="pbProgres" Height="20" Margin="20,0,20,0"/>
     </StackPanel>
 </Window>

@@ -176,6 +176,7 @@
     <None Include="efadbDataSet.xss">
       <DependentUpon>efadbDataSet.xsd</DependentUpon>
     </None>
+    <None Include="FitxersImport\Jugadors.xlsx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

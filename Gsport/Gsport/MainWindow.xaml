@@ -291,7 +291,7 @@
                             </ComboBox>
                         </Grid>
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" MaxWidth="600" VerticalScrollBarVisibility="Auto" Height="180" Margin="6">
-                            <DataGrid x:Name="jugadorsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="500">
+                            <DataGrid x:Name="jugadorsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="500" IsReadOnly="True">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn x:Name="dniColumn" Binding="{Binding dni}" Header="dni" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="nomColumn" Binding="{Binding nom}" Header="nom" Width="SizeToHeader"/>
