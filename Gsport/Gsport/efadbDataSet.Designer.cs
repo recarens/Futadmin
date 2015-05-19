@@ -76,10 +76,6 @@ namespace Gsport {
         
         private global::System.Data.DataRelation relationfk_amonestacions_partit_tipus_amonestacio1;
         
-        private global::System.Data.DataRelation relationfk_convocatories_equips_rivals1;
-        
-        private global::System.Data.DataRelation relationfk_convocatories_equips1;
-        
         private global::System.Data.DataRelation relationfk_convocatories_partits1;
         
         private global::System.Data.DataRelation relationfk_detall_convocatoria_convocatories1;
@@ -783,8 +779,6 @@ namespace Gsport {
             this.relationfk_amonestacions_partit_jugadors1 = this.Relations["fk_amonestacions_partit_jugadors1"];
             this.relationfk_amonestacions_partit_partits1 = this.Relations["fk_amonestacions_partit_partits1"];
             this.relationfk_amonestacions_partit_tipus_amonestacio1 = this.Relations["fk_amonestacions_partit_tipus_amonestacio1"];
-            this.relationfk_convocatories_equips_rivals1 = this.Relations["fk_convocatories_equips_rivals1"];
-            this.relationfk_convocatories_equips1 = this.Relations["fk_convocatories_equips1"];
             this.relationfk_convocatories_partits1 = this.Relations["fk_convocatories_partits1"];
             this.relationfk_detall_convocatoria_convocatories1 = this.Relations["fk_detall_convocatoria_convocatories1"];
             this.relationfk_detall_convocatoria_jugadors1 = this.Relations["fk_detall_convocatoria_jugadors1"];
@@ -877,14 +871,6 @@ namespace Gsport {
                         this.tabletipus_amonestacio.id_tipus_amonestacioColumn}, new global::System.Data.DataColumn[] {
                         this.tableamonestacions_partit.id_tipus_amonestacioColumn}, false);
             this.Relations.Add(this.relationfk_amonestacions_partit_tipus_amonestacio1);
-            this.relationfk_convocatories_equips_rivals1 = new global::System.Data.DataRelation("fk_convocatories_equips_rivals1", new global::System.Data.DataColumn[] {
-                        this.tableequips_rivals.id_equip_rivalColumn}, new global::System.Data.DataColumn[] {
-                        this.tableconvocatories.id_equip_rivalColumn}, false);
-            this.Relations.Add(this.relationfk_convocatories_equips_rivals1);
-            this.relationfk_convocatories_equips1 = new global::System.Data.DataRelation("fk_convocatories_equips1", new global::System.Data.DataColumn[] {
-                        this.tableequips.id_equipColumn}, new global::System.Data.DataColumn[] {
-                        this.tableconvocatories.id_equipColumn}, false);
-            this.Relations.Add(this.relationfk_convocatories_equips1);
             this.relationfk_convocatories_partits1 = new global::System.Data.DataRelation("fk_convocatories_partits1", new global::System.Data.DataColumn[] {
                         this.tablepartits.id_partitColumn}, new global::System.Data.DataColumn[] {
                         this.tableconvocatories.id_partitColumn}, false);
@@ -1872,15 +1858,9 @@ namespace Gsport {
             
             private global::System.Data.DataColumn columnid_convocatoria;
             
-            private global::System.Data.DataColumn columnjornada;
-            
-            private global::System.Data.DataColumn columndata_convocatoria;
-            
             private global::System.Data.DataColumn columnid_partit;
             
-            private global::System.Data.DataColumn columnid_equip;
-            
-            private global::System.Data.DataColumn columnid_equip_rival;
+            private global::System.Data.DataColumn columnhora_convocatoria;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -1925,22 +1905,6 @@ namespace Gsport {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn jornadaColumn {
-                get {
-                    return this.columnjornada;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn data_convocatoriaColumn {
-                get {
-                    return this.columndata_convocatoria;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn id_partitColumn {
                 get {
                     return this.columnid_partit;
@@ -1949,17 +1913,9 @@ namespace Gsport {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn id_equipColumn {
+            public global::System.Data.DataColumn hora_convocatoriaColumn {
                 get {
-                    return this.columnid_equip;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn id_equip_rivalColumn {
-                get {
-                    return this.columnid_equip_rival;
+                    return this.columnhora_convocatoria;
                 }
             }
             
@@ -2000,23 +1956,14 @@ namespace Gsport {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public convocatoriesRow AddconvocatoriesRow(int jornada, System.DateTime data_convocatoria, partitsRow parentpartitsRowByfk_convocatories_partits1, equipsRow parentequipsRowByfk_convocatories_equips1, equips_rivalsRow parentequips_rivalsRowByfk_convocatories_equips_rivals1) {
+            public convocatoriesRow AddconvocatoriesRow(partitsRow parentpartitsRowByfk_convocatories_partits1, System.TimeSpan hora_convocatoria) {
                 convocatoriesRow rowconvocatoriesRow = ((convocatoriesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        jornada,
-                        data_convocatoria,
                         null,
-                        null,
-                        null};
+                        hora_convocatoria};
                 if ((parentpartitsRowByfk_convocatories_partits1 != null)) {
-                    columnValuesArray[3] = parentpartitsRowByfk_convocatories_partits1[0];
-                }
-                if ((parentequipsRowByfk_convocatories_equips1 != null)) {
-                    columnValuesArray[4] = parentequipsRowByfk_convocatories_equips1[0];
-                }
-                if ((parentequips_rivalsRowByfk_convocatories_equips_rivals1 != null)) {
-                    columnValuesArray[5] = parentequips_rivalsRowByfk_convocatories_equips_rivals1[0];
+                    columnValuesArray[1] = parentpartitsRowByfk_convocatories_partits1[0];
                 }
                 rowconvocatoriesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowconvocatoriesRow);
@@ -2048,11 +1995,8 @@ namespace Gsport {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnid_convocatoria = base.Columns["id_convocatoria"];
-                this.columnjornada = base.Columns["jornada"];
-                this.columndata_convocatoria = base.Columns["data_convocatoria"];
                 this.columnid_partit = base.Columns["id_partit"];
-                this.columnid_equip = base.Columns["id_equip"];
-                this.columnid_equip_rival = base.Columns["id_equip_rival"];
+                this.columnhora_convocatoria = base.Columns["hora_convocatoria"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2060,16 +2004,10 @@ namespace Gsport {
             private void InitClass() {
                 this.columnid_convocatoria = new global::System.Data.DataColumn("id_convocatoria", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid_convocatoria);
-                this.columnjornada = new global::System.Data.DataColumn("jornada", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnjornada);
-                this.columndata_convocatoria = new global::System.Data.DataColumn("data_convocatoria", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndata_convocatoria);
                 this.columnid_partit = new global::System.Data.DataColumn("id_partit", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnid_partit);
-                this.columnid_equip = new global::System.Data.DataColumn("id_equip", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnid_equip);
-                this.columnid_equip_rival = new global::System.Data.DataColumn("id_equip_rival", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnid_equip_rival);
+                this.columnhora_convocatoria = new global::System.Data.DataColumn("hora_convocatoria", typeof(global::System.TimeSpan), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhora_convocatoria);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid_convocatoria}, true));
                 this.columnid_convocatoria.AutoIncrement = true;
@@ -2077,10 +2015,7 @@ namespace Gsport {
                 this.columnid_convocatoria.AutoIncrementStep = -1;
                 this.columnid_convocatoria.AllowDBNull = false;
                 this.columnid_convocatoria.Unique = true;
-                this.columnjornada.AllowDBNull = false;
                 this.columnid_partit.AllowDBNull = false;
-                this.columnid_equip.AllowDBNull = false;
-                this.columnid_equip_rival.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9069,34 +9004,6 @@ namespace Gsport {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int jornada {
-                get {
-                    return ((int)(this[this.tableconvocatories.jornadaColumn]));
-                }
-                set {
-                    this[this.tableconvocatories.jornadaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime data_convocatoria {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableconvocatories.data_convocatoriaColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("El valor de la columna \'data_convocatoria\' de la tabla \'convocatories\' es DBNull." +
-                                "", e);
-                    }
-                }
-                set {
-                    this[this.tableconvocatories.data_convocatoriaColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int id_partit {
                 get {
                     return ((int)(this[this.tableconvocatories.id_partitColumn]));
@@ -9108,45 +9015,18 @@ namespace Gsport {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int id_equip {
+            public System.TimeSpan hora_convocatoria {
                 get {
-                    return ((int)(this[this.tableconvocatories.id_equipColumn]));
+                    try {
+                        return ((global::System.TimeSpan)(this[this.tableconvocatories.hora_convocatoriaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'hora_convocatoria\' de la tabla \'convocatories\' es DBNull." +
+                                "", e);
+                    }
                 }
                 set {
-                    this[this.tableconvocatories.id_equipColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int id_equip_rival {
-                get {
-                    return ((int)(this[this.tableconvocatories.id_equip_rivalColumn]));
-                }
-                set {
-                    this[this.tableconvocatories.id_equip_rivalColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public equips_rivalsRow equips_rivalsRow {
-                get {
-                    return ((equips_rivalsRow)(this.GetParentRow(this.Table.ParentRelations["fk_convocatories_equips_rivals1"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["fk_convocatories_equips_rivals1"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public equipsRow equipsRow {
-                get {
-                    return ((equipsRow)(this.GetParentRow(this.Table.ParentRelations["fk_convocatories_equips1"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["fk_convocatories_equips1"]);
+                    this[this.tableconvocatories.hora_convocatoriaColumn] = value;
                 }
             }
             
@@ -9163,14 +9043,14 @@ namespace Gsport {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Isdata_convocatoriaNull() {
-                return this.IsNull(this.tableconvocatories.data_convocatoriaColumn);
+            public bool Ishora_convocatoriaNull() {
+                return this.IsNull(this.tableconvocatories.hora_convocatoriaColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Setdata_convocatoriaNull() {
-                this[this.tableconvocatories.data_convocatoriaColumn] = global::System.Convert.DBNull;
+            public void Sethora_convocatoriaNull() {
+                this[this.tableconvocatories.hora_convocatoriaColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9566,17 +9446,6 @@ namespace Gsport {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public convocatoriesRow[] GetconvocatoriesRows() {
-                if ((this.Table.ChildRelations["fk_convocatories_equips1"] == null)) {
-                    return new convocatoriesRow[0];
-                }
-                else {
-                    return ((convocatoriesRow[])(base.GetChildRows(this.Table.ChildRelations["fk_convocatories_equips1"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public jugadorsRow[] GetjugadorsRows() {
                 if ((this.Table.ChildRelations["fk_jugadors_equips1"] == null)) {
                     return new jugadorsRow[0];
@@ -9710,17 +9579,6 @@ namespace Gsport {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetpuntuacioNull() {
                 this[this.tableequips_rivals.puntuacioColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public convocatoriesRow[] GetconvocatoriesRows() {
-                if ((this.Table.ChildRelations["fk_convocatories_equips_rivals1"] == null)) {
-                    return new convocatoriesRow[0];
-                }
-                else {
-                    return ((convocatoriesRow[])(base.GetChildRows(this.Table.ChildRelations["fk_convocatories_equips_rivals1"])));
-                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13520,17 +13378,14 @@ namespace Gsport.efadbDataSetTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "convocatories";
             tableMapping.ColumnMappings.Add("id_convocatoria", "id_convocatoria");
-            tableMapping.ColumnMappings.Add("jornada", "jornada");
-            tableMapping.ColumnMappings.Add("data_convocatoria", "data_convocatoria");
             tableMapping.ColumnMappings.Add("id_partit", "id_partit");
-            tableMapping.ColumnMappings.Add("id_equip", "id_equip");
-            tableMapping.ColumnMappings.Add("id_equip_rival", "id_equip_rival");
+            tableMapping.ColumnMappings.Add("hora_convocatoria", "hora_convocatoria");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM `convocatories` WHERE ((`id_convocatoria` = @p1) AND (`jornada` = @p2" +
-                ") AND ((@p3 = 1 AND `data_convocatoria` IS NULL) OR (`data_convocatoria` = @p4))" +
-                " AND (`id_partit` = @p5) AND (`id_equip` = @p6) AND (`id_equip_rival` = @p7))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM `convocatories` WHERE ((`id_convocatoria` = @p1) AND (`id_partit` = @" +
+                "p2) AND ((@p3 = 1 AND `hora_convocatoria` IS NULL) OR (`hora_convocatoria` = @p4" +
+                ")))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p1";
@@ -13545,7 +13400,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "jornada";
+            param.SourceColumn = "id_partit";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
@@ -13553,123 +13408,58 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "data_convocatoria";
+            param.SourceColumn = "hora_convocatoria";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             param.SourceColumnNullMapping = true;
             this._adapter.DeleteCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p4";
-            param.DbType = global::System.Data.DbType.Date;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Date;
+            param.DbType = global::System.Data.DbType.Time;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Time;
             param.IsNullable = true;
-            param.SourceColumn = "data_convocatoria";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p5";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "id_partit";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p6";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "id_equip";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.DeleteCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p7";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "id_equip_rival";
+            param.SourceColumn = "hora_convocatoria";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.DeleteCommand.Parameters.Add(param);
             this._adapter.InsertCommand = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `convocatories` (`jornada`, `data_convocatoria`, `id_partit`, `id_equ" +
-                "ip`, `id_equip_rival`) VALUES (@p1, @p2, @p3, @p4, @p5)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO `convocatories` (`id_partit`, `hora_convocatoria`) VALUES (@p1, @p2)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p1";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "jornada";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p2";
-            param.DbType = global::System.Data.DbType.Date;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Date;
-            param.IsNullable = true;
-            param.SourceColumn = "data_convocatoria";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p3";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
             param.SourceColumn = "id_partit";
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p4";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
+            param.ParameterName = "@p2";
+            param.DbType = global::System.Data.DbType.Time;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Time;
             param.IsNullable = true;
-            param.SourceColumn = "id_equip";
-            this._adapter.InsertCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p5";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "id_equip_rival";
+            param.SourceColumn = "hora_convocatoria";
             this._adapter.InsertCommand.Parameters.Add(param);
             this._adapter.UpdateCommand = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `convocatories` SET `jornada` = @p1, `data_convocatoria` = @p2, `id_partit` = @p3, `id_equip` = @p4, `id_equip_rival` = @p5 WHERE ((`id_convocatoria` = @p6) AND (`jornada` = @p7) AND ((@p8 = 1 AND `data_convocatoria` IS NULL) OR (`data_convocatoria` = @p9)) AND (`id_partit` = @p10) AND (`id_equip` = @p11) AND (`id_equip_rival` = @p12))";
+            this._adapter.UpdateCommand.CommandText = "UPDATE `convocatories` SET `id_partit` = @p1, `hora_convocatoria` = @p2 WHERE ((`" +
+                "id_convocatoria` = @p3) AND (`id_partit` = @p4) AND ((@p5 = 1 AND `hora_convocat" +
+                "oria` IS NULL) OR (`hora_convocatoria` = @p6)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
             param.ParameterName = "@p1";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "jornada";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p2";
-            param.DbType = global::System.Data.DbType.Date;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Date;
-            param.IsNullable = true;
-            param.SourceColumn = "data_convocatoria";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p3";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
             param.SourceColumn = "id_partit";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p4";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
+            param.ParameterName = "@p2";
+            param.DbType = global::System.Data.DbType.Time;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Time;
             param.IsNullable = true;
-            param.SourceColumn = "id_equip";
+            param.SourceColumn = "hora_convocatoria";
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p5";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "id_equip_rival";
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p6";
+            param.ParameterName = "@p3";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
@@ -13677,32 +13467,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p7";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "jornada";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p8";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
-            param.IsNullable = true;
-            param.SourceColumn = "data_convocatoria";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            param.SourceColumnNullMapping = true;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p9";
-            param.DbType = global::System.Data.DbType.Date;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Date;
-            param.IsNullable = true;
-            param.SourceColumn = "data_convocatoria";
-            param.SourceVersion = global::System.Data.DataRowVersion.Original;
-            this._adapter.UpdateCommand.Parameters.Add(param);
-            param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p10";
+            param.ParameterName = "@p4";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
@@ -13710,19 +13475,20 @@ namespace Gsport.efadbDataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p11";
+            param.ParameterName = "@p5";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
-            param.SourceColumn = "id_equip";
+            param.SourceColumn = "hora_convocatoria";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            param.SourceColumnNullMapping = true;
             this._adapter.UpdateCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p12";
-            param.DbType = global::System.Data.DbType.Int32;
-            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
+            param.ParameterName = "@p6";
+            param.DbType = global::System.Data.DbType.Time;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Time;
             param.IsNullable = true;
-            param.SourceColumn = "id_equip_rival";
+            param.SourceColumn = "hora_convocatoria";
             param.SourceVersion = global::System.Data.DataRowVersion.Original;
             this._adapter.UpdateCommand.Parameters.Add(param);
         }
@@ -13740,8 +13506,7 @@ namespace Gsport.efadbDataSetTableAdapters {
             this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT `id_convocatoria`, `jornada`, `data_convocatoria`, `id_partit`, `id_equip`" +
-                ", `id_equip_rival` FROM `convocatories`";
+            this._commandCollection[0].CommandText = "SELECT id_convocatoria, id_partit, hora_convocatoria FROM convocatories";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -13802,7 +13567,7 @@ namespace Gsport.efadbDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int p1, int p2, global::System.Nullable<global::System.DateTime> p4, int p5, int p6, int p7) {
+        public virtual int Delete(int p1, int p2, global::System.Nullable<global::System.DateTime> p4) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(p1));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(p2));
             if ((p4.HasValue == true)) {
@@ -13813,9 +13578,6 @@ namespace Gsport.efadbDataSetTableAdapters {
                 this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(p5));
-            this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(p6));
-            this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(p7));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -13836,7 +13598,7 @@ namespace Gsport.efadbDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int p1, global::System.Nullable<global::System.DateTime> p2, int p3, int p4, int p5) {
+        public virtual int Insert(int p1, global::System.Nullable<global::System.DateTime> p2) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(p1));
             if ((p2.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(p2.Value));
@@ -13844,9 +13606,6 @@ namespace Gsport.efadbDataSetTableAdapters {
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(p3));
-            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(p4));
-            this.Adapter.InsertCommand.Parameters[4].Value = ((int)(p5));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -13867,7 +13626,7 @@ namespace Gsport.efadbDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int p1, global::System.Nullable<global::System.DateTime> p2, int p3, int p4, int p5, int p6, int p7, global::System.Nullable<global::System.DateTime> p9, int p10, int p11, int p12) {
+        public virtual int Update(int p1, global::System.Nullable<global::System.DateTime> p2, int p3, int p4, global::System.Nullable<global::System.DateTime> p6) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(p1));
             if ((p2.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(p2.Value));
@@ -13877,20 +13636,14 @@ namespace Gsport.efadbDataSetTableAdapters {
             }
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(p3));
             this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(p4));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(p5));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(p6));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(p7));
-            if ((p9.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(p9.Value));
+            if ((p6.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(p6.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(p10));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(p11));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(p12));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {

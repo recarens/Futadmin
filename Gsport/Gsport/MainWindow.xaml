@@ -20,6 +20,8 @@
         <CollectionViewSource x:Key="fasesViewSource" Source="{Binding fases, Source={StaticResource efadbDataSet}}"/>
         <CollectionViewSource x:Key="jugadorslesionsViewSource" Source="{Binding fk_lesions_jugadors1, Source={StaticResource jugadorsViewSource}}"/>
         <CollectionViewSource x:Key="convocatoriesViewSource" Source="{Binding convocatories, Source={StaticResource efadbDataSet}}"/>
+        <CollectionViewSource x:Key="partitsViewSource" Source="{Binding partits, Source={StaticResource efadbDataSet}}"/>
+        <CollectionViewSource x:Key="tipus_partitViewSource" Source="{Binding tipus_partit, Source={StaticResource efadbDataSet}}"/>
     </Window.Resources>
     <Window.Background>
         <ImageBrush ImageSource="Fotos/grass.jpg" Stretch="UniformToFill"/>
@@ -31,7 +33,7 @@
             <ColumnDefinition x:Name="cdequips" Width="0"/>
             <ColumnDefinition x:Name="cdntrenadors" Width="0"/>
             <ColumnDefinition x:Name="cdTemporada" Width="0"/>
-            <ColumnDefinition x:Name="cdPartits" Width="0"/>
+            <ColumnDefinition x:Name="cdPartits" Width="800"/>
             <ColumnDefinition x:Name="cdEquipsRivals" Width="0"/>
             <ColumnDefinition x:Name="cdConvocatoria" Width="0"/>
         </Grid.ColumnDefinitions>
@@ -213,6 +215,7 @@
 
                     </WrapPanel>
                 </Border>
+                <Button x:Name="btnEsborrarJugadors" Content="Esborrar" FontSize="16" FontWeight="Bold" Margin="10,40,10,0" Click="btnBorrar_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
             </StackPanel>
         </ScrollViewer>
         <ScrollViewer Grid.Column="2">
@@ -322,6 +325,7 @@
                         </ScrollViewer>
                     </WrapPanel>
                 </Border>
+                <Button x:Name="btnEsborrarEquips" Content="Esborrar" FontSize="16" FontWeight="Bold" Margin="10,40,10,0" Click="btnBorrar_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
             </StackPanel>
         </ScrollViewer>
         <ScrollViewer Grid.Column="3">
@@ -357,9 +361,9 @@
                                 <DataGridTextColumn x:Name="puntuacioColumn" Binding="{Binding puntuacio}" Header="puntuacio" Width="100"/>
                             </DataGrid.Columns>
                         </DataGrid>
-
                     </WrapPanel>
                 </Border>
+                <Button x:Name="btnEsborrarEntrenadors" Content="Esborrar" FontSize="16" FontWeight="Bold" Margin="10,40,10,0" Click="btnBorrar_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
             </StackPanel>
         </ScrollViewer>
         <ScrollViewer Grid.Column="4">
@@ -405,7 +409,41 @@
                 </Border>
             </StackPanel>
         </ScrollViewer>
-        <ScrollViewer Grid.Column="5">
+        <ScrollViewer Grid.Column="5" Grid.ColumnSpan="2">
+            <StackPanel x:Name="spDadesPartit" Orientation="Vertical">
+                <Button x:Name="btnGuardarPartit" Click="btnGuardar_Click" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10" IsEnabled="False">Guardar</Button>
+                <Label Content="Equip del club" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                <ComboBox ItemsSource="{Binding Source={StaticResource equipsViewSource1}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_equip" Margin="40,0,40,5" FontSize="15"/>
+                <Label Content="Equip rival" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" />
+                <ComboBox ItemsSource="{Binding Source={StaticResource equips_rivalsViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_equip_rival" Margin="40,0,40,0" FontSize="15"/>
+                <Label Content="Tipus partit" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                <ComboBox ItemsSource="{Binding Source={StaticResource tipus_partitViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_tipus_partit" Margin="40,0,40,0" FontSize="15"/>
+                <Label Content="Fase" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                <ComboBox ItemsSource="{Binding Source={StaticResource fasesViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_fase" Margin="40,0,40,5" FontSize="15"/>
+                <Grid x:Name="griddadespartit" DataContext="{StaticResource partitsViewSource}" HorizontalAlignment="Center"  Background="#FF52B64E">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Data partit" Grid.Column="0" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E"/>
+                    <DatePicker x:Name="data_partitDatePicker" Grid.Column="1" HorizontalAlignment="Left" FontSize="20" Grid.Row="0" SelectedDate="{Binding data_partit, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" BorderBrush="{x:Null}"/>
+                    <Label Content="Jornada" Grid.Column="0" Grid.Row="1" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" VerticalAlignment="Center"/>
+                    <TextBox x:Name="jornadaTextBox1" Grid.Column="1" Grid.Row="1" FontSize="20"  Text="{Binding jornada, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="150" KeyDown="tb_KeyDown" Margin="2"/>
+                    <Label Content="Gols locals " Grid.Column="0" Grid.Row="2" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" VerticalAlignment="Center"/>
+                    <TextBox x:Name="tbgolsLocals" Grid.Column="1" Grid.Row="2" FontSize="20" Text="{Binding gols_local, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="150" KeyDown="tb_KeyDown" Margin="2"/>
+                    <Label Content="Gols visitants " Grid.Column="0" Grid.Row="3" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" VerticalAlignment="Center"/>
+                    <TextBox x:Name="tbgolsVisitants" Grid.Column="1" Grid.Row="3" FontSize="20" Text="{Binding gols_visitant, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="150" KeyDown="tb_KeyDown" Margin="2"/>
+                    <Label Content="El teu equips és " Grid.Column="0" Grid.Row="4" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="tblocalVisitant" Grid.Column="1" Grid.Row="4" FontSize="20" Width="150" Margin="5"/>
+                </Grid>
+            </StackPanel>
         </ScrollViewer>
         <ScrollViewer Grid.Column="6">
             <StackPanel x:Name="spDadesEquipRival" Orientation="Vertical">
@@ -451,6 +489,7 @@
                         </Grid>
                     </WrapPanel>
                 </Border>
+                <Button x:Name="btnEsborrarEquipsRivals" Content="Esborrar" FontSize="16" FontWeight="Bold" Margin="10,40,10,0" Click="btnBorrar_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
             </StackPanel>
         </ScrollViewer>
         <ScrollViewer Grid.Column="7">
@@ -474,11 +513,11 @@
                             <Label Content="jornada:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
                             <TextBox x:Name="jornadaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding jornada, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                             <Label Content="data convocatoria:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-                            <DatePicker x:Name="data_convocatoriaDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="2" SelectedDate="{Binding data_convocatoria, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>   
+                            <DatePicker x:Name="data_convocatoriaDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="2" SelectedDate="{Binding data_convocatoria, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
                         </Grid>
-
                     </WrapPanel>
                 </Border>
+                <Button Content="Esborrar" FontSize="16" FontWeight="Bold" Margin="10,40,10,0" Click="btnBorrar_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>
