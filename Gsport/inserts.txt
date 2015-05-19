@@ -13,3 +13,63 @@ ALTER TABLE  `jugador_temporada` DROP FOREIGN KEY  `fk_jugador_temporada_jugador
 ALTER TABLE  `jugador_temporada` ADD CONSTRAINT  `fk_jugador_temporada_jugadors1` FOREIGN KEY (  `id_jugador` ) REFERENCES `gsportse_efadb`.`jugadors` (
 `id_jugador`
 ) ON DELETE CASCADE ON UPDATE CASCADE ;
+Create procedure inserirjugadors(
+BEGIN
+DECLARE idjugador INT;
+DECLARE idtemporada INT;
+INSERT INTO jugadors (
+dni
+, nom
+, cognoms
+, sexe
+, data_inscripcio
+, data_naixement
+, tarjeta_sanitaria
+, malaltia_alergia
+, mobil
+, telefon
+, correu_electronic
+, numero_soci
+, lateralitat
+, edat
+, id_posicio
+, id_equip)
+
+    VALUES (indni
+    , innom
+    , incognoms
+    , insexe
+    , indata_inscripcio
+    , indata_naixement
+    , intarjeta_sanitaria
+    , inmalaltia_alergia
+    , inmobil
+    , intelefon
+    , incorreu_electronic
+    , innumero_soci
+    , inlateralitat
+    , inedat
+    , inid_posicio
+    , inid_equip);
+
+SELECT id_jugador INTO idjugador from jugadors where dni = indni;
+SELECT id_temporada INTO idtemporada from temporades ORDER BY id_temporada DESC LIMIT 1; 
+
+INSERT INTO jugador_temporada (id_jugador
+                               ,id_temporada
+                               ,gols
+                               ,ocasions_de_gol
+                               ,minuts_jugats
+                               ,faltes_comeses
+                               ,faltes_rebudes
+                               ,targetes_grogues
+                               ,targetes_vermelles
+                               ,pes
+                               ,altura
+                               ,dorsal
+                               ,faltes_entreno
+                               ,notaGS)
+VALUES (idjugador,idtemporada,0,0,0,0,0,0,0,0,0,0,0,0);
+
+
+END
