@@ -847,6 +847,7 @@ namespace Gsport
                         btnNovaTemporada.IsEnabled = true;
                         btnAfageixEntrenador.IsEnabled = true;
                         btnCrearEquipRival.IsEnabled = true;
+                        btnImportador.IsEnabled = true;
                         break;
                     case 5: //Gsport Admin
                         btnAfageix.IsEnabled = true;
@@ -854,6 +855,7 @@ namespace Gsport
                         btnNovaTemporada.IsEnabled = true;
                         btnAfageixEntrenador.IsEnabled = true;
                         btnCrearEquipRival.IsEnabled = true;
+                        btnImportador.IsEnabled = true;
                         break;
                 }
                 // Cargar datos en la tabla equips. Puede modificar este código según sea necesario.
@@ -918,6 +920,17 @@ namespace Gsport
                 e.Handled = false;
             else
                 e.Handled = true;
+        }
+
+        /// <summary>
+        /// obre una nova finestra que importa dades
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnImportador_Click(object sender, RoutedEventArgs e)
+        {
+            wndImportar wnd = new wndImportar();
+            wnd.ShowDialog();
         }
     }
 }

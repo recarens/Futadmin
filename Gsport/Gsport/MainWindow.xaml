@@ -33,7 +33,7 @@
             <ColumnDefinition x:Name="cdTemporada" Width="0"/>
             <ColumnDefinition x:Name="cdPartits" Width="0"/>
             <ColumnDefinition x:Name="cdEquipsRivals" Width="0"/>
-            <ColumnDefinition x:Name="cdConvocatoria" Width="800"/>
+            <ColumnDefinition x:Name="cdConvocatoria" Width="0"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Margin="5">
             <Button x:Name="btnCerca" Content="Cercar" Margin="9" Click="btnCerca_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold" />
@@ -44,6 +44,7 @@
             <Button x:Name="btnNovaTemporada" Content="Nova Temporada" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}"  Foreground="#FF0B2E10" FontWeight="Bold" Click="btnNovaTemporada_Click"  IsEnabled="False"/>
             <Button x:Name="btnPartits" Content="Crear Partits" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}"  Foreground="#FF0B2E10" FontWeight="Bold" IsEnabled="False" Click="btnPartits_Click"/>
             <Button x:Name="btnComvocatories" Content="+ Convocatoria" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}"  Foreground="#FF0B2E10" FontWeight="Bold" IsEnabled="False"/>
+            <Button x:Name="btnImportador" Content="Importador" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10"  FontWeight="Bold" IsEnabled="False" Click="btnImportador_Click"/>
             <Button x:Name="btnSortir" Content="Sortir" Margin="9" Click="btnSortir_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold"/>
         </StackPanel>
         <GridSplitter Grid.Column="0" Width="10" BorderBrush="#FF171212" Background="White"/>
@@ -469,17 +470,11 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>                         
+                            </Grid.RowDefinitions>
                             <Label Content="jornada:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
                             <TextBox x:Name="jornadaTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding jornada, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                             <Label Content="data convocatoria:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-                            <DatePicker x:Name="data_convocatoriaDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="2" SelectedDate="{Binding data_convocatoria, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
-                            <Label Content="id partit:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-                            <TextBox x:Name="id_partitTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding id_partit, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                            <Label Content="id equip:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-                            <TextBox x:Name="id_equipTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding id_equip, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                            <Label Content="id equip rival:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
-                            <TextBox x:Name="id_equip_rivalTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="5" Text="{Binding id_equip_rival, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                            <DatePicker x:Name="data_convocatoriaDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="2" SelectedDate="{Binding data_convocatoria, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>   
                         </Grid>
 
                     </WrapPanel>

@@ -95,6 +95,9 @@
     <Compile Include="wndCercar.xaml.cs">
       <DependentUpon>wndCercar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="wndImportar.xaml.cs">
+      <DependentUpon>wndImportar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="wndLogin.xaml.cs">
       <DependentUpon>wndLogin.xaml</DependentUpon>
     </Compile>
@@ -115,6 +118,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="wndCercar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wndImportar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -169,7 +176,6 @@
     <None Include="efadbDataSet.xss">
       <DependentUpon>efadbDataSet.xsd</DependentUpon>
     </None>
-    <None Include="Fotos\desktop.ini" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -215,6 +221,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Fotos\img.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Fotos\img1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Fotos\img2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Fotos\img3.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,17 @@
+﻿<Window x:Class="Gsport.wndImportar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="wndImportar" Height="381.59" Width="544.77">
+    <Window.Background>
+        <ImageBrush ImageSource="Fotos/grass.jpg"/>
+    </Window.Background>
+    <StackPanel Orientation="Vertical">
+        <Label Content="Que vols importar?" FontSize="30" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White" Background="#FF379129" />
+        <UniformGrid Height="250" Width="450" Margin="20">
+            <Button x:Name="btnImportJugadors" Click="btnImportJugadors_Click" Content="Jugadors" Margin="8" FontWeight="Bold" Foreground="White" FontSize="25" Background="#FF379129"/>
+            <Button Content="Equips" Margin="8" FontWeight="Bold" Foreground="White" FontSize="25" Background="#FF379129"/>
+            <Button Content="Entrenadors" Margin="8" FontWeight="Bold" Foreground="White" FontSize="25" Background="#FF379129"/>
+            <Button Content="Partits" Margin="8" Background="#FF379129" FontWeight="Bold" Foreground="White" FontSize="25"/>
+        </UniformGrid>
+    </StackPanel>
+</Window>
