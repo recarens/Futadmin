@@ -411,15 +411,15 @@
         </ScrollViewer>
         <ScrollViewer Grid.Column="5">
             <StackPanel x:Name="spDadesPartit" Orientation="Vertical">
-                <Button x:Name="btnGuardarPartit" Click="btnGuardar_Click" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10" IsEnabled="False">Guardar</Button>
+                <Button x:Name="btnGuardarPartit" Click="btnGuardarPartit_Click" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10">Guardar</Button>
                 <Label Content="Equip del club" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                <ComboBox ItemsSource="{Binding Source={StaticResource equipsViewSource1}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_equip" Margin="40,0,40,5" FontSize="15"/>
+                <ComboBox x:Name="cbEquipClub" ItemsSource="{Binding Source={StaticResource equipsViewSource1}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_equip" Margin="40,0,40,5" FontSize="15"/>
                 <Label Content="Equip rival" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" />
-                <ComboBox ItemsSource="{Binding Source={StaticResource equips_rivalsViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_equip_rival" Margin="40,0,40,0" FontSize="15"/>
+                <ComboBox x:Name="cbEquipRival" ItemsSource="{Binding Source={StaticResource equips_rivalsViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_equip_rival" Margin="40,0,40,0" FontSize="15"/>
                 <Label Content="Tipus partit" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                <ComboBox ItemsSource="{Binding Source={StaticResource tipus_partitViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_tipus_partit" Margin="40,0,40,0" FontSize="15"/>
+                <ComboBox x:Name="cbTipusPartit" ItemsSource="{Binding Source={StaticResource tipus_partitViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_tipus_partit" Margin="40,0,40,0" FontSize="15"/>
                 <Label Content="Fase" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                <ComboBox ItemsSource="{Binding Source={StaticResource fasesViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_fase" Margin="40,0,40,5" FontSize="15"/>
+                <ComboBox x:Name="cbFasePartit" ItemsSource="{Binding Source={StaticResource fasesViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_fase" Margin="40,0,40,5" FontSize="15"/>
                 <Grid x:Name="griddadespartit" DataContext="{StaticResource partitsViewSource}" HorizontalAlignment="Center"  Background="#FF52B64E">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -435,13 +435,13 @@
                     <Label Content="Data partit" Grid.Column="0" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E"/>
                     <DatePicker x:Name="data_partitDatePicker" Grid.Column="1" HorizontalAlignment="Left" FontSize="20" Grid.Row="0" SelectedDate="{Binding data_partit, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" BorderBrush="{x:Null}"/>
                     <Label Content="Jornada" Grid.Column="0" Grid.Row="1" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" VerticalAlignment="Center"/>
-                    <TextBox x:Name="jornadaTextBox1" Grid.Column="1" Grid.Row="1" FontSize="20"  Text="{Binding jornada, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="150" KeyDown="tb_KeyDown" Margin="2"/>
+                    <TextBox x:Name="tbJornadaPartit" Grid.Column="1" Grid.Row="1" FontSize="20"  Text="{Binding jornada, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="150" KeyDown="tb_KeyDown" Margin="2"/>
                     <Label Content="Gols locals " Grid.Column="0" Grid.Row="2" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" VerticalAlignment="Center"/>
                     <TextBox x:Name="tbgolsLocals" Grid.Column="1" Grid.Row="2" FontSize="20" Text="{Binding gols_local, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="150" KeyDown="tb_KeyDown" Margin="2"/>
                     <Label Content="Gols visitants " Grid.Column="0" Grid.Row="3" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" VerticalAlignment="Center"/>
                     <TextBox x:Name="tbgolsVisitants" Grid.Column="1" Grid.Row="3" FontSize="20" Text="{Binding gols_visitant, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="150" KeyDown="tb_KeyDown" Margin="2"/>
                     <Label Content="El teu equips és " Grid.Column="0" Grid.Row="4" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" VerticalAlignment="Center"/>
-                    <ComboBox x:Name="tblocalVisitant" Grid.Column="1" Grid.Row="4" FontSize="20" Width="150" Margin="5"/>
+                    <ComboBox x:Name="cblocalVisitant" Grid.Column="1" Grid.Row="4" FontSize="20" Width="150" Margin="5"/>
                 </Grid>
             </StackPanel>
         </ScrollViewer>
@@ -467,8 +467,8 @@
                             <TextBox x:Name="nomEquipRivalTextBox" Grid.Column="1" MinWidth="150" Margin="0,4,0,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="1" Text="{Binding nom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="nomTextBox2_TextChanged"/>
                             <Label Content="poblacio:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="2" VerticalAlignment="Center"/>
                             <TextBox x:Name="poblacioRivalTextBox" Grid.Column="1" MinWidth="150" Margin="0,4,0,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="2" Text="{Binding poblacio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-                            <Label Content="puntuacio:" KeyDown="tb_KeyDown" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="4" VerticalAlignment="Center"/>
-                            <TextBox x:Name="puntuacioRivalTextBox" Grid.Column="1" MinWidth="150" Margin="0,4,0,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="4" Text="{Binding puntuacio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                            <Label Content="puntuacio:"  Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="4" VerticalAlignment="Center"/>
+                            <TextBox x:Name="puntuacioRivalTextBox" KeyDown="tb_KeyDown" Grid.Column="1" MinWidth="150" Margin="0,4,0,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="4" Text="{Binding puntuacio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                         </Grid>
                         <Grid x:Name="gridFasesRivals" DataContext="{StaticResource fasesViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Grid.ColumnDefinitions>

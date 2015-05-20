@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -40,6 +41,9 @@ namespace Gsport
         Gsport.efadbDataSetTableAdapters.equips_rivalsTableAdapter efadbDataSetequips_rivalsTableAdapter;
         Gsport.efadbDataSetTableAdapters.lesionsTableAdapter efadbDataSetlesionsTableAdapter;
         System.Windows.Data.CollectionViewSource jugadorslesionsViewSource;
+        Gsport.efadbDataSetTableAdapters.partitsTableAdapter efadbDataSetpartitsTableAdapter;
+        System.Windows.Data.CollectionViewSource partitsViewSource;
+        string mySqlString = "Server=shz24.guebs.net;port=3306;user id=gsportse_remot;password=gsport123.;persistsecurityinfo=True;database=gsportse_efadb";
         string rutaImg = @"C:/Fotos/img.jpg";
         int idTemporada = 1;
         int codiUsuari;
@@ -58,8 +62,9 @@ namespace Gsport
             dpAnyNeixament.SelectedDate = DateTime.Now;
             tbSexe.Items.Add("M");
             tbSexe.Items.Add("F");
-            tblocalVisitant.Items.Add("Local");
-            tblocalVisitant.Items.Add("Visitant");
+            cblocalVisitant.Items.Add("Local"); //0
+            cblocalVisitant.Items.Add("Visitant"); //1
+            
             tbSexe.SelectedItem = tbSexe.Items.GetItemAt(0);
         }
 
@@ -641,10 +646,22 @@ namespace Gsport
                     dr["dni"] = tbDni.Text.Trim();
                     dr["nom"] = tbNom.Text.Trim();
                     dr["cognoms"] = tbCognom.Text.Trim();
-                    dr["sexe"] = Convert.ToInt16(tbSexe.SelectedIndex);
+                    if (tbSexe.SelectedIndex > 0)
+                        dr["sexe"] = Convert.ToInt16(tbSexe.SelectedIndex);
+                    else
+                        dr["sexe"] = 0;
+
                     dr["nomImatge"] = rutaImg;
-                    dr["data_inscripcio"] = DateTime.Parse(dpAnyInscripcio.SelectedDate.ToString());
-                    dr["data_naixement"] = DateTime.Parse(dpAnyNeixament.SelectedDate.ToString());
+
+                    if (dpAnyInscripcio.SelectedDate.ToString().Trim().Length > 0)
+                        dr["data_inscripcio"] = DateTime.Parse(dpAnyInscripcio.SelectedDate.ToString());
+                    else
+                        dr["data_inscripcio"] = DateTime.Parse(DateTime.Now.ToShortDateString());
+
+                    if (dpAnyNeixament.SelectedDate.ToString().Trim().Length > 0)
+                        dr["data_naixement"] = DateTime.Parse(dpAnyNeixament.SelectedDate.ToString());
+                    else
+                        dr["data_naixement"] = DateTime.Parse(DateTime.Now.ToShortDateString());
                     dr["tarjeta_sanitaria"] = tbTarjetaSanitaria.Text.Trim();
                     dr["malaltia_alergia"] = tbMalalties.Text.Trim();
                     dr["mobil"] = tbMobil.Text.Trim();
@@ -652,7 +669,10 @@ namespace Gsport
                     dr["correu_electronic"] = tbcorreuElec.Text.Trim();
                     dr["numero_soci"] = tbnSoci.Text.Trim();
                     dr["lateralitat"] = tbLateralitat.Text.Trim();
-                    dr["edat"] = Convert.ToInt32(tbEdat.Text.Trim());
+                    if (tbEdat.Text.Trim().Length > 0)
+                        dr["edat"] = Convert.ToInt32(tbEdat.Text.Trim());
+                    else
+                        dr["edat"] = 0;
                     dr["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
                     dr["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);
                     try
@@ -699,7 +719,10 @@ namespace Gsport
                     dr["dni"] = dniTextBox.Text.Trim();
                     dr["nom"] = nomTextBox1.Text.Trim();
                     dr["cognom"] = cognomTextBox.Text.Trim();
-                    dr["data_naixement"] = DateTime.Parse(data_naixementDatePicker.SelectedDate.ToString());
+                    if (data_naixementDatePicker.SelectedDate.ToString().Trim().Length > 0)
+                        dr["data_naixement"] = DateTime.Parse(data_naixementDatePicker.SelectedDate.ToString());
+                    else
+                        dr["data_naixement"] = DateTime.Parse(DateTime.Now.ToShortDateString());
                     try
                     {
                         efadbDataSet.entrenadors.Rows.Add(dr);
@@ -724,10 +747,24 @@ namespace Gsport
                 {
                     DataRow dr = efadbDataSet.Tables["equips"].NewRow();
                     dr["nom"] = nomTextBox.Text.Trim();
-                    dr["id_divisio"] = Convert.ToInt32(id_divisioComboBox.SelectedValue);
-                    dr["id_categoria"] = Convert.ToInt32(id_categoriaComboBox.SelectedValue);
-                    dr["id_entrenador"] = Convert.ToInt32(id_entrenadorComboBox.SelectedValue);
-                    dr["puntuacio"] = puntuacioTextBox.Text.Trim();
+                    if (id_divisioComboBox.SelectedIndex >= 0)
+                        dr["id_divisio"] = Convert.ToInt32(id_divisioComboBox.SelectedValue);
+                    else
+                        dr["id_divisio"] = 1;
+
+                    if (id_categoriaComboBox.SelectedIndex >= 0)
+                        dr["id_categoria"] = Convert.ToInt32(id_categoriaComboBox.SelectedValue);
+                    else
+                        dr["id_categoria"] = 1;
+
+                    if (id_entrenadorComboBox.SelectedIndex >= 0)
+                        dr["id_entrenador"] = Convert.ToInt32(id_entrenadorComboBox.SelectedValue);
+                    else
+                        dr["id_entrenador"] = 1;
+                    if (puntuacioTextBox.Text.Trim().Length > 0)
+                        dr["puntuacio"] = puntuacioTextBox.Text.Trim();
+                    else
+                        dr["puntuacio"] = 0;
                     try
                     {
                         efadbDataSet.equips.Rows.Add(dr);
@@ -752,7 +789,10 @@ namespace Gsport
                     DataRow dr = efadbDataSet.Tables["equips_rivals"].NewRow();
                     dr["nom"] = nomEquipRivalTextBox.Text.Trim();
                     dr["poblacio"] = poblacioRivalTextBox.Text.Trim();
-                    dr["puntuacio"] = puntuacioRivalTextBox.Text.Trim();
+                    if (puntuacioRivalTextBox.Text.Trim().Length > 0)
+                        dr["puntuacio"] = puntuacioRivalTextBox.Text.Trim();
+                    else
+                        dr["puntuacio"] = 0;
                     dr["id_fase"] = Convert.ToInt32(id_faseComboBox.SelectedValue);
                     try
                     {
@@ -866,6 +906,59 @@ namespace Gsport
             }
         }
 
+        private void btnGuardarPartit_Click(object sender, RoutedEventArgs e)
+        {
+            ///Aqui s'ha afagit una llibreria en principi cap problema.
+            MySqlConnection cnMySql = new MySqlConnection(mySqlString);
+            try 
+            { 
+                cnMySql.Open();
+                MySqlCommand cmd;
+                cmd = new MySqlCommand("Insertarpartit", cnMySql);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("inidequip", Convert.ToInt32(cbEquipClub.SelectedValue));
+                cmd.Parameters.AddWithValue("inidequiprival", Convert.ToInt32(cbEquipRival.SelectedValue));
+                cmd.Parameters.AddWithValue("inidfase", Convert.ToInt32(cbFasePartit.SelectedValue));
+                cmd.Parameters.AddWithValue("inidtipus", Convert.ToInt32(cbTipusPartit.SelectedValue));
+                if (Convert.ToInt32(tbJornadaPartit.Text.Trim().Length) > 0)
+                    cmd.Parameters.AddWithValue("injornada", Convert.ToInt32(tbJornadaPartit.Text.Trim()));
+                else
+                    cmd.Parameters.AddWithValue("injornada", 1);
+
+                if (data_partitDatePicker.SelectedDate.ToString().Trim().Length > 0)
+                    cmd.Parameters.AddWithValue("indatapartit", DateTime.Parse(data_partitDatePicker.SelectedDate.ToString()));
+                else
+                    cmd.Parameters.AddWithValue("indatapartit", DateTime.Parse(DateTime.Now.ToShortDateString()));
+
+                if (tbgolsLocals.Text.Trim().Length > 0)
+                    cmd.Parameters.AddWithValue("ingolslocal", Convert.ToInt32(tbgolsLocals.Text.Trim()));
+                else
+                    cmd.Parameters.AddWithValue("ingolslocal", 0);
+
+                if (tbgolsVisitants.Text.Trim().Length > 0)
+                    cmd.Parameters.AddWithValue("ingolsvisitant", Convert.ToInt32(tbgolsVisitants.Text.Trim()));
+                else
+                    cmd.Parameters.AddWithValue("ingolsvisitant", 0);
+
+                if (cblocalVisitant.SelectedIndex >= 0)
+                    cmd.Parameters.AddWithValue("invisitant", Convert.ToInt16(cblocalVisitant.SelectedIndex));
+                else
+                    cmd.Parameters.AddWithValue("invisitant", 0);
+                if (efadbDataSet.partits.Rows.Count > 0)
+                    cmd.Parameters.AddWithValue("inidpartit", Convert.ToInt32(efadbDataSet.partits.Rows[efadbDataSet.partits.Rows.Count-1]["id_partit"])+1);
+                else
+                    cmd.Parameters.AddWithValue("inidpartit", 1);
+                cmd.ExecuteNonQuery();
+                cnMySql.Close();
+                efadbDataSetpartitsTableAdapter.Fill(efadbDataSet.partits);
+                partitsViewSource.View.MoveCurrentToLast();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         /// <summary>
         /// Obre la finestra de carga guarda l'usuari que s'ha introduit i segons el nivell de privilegi habilita i deshabilita controls a mes crear els view i els adapters
         /// </summary>
@@ -965,12 +1058,10 @@ namespace Gsport
                 Gsport.efadbDataSetTableAdapters.convocatoriesTableAdapter efadbDataSetconvocatoriesTableAdapter = new Gsport.efadbDataSetTableAdapters.convocatoriesTableAdapter();
                 efadbDataSetconvocatoriesTableAdapter.Fill(efadbDataSet.convocatories);
                 System.Windows.Data.CollectionViewSource convocatoriesViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("convocatoriesViewSource")));
-                //convocatoriesViewSource.View.MoveCurrentToFirst();
                 // Cargar datos en la tabla partits. Puede modificar este código según sea necesario.
-                Gsport.efadbDataSetTableAdapters.partitsTableAdapter efadbDataSetpartitsTableAdapter = new Gsport.efadbDataSetTableAdapters.partitsTableAdapter();
+                efadbDataSetpartitsTableAdapter = new Gsport.efadbDataSetTableAdapters.partitsTableAdapter();
                 efadbDataSetpartitsTableAdapter.Fill(efadbDataSet.partits);
-                System.Windows.Data.CollectionViewSource partitsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("partitsViewSource")));
-                //partitsViewSource.View.MoveCurrentToFirst();
+                partitsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("partitsViewSource")));
                 // Cargar datos en la tabla tipus_partit. Puede modificar este código según sea necesario.
                 Gsport.efadbDataSetTableAdapters.tipus_partitTableAdapter efadbDataSettipus_partitTableAdapter = new Gsport.efadbDataSetTableAdapters.tipus_partitTableAdapter();
                 efadbDataSettipus_partitTableAdapter.Fill(efadbDataSet.tipus_partit);

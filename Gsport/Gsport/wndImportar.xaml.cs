@@ -97,6 +97,7 @@ namespace Gsport
                                 cmd.Parameters.AddWithValue("inid_equip", 1);
                             cmd.ExecuteNonQuery();
                             pbProgres.Value += 1;
+                            
                         }
                     }
                     idr.Close();
