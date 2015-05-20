@@ -33,7 +33,7 @@
             <ColumnDefinition x:Name="cdequips" Width="0"/>
             <ColumnDefinition x:Name="cdntrenadors" Width="0"/>
             <ColumnDefinition x:Name="cdTemporada" Width="0"/>
-            <ColumnDefinition x:Name="cdPartits" Width="800"/>
+            <ColumnDefinition x:Name="cdPartits" Width="0"/>
             <ColumnDefinition x:Name="cdEquipsRivals" Width="0"/>
             <ColumnDefinition x:Name="cdConvocatoria" Width="0"/>
         </Grid.ColumnDefinitions>
@@ -409,7 +409,7 @@
                 </Border>
             </StackPanel>
         </ScrollViewer>
-        <ScrollViewer Grid.Column="5" Grid.ColumnSpan="2">
+        <ScrollViewer Grid.Column="5">
             <StackPanel x:Name="spDadesPartit" Orientation="Vertical">
                 <Button x:Name="btnGuardarPartit" Click="btnGuardar_Click" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10" IsEnabled="False">Guardar</Button>
                 <Label Content="Equip del club" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" Margin="0,10,0,0"/>
