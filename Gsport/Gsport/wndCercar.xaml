@@ -15,12 +15,13 @@
             <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <WrapPanel>
-            <WrapPanel Orientation="Horizontal" Margin="4" Background="#FF52B64E">
+        <WrapPanel Orientation="Vertical">
+            <WrapPanel Orientation="Horizontal" Margin="4" Background="#FF52B64E" HorizontalAlignment="Center">
                 <RadioButton x:Name="rbEquip" Content="Equips" GroupName="grCerca" FontSize="15" Margin="0,0,10,0" Checked="rbEquip_Checked" FontWeight="Bold" Foreground="#FF0B2E10"/>
                 <RadioButton x:Name="rbEquipRivals" Content="Equips Rivals" GroupName="grCerca" FontSize="15" Margin="0,0,10,0" Checked="rbEquipRivals_Checked" FontWeight="Bold" Foreground="#FF0B2E10"/>
                 <RadioButton x:Name="rbJugador" Content="Jugadors" GroupName="grCerca" FontSize="15" Checked="rbJugador_Checked" FontWeight="Bold" Foreground="#FF0B2E10"/>
-                <RadioButton x:Name="rbEntrenador" Content="Entrenador" GroupName="grCerca" FontSize="15" Checked="rbEntrenador_Checked" FontWeight="Bold" Foreground="#FF0B2E10"/>
+                <RadioButton x:Name="rbEntrenador" Content="Entrenadors" GroupName="grCerca" FontSize="15" Checked="rbEntrenador_Checked" FontWeight="Bold" Foreground="#FF0B2E10"/>
+                <RadioButton x:Name="rbPartits" Content="Partits" GroupName="grCerca" FontSize="15" Checked="rbPartits_Checked" FontWeight="Bold" Foreground="#FF0B2E10"/>
             </WrapPanel>
             <WrapPanel Orientation="Horizontal" Margin="5">
                 <Label  FontSize="16" FontWeight="Bold" Foreground="#FF0B2E10" Content="Camps a buscar" Background="#FF52B64E"/>
