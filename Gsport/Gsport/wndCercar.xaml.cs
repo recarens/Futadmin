@@ -26,18 +26,29 @@ namespace Gsport
         DataView dvJugadors;
         DataView dvEquipsRivals;
         DataView dvPartits;
+        DataTable dt = new DataTable();
         public int id;
         public string queEs = "";
+        public DataRow drSelect;
         public wndCercar()
         {
             InitializeComponent();
         }
-        public wndCercar(efadbDataSet dataSet)
+        public wndCercar(efadbDataSet dataSet,bool convocatoria)
         {
             cbCategoriaCerca = new ComboBox();
             dgResultat = new DataGrid();
             InitializeComponent();
-            dataSetAux = dataSet;          
+            dataSetAux = dataSet;
+            if(convocatoria)
+            {
+                rbEntrenador.IsEnabled = false;
+                rbJugador.IsEnabled = false;
+                rbEquip.IsEnabled = false;
+                rbEquipRivals.IsEnabled = false;
+                rbPartits.IsChecked = true;
+            }
+
         }
 
         private void rbJugador_Checked(object sender, RoutedEventArgs e)
@@ -56,8 +67,7 @@ namespace Gsport
                     col.Visibility = Visibility.Hidden;
                 if (col.DisplayIndex == 3)
                     col.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
-            }
-            
+            }   
         }
 
         private void rbEntrenador_Checked(object sender, RoutedEventArgs e)
@@ -133,12 +143,10 @@ namespace Gsport
         private void rbPartits_Checked(object sender, RoutedEventArgs e)
         {
             cbCategoriaCerca.Items.Clear();
-            cbCategoriaCerca.IsEnabled = false;
             cbCategoriaCerca.Items.Add("Jornada");
             cbCategoriaCerca.Items.Add("Rival");
             cbCategoriaCerca.SelectedIndex = 0;
             dvPartits = new DataView(dataSetAux.partits);
-            DataTable dt = new DataTable();
             dt = dvPartits.ToTable();
             dt.Columns.Add("nomEquip", typeof(String));
             dt.Columns.Add("nomEquipRival", typeof(String));
@@ -222,8 +230,17 @@ namespace Gsport
             }
             else if(rbPartits.IsChecked == true)
             {
-                dvPartits.RowFilter = "nomEquipRival '%" + tbBusca.Text.Trim().ToLower() + "%'";
-                dgResultat.ItemsSource = dvPartits;
+                if (cbCategoriaCerca.SelectedIndex == 0)
+                {
+
+                    if (tbBusca.Text.Trim().ToLower().Length > 0)
+                        dt.DefaultView.RowFilter = "jornada = " + tbBusca.Text.Trim().ToLower();
+                    else
+                        dt.DefaultView.RowFilter = "jornada > 0";
+                }
+                else
+                    dt.DefaultView.RowFilter = "nomEquipRival LIKE '%" + tbBusca.Text.Trim().ToLower() + "%'";
+                dgResultat.ItemsSource = dt.DefaultView;
             }
         }
         private void dgResultat_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -240,12 +257,25 @@ namespace Gsport
                     queEs = "equip";
                 else if (rbEquipRivals.IsChecked == true)
                     queEs = "equiprival";
+                else if(rbPartits.IsChecked == true)
+                {
+                    queEs = "partit";
+                    drSelect = dtr.Row;
+                }
                 this.Close();
             }
             catch//Ho deixo aixi per si fan misclick
             {
 
             }
+        }
+        private void tb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (cbCategoriaCerca.SelectedIndex == 0 && rbPartits.IsChecked == true)
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+                e.Handled = false;
+            else
+                e.Handled = true;
         }
 
         private void cbCategoriaCerca_SelectionChanged(object sender, SelectionChangedEventArgs e)
