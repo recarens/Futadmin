@@ -64,7 +64,12 @@ namespace Gsport
             tbSexe.Items.Add("F");
             cblocalVisitant.Items.Add("Local"); //0
             cblocalVisitant.Items.Add("Visitant"); //1
-            
+            for (int i = 0; i < 25;i++)
+                cbhora.Items.Add(i);
+
+            for (int i = 0; i < 60;i++)
+                cbminut.Items.Add(i);
+
             tbSexe.SelectedItem = tbSexe.Items.GetItemAt(0);
         }
 
@@ -75,7 +80,7 @@ namespace Gsport
         /// <param name="e"></param>
         private void btnCerca_Click(object sender, RoutedEventArgs e)
         {
-            wndCercar wnd = new wndCercar(efadbDataSet);
+            wndCercar wnd = new wndCercar(efadbDataSet,false);
             wnd.ShowDialog();
             idCercat = wnd.id;
             queEs = wnd.queEs;
@@ -168,6 +173,32 @@ namespace Gsport
                 posicioRow = i;
                 id_faseComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips_rivals"].Rows[posicioRow]["id_fase"]);
             }
+            else if (queEs == "partit")
+            {
+                bool trobat = false;
+                int i = 0;
+                while (!trobat)
+                {
+                    if (idCercat == Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[i][0]))
+                        trobat = true;
+                    else
+                        i++;
+                }
+                btnPartits_Click(this, null);
+                objectaCercat = true;
+                //griddadespartit" DataContext="{StaticResource partitsViewSource}"
+                griddadespartit.DataContext = FindResource("partitsViewSource");
+                partitsViewSource.View.MoveCurrentToPosition(i);
+                posicioRow = i;
+                cbEquipClub.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_equip"]);
+                cbEquipRival.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_equip_rival"]);
+                cbTipusPartit.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_tipus_partit"]);
+                cbFasePartit.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_fase"]);
+                if (Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["visitant"]) == 0)
+                    cblocalVisitant.SelectedItem = "Local";
+                else
+                    cblocalVisitant.SelectedItem = "Visitant";
+            }
         }
 
         /// <summary>
@@ -214,6 +245,9 @@ namespace Gsport
             cdPartits.Width = gP2;
             GridLength gER2 = new GridLength(0, GridUnitType.Star);
             cdEquipsRivals.Width = gER2;
+            GridLength gCon2 = new GridLength(0, GridUnitType.Star);
+            cdConvocatoria.Width = gCon2;
+
             wpDadesTemporada.Height = 0;
             wpLesions.Height = 0;
             btnDadesTemporada.IsEnabled = false;
@@ -243,6 +277,8 @@ namespace Gsport
             cdPartits.Width = gP2;
             GridLength gER2 = new GridLength(0, GridUnitType.Star);
             cdEquipsRivals.Width = gER2;
+            GridLength gCon2 = new GridLength(0, GridUnitType.Star);
+            cdConvocatoria.Width = gCon2;
             btnEsborrarEntrenadors.IsEnabled = false;
         }
 
@@ -268,6 +304,8 @@ namespace Gsport
             cdPartits.Width = gP2;
             GridLength gER2 = new GridLength(0, GridUnitType.Star);
             cdEquipsRivals.Width = gER2;
+            GridLength gCon2 = new GridLength(0, GridUnitType.Star);
+            cdConvocatoria.Width = gCon2;
             btnEsborrarEquips.IsEnabled = false;
         }
 
@@ -290,6 +328,8 @@ namespace Gsport
             cdPartits.Width = gP2;
             GridLength gER2 = new GridLength(0, GridUnitType.Star);
             cdEquipsRivals.Width = gER2;
+            GridLength gCon2 = new GridLength(0, GridUnitType.Star);
+            cdConvocatoria.Width = gCon2;
         }
 
         /// <summary>
@@ -312,6 +352,8 @@ namespace Gsport
             cdequips.Width = gE2;
             GridLength gER2 = new GridLength(0, GridUnitType.Star);
             cdEquipsRivals.Width = gER2;
+            GridLength gCon2 = new GridLength(0, GridUnitType.Star);
+            cdConvocatoria.Width = gCon2;
         }
 
         private void btnCrearEquipRival_Click(object sender, RoutedEventArgs e)
@@ -330,8 +372,30 @@ namespace Gsport
             cdequips.Width = gE2;
             GridLength gP2 = new GridLength(0, GridUnitType.Star);
             cdPartits.Width = gP2;
+            GridLength gCon2 = new GridLength(0, GridUnitType.Star);
+            cdConvocatoria.Width = gCon2;
             btnEsborrarEquipsRivals.IsEnabled = false;
         }
+
+        private void btnComvocatories_Click(object sender, RoutedEventArgs e)
+        {
+            objectaCercat = false;
+            GridLength gCon2 = new GridLength(this.ActualWidth, GridUnitType.Star);
+            cdConvocatoria.Width = gCon2;
+            GridLength gP2 = new GridLength(0, GridUnitType.Star);
+            cdPartits.Width = gP2;
+            GridLength gER2 = new GridLength(0, GridUnitType.Star);
+            cdEquipsRivals.Width = gER2;
+            GridLength gT2 = new GridLength(0, GridUnitType.Star);
+            cdTemporada.Width = gT2;
+            GridLength gJ2 = new GridLength(0, GridUnitType.Star);
+            cdjugadors.Width = gJ2;
+            GridLength gC2 = new GridLength(0, GridUnitType.Star);
+            cdntrenadors.Width = gC2;
+            GridLength gE2 = new GridLength(0, GridUnitType.Star);
+            cdequips.Width = gE2;     
+        }
+
         /// <summary>
         /// Amaga totes les columnes
         /// </summary>
@@ -349,6 +413,8 @@ namespace Gsport
             cdntrenadors.Width = gC2;
             GridLength gE2 = new GridLength(0, GridUnitType.Star);
             cdequips.Width = gE2;
+            GridLength gCon2 = new GridLength(0, GridUnitType.Star);
+            cdConvocatoria.Width = gCon2;
         }
 
         /// <summary>
@@ -906,57 +972,102 @@ namespace Gsport
             }
         }
 
+        /// <summary>
+        /// Guarda el partit mitjançant una procedure i els parametres passats per el programa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnGuardarPartit_Click(object sender, RoutedEventArgs e)
         {
-            ///Aqui s'ha afagit una llibreria per accedir amb cadena de conexio a mysql i fer commands, en principi cap problema.
-            MySqlConnection cnMySql = new MySqlConnection(mySqlString);
-            try 
-            { 
-                cnMySql.Open();
-                MySqlCommand cmd;
-                cmd = new MySqlCommand("Insertarpartit", cnMySql);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("inidequip", Convert.ToInt32(cbEquipClub.SelectedValue));
-                cmd.Parameters.AddWithValue("inidequiprival", Convert.ToInt32(cbEquipRival.SelectedValue));
-                cmd.Parameters.AddWithValue("inidfase", Convert.ToInt32(cbFasePartit.SelectedValue));
-                cmd.Parameters.AddWithValue("inidtipus", Convert.ToInt32(cbTipusPartit.SelectedValue));
-                if (Convert.ToInt32(tbJornadaPartit.Text.Trim().Length) > 0)
-                    cmd.Parameters.AddWithValue("injornada", Convert.ToInt32(tbJornadaPartit.Text.Trim()));
-                else
-                    cmd.Parameters.AddWithValue("injornada", 1);
-
-                if (data_partitDatePicker.SelectedDate.ToString().Trim().Length > 0)
-                    cmd.Parameters.AddWithValue("indatapartit", DateTime.Parse(data_partitDatePicker.SelectedDate.ToString()));
-                else
-                    cmd.Parameters.AddWithValue("indatapartit", DateTime.Parse(DateTime.Now.ToShortDateString()));
-
-                if (tbgolsLocals.Text.Trim().Length > 0)
-                    cmd.Parameters.AddWithValue("ingolslocal", Convert.ToInt32(tbgolsLocals.Text.Trim()));
-                else
-                    cmd.Parameters.AddWithValue("ingolslocal", 0);
-
-                if (tbgolsVisitants.Text.Trim().Length > 0)
-                    cmd.Parameters.AddWithValue("ingolsvisitant", Convert.ToInt32(tbgolsVisitants.Text.Trim()));
-                else
-                    cmd.Parameters.AddWithValue("ingolsvisitant", 0);
-
-                if (cblocalVisitant.SelectedIndex >= 0)
-                    cmd.Parameters.AddWithValue("invisitant", Convert.ToInt16(cblocalVisitant.SelectedIndex));
-                else
-                    cmd.Parameters.AddWithValue("invisitant", 0);
-                if (efadbDataSet.partits.Rows.Count > 0)
-                    cmd.Parameters.AddWithValue("inidpartit", Convert.ToInt32(efadbDataSet.partits.Rows[efadbDataSet.partits.Rows.Count-1]["id_partit"])+1);
-                else
-                    cmd.Parameters.AddWithValue("inidpartit", 1);
-                cmd.ExecuteNonQuery();
-                cnMySql.Close();
-                efadbDataSetpartitsTableAdapter.Fill(efadbDataSet.partits);
-                partitsViewSource.View.MoveCurrentToLast();
-            }
-            catch(Exception ex)
+            if (!objectaCercat)
             {
-                MessageBox.Show(ex.ToString());
+                ///Aqui s'ha afagit una llibreria per accedir amb cadena de conexio a mysql i fer commands, en principi cap problema.
+                MySqlConnection cnMySql = new MySqlConnection(mySqlString);
+                try
+                {
+                    cnMySql.Open();
+                    MySqlCommand cmd;
+                    cmd = new MySqlCommand("Insertarpartit", cnMySql);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("inidequip", Convert.ToInt32(cbEquipClub.SelectedValue));
+                    cmd.Parameters.AddWithValue("inidequiprival", Convert.ToInt32(cbEquipRival.SelectedValue));
+                    cmd.Parameters.AddWithValue("inidfase", Convert.ToInt32(cbFasePartit.SelectedValue));
+                    cmd.Parameters.AddWithValue("inidtipus", Convert.ToInt32(cbTipusPartit.SelectedValue));
+                    if (Convert.ToInt32(tbJornadaPartit.Text.Trim().Length) > 0)
+                        cmd.Parameters.AddWithValue("injornada", Convert.ToInt32(tbJornadaPartit.Text.Trim()));
+                    else
+                        cmd.Parameters.AddWithValue("injornada", 1);
+
+                    if (data_partitDatePicker.SelectedDate.ToString().Trim().Length > 0)
+                        cmd.Parameters.AddWithValue("indatapartit", DateTime.Parse(data_partitDatePicker.SelectedDate.ToString()));
+                    else
+                        cmd.Parameters.AddWithValue("indatapartit", DateTime.Parse(DateTime.Now.ToShortDateString()));
+
+                    if (tbgolsLocals.Text.Trim().Length > 0)
+                        cmd.Parameters.AddWithValue("ingolslocal", Convert.ToInt32(tbgolsLocals.Text.Trim()));
+                    else
+                        cmd.Parameters.AddWithValue("ingolslocal", 0);
+
+                    if (tbgolsVisitants.Text.Trim().Length > 0)
+                        cmd.Parameters.AddWithValue("ingolsvisitant", Convert.ToInt32(tbgolsVisitants.Text.Trim()));
+                    else
+                        cmd.Parameters.AddWithValue("ingolsvisitant", 0);
+
+                    if (cblocalVisitant.SelectedIndex >= 0)
+                        cmd.Parameters.AddWithValue("invisitant", Convert.ToInt16(cblocalVisitant.SelectedIndex));
+                    else
+                        cmd.Parameters.AddWithValue("invisitant", 0);
+                    if (efadbDataSet.partits.Rows.Count > 0)
+                        cmd.Parameters.AddWithValue("inidpartit", Convert.ToInt32(efadbDataSet.partits.Rows[efadbDataSet.partits.Rows.Count - 1]["id_partit"]) + 1);
+                    else
+                        cmd.Parameters.AddWithValue("inidpartit", 1);
+                    cmd.ExecuteNonQuery();
+                    cnMySql.Close();
+                    efadbDataSetpartitsTableAdapter.Fill(efadbDataSet.partits);
+                    partitsViewSource.View.MoveCurrentToLast();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
+            else
+            {
+                efadbDataSet.Tables["partits"].Rows[posicioRow]["id_equip"] = Convert.ToInt32(cbEquipClub.SelectedValue);
+                efadbDataSet.Tables["partits"].Rows[posicioRow]["id_equip_rival"] = Convert.ToInt32(cbEquipRival.SelectedValue);
+                efadbDataSet.Tables["partits"].Rows[posicioRow]["id_tipus_partit"] = Convert.ToInt32(cbTipusPartit.SelectedValue);
+                efadbDataSet.Tables["partits"].Rows[posicioRow]["id_fase"] = Convert.ToInt32(cbFasePartit.SelectedValue);
+                efadbDataSet.Tables["partits"].Rows[posicioRow]["visitant"] = cblocalVisitant.SelectedIndex;
+                efadbDataSetpartitsTableAdapter.Update(efadbDataSet.partits.Rows[posicioRow]);
+
+                MessageBox.Show("S'ha guardat: " + queEs);
+            }
+        }
+
+        private void btnGuardarConvocatoria_Click(object sender, RoutedEventArgs e)
+        {
+            ///Aqui s'ha afagit una llibreria per accedir amb cadena de conexio a mysql i fer commands, en principi cap problema.
+                MySqlConnection cnMySql = new MySqlConnection(mySqlString);
+                try
+                {
+                    cnMySql.Open();
+                    MySqlCommand cmd;
+                    cmd = new MySqlCommand("inserirconvocatoria", cnMySql);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("inidpartit", idCercat);
+                    if (efadbDataSet.convocatories.Rows.Count > 0)
+                        cmd.Parameters.AddWithValue("inidconvocatoria", Convert.ToInt32(efadbDataSet.convocatories.Rows[efadbDataSet.partits.Rows.Count - 1]["id_convocatoria"]) + 1);
+                    else
+                        cmd.Parameters.AddWithValue("inidpartit", 1);
+                    if (cbhora.SelectedIndex >= 0 && cbminut.SelectedIndex >= 0)
+                        cmd.Parameters.AddWithValue("invisitant", Convert.ToDateTime(cbhora.SelectedItem.ToString() + ":" + cbminut.SelectedItem.ToString() + ":00").ToShortTimeString());
+                    else
+                        cmd.Parameters.AddWithValue("inhoraconvocatoria", Convert.ToDateTime("12:00:00").ToShortTimeString());
+                    cmd.ExecuteNonQuery();
+                    cnMySql.Close();
+                }
+                catch(Exception ex)
+                {}
         }
 
         /// <summary>
@@ -993,6 +1104,7 @@ namespace Gsport
                         btnAfageix.IsEnabled = true;
                         btnCrearEquipRival.IsEnabled = true;
                         btnPartits.IsEnabled = true;
+                        btnComvocatories.IsEnabled = true;
                         break;
                     case 4: //Coordinador
                         btnAfageix.IsEnabled = true;
@@ -1002,6 +1114,7 @@ namespace Gsport
                         btnCrearEquipRival.IsEnabled = true;
                         btnImportador.IsEnabled = true;
                         btnPartits.IsEnabled = true;
+                        btnComvocatories.IsEnabled = true;
                         //jugadorsDataGrid.IsReadOnly = false;
                         break;
                     case 5: //Gsport Admin
@@ -1012,6 +1125,7 @@ namespace Gsport
                         btnCrearEquipRival.IsEnabled = true;
                         btnImportador.IsEnabled = true;
                         btnPartits.IsEnabled = true;
+                        btnComvocatories.IsEnabled = true;
                         //jugadorsDataGrid.IsReadOnly = false;
                         break;
                 }
@@ -1077,11 +1191,14 @@ namespace Gsport
             {
                 MessageBox.Show("El servei no esta disponible");
                 btnCerca.IsEnabled = false;
-            }
-
-            
+            }   
         }
 
+        /// <summary>
+        /// controla els text box que nomes es puguin posar numeros
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tb_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
@@ -1099,6 +1216,7 @@ namespace Gsport
         {
             wndImportar wnd = new wndImportar();
             wnd.ShowDialog();
+            efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
         }
 
         private void btnBorrar_Click(object sender, RoutedEventArgs e)
@@ -1140,6 +1258,41 @@ namespace Gsport
             {
                 MessageBox.Show(ex + "");
             }
+        }
+
+        private void btnTriaPartit_Click(object sender, RoutedEventArgs e)
+        {
+            bool trobat = false;
+            int i = 0;
+            wndCercar wnd = new wndCercar(efadbDataSet, true);
+            wnd.ShowDialog();
+            idCercat = wnd.id;
+            queEs = wnd.queEs;
+            objectaCercat = true;
+            lblPartitVs.Content = wnd.drSelect.ItemArray[10] + " VS " + wnd.drSelect.ItemArray[11] + " Data " + Convert.ToDateTime(wnd.drSelect.ItemArray[3].ToString()).ToShortDateString();
+            while (!trobat)
+            {
+                if (Convert.ToInt32(wnd.drSelect.ItemArray[1]) == Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[i][0]))
+                    trobat = true;
+                else
+                    i++;
+            }
+            gridTotsJugadors.DataContext = FindResource("equipsjugadorsViewSource");
+            equipsViewSource.View.MoveCurrentToPosition(i);
+            if (idCercat > 0)
+                btnGuardarConvocatoria.IsEnabled = true;
+        }
+
+        private void id_jugadorListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lbJugadorsConvocats.Items.Add(id_jugadorListBox.SelectedItem);
+            this.UpdateLayout();
+        }
+
+        private void lbJugadorsConvocats_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lbJugadorsConvocats.Items.Remove(lbJugadorsConvocats.SelectedItem);
+            this.UpdateLayout();
         }
     }
 }
