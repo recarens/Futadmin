@@ -411,14 +411,21 @@
         <ScrollViewer Grid.Column="5">
             <StackPanel x:Name="spDadesPartit" Orientation="Vertical">
                 <Button x:Name="btnGuardarPartit" Click="btnGuardarPartit_Click" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10">Guardar</Button>
-                <Label Content="Equip del club" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                <ComboBox x:Name="cbEquipClub" ItemsSource="{Binding Source={StaticResource equipsViewSource1}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_equip" Margin="40,0,40,5" FontSize="15"/>
-                <Label Content="Equip rival" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" />
-                <ComboBox x:Name="cbEquipRival" ItemsSource="{Binding Source={StaticResource equips_rivalsViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_equip_rival" Margin="40,0,40,0" FontSize="15"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="vertical" Margin="10">
+                        <Label Content="Equip del club"  Width="200" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                        <ComboBox x:Name="cbEquipClub" Width="200"  ItemsSource="{Binding Source={StaticResource equipsViewSource1}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_equip" FontSize="15"/>
+                    </StackPanel>
+                    <StackPanel Orientation="vertical" Margin="10">
+                        <Label Content="Equip rival" Width="200" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                        <ComboBox x:Name="cbEquipRival" Width="200" ItemsSource="{Binding Source={StaticResource equips_rivalsViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_equip_rival" FontSize="15"/>
+                    </StackPanel>
+                </StackPanel>
+                
                 <Label Content="Tipus partit" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                <ComboBox x:Name="cbTipusPartit" ItemsSource="{Binding Source={StaticResource tipus_partitViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_tipus_partit" Margin="40,0,40,0" FontSize="15"/>
+                <ComboBox x:Name="cbTipusPartit" Width="200" ItemsSource="{Binding Source={StaticResource tipus_partitViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_tipus_partit" Margin="40,0,40,0" FontSize="15"/>
                 <Label Content="Fase" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                <ComboBox x:Name="cbFasePartit" ItemsSource="{Binding Source={StaticResource fasesViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_fase" Margin="40,0,40,5" FontSize="15"/>
+                <ComboBox x:Name="cbFasePartit" Width="200" ItemsSource="{Binding Source={StaticResource fasesViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_fase" Margin="40,0,40,5" FontSize="15"/>
                 <Grid x:Name="griddadespartit" DataContext="{StaticResource partitsViewSource}" HorizontalAlignment="Center"  Background="#FF52B64E">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
