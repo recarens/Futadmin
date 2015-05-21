@@ -908,7 +908,7 @@ namespace Gsport
 
         private void btnGuardarPartit_Click(object sender, RoutedEventArgs e)
         {
-            ///Aqui s'ha afagit una llibreria en principi cap problema.
+            ///Aqui s'ha afagit una llibreria per accedir amb cadena de conexio a mysql i fer commands, en principi cap problema.
             MySqlConnection cnMySql = new MySqlConnection(mySqlString);
             try 
             { 
@@ -1002,6 +1002,7 @@ namespace Gsport
                         btnCrearEquipRival.IsEnabled = true;
                         btnImportador.IsEnabled = true;
                         btnPartits.IsEnabled = true;
+                        //jugadorsDataGrid.IsReadOnly = false;
                         break;
                     case 5: //Gsport Admin
                         btnAfageix.IsEnabled = true;
@@ -1011,6 +1012,7 @@ namespace Gsport
                         btnCrearEquipRival.IsEnabled = true;
                         btnImportador.IsEnabled = true;
                         btnPartits.IsEnabled = true;
+                        //jugadorsDataGrid.IsReadOnly = false;
                         break;
                 }
                 // Cargar datos en la tabla equips. Puede modificar este código según sea necesario.
@@ -1069,7 +1071,7 @@ namespace Gsport
                 //tipus_partitViewSource.View.MoveCurrentToFirst();
                 DataColumn dt = new DataColumn("nom");
                 dt.DataType = typeof(String);
-                efadbDataSet.Tables["jugador_temporada"].Columns.Add(dt);
+                efadbDataSet.Tables["jugador_temporada"].Columns.Add(dt); //el nom de la temproada en cada fila i aixi en el combobox jugadors_temporada podem veurei el nom.
             }
             catch
             {
