@@ -276,7 +276,7 @@
                                 </ComboBox.ItemsPanel>
                             </ComboBox>
                         </Grid>
-                        <Grid x:Name="grid7" DataContext="{StaticResource entrenadorsViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Grid x:Name="gridEntrenadorsEquip" DataContext="{StaticResource entrenadorsViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="Auto"/>
@@ -299,18 +299,17 @@
                                     <DataGridTextColumn x:Name="dniColumn" Binding="{Binding dni}" Header="dni" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="nomColumn" Binding="{Binding nom}" Header="nom" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="cognomsColumn" Binding="{Binding cognoms}" Header="cognoms" Width="SizeToHeader"/>
-                                    <DataGridTextColumn x:Name="sexeColumn" Binding="{Binding sexe}" Header="sexe" Width="SizeToHeader"/>
                                     <DataGridTemplateColumn x:Name="data_inscripcioColumn" Header="data inscripcio" Width="SizeToHeader">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <DatePicker SelectedDate="{Binding data_inscripcio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                                <DatePicker SelectedDate="{Binding data_inscripcio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="False"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
                                     <DataGridTemplateColumn x:Name="data_naixementColumn" Header="data naixement" Width="SizeToHeader">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <DatePicker SelectedDate="{Binding data_naixement, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                                <DatePicker SelectedDate="{Binding data_naixement, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="False"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
