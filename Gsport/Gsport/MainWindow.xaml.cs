@@ -43,6 +43,8 @@ namespace Gsport
         System.Windows.Data.CollectionViewSource jugadorslesionsViewSource;
         Gsport.efadbDataSetTableAdapters.partitsTableAdapter efadbDataSetpartitsTableAdapter;
         System.Windows.Data.CollectionViewSource partitsViewSource;
+        Gsport.efadbDataSetTableAdapters.convocatoriesTableAdapter efadbDataSetconvocatoriesTableAdapter;
+        System.Windows.Data.CollectionViewSource convocatoriesViewSource;
         string mySqlString = "Server=shz24.guebs.net;port=3306;user id=gsportse_remot;password=gsport123.;persistsecurityinfo=True;database=gsportse_efadb";
         string rutaImg = @"C:/Fotos/img.jpg";
         int idTemporada = 1;
@@ -52,6 +54,7 @@ namespace Gsport
         int posicioRow;
         bool objectaCercat = false;
         bool esborrat = false;
+        int idEquipConvocatoria = 0;
         public MainWindow()
         {     
             InitializeComponent(); 
@@ -64,7 +67,7 @@ namespace Gsport
             tbSexe.Items.Add("F");
             cblocalVisitant.Items.Add("Local"); //0
             cblocalVisitant.Items.Add("Visitant"); //1
-            for (int i = 0; i < 25;i++)
+            for (int i = 1; i < 25;i++)
                 cbhora.Items.Add(i);
 
             for (int i = 0; i < 60;i++)
@@ -1056,15 +1059,27 @@ namespace Gsport
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("inidpartit", idCercat);
                     if (efadbDataSet.convocatories.Rows.Count > 0)
-                        cmd.Parameters.AddWithValue("inidconvocatoria", Convert.ToInt32(efadbDataSet.convocatories.Rows[efadbDataSet.partits.Rows.Count - 1]["id_convocatoria"]) + 1);
+                        cmd.Parameters.AddWithValue("inidconvocatoria", Convert.ToInt32(efadbDataSet.convocatories.Rows[efadbDataSet.convocatories.Rows.Count - 1]["id_convocatoria"]) + 1);
                     else
                         cmd.Parameters.AddWithValue("inidpartit", 1);
                     if (cbhora.SelectedIndex >= 0 && cbminut.SelectedIndex >= 0)
-                        cmd.Parameters.AddWithValue("invisitant", Convert.ToDateTime(cbhora.SelectedItem.ToString() + ":" + cbminut.SelectedItem.ToString() + ":00").ToShortTimeString());
+                        cmd.Parameters.AddWithValue("inhoraconvocatoria", Convert.ToDateTime(cbhora.SelectedItem.ToString() + ":" + cbminut.SelectedItem.ToString() + ":00").ToShortTimeString());
                     else
                         cmd.Parameters.AddWithValue("inhoraconvocatoria", Convert.ToDateTime("12:00:00").ToShortTimeString());
                     cmd.ExecuteNonQuery();
+                    efadbDataSetconvocatoriesTableAdapter.Fill(efadbDataSet.convocatories);
+                    for (int i = 0; i < lbJugadorsConvocats.Items.Count;i++)
+                    {
+                        MySqlCommand cmd2 = new MySqlCommand("Insertardetallconvocatoria", cnMySql);
+                        cmd2.CommandType = CommandType.StoredProcedure;
+                        cmd2.Parameters.AddWithValue("inidconvocatoria", efadbDataSet.convocatories.Rows[efadbDataSet.convocatories.Rows.Count - 1]["id_convocatoria"]);
+                        int idjugador = Convert.ToInt32(((System.Data.DataRowView)lbJugadorsConvocats.Items[i]).Row.ItemArray[0]);
+                        cmd2.Parameters.AddWithValue("inidjugador", idjugador);
+                        cmd2.ExecuteNonQuery();
+                    }
                     cnMySql.Close();
+                    //ht tp://gsports.es/gsport/notificacioConvocatoria.php?idConvocatoria=1
+                    MessageBox.Show("Vols enviar notificació?", "", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
                 }
                 catch(Exception ex)
                 {}
@@ -1171,9 +1186,9 @@ namespace Gsport
                 efadbDataSetlesionsTableAdapter.Fill(efadbDataSet.lesions);
                 jugadorslesionsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugadorslesionsViewSource")));
                 // Cargar datos en la tabla convocatories. Puede modificar este código según sea necesario.
-                Gsport.efadbDataSetTableAdapters.convocatoriesTableAdapter efadbDataSetconvocatoriesTableAdapter = new Gsport.efadbDataSetTableAdapters.convocatoriesTableAdapter();
+                efadbDataSetconvocatoriesTableAdapter = new Gsport.efadbDataSetTableAdapters.convocatoriesTableAdapter();
                 efadbDataSetconvocatoriesTableAdapter.Fill(efadbDataSet.convocatories);
-                System.Windows.Data.CollectionViewSource convocatoriesViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("convocatoriesViewSource")));
+                convocatoriesViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("convocatoriesViewSource")));
                 // Cargar datos en la tabla partits. Puede modificar este código según sea necesario.
                 efadbDataSetpartitsTableAdapter = new Gsport.efadbDataSetTableAdapters.partitsTableAdapter();
                 efadbDataSetpartitsTableAdapter.Fill(efadbDataSet.partits);
@@ -1262,6 +1277,7 @@ namespace Gsport
 
         private void btnTriaPartit_Click(object sender, RoutedEventArgs e)
         {
+            lbJugadorsConvocats.Items.Clear();
             bool trobat = false;
             int i = 0;
             wndCercar wnd = new wndCercar(efadbDataSet, true);
@@ -1269,7 +1285,8 @@ namespace Gsport
             idCercat = wnd.id;
             queEs = wnd.queEs;
             objectaCercat = true;
-            lblPartitVs.Content = wnd.drSelect.ItemArray[10] + " VS " + wnd.drSelect.ItemArray[11] + " Data " + Convert.ToDateTime(wnd.drSelect.ItemArray[3].ToString()).ToShortDateString();
+            lblPartitVs.Content = wnd.drSelect.ItemArray[10] + " VS " + wnd.drSelect.ItemArray[11] + " - Data " + Convert.ToDateTime(wnd.drSelect.ItemArray[3].ToString()).ToShortDateString();
+            idEquipConvocatoria = Convert.ToInt32(wnd.drSelect.ItemArray[1]);
             while (!trobat)
             {
                 if (Convert.ToInt32(wnd.drSelect.ItemArray[1]) == Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[i][0]))
@@ -1285,7 +1302,18 @@ namespace Gsport
 
         private void id_jugadorListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            lbJugadorsConvocats.Items.Add(id_jugadorListBox.SelectedItem);
+            bool trobat = false;
+            int j = 0;
+            while (!trobat && j < lbJugadorsConvocats.Items.Count)
+            {
+                if (lbJugadorsConvocats.Items[j].Equals(id_jugadorListBox.SelectedItem))
+                {
+                    trobat = true;
+                }
+                j++;
+            }
+            if (!trobat)
+                lbJugadorsConvocats.Items.Add(id_jugadorListBox.SelectedItem);
             this.UpdateLayout();
         }
 

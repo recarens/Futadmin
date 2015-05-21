@@ -35,7 +35,7 @@
             <ColumnDefinition x:Name="cdTemporada" Width="0"/>
             <ColumnDefinition x:Name="cdPartits" Width="0"/>
             <ColumnDefinition x:Name="cdEquipsRivals" Width="0"/>
-            <ColumnDefinition x:Name="cdConvocatoria" Width="850"/>
+            <ColumnDefinition x:Name="cdConvocatoria" Width="0"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical" Grid.Column="0" Margin="5">
             <Button x:Name="btnCerca" Content="Cercar" Margin="9" Click="btnCerca_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold" />
@@ -512,15 +512,15 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Grid x:Name="gridTotsJugadors" HorizontalAlignment="Left" VerticalAlignment="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Label Content="Jugadors:" Grid.Column="0" FontSize="18" FontWeight="Bold" Foreground="#FF0B2E10" Margin="5" Grid.Row="0" VerticalAlignment="Center"/>
-                            <ListBox x:Name="id_jugadorListBox" Grid.Column="1" SelectedValuePath="id_jugador" HorizontalAlignment="Left" Height="200" ItemsSource="{Binding}" Margin="10" Grid.Row="0" VerticalAlignment="Center" Width="150" SelectionChanged="id_jugadorListBox_SelectionChanged" FontSize="15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Content="Jugadors:" Grid.Column="0" FontSize="18" FontWeight="Bold" Foreground="#FF0B2E10" Margin="5" Grid.Row="0" VerticalAlignment="Center"/>
+                                <ListBox x:Name="id_jugadorListBox" Grid.Column="1" SelectedValuePath="id_jugador" HorizontalAlignment="Left" Height="200" ItemsSource="{Binding}" Margin="10" Grid.Row="0" VerticalAlignment="Center" Width="150" SelectionChanged="id_jugadorListBox_SelectionChanged" FontSize="15">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock>
@@ -535,15 +535,15 @@
                                     </ListBox.ItemTemplate>
                                 </ListBox>
                             </Grid>
-                        <Grid x:Name="gridJugadorsConvocats" HorizontalAlignment="Left" VerticalAlignment="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Label Content="Jugadors convocats:" Grid.Column="0" FontSize="18" FontWeight="Bold" Foreground="#FF0B2E10" Margin="5" Grid.Row="0" VerticalAlignment="Center"/>
+                            <Grid x:Name="gridJugadorsConvocats" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Label Content="Jugadors convocats:" Grid.Column="0" FontSize="18" FontWeight="Bold" Foreground="#FF0B2E10" Margin="5" Grid.Row="0" VerticalAlignment="Center"/>
                                 <ListBox x:Name="lbJugadorsConvocats" Grid.Column="1" SelectedValuePath="id_jugadors" HorizontalAlignment="Left" Height="200" Margin="10" Grid.Row="0" VerticalAlignment="Center" Width="150" SelectionChanged="lbJugadorsConvocats_SelectionChanged" FontSize="15">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
@@ -559,8 +559,7 @@
                                     </ListBox.ItemTemplate>
                                 </ListBox>
                             </Grid>
-                    </StackPanel>
-                        
+                        </StackPanel>
                     </StackPanel>
                 </Border>
                 <Button x:Name="btnGuardarConvocatoria" Content="Crear Convocatoria" FontSize="16" FontWeight="Bold" Margin="10,50,10,0" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10" Click="btnGuardarConvocatoria_Click" IsEnabled="False"/>
