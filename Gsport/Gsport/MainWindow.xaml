@@ -29,7 +29,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="cdmenu" Width="165" MaxWidth="165"/>
-            <ColumnDefinition x:Name="cdjugadors" Width="800"/>
+            <ColumnDefinition x:Name="cdjugadors" Width="0"/>
             <ColumnDefinition x:Name="cdequips" Width="0"/>
             <ColumnDefinition x:Name="cdntrenadors" Width="0"/>
             <ColumnDefinition x:Name="cdTemporada" Width="0"/>
@@ -56,7 +56,7 @@
                 <Image x:Name="imgImatge" Width="100" Height="100" Margin="5" MouseRightButtonDown="imgImatge_MouseRightButtonDown" Source="Fotos/img.jpg"/>
                 <Button x:Name="btnDadesJugador" Content="Dades Personals" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesPersonals_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,30" x:Name="wpDadesPersonals" BorderThickness="2">
-                    <WrapPanel x:Name="wpJugadors" Orientation="Vertical" Background="#FF52B64E" MaxHeight="265">
+                    <WrapPanel x:Name="wpJugadors" Orientation="Vertical" Background="#FF52B64E" MaxHeight="265"  DataContext="{StaticResource jugadorsViewSource}">
                         <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="DNI:"/>
                             <TextBox x:Name="tbDni" MinWidth="200" Margin="33,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding dni, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" TextChanged="tbDni_TextChanged"/>
@@ -293,7 +293,7 @@
                             </ComboBox>
                         </Grid>
                         <ScrollViewer HorizontalScrollBarVisibility="Auto" MaxWidth="600" VerticalScrollBarVisibility="Auto" Height="180" Margin="6">
-                            <DataGrid x:Name="jugadorsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="500" IsReadOnly="True">
+                            <DataGrid x:Name="jugadorsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="500" Height="180" IsReadOnly="True">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn x:Name="dniColumn" Binding="{Binding dni}" Header="dni" Width="SizeToHeader"/>
                                     <DataGridTextColumn x:Name="nomColumn" Binding="{Binding nom}" Header="nom" Width="SizeToHeader"/>
