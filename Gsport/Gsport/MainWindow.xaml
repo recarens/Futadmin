@@ -29,7 +29,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="cdmenu" Width="165" MaxWidth="165"/>
-            <ColumnDefinition x:Name="cdjugadors" Width="0"/>
+            <ColumnDefinition x:Name="cdjugadors" Width="800"/>
             <ColumnDefinition x:Name="cdequips" Width="0"/>
             <ColumnDefinition x:Name="cdntrenadors" Width="0"/>
             <ColumnDefinition x:Name="cdTemporada" Width="0"/>
@@ -56,32 +56,32 @@
                 <Image x:Name="imgImatge" Width="100" Height="100" Margin="5" MouseRightButtonDown="imgImatge_MouseRightButtonDown" Source="Fotos/img.jpg"/>
                 <Button x:Name="btnDadesJugador" Content="Dades Personals" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesPersonals_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,30" x:Name="wpDadesPersonals" BorderThickness="2">
-                    <WrapPanel Orientation="Vertical" Background="#FF52B64E" MaxHeight="265" DataContext="{StaticResource jugadorsViewSource}">
-                        <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
+                    <WrapPanel x:Name="wpJugadors" Orientation="Vertical" Background="#FF52B64E" MaxHeight="265">
+                        <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="DNI:"/>
                             <TextBox x:Name="tbDni" MinWidth="200" Margin="33,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding dni, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" TextChanged="tbDni_TextChanged"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
+                        <StackPanel Orientation="Horizontal" >
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Nom:"/>
                             <TextBox x:Name="tbNom" MinWidth="199" Margin="28,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding nom, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
+                        <StackPanel Orientation="Horizontal" >
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Cognom:"/>
                             <TextBox x:Name="tbCognom" MinWidth="199" Margin="4,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding cognoms, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
+                        <StackPanel Orientation="Horizontal" >
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Edat:"/>
-                            <TextBox x:Name="tbEdat" MinWidth="200" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding edat, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" KeyDown="tb_KeyDown" />
+                            <Label x:Name="tbEdat" MinWidth="200" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}" FontWeight="Bold" Foreground="#FF0B2E10"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
-                            <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Any Neixament:"/>
-                            <DatePicker x:Name="dpAnyNeixament" MaxWidth="150" Margin="10,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding data_neixament, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" DisplayDateStart="2015-05-07" SelectedDate="{Binding data_naixement, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Data naixement:"/>
+                            <DatePicker x:Name="dpAnyNeixament" MaxWidth="150" Margin="10,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding data_neixament, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" DisplayDateStart="2015-05-07" SelectedDate="{Binding data_naixement, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" SelectedDateChanged="dpAnyNeixament_SelectedDateChanged"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
+                        <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Telèfon:"/>
                             <TextBox x:Name="tbTelefon" MinWidth="200" Margin="10,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding telefon, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" KeyDown="tb_KeyDown"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
+                        <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Mòbil:"/>
                             <TextBox x:Name="tbMobil" MinWidth="203" Margin="20,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding mobil, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" KeyDown="tb_KeyDown"/>
                         </StackPanel>
@@ -89,27 +89,27 @@
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Sexe:"/>
                             <ComboBox x:Name="tbSexe" MinWidth="201" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}" SelectedItem="{Binding sexe, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
+                        <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Data inscripció:"/>
                             <DatePicker x:Name="dpAnyInscripcio" MaxWidth="155" Margin="10,5,10,5" FontSize="16" BorderBrush="{x:Null}" SelectedDate="2000-01-01"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
+                        <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Tarjeta Sanitaria:"/>
                             <TextBox x:Name="tbTarjetaSanitaria" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding tarjeta_sanitaria, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
+                        <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Correu electrònic:"/>
                             <TextBox x:Name="tbcorreuElec" MinWidth="150" Margin="1,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding correu_electronic, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
+                        <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Numero de Soci:"/>
                             <TextBox x:Name="tbnSoci" MinWidth="150" Margin="9,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding numero_soci, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </StackPanel>
-                        <StackPanel  Orientation="Horizontal" DataContext="{StaticResource jugadorsViewSource}">
+                        <StackPanel  Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Lateralitat:"/>
                             <TextBox x:Name="tbLateralitat" MinWidth="150" Margin="9,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding lateralitat, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal"  DataContext="{StaticResource posicionsjugadorsViewSource}">
+                        <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Posicio:"/>
                             <ComboBox x:Name="tbposicioNom" MinWidth="150" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}" DisplayMemberPath="nom" SelectedValuePath="id_posicio" ItemsSource="{Binding Source={StaticResource posicionsViewSource}}" SelectedIndex="0" />
                         </StackPanel>
@@ -118,17 +118,17 @@
                             <ComboBox x:Name="cbequip" MinWidth="150" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}" ItemsSource="{Binding Source={StaticResource equipsViewSource1}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_equip"/>
                         </StackPanel>
                         <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Malalties o alergies:"/>
-                        <ScrollViewer MaxWidth="300" MinWidth="300" MaxHeight="100" MinHeight="100" Margin="1,5,10,5" DataContext="{StaticResource jugadorsViewSource}">
+                        <ScrollViewer MaxWidth="300" MinWidth="300" MaxHeight="100" MinHeight="100" Margin="1,5,10,5">
                             <TextBox x:Name="tbMalalties"  FontSize="16" BorderBrush="{x:Null}" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding malaltia_alergia, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  />
                         </ScrollViewer>
                     </WrapPanel>
                 </Border>
                 <Button x:Name="btnDadesTemporada" Content="Dades per Temporada" FontSize="16" FontWeight="Bold" Margin="10,0,10,0" Click="btnDadesTemporada_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="0" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,0" x:Name="wpDadesTemporada" BorderThickness="2">
-                    <StackPanel Orientation="Vertical" DataContext="{StaticResource jugadorsjugador_temporadaViewSource}">
+                    <StackPanel x:Name="spDadestemporadaJugador" Orientation="Vertical" DataContext="{StaticResource jugadorsjugador_temporadaViewSource}">
                         <ComboBox x:Name="cbTemporades" SelectedValuePath="id_temporada" DisplayMemberPath="nom" ItemsSource="{Binding}" FontSize="15" BorderBrush="#FF022B09" BorderThickness="2" Background="#FF52B64E"/>
                         <WrapPanel Orientation="Horizontal" Background="#FF52B64E">
-                            <Grid x:Name="grid4" DataContext="{StaticResource jugadorsjugador_temporadaViewSource}">
+                            <Grid x:Name="gridDadestemporadadunjugador" DataContext="{StaticResource jugadorsjugador_temporadaViewSource}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
@@ -159,7 +159,7 @@
                                 <Label Content="targetes grogues:" Grid.Column="0" Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Grid.Row="7" VerticalAlignment="Center"/>
                                 <TextBox x:Name="targetes_groguesTextBox" Grid.Column="1" MinWidth="150" Margin="7,5,10,5" FontSize="16" BorderBrush="{x:Null}" Grid.Row="7" Text="{Binding targetes_grogues, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" KeyDown="tb_KeyDown"/>
                             </Grid>
-                            <Grid x:Name="grid5" DataContext="{StaticResource jugadorsjugador_temporadaViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid x:Name="grid2dadestempordajugador" DataContext="{StaticResource jugadorsjugador_temporadaViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
@@ -191,7 +191,7 @@
                 </Border>
                 <Button x:Name="btnDadesLesions" Content="Lesions" FontSize="16" FontWeight="Bold" Margin="10,40,10,0" Click="btnDadesLesions_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,0" x:Name="wpLesions" BorderThickness="2">
-                    <WrapPanel Background="#FF52B64E" DataContext="{StaticResource jugadorslesionsViewSource}">
+                    <WrapPanel x:Name="wpLesionsjugador" Background="#FF52B64E" DataContext="{StaticResource jugadorslesionsViewSource}">
                         <DataGrid x:Name="lesionsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="940" Margin="10" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn x:Name="nomColumn2" Binding="{Binding nom}" Header="nom" Width="200" FontSize="14"/>
@@ -212,7 +212,6 @@
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-
                     </WrapPanel>
                 </Border>
                 <Button x:Name="btnEsborrarJugadors" Content="Esborrar" FontSize="16" FontWeight="Bold" Margin="10,40,10,0" Click="btnBorrar_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
