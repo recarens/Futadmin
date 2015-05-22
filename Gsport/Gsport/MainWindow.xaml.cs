@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -67,7 +68,7 @@ namespace Gsport
             tbSexe.Items.Add("F");
             cblocalVisitant.Items.Add("Local"); //0
             cblocalVisitant.Items.Add("Visitant"); //1
-            for (int i = 1; i < 25;i++)
+            for (int i = 0; i < 24;i++)
                 cbhora.Items.Add(i);
 
             for (int i = 0; i < 60;i++)
@@ -382,6 +383,9 @@ namespace Gsport
 
         private void btnComvocatories_Click(object sender, RoutedEventArgs e)
         {
+            gridTotsJugadors.DataContext = null;
+            lblPartitVs.Content = "";
+            btnGuardarConvocatoria.IsEnabled = false;
             objectaCercat = false;
             GridLength gCon2 = new GridLength(this.ActualWidth, GridUnitType.Star);
             cdConvocatoria.Width = gCon2;
@@ -1079,10 +1083,21 @@ namespace Gsport
                     }
                     cnMySql.Close();
                     //ht tp://gsports.es/gsport/notificacioConvocatoria.php?idConvocatoria=1
-                    MessageBox.Show("Vols enviar notificació?", "", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                    MessageBoxResult resultat = MessageBox.Show("S'ha guardat correctament \n Vols enviar notificació?", "", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if(resultat == MessageBoxResult.Yes)
+                    {
+                        Process ps;
+                        ProcessStartInfo psi = new ProcessStartInfo("IEXPLORE.EXE","http://gsports.es/gsport/notificacioConvocatoria.php?idConvocatoria=" + efadbDataSet.convocatories.Rows[efadbDataSet.convocatories.Rows.Count - 1]["id_convocatoria"]);
+                        psi.WindowStyle = ProcessWindowStyle.Minimized; //aixi no es veu la finestra
+                        ps = Process.Start(psi);
+                        ps.Kill();
+                    }
+                    btnGuardarConvocatoria.IsEnabled = false;
                 }
                 catch(Exception ex)
-                {}
+                {
+                    MessageBox.Show(ex + "");
+                }
         }
 
         /// <summary>
@@ -1278,6 +1293,7 @@ namespace Gsport
         private void btnTriaPartit_Click(object sender, RoutedEventArgs e)
         {
             lbJugadorsConvocats.Items.Clear();
+            btnGuardarConvocatoria.IsEnabled = true;
             bool trobat = false;
             int i = 0;
             wndCercar wnd = new wndCercar(efadbDataSet, true);
@@ -1285,19 +1301,23 @@ namespace Gsport
             idCercat = wnd.id;
             queEs = wnd.queEs;
             objectaCercat = true;
-            lblPartitVs.Content = wnd.drSelect.ItemArray[10] + " VS " + wnd.drSelect.ItemArray[11] + " - Data " + Convert.ToDateTime(wnd.drSelect.ItemArray[3].ToString()).ToShortDateString();
-            idEquipConvocatoria = Convert.ToInt32(wnd.drSelect.ItemArray[1]);
-            while (!trobat)
+            try
             {
-                if (Convert.ToInt32(wnd.drSelect.ItemArray[1]) == Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[i][0]))
-                    trobat = true;
-                else
-                    i++;
+                lblPartitVs.Content = wnd.drSelect.ItemArray[10] + " VS " + wnd.drSelect.ItemArray[11] + " - Data " + Convert.ToDateTime(wnd.drSelect.ItemArray[3].ToString()).ToShortDateString();
+                idEquipConvocatoria = Convert.ToInt32(wnd.drSelect.ItemArray[1]);
+                while (!trobat)
+                {
+                    if (Convert.ToInt32(wnd.drSelect.ItemArray[1]) == Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[i][0]))
+                        trobat = true;
+                    else
+                        i++;
+                }
+                gridTotsJugadors.DataContext = FindResource("equipsjugadorsViewSource");
+                equipsViewSource.View.MoveCurrentToPosition(i);
+                if (idCercat > 0)
+                    btnGuardarConvocatoria.IsEnabled = true;
             }
-            gridTotsJugadors.DataContext = FindResource("equipsjugadorsViewSource");
-            equipsViewSource.View.MoveCurrentToPosition(i);
-            if (idCercat > 0)
-                btnGuardarConvocatoria.IsEnabled = true;
+            catch{}
         }
 
         private void id_jugadorListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1314,6 +1334,8 @@ namespace Gsport
             }
             if (!trobat)
                 lbJugadorsConvocats.Items.Add(id_jugadorListBox.SelectedItem);
+            else
+                MessageBox.Show("Ja l'has posat");
             this.UpdateLayout();
         }
 
