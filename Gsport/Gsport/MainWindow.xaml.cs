@@ -819,6 +819,7 @@ namespace Gsport
                         entrenadorsViewSource.View.MoveCurrentToLast();
                         posicioRow = efadbDataSet.entrenadors.Count - 1;
                         btnEsborrarEntrenadors.IsEnabled = true;
+                        btnCrearEquip.IsEnabled = true;
                     }
                     catch (Exception ex)
                     {
@@ -860,6 +861,8 @@ namespace Gsport
                         equipsViewSource.View.MoveCurrentToLast();
                         posicioRow = efadbDataSet.equips.Count - 1;
                         btnEsborrarEquips.IsEnabled = true;
+                        btnPartits.IsEnabled = true;
+                        btnAfageix.IsEnabled = true;
                     }
                     catch (Exception ex)
                     {
@@ -1239,14 +1242,14 @@ namespace Gsport
                 DataColumn dt = new DataColumn("nom");
                 dt.DataType = typeof(String);
                 efadbDataSet.Tables["jugador_temporada"].Columns.Add(dt); //el nom de la temproada en cada fila i aixi en el combobox jugadors_temporada podem veurei el nom.
-                if (efadbDataSet.Tables["entrenadors"].Rows.Count < 0)
+                if (efadbDataSet.Tables["entrenadors"].Rows.Count == 0)
                     btnCrearEquip.IsEnabled = false;
-                if (efadbDataSet.Tables["equips"].Rows.Count < 0)
+                if (efadbDataSet.Tables["equips"].Rows.Count == 0)
                 {
                     btnAfageix.IsEnabled = false;
                     btnPartits.IsEnabled = false;
                 }
-                if(efadbDataSet.Tables["equips_rivals"].Rows.Count < 0)
+                if(efadbDataSet.Tables["equips_rivals"].Rows.Count == 0)
                     btnPartits.IsEnabled = false;
             }
             catch
@@ -1311,9 +1314,31 @@ namespace Gsport
                     }
                     else if (queEs == "entrenador")
                     {
-                        efadbDataSet.Tables["entrenadors"].Rows[posicioRow].Delete();
-                        efadbDataSetentrenadorsTableAdapter.Update(efadbDataSet.entrenadors);
-                        efadbDataSetentrenadorsTableAdapter.Fill(efadbDataSet.entrenadors);
+                        int i = 0;
+                        bool trobat = false;
+                        while (i < efadbDataSet.Tables["equips"].Rows.Count && !trobat)
+                        {
+                            if(idCercat ==Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[i]["id_entrenador"]) )
+                            {
+                                trobat = true;
+                            }
+                            i++;
+                        }
+                        if (trobat)
+                        {
+                            efadbDataSet.Tables["entrenadors"].Rows[posicioRow].Delete();
+                            efadbDataSetentrenadorsTableAdapter.Update(efadbDataSet.entrenadors);
+                            efadbDataSetentrenadorsTableAdapter.Fill(efadbDataSet.entrenadors);
+                            if(efadbDataSet.Tables["entrenadors"].Rows.Count==0)
+                            {
+                                btnCrearEquip.IsEnabled = false;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("No pots esborrar un entrenador que te un equip, Modifica primer l'equip");
+                        }
+
                     }
                     else if (queEs == "equiprival")
                     {
