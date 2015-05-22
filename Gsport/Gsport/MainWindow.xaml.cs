@@ -57,7 +57,8 @@ namespace Gsport
         bool esborrat = false;
         int idEquipConvocatoria = 0;
         public MainWindow()
-        {     
+        {
+            
             InitializeComponent(); 
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("ca-ES");
             idiomes.WrapperIdiomes.ChangeCulture(Thread.CurrentThread.CurrentUICulture);
@@ -105,6 +106,7 @@ namespace Gsport
                 btnDadesTemporada.IsEnabled = true;
                 btnDadesLesions.IsEnabled = true;
                 btnEsborrarJugadors.IsEnabled = true;
+                wpJugadors.DataContext = FindResource("jugadorsViewSource");
                 jugadorsViewSource.View.MoveCurrentToPosition(i);
                 posicioRow = i;
                 imgImatge.Source = new BitmapImage(new Uri(efadbDataSet.Tables["jugadors"].Rows[posicioRow]["nomImatge"].ToString()));//actualitza la foto.
@@ -236,7 +238,9 @@ namespace Gsport
         /// <param name="e"></param>
         private void btnAfageix_Click(object sender, RoutedEventArgs e)
         {
+            
             objectaCercat = false;
+            wpJugadors.DataContext = null;
             GridLength gE2 = new GridLength(0, GridUnitType.Star);
             cdequips.Width = gE2;
             GridLength gJ2 = new GridLength(this.ActualWidth,GridUnitType.Star);
@@ -257,6 +261,8 @@ namespace Gsport
             btnDadesTemporada.IsEnabled = false;
             btnDadesLesions.IsEnabled = false;
             btnEsborrarJugadors.IsEnabled = false;
+            tbDni.Text = "";
+
         }
 
         /// <summary>
@@ -344,6 +350,7 @@ namespace Gsport
         private void btnPartits_Click(object sender, RoutedEventArgs e)
         {
             objectaCercat = false;
+            griddadespartit.DataContext = null;
             GridLength gP2 = new GridLength(this.ActualWidth, GridUnitType.Star);
             cdPartits.Width = gP2;
             GridLength gT2 = new GridLength(0, GridUnitType.Star);
@@ -742,8 +749,8 @@ namespace Gsport
                     dr["correu_electronic"] = tbcorreuElec.Text.Trim();
                     dr["numero_soci"] = tbnSoci.Text.Trim();
                     dr["lateralitat"] = tbLateralitat.Text.Trim();
-                    if (tbEdat.Text.Trim().Length > 0)
-                        dr["edat"] = Convert.ToInt32(tbEdat.Text.Trim());
+                    if (tbEdat.Content.ToString().Trim().Length > 0)
+                        dr["edat"] = Convert.ToInt32(tbEdat.Content.ToString().Trim());
                     else
                         dr["edat"] = 0;
                     dr["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
@@ -777,9 +784,11 @@ namespace Gsport
                         MessageBox.Show("Guardat");
                         objectaCercat = true;
                         queEs = "jugador";
+                        wpJugadors.DataContext = FindResource("jugadorsViewSource");
                         jugadorsViewSource.View.MoveCurrentToLast();
                         posicioRow = efadbDataSet.jugadors.Count - 1;
                         btnEsborrarJugadors.IsEnabled = true;
+
                     }
                     catch (Exception ex)
                     {
@@ -896,12 +905,17 @@ namespace Gsport
                         efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
                         efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);
                         efadbDataSet.Tables["jugadors"].Rows[posicioRow]["nomImatge"] = rutaImg;
-                        efadbDataSetjugadorsTableAdapter.Update(efadbDataSet.jugadors.Rows[posicioRow]);
+                        efadbDataSetjugadorsTableAdapter.Update(efadbDataSet.jugadors);
+                        efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
                         efadbDataSetjugador_temporadaTableAdapter.Update(efadbDataSet.jugador_temporada);
                         
                         efadbDataSetlesionsTableAdapter.Update(efadbDataSet.lesions);
-                        //refresh
                         efadbDataSetlesionsTableAdapter.Fill(efadbDataSet.lesions);
+                        //refresh
+                        
+                        //efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
+                        
+                        jugadorsViewSource.View.MoveCurrentToPosition(posicioRow);
                         //
                     }
                     else if (queEs == "equip")
@@ -909,16 +923,22 @@ namespace Gsport
                         efadbDataSet.Tables["equips"].Rows[posicioRow]["id_divisio"] = Convert.ToInt32(id_divisioComboBox.SelectedValue);
                         efadbDataSet.Tables["equips"].Rows[posicioRow]["id_categoria"] = Convert.ToInt32(id_categoriaComboBox.SelectedValue);
                         efadbDataSet.Tables["equips"].Rows[posicioRow]["id_entrenador"] = Convert.ToInt32(id_entrenadorComboBox.SelectedValue);
-                        efadbDataSetequipsTableAdapter.Update(efadbDataSet.equips.Rows[posicioRow]);
+                        efadbDataSetequipsTableAdapter.Update(efadbDataSet.equips);
+                        efadbDataSetequipsTableAdapter.Fill(efadbDataSet.equips);
+                        equipsViewSource.View.MoveCurrentToPosition(posicioRow);
                     }
                     else if(queEs == "entrenador")
                     {
                         efadbDataSetentrenadorsTableAdapter.Update(efadbDataSet.entrenadors.Rows[posicioRow]);
+                        efadbDataSetentrenadorsTableAdapter.Fill(efadbDataSet.entrenadors);
+                        entrenadorsViewSource.View.MoveCurrentToPosition(posicioRow);
                     }
                     else if(queEs == "equiprival")
                     {
                         efadbDataSet.Tables["equips_rivals"].Rows[posicioRow]["id_fase"] = Convert.ToInt32(id_faseComboBox.SelectedValue);
-                        efadbDataSetequips_rivalsTableAdapter.Update(efadbDataSet.equips_rivals.Rows[posicioRow]);
+                        efadbDataSetequips_rivalsTableAdapter.Update(efadbDataSet.equips_rivals);
+                        efadbDataSetequips_rivalsTableAdapter.Fill(efadbDataSet.equips_rivals);
+                        equips_rivalsViewSource.View.MoveCurrentToPosition(posicioRow);
                     }
                     MessageBox.Show("S'ha guardat: " + queEs);
                 }
@@ -950,6 +970,7 @@ namespace Gsport
             {
                 efadbDataSet.temporades.Rows.Add(dr);
                 efadbDataSettemporadesTableAdapter.Update(dr);
+                efadbDataSettemporadesTableAdapter.Fill(efadbDataSet.temporades);
                 MessageBox.Show("Guardat");
                 foreach (DataRow drJugador in efadbDataSet.jugadors)
                 {
@@ -970,6 +991,7 @@ namespace Gsport
                     dr2["notaGS"] = 0;
                     efadbDataSet.Tables["jugador_temporada"].Rows.Add(dr2);
                     efadbDataSetjugador_temporadaTableAdapter.Update(dr2);
+                    efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
                 }
                 btnGuardarTemporada.IsEnabled = false;
             }
@@ -1032,6 +1054,7 @@ namespace Gsport
                     cnMySql.Close();
                     efadbDataSetpartitsTableAdapter.Fill(efadbDataSet.partits);
                     partitsViewSource.View.MoveCurrentToLast();
+                    MessageBox.Show("S'ha guardat: " + queEs);
                 }
                 catch (Exception ex)
                 {
@@ -1046,7 +1069,7 @@ namespace Gsport
                 efadbDataSet.Tables["partits"].Rows[posicioRow]["id_fase"] = Convert.ToInt32(cbFasePartit.SelectedValue);
                 efadbDataSet.Tables["partits"].Rows[posicioRow]["visitant"] = cblocalVisitant.SelectedIndex;
                 efadbDataSetpartitsTableAdapter.Update(efadbDataSet.partits.Rows[posicioRow]);
-
+                efadbDataSetpartitsTableAdapter.Fill(efadbDataSet.partits);
                 MessageBox.Show("S'ha guardat: " + queEs);
             }
         }
@@ -1087,10 +1110,10 @@ namespace Gsport
                     if(resultat == MessageBoxResult.Yes)
                     {
                         Process ps;
-                        ProcessStartInfo psi = new ProcessStartInfo("IEXPLORE.EXE","http://gsports.es/gsport/notificacioConvocatoria.php?idConvocatoria=" + efadbDataSet.convocatories.Rows[efadbDataSet.convocatories.Rows.Count - 1]["id_convocatoria"]);
-                        psi.WindowStyle = ProcessWindowStyle.Minimized; //aixi no es veu la finestra
+                        ProcessStartInfo psi = new ProcessStartInfo("chrome.EXE","http://gsports.es/gsport/notificacioConvocatoria.php?idConvocatoria=" + efadbDataSet.convocatories.Rows[efadbDataSet.convocatories.Rows.Count - 1]["id_convocatoria"]);
+                        //psi.WindowStyle = ProcessWindowStyle.Hidden; //aixi no es veu la finestra
                         ps = Process.Start(psi);
-                        ps.Kill();
+                        ps.Close();
                     }
                     btnGuardarConvocatoria.IsEnabled = false;
                 }
@@ -1216,6 +1239,15 @@ namespace Gsport
                 DataColumn dt = new DataColumn("nom");
                 dt.DataType = typeof(String);
                 efadbDataSet.Tables["jugador_temporada"].Columns.Add(dt); //el nom de la temproada en cada fila i aixi en el combobox jugadors_temporada podem veurei el nom.
+                if (efadbDataSet.Tables["entrenadors"].Rows.Count < 0)
+                    btnCrearEquip.IsEnabled = false;
+                if (efadbDataSet.Tables["equips"].Rows.Count < 0)
+                {
+                    btnAfageix.IsEnabled = false;
+                    btnPartits.IsEnabled = false;
+                }
+                if(efadbDataSet.Tables["equips_rivals"].Rows.Count < 0)
+                    btnPartits.IsEnabled = false;
             }
             catch
             {
@@ -1231,7 +1263,7 @@ namespace Gsport
         /// <param name="e"></param>
         private void tb_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9 || e.Key <=  Key.Tab)
                 e.Handled = false;
             else
                 e.Handled = true;
@@ -1249,40 +1281,52 @@ namespace Gsport
             efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
         }
 
+        /// <summary>
+        /// esborra l'objecta de la taula i del dataset
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnBorrar_Click(object sender, RoutedEventArgs e)
         {
-            esborrat = true;
+            
             try
             {
-                if (queEs == "jugador")
+                MessageBoxResult resultat = MessageBox.Show("Vols esborrar auqesta entrada?", "", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (resultat == MessageBoxResult.Yes)
                 {
-                    efadbDataSet.Tables["jugadors"].Rows[posicioRow].Delete();   
-                    efadbDataSetjugadorsTableAdapter.Update(efadbDataSet.jugadors);
-                    efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
+                    esborrat = true;
+                    if (queEs == "jugador")
+                    {
+
+                        efadbDataSet.Tables["jugadors"].Rows[posicioRow].Delete();
+                        efadbDataSetjugadorsTableAdapter.Update(efadbDataSet.jugadors);
+                        efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
+                    }
+
+                    else if (queEs == "equip")
+                    {
+                        efadbDataSet.Tables["equips"].Rows[posicioRow].Delete();
+                        efadbDataSetequipsTableAdapter.Update(efadbDataSet.equips);
+                        efadbDataSetequipsTableAdapter.Fill(efadbDataSet.equips);
+                    }
+                    else if (queEs == "entrenador")
+                    {
+                        efadbDataSet.Tables["entrenadors"].Rows[posicioRow].Delete();
+                        efadbDataSetentrenadorsTableAdapter.Update(efadbDataSet.entrenadors);
+                        efadbDataSetentrenadorsTableAdapter.Fill(efadbDataSet.entrenadors);
+                    }
+                    else if (queEs == "equiprival")
+                    {
+                        efadbDataSet.Tables["equips_rivals"].Rows[posicioRow].Delete();
+                        efadbDataSetequips_rivalsTableAdapter.Update(efadbDataSet.equips_rivals);
+                        efadbDataSetequips_rivalsTableAdapter.Fill(efadbDataSet.equips_rivals);
+                    }
+                    MessageBox.Show("S'ha esborrat: " + queEs);
+                    esborrat = false;
+                    objectaCercat = false;
+                    AmagarTot();
+                    btnCerca_Click(this, null);
                 }
-                else if (queEs == "equip")
-                {
-                    efadbDataSet.Tables["equips"].Rows[posicioRow].Delete();
-                    efadbDataSetequipsTableAdapter.Update(efadbDataSet.equips);
-                    efadbDataSetequipsTableAdapter.Fill(efadbDataSet.equips);
-                }
-                else if (queEs == "entrenador")
-                {
-                    efadbDataSet.Tables["entrenadors"].Rows[posicioRow].Delete();
-                    efadbDataSetentrenadorsTableAdapter.Update(efadbDataSet.entrenadors);
-                    efadbDataSetentrenadorsTableAdapter.Fill(efadbDataSet.entrenadors);
-                }
-                else if (queEs == "equiprival")
-                {
-                    efadbDataSet.Tables["equips_rivals"].Rows[posicioRow].Delete();
-                    efadbDataSetequips_rivalsTableAdapter.Update(efadbDataSet.equips_rivals);
-                    efadbDataSetequips_rivalsTableAdapter.Fill(efadbDataSet.equips_rivals);
-                }
-                MessageBox.Show("S'ha esborrat: " + queEs);
-                esborrat = false;
-                objectaCercat = false;
-                AmagarTot();
-                btnCerca_Click(this, null);
             }
             catch (Exception ex)
             {
@@ -1290,6 +1334,11 @@ namespace Gsport
             }
         }
 
+        /// <summary>
+        /// A DINTRE DE LA INTEFICIE DE CONVOCATORIA obre una cerca nomes de partits i executa el seguent codi
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnTriaPartit_Click(object sender, RoutedEventArgs e)
         {
             lbJugadorsConvocats.Items.Clear();
@@ -1320,6 +1369,11 @@ namespace Gsport
             catch{}
         }
 
+        /// <summary>
+        /// comprova si esta posada en el listbox de jugadors convocats i si no el posa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void id_jugadorListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             bool trobat = false;
@@ -1339,10 +1393,27 @@ namespace Gsport
             this.UpdateLayout();
         }
 
+        /// <summary>
+        /// esborra l'element de la listbox de jugadors convocats
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lbJugadorsConvocats_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             lbJugadorsConvocats.Items.Remove(lbJugadorsConvocats.SelectedItem);
             this.UpdateLayout();
         }
+
+        private void dpAnyNeixament_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tbEdat.Content = "";
+            int edat = 0;
+            try
+            {
+                edat = Convert.ToDateTime(DateTime.Now).Year - Convert.ToDateTime(((DatePicker)sender).SelectedDate.ToString()).Year;
+                tbEdat.Content = edat + "";
+            }
+            catch{}
+        } 
     }
 }
