@@ -1065,7 +1065,7 @@ namespace Gsport
                     if (efadbDataSet.convocatories.Rows.Count > 0)
                         cmd.Parameters.AddWithValue("inidconvocatoria", Convert.ToInt32(efadbDataSet.convocatories.Rows[efadbDataSet.convocatories.Rows.Count - 1]["id_convocatoria"]) + 1);
                     else
-                        cmd.Parameters.AddWithValue("inidpartit", 1);
+                        cmd.Parameters.AddWithValue("inidconvocatoria", 1);
                     if (cbhora.SelectedIndex >= 0 && cbminut.SelectedIndex >= 0)
                         cmd.Parameters.AddWithValue("inhoraconvocatoria", Convert.ToDateTime(cbhora.SelectedItem.ToString() + ":" + cbminut.SelectedItem.ToString() + ":00").ToShortTimeString());
                     else
