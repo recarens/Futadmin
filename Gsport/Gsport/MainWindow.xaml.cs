@@ -1301,6 +1301,7 @@ namespace Gsport
             wnd.ShowDialog();
             efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
             efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
+            AmagarTot();
         }
 
         /// <summary>

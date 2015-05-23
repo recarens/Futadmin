@@ -105,8 +105,7 @@ namespace Gsport
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show("Hi ha errors en el fitxer");
-                    
+                    MessageBox.Show("Hi ha errors en el fitxer"); 
                 }
                 idr.Close();
                 conexio.Close();
