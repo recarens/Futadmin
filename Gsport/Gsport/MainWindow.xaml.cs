@@ -88,122 +88,125 @@ namespace Gsport
             wndCercar wnd = new wndCercar(efadbDataSet,false);
             wnd.ShowDialog();
             idCercat = wnd.id;
-            queEs = wnd.queEs;
-            
-            if (queEs == "jugador")
+            if(wnd.queEs!="")
+                queEs = wnd.queEs;
+            if (idCercat != 0)
             {
-                bool trobat = false;
-                int i = 0;
-                while (!trobat)
+                if (queEs == "jugador")
                 {
-                    if (idCercat == Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[i][0]))
-                        trobat = true;
+                    bool trobat = false;
+                    int i = 0;
+                    while (!trobat && i < efadbDataSet.Tables["jugadors"].Rows.Count)
+                    {
+                        if (idCercat == Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[i][0]))
+                            trobat = true;
+                        else
+                            i++;
+                    }
+                    btnAfageix_Click(this, null);
+                    objectaCercat = true;
+                    btnDadesTemporada.IsEnabled = true;
+                    btnDadesLesions.IsEnabled = true;
+                    btnEsborrarJugadors.IsEnabled = true;
+                    wpJugadors.DataContext = FindResource("jugadorsViewSource");
+                    jugadorsViewSource.View.MoveCurrentToPosition(i);
+                    posicioRow = i;
+                    imgImatge.Source = new BitmapImage(new Uri(efadbDataSet.Tables["jugadors"].Rows[i]["nomImatge"].ToString()));//actualitza la foto.
+                    if (Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[i]["sexe"]) == 0)
+                        tbSexe.SelectedItem = "M";
                     else
-                        i++;
+                        tbSexe.SelectedItem = "F";
+                    tbposicioNom.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[i]["id_posicio"]);
+                    cbequip.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[i]["id_equip"]);
+                    CarregarNomsTemporades();
                 }
-                btnAfageix_Click(this, null);
-                objectaCercat = true;
-                btnDadesTemporada.IsEnabled = true;
-                btnDadesLesions.IsEnabled = true;
-                btnEsborrarJugadors.IsEnabled = true;
-                wpJugadors.DataContext = FindResource("jugadorsViewSource");
-                jugadorsViewSource.View.MoveCurrentToPosition(i);
-                posicioRow = i;
-                imgImatge.Source = new BitmapImage(new Uri(efadbDataSet.Tables["jugadors"].Rows[posicioRow]["nomImatge"].ToString()));//actualitza la foto.
-                if (Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[posicioRow]["sexe"]) == 0)
-                    tbSexe.SelectedItem = "M";
-                else
-                    tbSexe.SelectedItem = "F";
-                tbposicioNom.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_posicio"]);
-                cbequip.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_equip"]);
-                CarregarNomsTemporades();
-            }
-            else if (queEs == "equip")
-            {
-                bool trobat = false;
-                int i = 0;
-                while (!trobat)
+                else if (queEs == "equip")
                 {
-                    if (idCercat == Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[i][0]))
-                        trobat = true;
-                    else
-                        i++;
+                    bool trobat = false;
+                    int i = 0;
+                    while (!trobat && i < efadbDataSet.Tables["equips"].Rows.Count)
+                    {
+                        if (idCercat == Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[i][0]))
+                            trobat = true;
+                        else
+                            i++;
+                    }
+                    btnCrearEquip_Click(this, null);
+                    objectaCercat = true;
+                    btnEsborrarEquips.IsEnabled = true;
+                    wpPrincipalEquip.DataContext = FindResource("equipsjugadorsViewSource");
+                    grid1.DataContext = FindResource("equipsViewSource1");
+                    equipsViewSource.View.MoveCurrentToPosition(i);
+                    posicioRow = i;
+                    id_categoriaComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[i]["id_categoria"]);
+                    id_divisioComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[i]["id_divisio"]);
+                    id_entrenadorComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[i]["id_entrenador"]);
+
                 }
-                btnCrearEquip_Click(this, null);
-                objectaCercat = true;
-                btnEsborrarEquips.IsEnabled = true;
-                wpPrincipalEquip.DataContext = FindResource("equipsjugadorsViewSource");
-                grid1.DataContext = FindResource("equipsViewSource1");
-                equipsViewSource.View.MoveCurrentToPosition(i);
-                posicioRow = i;
-                id_categoriaComboBox.SelectedValue =Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[posicioRow]["id_categoria"]);
-                id_divisioComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[posicioRow]["id_divisio"]);
-                id_entrenadorComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[posicioRow]["id_entrenador"]);
-                
-            }
-            else if(queEs == "entrenador")
-            {
-                bool trobat = false;
-                int i = 0;
-                while (!trobat)
+                else if (queEs == "entrenador")
                 {
-                    if (idCercat == Convert.ToInt32(efadbDataSet.Tables["entrenadors"].Rows[i][0]))
-                        trobat = true;
-                    else
-                        i++;
+                    bool trobat = false;
+                    int i = 0;
+                    while (!trobat && i < efadbDataSet.Tables["entrenadors"].Rows.Count)
+                    {
+                        if (idCercat == Convert.ToInt32(efadbDataSet.Tables["entrenadors"].Rows[i][0]))
+                            trobat = true;
+                        else
+                            i++;
+                    }
+                    btnAfageixEntrenador_Click(this, null);
+                    objectaCercat = true;
+                    btnEsborrarEntrenadors.IsEnabled = true;
+                    wpPrincipalEntenador.DataContext = FindResource("entrenadorsequipsViewSource1");
+                    grid2.DataContext = FindResource("entrenadorsViewSource");
+                    entrenadorsViewSource.View.MoveCurrentToPosition(i);
+                    posicioRow = i;
                 }
-                btnAfageixEntrenador_Click(this, null);
-                objectaCercat = true;
-                btnEsborrarEntrenadors.IsEnabled = true;
-                wpPrincipalEntenador.DataContext = FindResource("entrenadorsequipsViewSource1");
-                grid2.DataContext = FindResource("entrenadorsViewSource");
-                entrenadorsViewSource.View.MoveCurrentToPosition(i);
-                posicioRow = i;
-            }
-            else if (queEs == "equiprival")
-            {
-                bool trobat = false;
-                int i = 0;
-                while (!trobat)
+                else if (queEs == "equiprival")
                 {
-                    if (idCercat == Convert.ToInt32(efadbDataSet.Tables["equips_rivals"].Rows[i][0]))
-                        trobat = true;
-                    else
-                        i++;
+                    bool trobat = false;
+                    int i = 0;
+                    while (!trobat && i < efadbDataSet.Tables["equips_rivals"].Rows.Count)
+                    {
+                        if (idCercat == Convert.ToInt32(efadbDataSet.Tables["equips_rivals"].Rows[i][0]))
+                            trobat = true;
+                        else
+                            i++;
+                    }
+                    btnCrearEquipRival_Click(this, null);
+                    objectaCercat = true;
+                    btnEsborrarEquipsRivals.IsEnabled = true;
+                    gridEquisRivals.DataContext = FindResource("equips_rivalsViewSource");
+                    equips_rivalsViewSource.View.MoveCurrentToPosition(i);
+                    posicioRow = i;
+                    id_faseComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips_rivals"].Rows[i]["id_fase"]);
                 }
-                btnCrearEquipRival_Click(this, null);
-                objectaCercat = true;
-                btnEsborrarEquipsRivals.IsEnabled = true;
-                gridEquisRivals.DataContext = FindResource("equips_rivalsViewSource");
-                equips_rivalsViewSource.View.MoveCurrentToPosition(i);
-                posicioRow = i;
-                id_faseComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips_rivals"].Rows[posicioRow]["id_fase"]);
-            }
-            else if (queEs == "partit")
-            {
-                bool trobat = false;
-                int i = 0;
-                while (!trobat)
+                else if (queEs == "partit")
                 {
-                    if (idCercat == Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[i][0]))
-                        trobat = true;
+                    bool trobat = false;
+                    int i = 0;
+                    while (!trobat && i < efadbDataSet.Tables["partits"].Rows.Count)
+                    {
+                        if (idCercat == Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[i][0]))
+                            trobat = true;
+                        else
+                            i++;
+                    }
+                    btnPartits_Click(this, null);
+                    objectaCercat = true;
+                    //griddadespartit" DataContext="{StaticResource partitsViewSource}"
+                    griddadespartit.DataContext = FindResource("partitsViewSource");
+                    partitsViewSource.View.MoveCurrentToPosition(i);
+                    posicioRow = i;
+                    cbEquipClub.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[i]["id_equip"]);
+                    cbEquipRival.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[i]["id_equip_rival"]);
+                    cbTipusPartit.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[i]["id_tipus_partit"]);
+                    cbFasePartit.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[i]["id_fase"]);
+                    if (Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[i]["visitant"]) == 0)
+                        cblocalVisitant.SelectedItem = "Local";
                     else
-                        i++;
+                        cblocalVisitant.SelectedItem = "Visitant";
                 }
-                btnPartits_Click(this, null);
-                objectaCercat = true;
-                //griddadespartit" DataContext="{StaticResource partitsViewSource}"
-                griddadespartit.DataContext = FindResource("partitsViewSource");
-                partitsViewSource.View.MoveCurrentToPosition(i);
-                posicioRow = i;
-                cbEquipClub.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_equip"]);
-                cbEquipRival.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_equip_rival"]);
-                cbTipusPartit.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_tipus_partit"]);
-                cbFasePartit.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_fase"]);
-                if (Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["visitant"]) == 0)
-                    cblocalVisitant.SelectedItem = "Local";
-                else
-                    cblocalVisitant.SelectedItem = "Visitant";
             }
         }
 
@@ -255,7 +258,10 @@ namespace Gsport
             cdEquipsRivals.Width = gER2;
             GridLength gCon2 = new GridLength(0, GridUnitType.Star);
             cdConvocatoria.Width = gCon2;
-
+            if (efadbDataSet.jugadors.Count > 0)
+                posicioRow = efadbDataSet.jugadors.Count - 1;
+            else
+                posicioRow = 0;
             wpDadesTemporada.Height = 0;
             wpLesions.Height = 0;
             btnDadesTemporada.IsEnabled = false;
@@ -290,6 +296,10 @@ namespace Gsport
             GridLength gCon2 = new GridLength(0, GridUnitType.Star);
             cdConvocatoria.Width = gCon2;
             btnEsborrarEntrenadors.IsEnabled = false;
+            if (efadbDataSet.entrenadors.Count > 0)
+                posicioRow = efadbDataSet.entrenadors.Count - 1;
+            else
+                posicioRow = 0;
         }
 
         /// <summary>
@@ -317,6 +327,10 @@ namespace Gsport
             GridLength gCon2 = new GridLength(0, GridUnitType.Star);
             cdConvocatoria.Width = gCon2;
             btnEsborrarEquips.IsEnabled = false;
+            if (efadbDataSet.equips.Count > 0)
+                posicioRow = efadbDataSet.equips.Count - 1;
+            else
+                posicioRow = 0;
         }
 
         /// <summary>
@@ -386,6 +400,10 @@ namespace Gsport
             GridLength gCon2 = new GridLength(0, GridUnitType.Star);
             cdConvocatoria.Width = gCon2;
             btnEsborrarEquipsRivals.IsEnabled = false;
+            if (efadbDataSet.equips_rivals.Count > 0)
+                posicioRow = efadbDataSet.equips_rivals.Count - 1;
+            else
+                posicioRow = 0;
         }
 
         private void btnComvocatories_Click(object sender, RoutedEventArgs e)
@@ -911,8 +929,8 @@ namespace Gsport
                         efadbDataSetjugadorsTableAdapter.Update(efadbDataSet.jugadors);
                         efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
                         efadbDataSetjugador_temporadaTableAdapter.Update(efadbDataSet.jugador_temporada);
-                        
-                        efadbDataSetlesionsTableAdapter.Update(efadbDataSet.lesions);
+                        //efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
+                        efadbDataSetlesionsTableAdapter.Update(efadbDataSet.lesions);                       
                         efadbDataSetlesionsTableAdapter.Fill(efadbDataSet.lesions);
                         //refresh
                         
@@ -1279,9 +1297,10 @@ namespace Gsport
         /// <param name="e"></param>
         private void btnImportador_Click(object sender, RoutedEventArgs e)
         {
-            wndImportar wnd = new wndImportar();
+            wndImportar wnd = new wndImportar(efadbDataSet);
             wnd.ShowDialog();
             efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
+            efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
         }
 
         /// <summary>
@@ -1300,17 +1319,57 @@ namespace Gsport
                     esborrat = true;
                     if (queEs == "jugador")
                     {
-
+                        int i = 0;
+                        bool trobat = false;
+                        
+                        efadbDataSetusuarisTableAdapter.Update(efadbDataSet.usuaris);
+                        efadbDataSetusuarisTableAdapter.Fill(efadbDataSet.usuaris);
+                        if (efadbDataSet.Tables["jugadors"].Rows.Count > 0)
+                        {
+                            while (i < efadbDataSet.Tables["usuaris"].Rows.Count && !trobat)
+                            {
+                                if (efadbDataSet.Tables["usuaris"].Rows[i]["username"].ToString() == efadbDataSet.Tables["jugadors"].Rows[posicioRow]["dni"].ToString())
+                                {
+                                    trobat = true;
+                                    efadbDataSet.Tables["usuaris"].Rows[i].Delete();
+                                }
+                                i++;
+                            }
+                        }
                         efadbDataSet.Tables["jugadors"].Rows[posicioRow].Delete();
                         efadbDataSetjugadorsTableAdapter.Update(efadbDataSet.jugadors);
                         efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
+                        efadbDataSetusuarisTableAdapter.Update(efadbDataSet.usuaris);
+                        efadbDataSetusuarisTableAdapter.Fill(efadbDataSet.usuaris);
+                        efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
+                        efadbDataSetlesionsTableAdapter.Fill(efadbDataSet.lesions);
                     }
 
                     else if (queEs == "equip")
                     {
-                        efadbDataSet.Tables["equips"].Rows[posicioRow].Delete();
-                        efadbDataSetequipsTableAdapter.Update(efadbDataSet.equips);
-                        efadbDataSetequipsTableAdapter.Fill(efadbDataSet.equips);
+                        int i = 0;
+                        bool trobat = false;
+                        while (i < efadbDataSet.Tables["jugadors"].Rows.Count && !trobat)
+                        {
+                            if (idCercat == Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[i]["id_equip"]))
+                            {
+                                trobat = true;
+                            }
+                            i++;
+                        }
+                        if(!trobat)
+                        {
+                            efadbDataSet.Tables["equips"].Rows[posicioRow].Delete();
+                            efadbDataSetequipsTableAdapter.Update(efadbDataSet.equips);
+                            efadbDataSetequipsTableAdapter.Fill(efadbDataSet.equips);
+                        }
+                        else
+                            MessageBox.Show("No pots esborrar un equip que conte jugadors, Canvia d'equip els corresponents");
+                        if(efadbDataSet.Tables["equips"].Rows.Count == 0)
+                        {
+                            btnAfageix.IsEnabled = false;
+                            btnPartits.IsEnabled = false;
+                        }
                     }
                     else if (queEs == "entrenador")
                     {
@@ -1318,13 +1377,13 @@ namespace Gsport
                         bool trobat = false;
                         while (i < efadbDataSet.Tables["equips"].Rows.Count && !trobat)
                         {
-                            if(idCercat ==Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[i]["id_entrenador"]) )
+                            if (idCercat == Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[i]["id_entrenador"]))
                             {
                                 trobat = true;
                             }
                             i++;
                         }
-                        if (trobat)
+                        if (!trobat)
                         {
                             efadbDataSet.Tables["entrenadors"].Rows[posicioRow].Delete();
                             efadbDataSetentrenadorsTableAdapter.Update(efadbDataSet.entrenadors);
@@ -1338,13 +1397,20 @@ namespace Gsport
                         {
                             MessageBox.Show("No pots esborrar un entrenador que te un equip, Modifica primer l'equip");
                         }
-
+                        if (efadbDataSet.Tables["entrenadors"].Rows.Count == 0)
+                        {
+                            btnCrearEquip.IsEnabled = false;
+                        }
                     }
                     else if (queEs == "equiprival")
                     {
                         efadbDataSet.Tables["equips_rivals"].Rows[posicioRow].Delete();
                         efadbDataSetequips_rivalsTableAdapter.Update(efadbDataSet.equips_rivals);
                         efadbDataSetequips_rivalsTableAdapter.Fill(efadbDataSet.equips_rivals);
+                        if (efadbDataSet.Tables["equips_rivals"].Rows.Count == 0)
+                        {
+                            btnPartits.IsEnabled = false;
+                        }
                     }
                     MessageBox.Show("S'ha esborrat: " + queEs);
                     esborrat = false;

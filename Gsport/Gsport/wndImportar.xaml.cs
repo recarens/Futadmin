@@ -26,10 +26,12 @@ namespace Gsport
         string filename;
         string mySqlString = "Server=shz24.guebs.net;port=3306;user id=gsportse_remot;password=gsport123.;persistsecurityinfo=True;database=gsportse_efadb";
         MySqlConnection cnMySql;
-        public wndImportar()
+        efadbDataSet dataSetAux= new efadbDataSet();
+        public wndImportar(efadbDataSet dt)
         {
             InitializeComponent();
             cnMySql = new MySqlConnection(mySqlString);
+            dataSetAux = dt;
         }
 
         private void btnImportJugadors_Click(object sender, RoutedEventArgs e)
@@ -45,12 +47,11 @@ namespace Gsport
                 OleDbConnection conexio = new OleDbConnection(cadenaConexio);
                 conexio.Open();
                 cnMySql.Open();
-                
+                OleDbCommand com = new OleDbCommand("SELECT * FROM [jugadors$]", conexio);
+                OleDbCommand count = new OleDbCommand("SELECT COUNT(dni) from [jugadors$]", conexio);
+                IDataReader idr = com.ExecuteReader();
                 try
                 {
-                    OleDbCommand com = new OleDbCommand("SELECT * FROM [jugadors$]", conexio);
-                    OleDbCommand count = new OleDbCommand("SELECT COUNT(dni) from [jugadors$]",conexio);
-                    IDataReader idr = com.ExecuteReader();
                     int intcount = Convert.ToInt32(count.ExecuteScalar());
                     pbProgres.Maximum = intcount;
                     while (idr.Read())
@@ -92,23 +93,24 @@ namespace Gsport
                             else
                                 cmd.Parameters.AddWithValue("inid_posicio", 1);
                             if (idr[15] != DBNull.Value)
-                                cmd.Parameters.AddWithValue("inid_equip", Convert.ToInt32(idr[15]));
+                                cmd.Parameters.AddWithValue("inid_equip", Convert.ToInt32(idr[15]));  
                             else
-                                cmd.Parameters.AddWithValue("inid_equip", 1);
+                                cmd.Parameters.AddWithValue("inid_equip",dataSetAux.Tables["equips"].Rows[0]["id_equip"]);
                             cmd.ExecuteNonQuery();
                             pbProgres.Value += 1;
                             this.UpdateLayout();
                         }
                     }
-                    idr.Close();
-                    conexio.Close();
-                    cnMySql.Close();
                     MessageBox.Show("Importat correctament");
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show("Hi ha errors en el fitxer " + ex);
+                    MessageBox.Show("Hi ha errors en el fitxer");
+                    
                 }
+                idr.Close();
+                conexio.Close();
+                cnMySql.Close();
             }
         }
     }
