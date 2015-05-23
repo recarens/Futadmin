@@ -1301,6 +1301,7 @@ namespace Gsport
             wnd.ShowDialog();
             efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
             efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
+            efadbDataSetequipsTableAdapter.Fill(efadbDataSet.equips);
             AmagarTot();
         }
 
@@ -1310,8 +1311,7 @@ namespace Gsport
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnBorrar_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {    
             try
             {
                 MessageBoxResult resultat = MessageBox.Show("Vols esborrar auqesta entrada?", "", MessageBoxButton.YesNo, MessageBoxImage.Warning);

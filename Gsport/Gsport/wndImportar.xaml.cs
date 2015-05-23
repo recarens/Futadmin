@@ -32,10 +32,21 @@ namespace Gsport
             InitializeComponent();
             cnMySql = new MySqlConnection(mySqlString);
             dataSetAux = dt;
+            if(dataSetAux.equips.Rows.Count == 0)
+            {
+                btnImportJugadors.IsEnabled = false;
+                MessageBox.Show("Alerta no hi han equips per crear jugadors");
+            }
+            if (dataSetAux.entrenadors.Rows.Count == 0)
+            {
+                btnImportEquips.IsEnabled = false;
+                MessageBox.Show("Alerta no hi han entrenadors per crear equips");
+            }
         }
 
         private void btnImportJugadors_Click(object sender, RoutedEventArgs e)
         {
+            pbProgres.Value = 0;
             OpenFileDialog of = new OpenFileDialog();
             of.DefaultExt = ".xls";
             of.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
@@ -106,6 +117,70 @@ namespace Gsport
                 catch(Exception ex)
                 {
                     MessageBox.Show("Hi ha errors en el fitxer"); 
+                }
+                idr.Close();
+                conexio.Close();
+                cnMySql.Close();
+            }
+        }
+
+        private void btnImportEquips_Click(object sender, RoutedEventArgs e)
+        {
+            pbProgres.Value = 0;
+            OpenFileDialog of = new OpenFileDialog();
+            of.DefaultExt = ".xls";
+            of.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
+            Nullable<bool> result = of.ShowDialog();
+            if (result == true)
+            {
+                filename = of.FileName;
+                string cadenaConexio = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filename + "; Extended Properties=Excel 12.0;";
+                OleDbConnection conexio = new OleDbConnection(cadenaConexio);
+                conexio.Open();
+                cnMySql.Open();
+                OleDbCommand com = new OleDbCommand("SELECT * FROM [equips$]", conexio);
+                OleDbCommand count = new OleDbCommand("SELECT COUNT(nom) from [equips$]", conexio);
+                IDataReader idr = com.ExecuteReader();
+                try
+                {
+                    int intcount = Convert.ToInt32(count.ExecuteScalar());
+                    pbProgres.Maximum = intcount;
+                    while (idr.Read())
+                    {
+                        MySqlCommand cmd;
+                        cmd = new MySqlCommand("Insertarequips", cnMySql);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        if (idr[0] != DBNull.Value)
+                        {
+                            cmd.Parameters.AddWithValue("innom", idr[0].ToString());
+                            if (idr[1] != DBNull.Value)
+                                cmd.Parameters.AddWithValue("inid_divisio", idr[1].ToString());
+                            else
+                                cmd.Parameters.AddWithValue("inid_divisio", dataSetAux.categories.Rows[0]["id_divisio"]);
+
+                            if (idr[2] != DBNull.Value)
+                                cmd.Parameters.AddWithValue("inid_categoria", idr[2].ToString());
+                            else
+                                cmd.Parameters.AddWithValue("inid_categoria", dataSetAux.categories.Rows[0]["id_categoria"]);
+
+                            if (idr[3] != DBNull.Value)
+                                cmd.Parameters.AddWithValue("inid_entrenador", Convert.ToInt32(idr[3]));
+                            else
+                                cmd.Parameters.AddWithValue("inid_entrenador", Convert.ToInt32(dataSetAux.entrenadors.Rows[0]["id_entrenador"]));
+                            if (idr[4] != DBNull.Value)
+                                cmd.Parameters.AddWithValue("inpuntuacio", Convert.ToInt32(idr[4]));
+                            else
+                                cmd.Parameters.AddWithValue("inpuntuacio", 0);
+                            cmd.ExecuteNonQuery();
+                            pbProgres.Value += 1;
+                            this.UpdateLayout();
+                        }
+                    }
+                    MessageBox.Show("Importat correctament");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Hi ha errors en el fitxer");
                 }
                 idr.Close();
                 conexio.Close();
