@@ -87,7 +87,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Sexe:"/>
-                            <ComboBox x:Name="tbSexe" MinWidth="201" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}" SelectedItem="{Binding sexe, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            <ComboBox x:Name="tbSexe" MinWidth="201" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}" SelectedItem="{Binding sexe, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Background="{x:Null}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Data inscripció:"/>
@@ -184,7 +184,7 @@
                             </Grid>
                             <StackPanel Orientation="Vertical">
                                 <Label FontSize="30" Foreground="#FF0B2E10" Content="Nota GS" FontWeight="Bold"/>
-                                <Label x:Name="lblGsNota" FontSize="70" Foreground="#FF0B2E10" Content="{Binding notaGS, Source={StaticResource jugador_temporadaViewSource}}" HorizontalAlignment="Center"/>
+                                <Label x:Name="lblGsNota" FontSize="70" Foreground="#FF0B2E10" Content="{Binding notaGS, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  HorizontalAlignment="Center"/>
                             </StackPanel>
                         </WrapPanel>
                     </StackPanel>

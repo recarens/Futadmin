@@ -120,6 +120,7 @@ namespace Gsport
                     tbposicioNom.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[i]["id_posicio"]);
                     cbequip.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[i]["id_equip"]);
                     CarregarNomsTemporades();
+                    tbDni.IsEnabled = false;
                 }
                 else if (queEs == "equip")
                 {
@@ -142,7 +143,6 @@ namespace Gsport
                     id_categoriaComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[i]["id_categoria"]);
                     id_divisioComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[i]["id_divisio"]);
                     id_entrenadorComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[i]["id_entrenador"]);
-
                 }
                 else if (queEs == "entrenador")
                 {
@@ -268,7 +268,7 @@ namespace Gsport
             btnDadesTemporada.IsEnabled = false;
             btnDadesLesions.IsEnabled = false;
             btnEsborrarJugadors.IsEnabled = false;
-            tbDni.Text = "";
+            tbDni.IsEnabled = true;
 
         }
 
@@ -569,7 +569,7 @@ namespace Gsport
             bool trobat = false;
             btnGuardar.IsEnabled = true;
             if (tbDni.Text.Length > 8 && !esborrat)
-            {     
+            {
                 foreach (DataRow dr in efadbDataSet.Tables["jugadors"].Rows)
                 {
                     if (dr["dni"].ToString().ToLower() == tbDni.Text.Trim().ToLower())
@@ -577,10 +577,13 @@ namespace Gsport
                         trobat = true;
                     }
                 }
-                if (trobat && !objectaCercat)//aixo fa que si no es una modificacio deseviliti el boto guardar,jugadors
+                if (trobat)//aixo fa que si no es una modificacio deseviliti el boto guardar
                 {
-                    MessageBox.Show("Ja existeix");
-                    btnGuardar.IsEnabled = false;
+                    if (!objectaCercat)
+                    {
+                        MessageBox.Show("Ja existeix");
+                        btnGuardar.IsEnabled = false;
+                    }
                 }
             }
             else
@@ -607,10 +610,13 @@ namespace Gsport
                         trobat = true;
                     }
                 }
-                if (trobat && !objectaCercat)//aixo fa que si no es una modificacio deseviliti el boto guardar
+                if (trobat)//aixo fa que si no es una modificacio deseviliti el boto guardar
                 {
-                    MessageBox.Show("Ja existeix");
-                    btnGuardarEntrenador.IsEnabled = false;
+                    if (!objectaCercat)
+                    {
+                        MessageBox.Show("Ja existeix");
+                        btnGuardarEntrenador.IsEnabled = false;
+                    }
                 }
             }
             else
@@ -814,7 +820,7 @@ namespace Gsport
                         posicioRow = efadbDataSet.jugadors.Count - 1;
                         tbSexe.SelectedIndex = Convert.ToInt32(efadbDataSet.jugadors.Rows[posicioRow]["sexe"]);
                         btnEsborrarJugadors.IsEnabled = true;
-
+                        tbDni.IsEnabled = false;
                     }
                     catch (Exception ex)
                     {
@@ -930,6 +936,8 @@ namespace Gsport
                 {
                     if (queEs == "jugador")
                     {
+                        bool trobat = false;
+                        int i = 0;
                         efadbDataSet.Tables["jugadors"].Rows[posicioRow]["sexe"] = Convert.ToInt16(tbSexe.SelectedIndex);
                         efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
                         efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);
@@ -940,6 +948,7 @@ namespace Gsport
                         //efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
                         efadbDataSetlesionsTableAdapter.Update(efadbDataSet.lesions);                       
                         efadbDataSetlesionsTableAdapter.Fill(efadbDataSet.lesions);
+                        //CarregarNomsTemporades();
                         //refresh
                         //efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada); 
                         jugadorsViewSource.View.MoveCurrentToPosition(posicioRow);

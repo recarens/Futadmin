@@ -22,7 +22,7 @@
                 <Image x:Name="imgEn" Source="Fotos/eng.jpg"  Height="20" Margin="0,28,5,0" MouseLeftButtonDown="imgEn_MouseLeftButtonDown"/>
                 <Image x:Name="imgEs" Source="Fotos/es.png" Height="20" Margin="0,28,5,0" MouseLeftButtonDown="imgEs_MouseLeftButtonDown"/>
             </StackPanel>
-            <Button x:Name="btnMisPas" Width="160" Margin="0,23,0,0" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" BorderBrush="#FFB80404" BorderThickness="2" Content="{Binding btnMisPas, Source={StaticResource IdiomesRes}}"/>
+            <!--<Button x:Name="btnMisPas" Width="160" Margin="0,23,0,0" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" BorderBrush="#FFB80404" BorderThickness="2" Content="{Binding btnMisPas, Source={StaticResource IdiomesRes}}"/>-->
         </WrapPanel>
     </StackPanel>
 </Window>
