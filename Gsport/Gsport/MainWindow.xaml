@@ -99,7 +99,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Correu electrònic:"/>
-                            <TextBox x:Name="tbcorreuElec" MinWidth="150" Margin="1,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding correu_electronic, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                            <TextBox x:Name="tbcorreuElec" MinWidth="150" Margin="1,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding correu_electronic, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" LostFocus="tbcorreuElec_LostFocus"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Numero de Soci:"/>

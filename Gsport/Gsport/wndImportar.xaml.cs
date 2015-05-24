@@ -60,9 +60,10 @@ namespace Gsport
                 cnMySql.Open();
                 OleDbCommand com = new OleDbCommand("SELECT * FROM [jugadors$]", conexio);
                 OleDbCommand count = new OleDbCommand("SELECT COUNT(dni) from [jugadors$]", conexio);
-                IDataReader idr = com.ExecuteReader();
+                IDataReader idr = null;
                 try
                 {
+                    idr = com.ExecuteReader();
                     int intcount = Convert.ToInt32(count.ExecuteScalar());
                     pbProgres.Maximum = intcount;
                     while (idr.Read())
@@ -75,7 +76,7 @@ namespace Gsport
                             cmd.Parameters.AddWithValue("indni", idr[0].ToString());
                             cmd.Parameters.AddWithValue("innom", idr[1].ToString());
                             cmd.Parameters.AddWithValue("incognoms", idr[2].ToString());
-                            if(idr[3] != DBNull.Value)
+                            if (idr[3] != DBNull.Value)
                                 cmd.Parameters.AddWithValue("insexe", Convert.ToInt32(idr[3]));
                             else
                                 cmd.Parameters.AddWithValue("insexe", 0);
@@ -104,21 +105,22 @@ namespace Gsport
                             else
                                 cmd.Parameters.AddWithValue("inid_posicio", 1);
                             if (idr[15] != DBNull.Value)
-                                cmd.Parameters.AddWithValue("inid_equip", Convert.ToInt32(idr[15]));  
+                                cmd.Parameters.AddWithValue("inid_equip", Convert.ToInt32(idr[15]));
                             else
-                                cmd.Parameters.AddWithValue("inid_equip",dataSetAux.Tables["equips"].Rows[0]["id_equip"]);
+                                cmd.Parameters.AddWithValue("inid_equip", dataSetAux.Tables["equips"].Rows[0]["id_equip"]);
                             cmd.ExecuteNonQuery();
                             pbProgres.Value += 1;
                             this.UpdateLayout();
                         }
                     }
                     MessageBox.Show("Importat correctament");
+                    idr.Close();
+
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Hi ha errors en el fitxer"); 
+                    MessageBox.Show("Hi ha errors en el fitxer o no es el correcte");
                 }
-                idr.Close();
                 conexio.Close();
                 cnMySql.Close();
             }
@@ -140,9 +142,10 @@ namespace Gsport
                 cnMySql.Open();
                 OleDbCommand com = new OleDbCommand("SELECT * FROM [equips$]", conexio);
                 OleDbCommand count = new OleDbCommand("SELECT COUNT(nom) from [equips$]", conexio);
-                IDataReader idr = com.ExecuteReader();
+                IDataReader idr = null;
                 try
                 {
+                    idr = com.ExecuteReader();
                     int intcount = Convert.ToInt32(count.ExecuteScalar());
                     pbProgres.Maximum = intcount;
                     while (idr.Read())
@@ -177,12 +180,127 @@ namespace Gsport
                         }
                     }
                     MessageBox.Show("Importat correctament");
+                    idr.Close();
+                    
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Hi ha errors en el fitxer");
+                    MessageBox.Show("Hi ha errors en el fitxer o no es el correcte");
                 }
-                idr.Close();
+                conexio.Close();
+                cnMySql.Close();
+            }
+        }
+
+        private void btnImportEntrenadors_Click(object sender, RoutedEventArgs e)
+        {
+            pbProgres.Value = 0;
+            OpenFileDialog of = new OpenFileDialog();
+            of.DefaultExt = ".xls";
+            of.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
+            Nullable<bool> result = of.ShowDialog();
+            if (result == true)
+            {
+                filename = of.FileName;
+                string cadenaConexio = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filename + "; Extended Properties=Excel 12.0;";
+                OleDbConnection conexio = new OleDbConnection(cadenaConexio);
+                conexio.Open();
+                cnMySql.Open();
+                OleDbCommand com = new OleDbCommand("SELECT * FROM [entrenadors$]", conexio);
+                OleDbCommand count = new OleDbCommand("SELECT COUNT(nom) from [entrenadors$]", conexio);
+                IDataReader idr = null;
+                try
+                {
+                    idr = com.ExecuteReader();
+                    int intcount = Convert.ToInt32(count.ExecuteScalar());
+                    pbProgres.Maximum = intcount;
+                    while (idr.Read())
+                    {
+                        MySqlCommand cmd;
+                        cmd = new MySqlCommand("Insertarentrenadors", cnMySql);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        if (idr[0] != DBNull.Value)
+                        {
+                            cmd.Parameters.AddWithValue("indni", idr[0].ToString());
+                            cmd.Parameters.AddWithValue("innom", idr[1].ToString());
+                            cmd.Parameters.AddWithValue("incognom", idr[2].ToString());
+                            if (idr[3] != DBNull.Value)
+                                cmd.Parameters.AddWithValue("indata_naixement", DateTime.Parse(idr[3].ToString()));
+                            else
+                                cmd.Parameters.AddWithValue("indata_naixement", DateTime.Parse(DateTime.Now.ToShortDateString()));
+                            cmd.ExecuteNonQuery();
+                            pbProgres.Value += 1;
+                            this.UpdateLayout();
+                        }
+                    }
+                    MessageBox.Show("Importat correctament");
+                    idr.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Hi ha errors en el fitxer o no es el correcte");
+                }
+                conexio.Close();
+                cnMySql.Close();
+            }
+        }
+
+        private void btnImportarParits_Click(object sender, RoutedEventArgs e)
+        {
+            pbProgres.Value = 0;
+            OpenFileDialog of = new OpenFileDialog();
+            of.DefaultExt = ".xls";
+            of.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
+            Nullable<bool> result = of.ShowDialog();
+            if (result == true)
+            {
+                filename = of.FileName;
+                string cadenaConexio = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filename + "; Extended Properties=Excel 12.0;";
+                OleDbConnection conexio = new OleDbConnection(cadenaConexio);
+                conexio.Open();
+                cnMySql.Open();
+                OleDbCommand com = new OleDbCommand("SELECT * FROM [partits$]", conexio);
+                OleDbCommand count = new OleDbCommand("SELECT COUNT(id_equip) from [partits$]", conexio);
+                IDataReader idr = null;
+                try
+                {
+                    idr = com.ExecuteReader();
+                    int intcount = Convert.ToInt32(count.ExecuteScalar());
+                    pbProgres.Maximum = intcount;
+                    while (idr.Read())
+                    {
+                        MySqlCommand cmd;
+                        cmd = new MySqlCommand("Insertarpartit", cnMySql);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        if (idr[0] != DBNull.Value)
+                        {
+                            if (dataSetAux.partits.Rows.Count > 0)
+                                cmd.Parameters.AddWithValue("inidpartit", Convert.ToInt32(dataSetAux.partits.Rows[dataSetAux.partits.Rows.Count-1]["id_partit"])+1);
+                            else
+                                cmd.Parameters.AddWithValue("inidpartit",1);
+                            cmd.Parameters.AddWithValue("inidequip", Convert.ToInt32(idr[0].ToString()));
+                            cmd.Parameters.AddWithValue("inidequiprival", Convert.ToInt32(idr[1].ToString()));
+                            cmd.Parameters.AddWithValue("injornada", Convert.ToInt32(idr[2].ToString()));
+                            cmd.Parameters.AddWithValue("indatapartit", DateTime.Parse(idr[3].ToString()));
+                            cmd.Parameters.AddWithValue("inidtipus", Convert.ToInt32(idr[4].ToString()));
+                            cmd.Parameters.AddWithValue("inidfase", Convert.ToInt32(idr[5].ToString()));
+                            cmd.Parameters.AddWithValue("ingolslocal", Convert.ToInt32(idr[6].ToString()));
+                            cmd.Parameters.AddWithValue("ingolsvisitant", Convert.ToInt32(idr[7].ToString()));
+                            cmd.Parameters.AddWithValue("invisitant", Convert.ToInt32(idr[8].ToString()));
+                            cmd.ExecuteNonQuery();
+                            pbProgres.Value += 1;
+                            this.UpdateLayout();
+                        }
+                    }
+                    MessageBox.Show("Importat correctament");
+                    idr.Close();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Hi ha errors en el fitxer o no es el correcte");
+                }
                 conexio.Close();
                 cnMySql.Close();
             }

@@ -10,8 +10,8 @@
         <UniformGrid Height="250" Width="450" Margin="10">
             <Button x:Name="btnImportJugadors" Click="btnImportJugadors_Click" Content="Jugadors" Margin="8" FontWeight="Bold" Foreground="White" FontSize="25" Background="#FF379129"/>
             <Button x:Name="btnImportEquips" Content="Equips" Margin="8" FontWeight="Bold" Foreground="White" FontSize="25" Background="#FF379129" Click="btnImportEquips_Click"/>
-            <Button Content="Entrenadors" Margin="8" FontWeight="Bold" Foreground="White" FontSize="25" Background="#FF379129"/>
-            <Button Content="Partits" Margin="8" Background="#FF379129" FontWeight="Bold" Foreground="White" FontSize="25"/>
+            <Button x:Name="btnImportEntrenadors" Content="Entrenadors" Margin="8" FontWeight="Bold" Foreground="White" FontSize="25" Background="#FF379129" Click="btnImportEntrenadors_Click" />
+            <Button x:Name="btnImportarParits" Content="Partits" Margin="8" Background="#FF379129" FontWeight="Bold" Foreground="White" FontSize="25" Click="btnImportarParits_Click"/>
         </UniformGrid>
         <ProgressBar x:Name="pbProgres" Height="20" Margin="20,0,20,0"/>
     </StackPanel>
