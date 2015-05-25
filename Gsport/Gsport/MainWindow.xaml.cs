@@ -1558,6 +1558,17 @@ namespace Gsport
                 MessageBox.Show("L'email no és correcte");
                 tbcorreuElec.Text = "";
             }
+        }
+
+        private void btnLlistats_Click(object sender, RoutedEventArgs e)
+        {
+            wndLlistats wnd = new wndLlistats(efadbDataSet);
+            wnd.ShowDialog();
+        }
+
+        private void btnGrafics_Click(object sender, RoutedEventArgs e)
+        {
+
         } 
     }
 }

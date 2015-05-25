@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Gsport" x:Class="Gsport.wndCercar"
-        Title="wndCercar" Height="425.373" Width="834.015" WindowStartupLocation="CenterScreen">
+        Title="Cercar" Height="425.373" Width="834.015" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <ImageBrush ImageSource="Fotos/grass.jpg" Stretch="UniformToFill"/>
     </Window.Background>
@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <WrapPanel Orientation="Vertical">
             <WrapPanel Orientation="Horizontal" Margin="4" Background="#FF52B64E" HorizontalAlignment="Center">
-                <RadioButton x:Name="rbEquip" Content="Equips" GroupName="grCerca" FontSize="15" Margin="0,0,10,0" Checked="rbEquip_Checked" FontWeight="Bold" Foreground="#FF0B2E10"/>
+                <RadioButton x:Name="rbEquip" Content="Equips" GroupName="grCerca" FontSize="15" Margin="0,0,10,0" Checked="rbEquip_Checked" FontWeight="Bold" Foreground="#FF0B2E10" IsChecked="True"/>
                 <RadioButton x:Name="rbEquipRivals" Content="Equips Rivals" GroupName="grCerca" FontSize="15" Margin="0,0,10,0" Checked="rbEquipRivals_Checked" FontWeight="Bold" Foreground="#FF0B2E10"/>
                 <RadioButton x:Name="rbJugador" Margin="0,0,10,0" Content="Jugadors" GroupName="grCerca" FontSize="15" Checked="rbJugador_Checked" FontWeight="Bold" Foreground="#FF0B2E10"/>
                 <RadioButton x:Name="rbEntrenador" Margin="0,0,10,0" Content="Entrenadors" GroupName="grCerca" FontSize="15" Checked="rbEntrenador_Checked" FontWeight="Bold" Foreground="#FF0B2E10"/>

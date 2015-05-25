@@ -30,9 +30,11 @@ namespace Gsport
         public int id;
         public string queEs = "";
         public DataRow drSelect;
+        
         public wndCercar()
         {
             InitializeComponent();
+            
         }
         public wndCercar(efadbDataSet dataSet,bool convocatoria)
         {

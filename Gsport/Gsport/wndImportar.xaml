@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Gsport.wndImportar"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="wndImportar" Height="381.59" Width="544.77">
+        Title="Importador" Height="381.59" Width="544.77">
     <Window.Background>
         <ImageBrush ImageSource="Fotos/grass.jpg"/>
     </Window.Background>
