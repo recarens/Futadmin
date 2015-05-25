@@ -29,7 +29,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="cdmenu" Width="165" MaxWidth="165"/>
-            <ColumnDefinition x:Name="cdjugadors" Width="0"/>
+            <ColumnDefinition x:Name="cdjugadors" Width="800"/>
             <ColumnDefinition x:Name="cdequips" Width="0"/>
             <ColumnDefinition x:Name="cdntrenadors" Width="0"/>
             <ColumnDefinition x:Name="cdTemporada" Width="0"/>
@@ -75,7 +75,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Data naixement:"/>
-                            <DatePicker x:Name="dpAnyNeixament" MaxWidth="150" Margin="10,5,10,5" FontSize="16" BorderBrush="{x:Null}" Text="{Binding data_neixament, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" DisplayDateStart="2015-05-07" SelectedDate="{Binding data_naixement, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" SelectedDateChanged="dpAnyNeixament_SelectedDateChanged"/>
+                            <DatePicker x:Name="dpAnyNeixament" MaxWidth="150" Margin="10,5,10,5" FontSize="16" BorderBrush="{x:Null}" SelectedDate="{Binding data_naixement, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" SelectedDateChanged="dpAnyNeixament_SelectedDateChanged"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Telèfon:"/>
@@ -87,11 +87,11 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Sexe:"/>
-                            <ComboBox x:Name="tbSexe" MinWidth="201" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}" SelectedItem="{Binding sexe, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Background="{x:Null}"/>
+                            <ComboBox x:Name="tbSexe" MinWidth="201" Margin="30,5,10,5" FontSize="16" BorderBrush="{x:Null}" Background="{x:Null}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Data inscripció:"/>
-                            <DatePicker x:Name="dpAnyInscripcio" MaxWidth="155" Margin="10,5,10,5" FontSize="16" BorderBrush="{x:Null}" SelectedDate="2000-01-01"/>
+                            <DatePicker x:Name="dpAnyInscripcio" MaxWidth="155" Margin="10,5,10,5" FontSize="16" BorderBrush="{x:Null}" SelectedDate="{Binding data_inscripcio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Margin="4" FontSize="14" FontWeight="Bold" Foreground="#FF0B2E10" Content="Tarjeta Sanitaria:"/>
@@ -203,7 +203,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn x:Name="data_lesioColumn" Header="data lesio" Width="100">
+                                <DataGridTemplateColumn x:Name="data_lesioColumn" Header="data lesio">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <DatePicker SelectedDate="{Binding data_lesio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>

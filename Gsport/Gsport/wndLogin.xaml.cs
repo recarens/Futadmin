@@ -66,6 +66,7 @@ namespace Gsport
                 if(nErrors >= 5)
                 {
                     MessageBox.Show("T'has equivocat molts cops");
+                    Environment.Exit(0);
                 }
                 else
                     MessageBox.Show("No és correcte");
@@ -110,6 +111,14 @@ namespace Gsport
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void pbContrasenya_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                btnLogin_Click(this, null);
+            }
         }
     }
 }
