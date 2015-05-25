@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -1096,6 +1097,7 @@ namespace Gsport
                     efadbDataSetpartitsTableAdapter.Fill(efadbDataSet.partits);
                     partitsViewSource.View.MoveCurrentToLast();
                     MessageBox.Show("S'ha guardat: " + queEs);
+                    AmagarTot();
                 }
                 catch (Exception ex)
                 {
@@ -1153,9 +1155,18 @@ namespace Gsport
                     {
                         Process ps;
                         ProcessStartInfo psi = new ProcessStartInfo("http://gsports.es/gsport/notificacioConvocatoria.php?idConvocatoria=" + efadbDataSet.convocatories.Rows[efadbDataSet.convocatories.Rows.Count - 1]["id_convocatoria"]);
-                        //psi.WindowStyle = ProcessWindowStyle.Hidden; //aixi no es veu la finestra
+                        psi.WindowStyle = ProcessWindowStyle.Hidden; //aixi no es veu la finestra
                         ps = Process.Start(psi);
-                        ps.Close();
+                        //ps.Close();
+                        //HttpWebRequest peticio = (HttpWebRequest)WebRequest.Create("http://gsports.es/gsport/notificacioConvocatoria.php");
+                        //peticio.Method = "POST";
+                        //peticio.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
+                        //peticio.ContentType = "text/html";
+
+                        //string postData = "idConvocatoria=" + efadbDataSet.convocatories.Rows[efadbDataSet.convocatories.Rows.Count - 1]["id_convocatoria"];
+                        //byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+
+                        //peticio.GetResponse();
                     }
                     btnGuardarConvocatoria.IsEnabled = false;
                 }
@@ -1531,6 +1542,11 @@ namespace Gsport
             try
             {
                 edat = Convert.ToDateTime(DateTime.Now).Year - Convert.ToDateTime(((DatePicker)sender).SelectedDate.ToString()).Year;
+
+                if( (Convert.ToDateTime(DateTime.Now).Month) < (Convert.ToDateTime(((DatePicker)sender).SelectedDate.ToString()).Month)) {
+                    edat = edat - 1;
+                }
+
                 tbEdat.Content = edat + "";
             }
             catch{}
