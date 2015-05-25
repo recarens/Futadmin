@@ -1153,20 +1153,19 @@ namespace Gsport
                     MessageBoxResult resultat = MessageBox.Show("S'ha guardat correctament \n Vols enviar notificació?", "", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                     if(resultat == MessageBoxResult.Yes)
                     {
-                        Process ps;
-                        ProcessStartInfo psi = new ProcessStartInfo("http://gsports.es/gsport/notificacioConvocatoria.php?idConvocatoria=" + efadbDataSet.convocatories.Rows[efadbDataSet.convocatories.Rows.Count - 1]["id_convocatoria"]);
-                        psi.WindowStyle = ProcessWindowStyle.Hidden; //aixi no es veu la finestra
-                        ps = Process.Start(psi);
-                        //ps.Close();
-                        //HttpWebRequest peticio = (HttpWebRequest)WebRequest.Create("http://gsports.es/gsport/notificacioConvocatoria.php");
-                        //peticio.Method = "POST";
-                        //peticio.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
-                        //peticio.ContentType = "text/html";
-
-                        //string postData = "idConvocatoria=" + efadbDataSet.convocatories.Rows[efadbDataSet.convocatories.Rows.Count - 1]["id_convocatoria"];
-                        //byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-
-                        //peticio.GetResponse();
+                        // Generem la Notificació PUSH a partir del webService
+                        string url = "http://gsports.es/gsport/notificacioConvocatoria.php?idConvocatoria=" + efadbDataSet.convocatories.Rows[efadbDataSet.convocatories.Rows.Count - 1]["id_convocatoria"];
+                        string result = null;
+                        try
+                        {
+                            WebClient client = new WebClient();
+                            result = client.DownloadString(url);
+                            
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
                     }
                     btnGuardarConvocatoria.IsEnabled = false;
                 }
