@@ -602,27 +602,30 @@ namespace Gsport
         {
             bool trobat = false;
             btnGuardarEntrenador.IsEnabled = true;
-            if (dniTextBox.Text.Length > 8 && !esborrat)
+            if (cdntrenadors.Width.Value > 0)
             {
-                foreach (DataRow dr in efadbDataSet.Tables["entrenadors"].Rows)
+                if (dniTextBox.Text.Length > 8 && !esborrat)
                 {
-                    if (dr["dni"].ToString().ToLower() == dniTextBox.Text.Trim().ToLower())
+                    foreach (DataRow dr in efadbDataSet.Tables["entrenadors"].Rows)
                     {
-                        trobat = true;
+                        if (dr["dni"].ToString().ToLower() == dniTextBox.Text.Trim().ToLower())
+                        {
+                            trobat = true;
+                        }
+                    }
+                    if (trobat)//aixo fa que si no es una modificacio deseviliti el boto guardar
+                    {
+                        if (!objectaCercat)
+                        {
+                            MessageBox.Show("Ja existeix");
+                            btnGuardarEntrenador.IsEnabled = false;
+                        }
                     }
                 }
-                if (trobat)//aixo fa que si no es una modificacio deseviliti el boto guardar
+                else
                 {
-                    if (!objectaCercat)
-                    {
-                        MessageBox.Show("Ja existeix");
-                        btnGuardarEntrenador.IsEnabled = false;
-                    }
+                    btnGuardarEntrenador.IsEnabled = false;
                 }
-            }
-            else
-            {
-                btnGuardarEntrenador.IsEnabled = false;
             }
         }
 
@@ -1566,9 +1569,9 @@ namespace Gsport
             wnd.ShowDialog();
         }
 
-        private void btnGrafics_Click(object sender, RoutedEventArgs e)
-        {
+        //private void btnGrafics_Click(object sender, RoutedEventArgs e)
+        //{
 
-        } 
+        //} 
     }
 }

@@ -48,7 +48,7 @@
             <Button x:Name="btnComvocatories" Content="+ Convocatoria" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}"  Foreground="#FF0B2E10" FontWeight="Bold" IsEnabled="False" Click="btnComvocatories_Click"/>
             <Button x:Name="btnImportador" Content="Importador" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10"  FontWeight="Bold" IsEnabled="False" Click="btnImportador_Click"/>
             <Button x:Name="btnLlistats" Content="Llistat de jugadors" Margin="9" FontSize="15" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10"  FontWeight="Bold" Click="btnLlistats_Click"/>
-            <Button x:Name="btnGrafics" Content="Grafics" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold" Click="btnGrafics_Click"/>
+            <!--<Button x:Name="btnGrafics" Content="Grafics" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold" Click="btnGrafics_Click"/>-->
             <Button x:Name="btnSortir" Content="Sortir" Margin="9" Click="btnSortir_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold"/>
             
         </StackPanel>

@@ -305,5 +305,10 @@ namespace Gsport
                 cnMySql.Close();
             }
         }
+
+        private void btnImportarrivals_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

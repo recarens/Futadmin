@@ -42,19 +42,23 @@ namespace Gsport
             dgResultat = new DataGrid();
             InitializeComponent();
             dataSetAux = dataSet;
+            tbBusca.Width = 0;
             if(convocatoria)
             {
                 rbEntrenador.IsEnabled = false;
                 rbJugador.IsEnabled = false;
                 rbEquip.IsEnabled = false;
                 rbEquipRivals.IsEnabled = false;
-                rbPartits.IsChecked = true;
-            }
-
+                rbEntrenador.Visibility = Visibility.Hidden;
+                rbEquip.Visibility = Visibility.Hidden;
+                rbEquipRivals.Visibility = Visibility.Hidden;
+                rbJugador.Visibility = Visibility.Hidden;
+            }        
         }
 
         private void rbJugador_Checked(object sender, RoutedEventArgs e)
         {
+            tbBusca.Width = 200;
             cbCategoriaCerca.Items.Clear();
             cbCategoriaCerca.IsEnabled = true;
             cbCategoriaCerca.Items.Add("DNI");
@@ -74,6 +78,7 @@ namespace Gsport
 
         private void rbEntrenador_Checked(object sender, RoutedEventArgs e)
         {
+            tbBusca.Width = 200;
             cbCategoriaCerca.Items.Clear();
             cbCategoriaCerca.IsEnabled = true;
             cbCategoriaCerca.Items.Add("DNI");
@@ -97,6 +102,7 @@ namespace Gsport
 
         private void rbEquip_Checked(object sender, RoutedEventArgs e)
         {
+            tbBusca.Width = 200;
             cbCategoriaCerca.Items.Clear();
             cbCategoriaCerca.IsEnabled = false;
             dvEquips = new DataView(dataSetAux.equips);
@@ -123,6 +129,7 @@ namespace Gsport
         }
         private void rbEquipRivals_Checked(object sender, RoutedEventArgs e)
         {
+            tbBusca.Width = 200;
             cbCategoriaCerca.Items.Clear();
             cbCategoriaCerca.IsEnabled = false;
             dvEquipsRivals = new DataView(dataSetAux.equips_rivals);
@@ -144,58 +151,7 @@ namespace Gsport
 
         private void rbPartits_Checked(object sender, RoutedEventArgs e)
         {
-            cbCategoriaCerca.Items.Clear();
-            cbCategoriaCerca.Items.Add("Jornada");
-            cbCategoriaCerca.Items.Add("Rival");
-            cbCategoriaCerca.SelectedIndex = 0;
-            dvPartits = new DataView(dataSetAux.partits);
-            dt = dvPartits.ToTable();
-            dt.Columns.Add("nomEquip", typeof(String));
-            dt.Columns.Add("nomEquipRival", typeof(String));
-            dt.Columns.Add("SocLocal", typeof(String));
-            bool trobatEquip = false;
-            int i = 0;
-            bool trobatEquipRival = false;
-            int j = 0;
-            foreach (DataRow dr in dt.Rows)
-            {   
-                while (!trobatEquip && dataSetAux.equips.Rows.Count > i)
-                {
-                    if(Convert.ToInt32(dr["id_equip"]) == Convert.ToInt32(dataSetAux.equips.Rows[i]["id_equip"]))
-                    {
-                        trobatEquip = true;
-                        dr["nomEquip"] = dataSetAux.equips.Rows[i]["nom"];
-                    }
-                    else
-                        i++;
-                }
-                while (!trobatEquipRival && dataSetAux.equips_rivals.Rows.Count > j)
-                {
-                    if (Convert.ToInt32(dr["id_equip_rival"]) == Convert.ToInt32(dataSetAux.equips_rivals.Rows[j]["id_equip_rival"]))
-                    {
-                        trobatEquipRival = true;
-                        dr["nomEquipRival"] = dataSetAux.equips_rivals.Rows[j]["nom"];
-                    }
-                    else
-                        j++;
-                }
-                trobatEquip = false;
-                i = 0;
-                j = 0;
-                trobatEquipRival = false;
-                if (Convert.ToInt32(dr["visitant"]) == 0)
-                    dr["SocLocal"] = "Si";
-                else
-                    dr["SocLocal"] = "No";
-            }
-            dgResultat.ItemsSource = dt.DefaultView;
-            foreach (DataGridColumn col in dgResultat.Columns)
-            {
-                if (col.DisplayIndex >= 0 && col.DisplayIndex < 3 || col.DisplayIndex >= 5 && col.DisplayIndex < 7)
-                    col.Visibility = Visibility.Hidden;
-                if (col.DisplayIndex == 3)
-                    col.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
-            }
+            Partits();
         }
 
         private void tbBusca_TextChanged(object sender, TextChangedEventArgs e)
@@ -232,9 +188,11 @@ namespace Gsport
             }
             else if(rbPartits.IsChecked == true)
             {
+                //string jornadaNum = "0";
+                //if (tbBusca.Text.Length > 0)
+                //    jornadaNum = tbBusca.Text.Trim().ToLower();
                 if (cbCategoriaCerca.SelectedIndex == 0)
                 {
-
                     if (tbBusca.Text.Trim().ToLower().Length > 0)
                         dt.DefaultView.RowFilter = "jornada = " + tbBusca.Text.Trim().ToLower();
                     else
@@ -283,6 +241,63 @@ namespace Gsport
         private void cbCategoriaCerca_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             tbBusca.Text = "";
+        }
+
+        private void Partits()
+        {
+            tbBusca.Width = 200;
+            cbCategoriaCerca.Items.Clear();
+            cbCategoriaCerca.Items.Add("Jornada");
+            cbCategoriaCerca.Items.Add("Rival");
+            cbCategoriaCerca.SelectedIndex = 0;
+            dvPartits = new DataView(dataSetAux.partits);
+            dt = dvPartits.ToTable();
+            dt.Columns.Add("nomEquip", typeof(String));
+            dt.Columns.Add("nomEquipRival", typeof(String));
+            dt.Columns.Add("SocLocal", typeof(String));
+            bool trobatEquip = false;
+            int i = 0;
+            bool trobatEquipRival = false;
+            int j = 0;
+            foreach (DataRow dr in dt.Rows)
+            {
+                while (!trobatEquip && dataSetAux.equips.Rows.Count > i)
+                {
+                    if (Convert.ToInt32(dr["id_equip"]) == Convert.ToInt32(dataSetAux.equips.Rows[i]["id_equip"]))
+                    {
+                        trobatEquip = true;
+                        dr["nomEquip"] = dataSetAux.equips.Rows[i]["nom"];
+                    }
+                    else
+                        i++;
+                }
+                while (!trobatEquipRival && dataSetAux.equips_rivals.Rows.Count > j)
+                {
+                    if (Convert.ToInt32(dr["id_equip_rival"]) == Convert.ToInt32(dataSetAux.equips_rivals.Rows[j]["id_equip_rival"]))
+                    {
+                        trobatEquipRival = true;
+                        dr["nomEquipRival"] = dataSetAux.equips_rivals.Rows[j]["nom"];
+                    }
+                    else
+                        j++;
+                }
+                trobatEquip = false;
+                i = 0;
+                j = 0;
+                trobatEquipRival = false;
+                if (Convert.ToInt32(dr["visitant"]) == 0)
+                    dr["SocLocal"] = "Si";
+                else
+                    dr["SocLocal"] = "No";
+            }
+            dgResultat.ItemsSource = dt.DefaultView;
+            foreach (DataGridColumn col in dgResultat.Columns)
+            {
+                if (col.DisplayIndex >= 0 && col.DisplayIndex < 3 || col.DisplayIndex >= 5 && col.DisplayIndex < 7)
+                    col.Visibility = Visibility.Hidden;
+                if (col.DisplayIndex == 3)
+                    col.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+            }
         }
     }
 }

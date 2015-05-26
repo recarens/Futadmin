@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <WrapPanel Orientation="Vertical">
             <WrapPanel Orientation="Horizontal" Margin="4" Background="#FF52B64E" HorizontalAlignment="Center">
-                <RadioButton x:Name="rbEquip" Content="Equips" GroupName="grCerca" FontSize="15" Margin="0,0,10,0" Checked="rbEquip_Checked" FontWeight="Bold" Foreground="#FF0B2E10" IsChecked="True"/>
+                <RadioButton x:Name="rbEquip" Content="Equips" GroupName="grCerca" FontSize="15" Margin="0,0,10,0" Checked="rbEquip_Checked" FontWeight="Bold" Foreground="#FF0B2E10"/>
                 <RadioButton x:Name="rbEquipRivals" Content="Equips Rivals" GroupName="grCerca" FontSize="15" Margin="0,0,10,0" Checked="rbEquipRivals_Checked" FontWeight="Bold" Foreground="#FF0B2E10"/>
                 <RadioButton x:Name="rbJugador" Margin="0,0,10,0" Content="Jugadors" GroupName="grCerca" FontSize="15" Checked="rbJugador_Checked" FontWeight="Bold" Foreground="#FF0B2E10"/>
                 <RadioButton x:Name="rbEntrenador" Margin="0,0,10,0" Content="Entrenadors" GroupName="grCerca" FontSize="15" Checked="rbEntrenador_Checked" FontWeight="Bold" Foreground="#FF0B2E10"/>
@@ -30,7 +30,7 @@
         </WrapPanel>
         <WrapPanel Orientation="Horizontal" Grid.Column="1" Margin="10" >
             <Label  FontSize="16" FontWeight="Bold" Foreground="#FF0B2E10" Content="Busca:" Background="#FF52B64E"/>
-            <TextBox x:Name="tbBusca" MinWidth="210" FontSize="14" TextChanged="tbBusca_TextChanged" BorderBrush="{x:Null}" KeyDown="tb_KeyDown"/>
+            <TextBox x:Name="tbBusca" FontSize="14" TextChanged="tbBusca_TextChanged" BorderBrush="{x:Null}" KeyDown="tb_KeyDown" Width="0"/>
         </WrapPanel>
         <DataGrid x:Name="dgResultat" Grid.Row="1" Grid.ColumnSpan="2" Margin="10" IsReadOnly="True" FontSize="14" MouseLeftButtonDown="dgResultat_MouseLeftButtonDown">
         </DataGrid>
