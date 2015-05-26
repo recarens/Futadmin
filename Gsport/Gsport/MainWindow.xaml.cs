@@ -113,7 +113,14 @@ namespace Gsport
                     wpJugadors.DataContext = FindResource("jugadorsViewSource");
                     jugadorsViewSource.View.MoveCurrentToPosition(i);
                     posicioRow = i;
-                    imgImatge.Source = new BitmapImage(new Uri(efadbDataSet.Tables["jugadors"].Rows[i]["nomImatge"].ToString()));//actualitza la foto.
+                    try
+                    {
+                        imgImatge.Source = new BitmapImage(new Uri(efadbDataSet.Tables["jugadors"].Rows[i]["nomImatge"].ToString()));//actualitza la foto.
+                    }
+                    catch
+                    {
+                        imgImatge.Source = new BitmapImage(new Uri(@"C:/Fotos/img.jpg"));
+                    }
                     if (Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[i]["sexe"]) == 0)
                         tbSexe.SelectedItem = "M";
                     else
@@ -246,6 +253,7 @@ namespace Gsport
             queEs = "jugador";
             objectaCercat = false;
             wpJugadors.DataContext = null;
+            imgImatge.Source = new BitmapImage(new Uri(@"C:/Fotos/img.jpg"));
             GridLength gE2 = new GridLength(0, GridUnitType.Star);
             cdequips.Width = gE2;
             GridLength gJ2 = new GridLength(this.ActualWidth,GridUnitType.Star);
@@ -1203,16 +1211,39 @@ namespace Gsport
                         equipsDataGrid.IsReadOnly = true;
                         jugadorsDataGrid.IsReadOnly = true;
                         wpLesions.Height = 0;
+                        wpDadesPersonals.IsEnabled = false;
+                        wpLesionsjugador.IsEnabled = false;
+                        wpDadesTemporada.IsEnabled = false;
+                        wpDadesEntrenador.IsEnabled = false;  
+                        wpDadesEquip.IsEnabled = false;
+                        wpDadesEquipRival.IsEnabled = false;
+                        wpJugadors.IsEnabled = false;
+                        wpPrincipalEntenador.IsEnabled = false;
+                        wpPrincipalEquip.IsEnabled = false;
+                        wpDadesConvocatoria.IsEnabled = false;
+                        wpDadesEntrenador.IsEnabled = false;
+                        wpPrincipalEquip.IsEnabled = false;
+                        spDadesPartit.IsEnabled = false;
+                        btnEsborrarEntrenadors.IsEnabled = false;
+                        btnEsborrarEquips.IsEnabled = false;
+                        btnEsborrarEquipsRivals.IsEnabled = false;
+                        btnEsborrarJugadors.IsEnabled = false;
+                        imgImatge.IsEnabled = false;
                         break;
                     case 2: //Delegat
                         equipsDataGrid.IsReadOnly = true;
                         jugadorsDataGrid.IsReadOnly = true;
+                        btnLlistats.IsEnabled = true;
+                        spDadesEquipRival.IsEnabled = false;
+                        spDadesPartit.IsEnabled = false;
+                        spDadesEntrenador.IsEnabled = false;
                         break;
                     case 3: //Entrenador
                         btnAfageix.IsEnabled = true;
                         btnCrearEquipRival.IsEnabled = true;
                         btnPartits.IsEnabled = true;
                         btnComvocatories.IsEnabled = true;
+                        btnLlistats.IsEnabled = true;
                         break;
                     case 4: //Coordinador
                         btnAfageix.IsEnabled = true;
@@ -1223,6 +1254,7 @@ namespace Gsport
                         btnImportador.IsEnabled = true;
                         btnPartits.IsEnabled = true;
                         btnComvocatories.IsEnabled = true;
+                        btnLlistats.IsEnabled = true;
                         //jugadorsDataGrid.IsReadOnly = false;
                         break;
                     case 5: //Gsport Admin
@@ -1234,6 +1266,7 @@ namespace Gsport
                         btnImportador.IsEnabled = true;
                         btnPartits.IsEnabled = true;
                         btnComvocatories.IsEnabled = true;
+                        btnLlistats.IsEnabled = true;
                         //jugadorsDataGrid.IsReadOnly = false;
                         break;
                 }
