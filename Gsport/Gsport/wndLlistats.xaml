@@ -2,9 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
-        Title="wndLlistats"  MinWidth="300" Width="736" MaxWidth="736" Height="430" MaxHeight="400" WindowStyle="ToolWindow">
+        Title="Llistats"  MinWidth="300" Width="736" MaxWidth="736" Height="430" MaxHeight="400" WindowStyle="ToolWindow">
     <Grid>
-        <WindowsFormsHost HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="300" MinWidth="300" Width="718" Height="375">
+        <WindowsFormsHost HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="300" MinWidth="300" Width="718" Height="375" Margin="0,0,0,-5">
             <rv:ReportViewer x:Name="_reportViewer"/>
         </WindowsFormsHost>
     </Grid>

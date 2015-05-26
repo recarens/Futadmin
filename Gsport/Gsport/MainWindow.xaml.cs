@@ -864,11 +864,11 @@ namespace Gsport
                         efadbDataSet.Tables["jugadors"].Rows.Add(dr);
                         efadbDataSetjugadorsTableAdapter.Update(dr);
                         efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
-                        for (int i = 0; i < efadbDataSet.Tables["temporades"].Rows.Count; i++)
-                        {
+                        //for (int i = 0; i < efadbDataSet.Tables["temporades"].Rows.Count; i++)
+                        //{
                             DataRow dr2 = efadbDataSet.Tables["jugador_temporada"].NewRow();
                             dr2["id_jugador"] = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[efadbDataSet.Tables["jugadors"].Rows.Count - 1]["id_jugador"]);
-                            dr2["id_temporada"] = Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows[i]["id_temporada"]);
+                            dr2["id_temporada"] = Convert.ToInt32(efadbDataSet.Tables["temporades"].Rows[efadbDataSet.Tables["temporades"].Rows.Count-1]["id_temporada"]);
                             dr2["gols"] = 0;
                             dr2["ocasions_de_gol"] = 0;
                             dr2["minuts_jugats"] = 0;
@@ -884,7 +884,7 @@ namespace Gsport
                             efadbDataSet.Tables["jugador_temporada"].Rows.Add(dr2);
                             efadbDataSetjugador_temporadaTableAdapter.Update(dr2);
                             efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
-                        }
+                        //}
                         MessageBox.Show("S'ha guardat: " + queEs);
                         objectaCercat = true;
                         queEs = "jugador";
@@ -894,6 +894,9 @@ namespace Gsport
                         tbSexe.SelectedIndex = Convert.ToInt32(efadbDataSet.jugadors.Rows[posicioRow]["sexe"]);
                         btnEsborrarJugadors.IsEnabled = true;
                         tbDni.IsEnabled = false;
+
+                        
+
                     }
                     catch (Exception ex)
                     {
@@ -1019,15 +1022,22 @@ namespace Gsport
                         efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
                         efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);
                         efadbDataSet.Tables["jugadors"].Rows[posicioRow]["nomImatge"] = rutaImg;
+                        
                         efadbDataSetjugadorsTableAdapter.Update(efadbDataSet.jugadors);
                         efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
                         efadbDataSetjugador_temporadaTableAdapter.Update(efadbDataSet.jugador_temporada);
+                        
+                        // Generem la Nota GS
+                        string url = "http://gsports.es/gsport/jugadorEquip.php?idJugador=" + efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_jugador"];
+                        string result = null;
+                        WebClient client = new WebClient();
+                        result = client.DownloadString(url);
                         //efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
+                        efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
                         efadbDataSetlesionsTableAdapter.Update(efadbDataSet.lesions);                       
                         efadbDataSetlesionsTableAdapter.Fill(efadbDataSet.lesions);
-                        //CarregarNomsTemporades();
-                        //refresh
-                        //efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada); 
+                        CarregarNomsTemporades();
+                        //refresh 
                         jugadorsViewSource.View.MoveCurrentToPosition(posicioRow);
                         tbSexe.SelectedIndex = Convert.ToInt32(efadbDataSet.jugadors.Rows[posicioRow]["sexe"]);
                         MessageBox.Show("S'ha guardat: " + queEs);
@@ -1110,6 +1120,8 @@ namespace Gsport
                     efadbDataSet.Tables["jugador_temporada"].Rows.Add(dr2);
                     efadbDataSetjugador_temporadaTableAdapter.Update(dr2);
                     efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
+                    btnAfageix.IsEnabled = true;
+                    btnImportador.IsEnabled = false;
                 }
                 btnGuardarTemporada.IsEnabled = false;
             }
@@ -1177,7 +1189,12 @@ namespace Gsport
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
+                    if (cbEquipClub.SelectedIndex < 0 && cbEquipRival.SelectedIndex < 0)
+                        MessageBox.Show("No has triat els equips");
+                    else if (cbEquipClub.SelectedIndex < 0 || cbEquipRival.SelectedIndex < 0)
+                        MessageBox.Show("No has triat un dels equips");
+                    else
+                        MessageBox.Show(ex.ToString());
                 }
             }
             else
@@ -1406,6 +1423,11 @@ namespace Gsport
                 }
                 if(efadbDataSet.Tables["equips_rivals"].Rows.Count == 0)
                     btnPartits.IsEnabled = false;
+                if (efadbDataSet.Tables["temporades"].Rows.Count == 0)
+                {
+                    btnAfageix.IsEnabled = false;
+                    btnImportador.IsEnabled = false;
+                }
             }
             catch
             {
@@ -1441,6 +1463,7 @@ namespace Gsport
             efadbDataSetequipsTableAdapter.Fill(efadbDataSet.equips);
             efadbDataSetentrenadorsTableAdapter.Fill(efadbDataSet.entrenadors);
             efadbDataSetpartitsTableAdapter.Fill(efadbDataSet.partits);
+            efadbDataSetequips_rivalsTableAdapter.Fill(efadbDataSet.equips_rivals);
             AmagarTot();
         }
 
