@@ -60,7 +60,6 @@ namespace Gsport
         int idEquipConvocatoria = 0;
         public MainWindow()
         {
-            
             InitializeComponent(); 
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("ca-ES");
             idiomes.WrapperIdiomes.ChangeCulture(Thread.CurrentThread.CurrentUICulture);
@@ -87,6 +86,11 @@ namespace Gsport
         /// <param name="e"></param>
         private void btnCerca_Click(object sender, RoutedEventArgs e)
         {
+            efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
+            efadbDataSetentrenadorsTableAdapter.Fill(efadbDataSet.entrenadors);
+            efadbDataSetequips_rivalsTableAdapter.Fill(efadbDataSet.equips_rivals);
+            efadbDataSetequipsTableAdapter.Fill(efadbDataSet.equips);
+            efadbDataSetpartitsTableAdapter.Fill(efadbDataSet.partits);
             wndCercar wnd = new wndCercar(efadbDataSet,false);
             wnd.ShowDialog();
             idCercat = wnd.id;
@@ -217,6 +221,60 @@ namespace Gsport
                         cblocalVisitant.SelectedItem = "Visitant";
                 }
             }
+            else
+            {
+                if (objectaCercat)
+                {
+                    if (queEs == "jugador")
+                    {
+                        jugadorsViewSource.View.MoveCurrentToPosition(posicioRow);
+                        try
+                        {
+                            imgImatge.Source = new BitmapImage(new Uri(efadbDataSet.Tables["jugadors"].Rows[posicioRow]["nomImatge"].ToString()));//actualitza la foto.
+                        }
+                        catch
+                        {
+                            imgImatge.Source = new BitmapImage(new Uri(@"C:/Fotos/img.jpg"));
+                        }
+                        if (Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[posicioRow]["sexe"]) == 0)
+                            tbSexe.SelectedItem = "M";
+                        else
+                            tbSexe.SelectedItem = "F";
+                        tbposicioNom.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_posicio"]);
+                        cbequip.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_equip"]);
+                        CarregarNomsTemporades();
+                        tbDni.IsEnabled = false;
+                    }
+                    else if (queEs == "equip")
+                    {
+                        equipsViewSource.View.MoveCurrentToPosition(posicioRow);
+                        id_categoriaComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[posicioRow]["id_categoria"]);
+                        id_divisioComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[posicioRow]["id_divisio"]);
+                        id_entrenadorComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips"].Rows[posicioRow]["id_entrenador"]);
+                    }
+                    else if (queEs == "entrenador")
+                    {
+                        entrenadorsViewSource.View.MoveCurrentToPosition(posicioRow);
+                    }
+                    else if (queEs == "equiprival")
+                    {
+                        equips_rivalsViewSource.View.MoveCurrentToPosition(posicioRow);
+                        id_faseComboBox.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["equips_rivals"].Rows[posicioRow]["id_fase"]);
+                    }
+                    else if (queEs == "partit")
+                    {
+                        partitsViewSource.View.MoveCurrentToPosition(posicioRow);
+                        cbEquipClub.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_equip"]);
+                        cbEquipRival.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_equip_rival"]);
+                        cbTipusPartit.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_tipus_partit"]);
+                        cbFasePartit.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_fase"]);
+                        if (Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["visitant"]) == 0)
+                            cblocalVisitant.SelectedItem = "Local";
+                        else
+                            cblocalVisitant.SelectedItem = "Visitant";
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -343,6 +401,9 @@ namespace Gsport
                 posicioRow = efadbDataSet.equips.Count - 1;
             else
                 posicioRow = 0;
+            id_categoriaComboBox.SelectedIndex = 0;
+            id_divisioComboBox.SelectedIndex = 0;
+            id_entrenadorComboBox.SelectedIndex = 0;
         }
 
         /// <summary>
