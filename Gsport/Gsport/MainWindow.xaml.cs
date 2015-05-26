@@ -897,7 +897,10 @@ namespace Gsport
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
+                        if(cbequip.SelectedIndex < 0)
+                            MessageBox.Show("No has triat l'equip del jugador");
+                        else
+                            MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
                     }
                 }
                 if (cdntrenadors.Width.Value > 0)
@@ -971,7 +974,10 @@ namespace Gsport
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
+                        if (id_entrenadorComboBox.SelectedIndex< 0)
+                            MessageBox.Show("Falta l'entrenador de l'equip");
+                        else
+                            MessageBox.Show("No s'ha pogut guardar:" + ex.ToString());
                     }
                 }
                 if (cdEquipsRivals.Width.Value > 0)
@@ -1009,8 +1015,6 @@ namespace Gsport
                 {
                     if (queEs == "jugador")
                     {
-                        bool trobat = false;
-                        int i = 0;
                         efadbDataSet.Tables["jugadors"].Rows[posicioRow]["sexe"] = Convert.ToInt16(tbSexe.SelectedIndex);
                         efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_posicio"] = Convert.ToInt32(tbposicioNom.SelectedValue);
                         efadbDataSet.Tables["jugadors"].Rows[posicioRow]["id_equip"] = Convert.ToInt32(cbequip.SelectedValue);
