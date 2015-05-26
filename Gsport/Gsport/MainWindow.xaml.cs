@@ -1224,10 +1224,15 @@ namespace Gsport
                         wpDadesEntrenador.IsEnabled = false;
                         wpPrincipalEquip.IsEnabled = false;
                         spDadesPartit.IsEnabled = false;
-                        btnEsborrarEntrenadors.IsEnabled = false;
-                        btnEsborrarEquips.IsEnabled = false;
-                        btnEsborrarEquipsRivals.IsEnabled = false;
-                        btnEsborrarJugadors.IsEnabled = false;
+                        btnEsborrarEntrenadors.Visibility= Visibility.Hidden;
+                        btnEsborrarEquips.Visibility = Visibility.Hidden;
+                        btnEsborrarEquipsRivals.Visibility = Visibility.Hidden;
+                        btnEsborrarJugadors.Visibility = Visibility.Hidden;
+                        btnGuardar.Visibility = Visibility.Hidden;
+                        btnGuardarEntrenador.Visibility = Visibility.Hidden;
+                        btnGuardarEquip.Visibility = Visibility.Hidden;
+                        btnGuardarPartit.Visibility = Visibility.Hidden;
+                        btnGuardarEquipRival.Visibility = Visibility.Hidden;
                         imgImatge.IsEnabled = false;
                         break;
                     case 2: //Delegat
