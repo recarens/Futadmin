@@ -15,37 +15,37 @@ using System.Windows.Shapes;
 namespace Gsport
 {
     /// <summary>
-    /// Lógica de interacción para wndLlistats.xaml
+    /// Lógica de interacción para wndLlistatEquips.xaml
     /// </summary>
-    public partial class wndLlistats : Window
+    public partial class wndLlistatEquips : Window
     {
         efadbDataSet datasetAux = new efadbDataSet();
-        public wndLlistats(efadbDataSet ds)
+        public wndLlistatEquips(efadbDataSet ds)
         {
             InitializeComponent();
             datasetAux = ds;
-            _reportViewer.Load += _reportViewer_Load;
+            _reportViewer.Load += _reportViewerEquip_Load;
         }
 
-        void _reportViewer_Load(object sender, EventArgs e)
+        void _reportViewerEquip_Load(object sender, EventArgs e)
         {
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new
             Microsoft.Reporting.WinForms.ReportDataSource();
             //efadbDataSet dataset = new efadbDataSet();
             datasetAux.BeginInit();
-            reportDataSource1.Name = "dsInformes";
+            reportDataSource1.Name = "dtPartits";//son equips
             //Name of the report dataset in our .RDLC file
-            reportDataSource1.Value = datasetAux.jugadors;
+            reportDataSource1.Value = datasetAux.equips;
             this._reportViewer.LocalReport.DataSources.Add(reportDataSource1);
-            this._reportViewer.LocalReport.ReportPath = "../../Report1.rdlc";
+            this._reportViewer.LocalReport.ReportPath = "../../ReportEquips.rdlc";
             datasetAux.EndInit();
             //fill data into WpfApplication4DataSet
-            efadbDataSetTableAdapters.jugadorsTableAdapter
+            efadbDataSetTableAdapters.equipsTableAdapter
             accountsTableAdapter = new
-            efadbDataSetTableAdapters.jugadorsTableAdapter();
+            efadbDataSetTableAdapters.equipsTableAdapter();
 
             accountsTableAdapter.ClearBeforeFill = true;
-            accountsTableAdapter.Fill(datasetAux.jugadors);
+            accountsTableAdapter.Fill(datasetAux.equips);
             _reportViewer.RefreshReport();
             //_isReportViewerLoaded = true;
         }

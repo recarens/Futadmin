@@ -110,6 +110,12 @@
     <Compile Include="wndImportar.xaml.cs">
       <DependentUpon>wndImportar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="wndLlistatEntrenador.xaml.cs">
+      <DependentUpon>wndLlistatEntrenador.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="wndLlistatEquips.xaml.cs">
+      <DependentUpon>wndLlistatEquips.xaml</DependentUpon>
+    </Compile>
     <Compile Include="wndLlistats.xaml.cs">
       <DependentUpon>wndLlistats.xaml</DependentUpon>
     </Compile>
@@ -141,6 +147,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="wndImportar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wndLlistatEntrenador.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="wndLlistatEquips.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -189,6 +203,8 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report1.rdlc" />
+    <EmbeddedResource Include="ReportEntrenadors.rdlc" />
+    <EmbeddedResource Include="ReportEquips.rdlc" />
     <None Include="efadbDataSet.xsc">
       <DependentUpon>efadbDataSet.xsd</DependentUpon>
     </None>

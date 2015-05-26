@@ -1,11 +1,12 @@
-﻿<Window x:Class="Gsport.wndLlistats"
+﻿<Window x:Class="Gsport.wndLlistatEquips"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
-        Title="Llistat jugadors"  MinWidth="300" Width="736" MaxWidth="736" Height="430" MaxHeight="400" WindowStyle="ToolWindow">
+        Title="LlistatEquips" Height="300" Width="600" ResizeMode="NoResize">
     <Grid>
-        <WindowsFormsHost HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="300" MinWidth="300" Width="718" Height="375" Margin="0,0,0,-5">
+        <WindowsFormsHost HorizontalAlignment="Left" Height="269" VerticalAlignment="Top" Width="584">
             <rv:ReportViewer x:Name="_reportViewer"/>
         </WindowsFormsHost>
+
     </Grid>
 </Window>

@@ -86,6 +86,9 @@ namespace Gsport
         /// <param name="e"></param>
         private void btnCerca_Click(object sender, RoutedEventArgs e)
         {
+            bool convocatoria = false;
+            if (cdConvocatoria.Width.Value > 0)
+                convocatoria = true;
             efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
             efadbDataSetentrenadorsTableAdapter.Fill(efadbDataSet.entrenadors);
             efadbDataSetequips_rivalsTableAdapter.Fill(efadbDataSet.equips_rivals);
@@ -273,6 +276,8 @@ namespace Gsport
                         else
                             cblocalVisitant.SelectedItem = "Visitant";
                     }
+                    if(convocatoria)
+                        AmagarTot();
                 }
             }
         }
@@ -1324,6 +1329,13 @@ namespace Gsport
                         spDadesEquipRival.IsEnabled = false;
                         spDadesPartit.IsEnabled = false;
                         spDadesEntrenador.IsEnabled = false;
+                        btnEsborrarEntrenadors.Visibility= Visibility.Hidden;
+                        btnEsborrarEquips.Visibility = Visibility.Hidden;
+                        btnEsborrarEquipsRivals.Visibility = Visibility.Hidden;
+                        btnGuardarEntrenador.Visibility = Visibility.Hidden;
+                        btnGuardarEquip.Visibility = Visibility.Hidden;
+                        btnGuardarPartit.Visibility = Visibility.Hidden;
+                        btnGuardarEquipRival.Visibility = Visibility.Hidden;
                         break;
                     case 3: //Entrenador
                         btnAfageix.IsEnabled = true;
@@ -1331,6 +1343,7 @@ namespace Gsport
                         btnPartits.IsEnabled = true;
                         btnComvocatories.IsEnabled = true;
                         btnLlistats.IsEnabled = true;
+
                         break;
                     case 4: //Coordinador
                         btnAfageix.IsEnabled = true;
@@ -1342,6 +1355,8 @@ namespace Gsport
                         btnPartits.IsEnabled = true;
                         btnComvocatories.IsEnabled = true;
                         btnLlistats.IsEnabled = true;
+                        btnLlistatEntrenadors.IsEnabled = true;
+                        btnLlistatEquips.IsEnabled = true;
                         //jugadorsDataGrid.IsReadOnly = false;
                         break;
                     case 5: //Gsport Admin
@@ -1354,6 +1369,8 @@ namespace Gsport
                         btnPartits.IsEnabled = true;
                         btnComvocatories.IsEnabled = true;
                         btnLlistats.IsEnabled = true;
+                        btnLlistatEntrenadors.IsEnabled = true;
+                        btnLlistatEquips.IsEnabled = true;
                         //jugadorsDataGrid.IsReadOnly = false;
                         break;
                 }
@@ -1580,7 +1597,6 @@ namespace Gsport
                         }
                         MessageBox.Show("S'ha esborrat: " + queEs);
                     }
-                    
                     esborrat = false;
                     objectaCercat = false;
                     AmagarTot();
@@ -1624,6 +1640,7 @@ namespace Gsport
                 equipsViewSource.View.MoveCurrentToPosition(i);
                 if (idCercat > 0)
                     btnGuardarConvocatoria.IsEnabled = true;
+                lbJugadorsConvocats.Items.Clear();
             }
             catch{}
         }
@@ -1692,6 +1709,18 @@ namespace Gsport
         private void btnLlistats_Click(object sender, RoutedEventArgs e)
         {
             wndLlistats wnd = new wndLlistats(efadbDataSet);
+            wnd.ShowDialog();
+        }
+
+        private void btnLlistatEquips_Click(object sender, RoutedEventArgs e)
+        {
+            wndLlistatEquips wnd = new wndLlistatEquips(efadbDataSet);
+            wnd.ShowDialog();
+        }
+
+        private void btnLlistatEntrenadors_Click(object sender, RoutedEventArgs e)
+        {
+            wndLlistatEntrenador wnd = new wndLlistatEntrenador(efadbDataSet);
             wnd.ShowDialog();
         }
 
