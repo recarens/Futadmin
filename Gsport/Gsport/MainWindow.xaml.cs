@@ -136,6 +136,11 @@ namespace Gsport
                     cbequip.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["jugadors"].Rows[i]["id_equip"]);
                     CarregarNomsTemporades();
                     tbDni.IsEnabled = false;
+                    foreach (DataGridColumn col in lesionsDataGrid.Columns)
+                    {
+                        if (col.DisplayIndex == 3)
+                            col.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+                    }   
                 }
                 else if (queEs == "equip")
                 {
@@ -266,15 +271,18 @@ namespace Gsport
                     }
                     else if (queEs == "partit")
                     {
-                        partitsViewSource.View.MoveCurrentToPosition(posicioRow);
-                        cbEquipClub.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_equip"]);
-                        cbEquipRival.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_equip_rival"]);
-                        cbTipusPartit.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_tipus_partit"]);
-                        cbFasePartit.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_fase"]);
-                        if (Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["visitant"]) == 0)
-                            cblocalVisitant.SelectedItem = "Local";
-                        else
-                            cblocalVisitant.SelectedItem = "Visitant";
+                        if (posicioRow < efadbDataSet.Tables["partits"].Rows.Count)//ultims canvis
+                        {
+                            partitsViewSource.View.MoveCurrentToPosition(posicioRow);
+                            cbEquipClub.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_equip"]);
+                            cbEquipRival.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_equip_rival"]);
+                            cbTipusPartit.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_tipus_partit"]);
+                            cbFasePartit.SelectedValue = Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["id_fase"]);
+                            if (Convert.ToInt32(efadbDataSet.Tables["partits"].Rows[posicioRow]["visitant"]) == 0)
+                                cblocalVisitant.SelectedItem = "Local";
+                            else
+                                cblocalVisitant.SelectedItem = "Visitant";
+                        }
                     }
                     if(convocatoria)
                         AmagarTot();
@@ -458,6 +466,10 @@ namespace Gsport
             cdEquipsRivals.Width = gER2;
             GridLength gCon2 = new GridLength(0, GridUnitType.Star);
             cdConvocatoria.Width = gCon2;
+            cbEquipClub.SelectedIndex = 0;
+            cbEquipRival.SelectedIndex = 0;
+            cbFasePartit.SelectedIndex = 0;
+            cbTipusPartit.SelectedIndex = 0;
         }
 
         private void btnCrearEquipRival_Click(object sender, RoutedEventArgs e)
@@ -488,6 +500,7 @@ namespace Gsport
 
         private void btnComvocatories_Click(object sender, RoutedEventArgs e)
         {
+            lbJugadorsConvocats.Items.Clear();
             gridTotsJugadors.DataContext = null;
             lblPartitVs.Content = "";
             btnGuardarConvocatoria.IsEnabled = false;
@@ -1654,19 +1667,23 @@ namespace Gsport
         {
             bool trobat = false;
             int j = 0;
-            while (!trobat && j < lbJugadorsConvocats.Items.Count)
+            try
             {
-                if (lbJugadorsConvocats.Items[j].Equals(id_jugadorListBox.SelectedItem))
+                while (!trobat && j < lbJugadorsConvocats.Items.Count)
                 {
-                    trobat = true;
+                    if (lbJugadorsConvocats.Items[j].Equals(id_jugadorListBox.SelectedItem))
+                    {
+                        trobat = true;
+                    }
+                    j++;
                 }
-                j++;
+                if (!trobat)
+                    lbJugadorsConvocats.Items.Add(id_jugadorListBox.SelectedItem);
+                else
+                    MessageBox.Show("Ja l'has posat");
+                this.UpdateLayout();
             }
-            if (!trobat)
-                lbJugadorsConvocats.Items.Add(id_jugadorListBox.SelectedItem);
-            else
-                MessageBox.Show("Ja l'has posat");
-            this.UpdateLayout();
+            catch{}
         }
 
         /// <summary>
