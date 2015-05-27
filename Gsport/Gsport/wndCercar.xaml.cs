@@ -178,7 +178,10 @@ namespace Gsport
             }
             else if(rbEquip.IsChecked == true)
             {
-                dvEquips.RowFilter = "nom LIKE '%"+tbBusca.Text.Trim().ToLower()+"%'";
+                if (tbBusca.Text.Trim().ToLower() == "")
+                {
+                    dvEquips.RowFilter = "nom LIKE '%" + tbBusca.Text.Trim().ToLower() + "%'";
+                }
                 dgResultat.ItemsSource = dvEquips;
             }
             else if(rbEquipRivals.IsChecked == true)
