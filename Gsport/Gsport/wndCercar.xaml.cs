@@ -196,11 +196,10 @@ namespace Gsport
                     if (tbBusca.Text.Trim().ToLower().Length > 0)
                         dt.DefaultView.RowFilter = "jornada = " + tbBusca.Text.Trim().ToLower();
                     else
-                        dt.DefaultView.RowFilter = "jornada > 0";
+                        dt.DefaultView.RowFilter = String.Empty;
                 }
-                else
-                    dt.DefaultView.RowFilter = "nomEquipRival LIKE '%" + tbBusca.Text.Trim().ToLower() + "%'";
                 dgResultat.ItemsSource = dt.DefaultView;
+                
             }
         }
         private void dgResultat_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -248,7 +247,7 @@ namespace Gsport
             tbBusca.Width = 200;
             cbCategoriaCerca.Items.Clear();
             cbCategoriaCerca.Items.Add("Jornada");
-            cbCategoriaCerca.Items.Add("Rival");
+            //cbCategoriaCerca.Items.Add("Rival");
             cbCategoriaCerca.SelectedIndex = 0;
             dvPartits = new DataView(dataSetAux.partits);
             dt = dvPartits.ToTable();
