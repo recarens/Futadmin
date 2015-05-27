@@ -47,8 +47,8 @@ namespace Gsport
             bool trobat = false;
             foreach (DataRow Linia in dataSetAux.usuaris.Rows)
             {
-                if (tbUsuari.Text.Trim() == Linia["username"].ToString().Trim())
-                    if (pbContrasenya.Password.Trim() == Linia["password"].ToString().Trim())
+                if (tbUsuari.Text.Trim().ToLower() == Linia["username"].ToString().Trim().ToLower())
+                    if (pbContrasenya.Password.Trim().ToLower() == Linia["password"].ToString().Trim().ToLower())
                     {
                         trobat = true;
                         codiUsuari = (int)Linia["id_usuari"];
