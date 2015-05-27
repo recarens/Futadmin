@@ -38,6 +38,11 @@ namespace Gsport
         }
         public wndCercar(efadbDataSet dataSet,bool convocatoria)
         {
+            dvEquips = new DataView();
+            dvEntrenadors = new DataView();
+            dvJugadors = new DataView();
+            dvEquipsRivals = new DataView();
+            dvPartits = new DataView();
             cbCategoriaCerca = new ComboBox();
             dgResultat = new DataGrid();
             InitializeComponent();
@@ -179,14 +184,17 @@ namespace Gsport
             else if(rbEquip.IsChecked == true)
             {
                 if (tbBusca.Text.Trim().ToLower() == "")
-                {
+                {   
                     dvEquips.RowFilter = "nom LIKE '%" + tbBusca.Text.Trim().ToLower() + "%'";
                 }
                 dgResultat.ItemsSource = dvEquips;
             }
             else if(rbEquipRivals.IsChecked == true)
             {
-                dvEquipsRivals.RowFilter = "nom LIKE '%" + tbBusca.Text.Trim().ToLower() + "%'";
+                if (tbBusca.Text.Trim().ToLower() == "")
+                {
+                    dvEquipsRivals.RowFilter = "nom LIKE '%" + tbBusca.Text.Trim().ToLower() + "%'";
+                }
                 dgResultat.ItemsSource = dvEquipsRivals;
             }
             else if(rbPartits.IsChecked == true)
