@@ -48,7 +48,9 @@ namespace Gsport
         System.Windows.Data.CollectionViewSource partitsViewSource;
         Gsport.efadbDataSetTableAdapters.convocatoriesTableAdapter efadbDataSetconvocatoriesTableAdapter;
         System.Windows.Data.CollectionViewSource convocatoriesViewSource;
+        
         string mySqlString = "Server=shz24.guebs.net;port=3306;user id=gsportse_remot;password=gsport123.;persistsecurityinfo=True;database=gsportse_efadb";
+        MySqlConnection cnMySql;
         string rutaImg = @"C:/Fotos/img.jpg";
         int idTemporada = 1;
         int codiUsuari;
@@ -60,7 +62,8 @@ namespace Gsport
         int idEquipConvocatoria = 0;
         public MainWindow()
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("ca-ES");
             idiomes.WrapperIdiomes.ChangeCulture(Thread.CurrentThread.CurrentUICulture);
             data_IniciDatePicker.SelectedDate = DateTime.Now;
@@ -1232,7 +1235,7 @@ namespace Gsport
         private void btnGuardarConvocatoria_Click(object sender, RoutedEventArgs e)
         {
             ///Aqui s'ha afagit una llibreria per accedir amb cadena de conexio a mysql i fer commands, en principi cap problema.
-                MySqlConnection cnMySql = new MySqlConnection(mySqlString);
+                cnMySql = new MySqlConnection(mySqlString);
                 try
                 {
                     cnMySql.Open();
@@ -1295,12 +1298,13 @@ namespace Gsport
         {
             try
             {
+                
                 efadbDataSet = ((Gsport.efadbDataSet)(this.FindResource("efadbDataSet")));
                 // Cargar datos en la tabla jugadors. Puede modificar este código según sea necesario.
                 efadbDataSetjugadorsTableAdapter = new Gsport.efadbDataSetTableAdapters.jugadorsTableAdapter();
                 efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
                 efadbDataSetusuarisTableAdapter = new Gsport.efadbDataSetTableAdapters.usuarisTableAdapter();
-                efadbDataSetusuarisTableAdapter.Fill(efadbDataSet.usuaris);
+                efadbDataSetusuarisTableAdapter.Fill(efadbDataSet.usuaris,1);     
                 jugadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugadorsViewSource")));
                 wndLogin wnd = new wndLogin(efadbDataSet);
                 wnd.ShowDialog();
@@ -1516,7 +1520,7 @@ namespace Gsport
                         bool trobat = false;
                         
                         efadbDataSetusuarisTableAdapter.Update(efadbDataSet.usuaris);
-                        efadbDataSetusuarisTableAdapter.Fill(efadbDataSet.usuaris);
+                        efadbDataSetusuarisTableAdapter.Fill(efadbDataSet.usuaris,1);
                         if (efadbDataSet.Tables["jugadors"].Rows.Count > 0)
                         {
                             while (i < efadbDataSet.Tables["usuaris"].Rows.Count && !trobat)
@@ -1533,7 +1537,7 @@ namespace Gsport
                         efadbDataSetjugadorsTableAdapter.Update(efadbDataSet.jugadors);
                         efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
                         efadbDataSetusuarisTableAdapter.Update(efadbDataSet.usuaris);
-                        efadbDataSetusuarisTableAdapter.Fill(efadbDataSet.usuaris);
+                        efadbDataSetusuarisTableAdapter.Fill(efadbDataSet.usuaris,1);
                         efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
                         efadbDataSetlesionsTableAdapter.Fill(efadbDataSet.lesions);
                         MessageBox.Show("S'ha esborrat: " + queEs);
