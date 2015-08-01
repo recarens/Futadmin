@@ -980,6 +980,7 @@ namespace Gsport
                         dr["puntuacio"] = puntuacioTextBox.Text.Trim();
                     else
                         dr["puntuacio"] = 0;
+                    dr["id_club"] = 1;
                     try
                     {
                         efadbDataSet.equips.Rows.Add(dr);

@@ -174,6 +174,7 @@ namespace Gsport
                                 cmd.Parameters.AddWithValue("inpuntuacio", Convert.ToInt32(idr[4]));
                             else
                                 cmd.Parameters.AddWithValue("inpuntuacio", 0);
+                            cmd.Parameters.AddWithValue("inid_club", 1);
                             cmd.ExecuteNonQuery();
                             pbProgres.Value += 1;
                             this.UpdateLayout();
