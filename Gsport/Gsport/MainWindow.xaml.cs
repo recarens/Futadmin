@@ -80,6 +80,14 @@ namespace Gsport
                 cbminut.Items.Add(i);
 
             tbSexe.SelectedItem = tbSexe.Items.GetItemAt(0);
+
+            //crear  carpeta Fotos si no existeix
+            if (Directory.Exists(@"C:/Fotos/") == false)
+            {
+                Directory.CreateDirectory(@"C:/Fotos");
+                
+            }
+
         }
 
         /// <summary>
