@@ -197,7 +197,7 @@
                 <Button x:Name="btnDadesAmonestacions" Content="Amonestacions" FontSize="16" FontWeight="Bold" Margin="10,40,10,0" Click="btnDadesAmonestacions_CLick" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,0" x:Name="wpAmonestacions" BorderThickness="2">
                     <WrapPanel x:Name="wpAmonestacionsjugador" Background="#FF52B64E" DataContext="{StaticResource jugadorsamonestacions_partitViewSource}">
-                        <DataGrid x:Name="amonestacions_partitDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="600" MaxWidth="600" Margin="10">
+                        <DataGrid x:Name="amonestacions_partitDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="600" MaxWidth="600" Margin="10" SelectionChanged="amonestacions_partitDataGrid_SelectionChanged">
                             <DataGrid.Columns>
                                 
                                 <DataGridTextColumn x:Name="id_tipus_amonestacioColumn1" Binding="{Binding id_tipus_amonestacio}" Header="Tipus amonestacio" Width="SizeToHeader" FontSize="16"/>

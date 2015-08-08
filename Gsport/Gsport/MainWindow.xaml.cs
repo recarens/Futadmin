@@ -1778,6 +1778,11 @@ namespace Gsport
             wnd.ShowDialog();
         }
 
+        private void amonestacions_partitDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
         //private void btnGrafics_Click(object sender, RoutedEventArgs e)
         //{
 
