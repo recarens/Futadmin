@@ -117,7 +117,7 @@ namespace Gsport
                     idr.Close();
 
                 }
-                catch (Exception ex)
+                catch
                 {
                     MessageBox.Show("Hi ha errors en el fitxer o no es el correcte");
                 }
@@ -184,7 +184,7 @@ namespace Gsport
                     idr.Close();
                     
                 }
-                catch (Exception ex)
+                catch
                 {
                     MessageBox.Show("Hi ha errors en el fitxer o no es el correcte");
                 }
@@ -238,7 +238,7 @@ namespace Gsport
                     idr.Close();
 
                 }
-                catch (Exception ex)
+                catch
                 {
                     MessageBox.Show("Hi ha errors en el fitxer o no es el correcte");
                 }
@@ -298,7 +298,7 @@ namespace Gsport
                     idr.Close();
 
                 }
-                catch (Exception ex)
+                catch
                 {
                     MessageBox.Show("Hi ha errors en el fitxer o no es el correcte");
                 }
@@ -349,7 +349,7 @@ namespace Gsport
                     idr.Close();
 
                 }
-                catch (Exception ex)
+                catch
                 {
                     MessageBox.Show("Hi ha errors en el fitxer o no es el correcte");
                 }
