@@ -48,7 +48,8 @@ namespace Gsport
         System.Windows.Data.CollectionViewSource partitsViewSource;
         Gsport.efadbDataSetTableAdapters.convocatoriesTableAdapter efadbDataSetconvocatoriesTableAdapter;
         System.Windows.Data.CollectionViewSource convocatoriesViewSource;
-        
+        Gsport.efadbDataSetTableAdapters.amonestacions_partitTableAdapter efadbDataSetamonestacions_partitTableAdapter;
+        System.Windows.Data.CollectionViewSource jugadorsamonestacions_partitViewSource;
         string mySqlString = "Server=shz24.guebs.net;port=3306;user id=gsportse_remot;password=gsport123.;persistsecurityinfo=True;database=gsportse_efadb";
         MySqlConnection cnMySql;
         string rutaImg = @"C:/Fotos/img.jpg";
@@ -128,6 +129,7 @@ namespace Gsport
                     btnDadesTemporada.IsEnabled = true;
                     btnDadesLesions.IsEnabled = true;
                     btnEsborrarJugadors.IsEnabled = true;
+                    btnDadesAmonestacions.IsEnabled = true;
                     wpJugadors.DataContext = FindResource("jugadorsViewSource");
                     jugadorsViewSource.View.MoveCurrentToPosition(i);
                     posicioRow = i;
@@ -350,15 +352,18 @@ namespace Gsport
             cdEquipsRivals.Width = gER2;
             GridLength gCon2 = new GridLength(0, GridUnitType.Star);
             cdConvocatoria.Width = gCon2;
+
             if (efadbDataSet.jugadors.Count > 0)
                 posicioRow = efadbDataSet.jugadors.Count - 1;
             else
                 posicioRow = 0;
             wpDadesTemporada.Height = 0;
             wpLesions.Height = 0;
+            wpAmonestacions.Height = 0;
             btnDadesTemporada.IsEnabled = false;
             btnDadesLesions.IsEnabled = false;
             btnEsborrarJugadors.IsEnabled = false;
+            btnDadesAmonestacions.IsEnabled = false;
             tbDni.IsEnabled = true;
 
         }
@@ -838,6 +843,18 @@ namespace Gsport
             }
         }
 
+        private void btnDadesAmonestacions_CLick(object sender, RoutedEventArgs e)
+        {
+            if (wpAmonestacions.Height > 0 || wpAmonestacions.Height.Equals(Double.NaN))
+            {
+                wpAmonestacions.Height = 0;
+            }
+            else
+            {
+                wpAmonestacions.Height = Double.NaN; // aixo es  height l'auto del xaml
+            }
+        }
+
         /// <summary>
         /// Guarda i si es un objecta cercat actualitza
         /// </summary>
@@ -922,9 +939,7 @@ namespace Gsport
                         posicioRow = efadbDataSet.jugadors.Count - 1;
                         tbSexe.SelectedIndex = Convert.ToInt32(efadbDataSet.jugadors.Rows[posicioRow]["sexe"]);
                         btnEsborrarJugadors.IsEnabled = true;
-                        tbDni.IsEnabled = false;
-
-                        
+                        tbDni.IsEnabled = false;                
 
                     }
                     catch (Exception ex)
@@ -1066,6 +1081,8 @@ namespace Gsport
                         efadbDataSetjugador_temporadaTableAdapter.Fill(efadbDataSet.jugador_temporada);
                         efadbDataSetlesionsTableAdapter.Update(efadbDataSet.lesions);                       
                         efadbDataSetlesionsTableAdapter.Fill(efadbDataSet.lesions);
+                        efadbDataSetamonestacions_partitTableAdapter.Update(efadbDataSet.amonestacions_partit);
+                        efadbDataSetamonestacions_partitTableAdapter.Fill(efadbDataSet.amonestacions_partit);
                         CarregarNomsTemporades();
                         //refresh 
                         jugadorsViewSource.View.MoveCurrentToPosition(posicioRow);
@@ -1307,13 +1324,13 @@ namespace Gsport
         {
             try
             {
-                
+
                 efadbDataSet = ((Gsport.efadbDataSet)(this.FindResource("efadbDataSet")));
                 // Cargar datos en la tabla jugadors. Puede modificar este código según sea necesario.
                 efadbDataSetjugadorsTableAdapter = new Gsport.efadbDataSetTableAdapters.jugadorsTableAdapter();
                 efadbDataSetjugadorsTableAdapter.Fill(efadbDataSet.jugadors);
                 efadbDataSetusuarisTableAdapter = new Gsport.efadbDataSetTableAdapters.usuarisTableAdapter();
-                efadbDataSetusuarisTableAdapter.Fill(efadbDataSet.usuaris,1);     
+                efadbDataSetusuarisTableAdapter.Fill(efadbDataSet.usuaris, 1);
                 jugadorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugadorsViewSource")));
                 wndLogin wnd = new wndLogin(efadbDataSet);
                 wnd.ShowDialog();
@@ -1327,7 +1344,8 @@ namespace Gsport
                         wpDadesPersonals.IsEnabled = false;
                         wpLesionsjugador.IsEnabled = false;
                         wpDadesTemporada.IsEnabled = false;
-                        wpDadesEntrenador.IsEnabled = false;  
+                        wpDadesEntrenador.IsEnabled = false;
+                        amonestacions_partitDataGrid.IsReadOnly = true;
                         wpDadesEquip.IsEnabled = false;
                         wpDadesEquipRival.IsEnabled = false;
                         wpJugadors.IsEnabled = false;
@@ -1337,7 +1355,7 @@ namespace Gsport
                         wpDadesEntrenador.IsEnabled = false;
                         wpPrincipalEquip.IsEnabled = false;
                         spDadesPartit.IsEnabled = false;
-                        btnEsborrarEntrenadors.Visibility= Visibility.Hidden;
+                        btnEsborrarEntrenadors.Visibility = Visibility.Hidden;
                         btnEsborrarEquips.Visibility = Visibility.Hidden;
                         btnEsborrarEquipsRivals.Visibility = Visibility.Hidden;
                         btnEsborrarJugadors.Visibility = Visibility.Hidden;
@@ -1355,7 +1373,8 @@ namespace Gsport
                         spDadesEquipRival.IsEnabled = false;
                         spDadesPartit.IsEnabled = false;
                         spDadesEntrenador.IsEnabled = false;
-                        btnEsborrarEntrenadors.Visibility= Visibility.Hidden;
+                        amonestacions_partitDataGrid.IsReadOnly = true;
+                        btnEsborrarEntrenadors.Visibility = Visibility.Hidden;
                         btnEsborrarEquips.Visibility = Visibility.Hidden;
                         btnEsborrarEquipsRivals.Visibility = Visibility.Hidden;
                         btnGuardarEntrenador.Visibility = Visibility.Hidden;
@@ -1454,6 +1473,11 @@ namespace Gsport
                 efadbDataSettipus_partitTableAdapter.Fill(efadbDataSet.tipus_partit);
                 System.Windows.Data.CollectionViewSource tipus_partitViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tipus_partitViewSource")));
                 //tipus_partitViewSource.View.MoveCurrentToFirst();
+                // Cargar datos en la tabla amonestacions_partit. Puede modificar este código según sea necesario.
+                efadbDataSetamonestacions_partitTableAdapter = new Gsport.efadbDataSetTableAdapters.amonestacions_partitTableAdapter();
+                efadbDataSetamonestacions_partitTableAdapter.Fill(efadbDataSet.amonestacions_partit);
+                jugadorsamonestacions_partitViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugadorsamonestacions_partitViewSource")));
+                
                 DataColumn dt = new DataColumn("nom");
                 dt.DataType = typeof(String);
                 efadbDataSet.Tables["jugador_temporada"].Columns.Add(dt); //el nom de la temproada en cada fila i aixi en el combobox jugadors_temporada podem veurei el nom.
@@ -1464,7 +1488,7 @@ namespace Gsport
                     btnAfageix.IsEnabled = false;
                     btnPartits.IsEnabled = false;
                 }
-                if(efadbDataSet.Tables["equips_rivals"].Rows.Count == 0)
+                if (efadbDataSet.Tables["equips_rivals"].Rows.Count == 0)
                     btnPartits.IsEnabled = false;
                 if (efadbDataSet.Tables["temporades"].Rows.Count == 0)
                 {
@@ -1476,7 +1500,7 @@ namespace Gsport
             {
                 MessageBox.Show("El servei no esta disponible");
                 btnCerca.IsEnabled = false;
-            }   
+            }
         }
 
         /// <summary>

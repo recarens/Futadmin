@@ -1,7 +1,7 @@
 ﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Gsport" x:Class="Gsport.MainWindow"
-        Title="Gsport v.0.9.88" Height="1000" Width="1109.587" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="Gsport v.0.9.88" Height="1370.5" Width="1109.587" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.Resources>
         <local:efadbDataSet x:Key="efadbDataSet"/>
         <CollectionViewSource x:Key="jugadorsViewSource" Source="{Binding jugadors, Source={StaticResource efadbDataSet}}"/>
@@ -22,6 +22,7 @@
         <CollectionViewSource x:Key="convocatoriesViewSource" Source="{Binding convocatories, Source={StaticResource efadbDataSet}}"/>
         <CollectionViewSource x:Key="partitsViewSource" Source="{Binding partits, Source={StaticResource efadbDataSet}}"/>
         <CollectionViewSource x:Key="tipus_partitViewSource" Source="{Binding tipus_partit, Source={StaticResource efadbDataSet}}"/>
+        <CollectionViewSource x:Key="jugadorsamonestacions_partitViewSource" Source="{Binding fk_amonestacions_partit_jugadors1, Source={StaticResource jugadorsViewSource}}"/>
     </Window.Resources>
     <Window.Background>
         <ImageBrush ImageSource="Fotos/grass.jpg" Stretch="UniformToFill"/>
@@ -29,7 +30,7 @@
     <Grid x:Name="gridPrincipal">
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="cdmenu" Width="165" MaxWidth="165"/>
-            <ColumnDefinition x:Name="cdjugadors" Width="0"/>
+            <ColumnDefinition x:Name="cdjugadors" Width="900"/>
             <ColumnDefinition x:Name="cdequips" Width="0"/>
             <ColumnDefinition x:Name="cdntrenadors" Width="0"/>
             <ColumnDefinition x:Name="cdTemporada" Width="0"/>
@@ -52,7 +53,6 @@
             <Button x:Name="btnLlistatEquips" Content="Llistat d'equips" Margin="9" FontSize="15" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10"  FontWeight="Bold" IsEnabled="False" Click="btnLlistatEquips_Click"/>
             <!--<Button x:Name="btnGrafics" Content="Grafics" Margin="9" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold" Click="btnGrafics_Click"/>-->
             <Button x:Name="btnSortir" Content="Sortir" Margin="9" Click="btnSortir_Click" FontSize="16" Background="#FF52B64E" BorderBrush="{x:Null}" Foreground="#FF0B2E10" FontWeight="Bold"/>
-            
         </StackPanel>
         <GridSplitter Grid.Column="0" Width="10" BorderBrush="#FF171212" Background="White"/>
         <ScrollViewer Grid.Column="1">
@@ -193,6 +193,21 @@
                             </StackPanel>
                         </WrapPanel>
                     </StackPanel>
+                </Border>
+                <Button x:Name="btnDadesAmonestacions" Content="Amonestacions" FontSize="16" FontWeight="Bold" Margin="10,40,10,0" Click="btnDadesAmonestacions_CLick" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
+                <Border Margin="10,0,10,0" x:Name="wpAmonestacions" BorderThickness="2">
+                    <WrapPanel x:Name="wpAmonestacionsjugador" Background="#FF52B64E" DataContext="{StaticResource jugadorsamonestacions_partitViewSource}">
+                        <DataGrid x:Name="amonestacions_partitDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="600" MaxWidth="600" Margin="10">
+                            <DataGrid.Columns>
+                                
+                                <DataGridTextColumn x:Name="id_tipus_amonestacioColumn1" Binding="{Binding id_tipus_amonestacio}" Header="Tipus amonestacio" Width="SizeToHeader" FontSize="16"/>
+                                <DataGridTextColumn x:Name="id_partitColumn1" Binding="{Binding id_partit}" Header="Partit" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="id_jugadorColumn" Binding="{Binding id_jugador}" Header="id jugador" Visibility="Hidden"/>
+                                <DataGridTextColumn x:Name="minutColumn1" Binding="{Binding minut}" Header="Minut" Width="SizeToHeader"/>
+                                <DataGridTextColumn x:Name="descripcio_amonestacioColumn" Binding="{Binding descripcio_amonestacio}" Header="Descripció amonestació" Width="500"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </WrapPanel>
                 </Border>
                 <Button x:Name="btnDadesLesions" Content="Lesions" FontSize="16" FontWeight="Bold" Margin="10,40,10,0" Click="btnDadesLesions_Click" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,0" x:Name="wpLesions" BorderThickness="2">
@@ -424,7 +439,7 @@
                         <Label Content="Equip rival" Width="200" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" Margin="0,10,0,0"/>
                         <ComboBox x:Name="cbEquipRival" Width="200" ItemsSource="{Binding Source={StaticResource equips_rivalsViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_equip_rival" FontSize="15"/>
                     </StackPanel>
-                </StackPanel>   
+                </StackPanel>
                 <Label Content="Tipus partit" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" Margin="0,10,0,0"/>
                 <ComboBox x:Name="cbTipusPartit" Width="200" ItemsSource="{Binding Source={StaticResource tipus_partitViewSource}}" SelectedIndex="0" DisplayMemberPath="nom" SelectedValuePath="id_tipus_partit" Margin="40,0,40,0" FontSize="15"/>
                 <Label Content="Fase" FontSize="20" FontWeight="Bold" Foreground="#FF0B2E10" Background="#FF52B64E" HorizontalAlignment="Center" Margin="0,10,0,0"/>
