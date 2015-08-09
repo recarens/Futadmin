@@ -74,6 +74,7 @@ namespace Gsport
             tbSexe.Items.Add("F");
             cblocalVisitant.Items.Add("Local"); //0
             cblocalVisitant.Items.Add("Visitant"); //1
+            
             for (int i = 0; i < 24;i++)
                 cbhora.Items.Add(i);
 
@@ -1477,7 +1478,15 @@ namespace Gsport
                 efadbDataSetamonestacions_partitTableAdapter = new Gsport.efadbDataSetTableAdapters.amonestacions_partitTableAdapter();
                 efadbDataSetamonestacions_partitTableAdapter.Fill(efadbDataSet.amonestacions_partit);
                 jugadorsamonestacions_partitViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("jugadorsamonestacions_partitViewSource")));
-                
+                // Cargar datos en la tabla tipus_amonestacio. Puede modificar este código según sea necesario.
+                Gsport.efadbDataSetTableAdapters.tipus_amonestacioTableAdapter efadbDataSettipus_amonestacioTableAdapter = new Gsport.efadbDataSetTableAdapters.tipus_amonestacioTableAdapter();
+                efadbDataSettipus_amonestacioTableAdapter.Fill(efadbDataSet.tipus_amonestacio);
+                System.Windows.Data.CollectionViewSource tipus_amonestacioViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tipus_amonestacioViewSource")));
+
+                // Cargar datos en la tabla tipus_esport. Puede modificar este código según sea necesario.
+                Gsport.efadbDataSetTableAdapters.tipus_esportTableAdapter efadbDataSettipus_esportTableAdapter = new Gsport.efadbDataSetTableAdapters.tipus_esportTableAdapter();
+                efadbDataSettipus_esportTableAdapter.Fill(efadbDataSet.tipus_esport);
+                System.Windows.Data.CollectionViewSource tipus_esportViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("tipus_esportViewSource")));
                 DataColumn dt = new DataColumn("nom");
                 dt.DataType = typeof(String);
                 efadbDataSet.Tables["jugador_temporada"].Columns.Add(dt); //el nom de la temproada en cada fila i aixi en el combobox jugadors_temporada podem veurei el nom.
@@ -1777,15 +1786,5 @@ namespace Gsport
             wndLlistatEntrenador wnd = new wndLlistatEntrenador(efadbDataSet);
             wnd.ShowDialog();
         }
-
-        private void amonestacions_partitDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        //private void btnGrafics_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //} 
     }
 }

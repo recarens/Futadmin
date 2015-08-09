@@ -1459,10 +1459,10 @@ namespace Gsport {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public amonestacions_partitRow Addamonestacions_partitRow(int id_amonestacio, tipus_amonestacioRow parenttipus_amonestacioRowByfk_amonestacions_partit_tipus_amonestacio1, partitsRow parentpartitsRowByfk_amonestacions_partit_partits1, jugadorsRow parentjugadorsRowByfk_amonestacions_partit_jugadors1, int minut, string descripcio_amonestacio) {
+            public amonestacions_partitRow Addamonestacions_partitRow(tipus_amonestacioRow parenttipus_amonestacioRowByfk_amonestacions_partit_tipus_amonestacio1, partitsRow parentpartitsRowByfk_amonestacions_partit_partits1, jugadorsRow parentjugadorsRowByfk_amonestacions_partit_jugadors1, int minut, string descripcio_amonestacio) {
                 amonestacions_partitRow rowamonestacions_partitRow = ((amonestacions_partitRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        id_amonestacio,
+                        null,
                         null,
                         null,
                         null,
@@ -1531,6 +1531,7 @@ namespace Gsport {
                 base.Columns.Add(this.columndescripcio_amonestacio);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid_amonestacio}, true));
+                this.columnid_amonestacio.AutoIncrement = true;
                 this.columnid_amonestacio.AllowDBNull = false;
                 this.columnid_amonestacio.Unique = true;
                 this.columnid_tipus_amonestacio.AllowDBNull = false;

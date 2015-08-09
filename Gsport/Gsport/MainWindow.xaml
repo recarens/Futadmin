@@ -23,6 +23,8 @@
         <CollectionViewSource x:Key="partitsViewSource" Source="{Binding partits, Source={StaticResource efadbDataSet}}"/>
         <CollectionViewSource x:Key="tipus_partitViewSource" Source="{Binding tipus_partit, Source={StaticResource efadbDataSet}}"/>
         <CollectionViewSource x:Key="jugadorsamonestacions_partitViewSource" Source="{Binding fk_amonestacions_partit_jugadors1, Source={StaticResource jugadorsViewSource}}"/>
+        <CollectionViewSource x:Key="tipus_amonestacioViewSource" Source="{Binding tipus_amonestacio, Source={StaticResource efadbDataSet}}"/>
+        <CollectionViewSource x:Key="tipus_esportViewSource" Source="{Binding tipus_esport, Source={StaticResource efadbDataSet}}"/>
     </Window.Resources>
     <Window.Background>
         <ImageBrush ImageSource="Fotos/grass.jpg" Stretch="UniformToFill"/>
@@ -30,7 +32,7 @@
     <Grid x:Name="gridPrincipal">
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="cdmenu" Width="165" MaxWidth="165"/>
-            <ColumnDefinition x:Name="cdjugadors" Width="900"/>
+            <ColumnDefinition x:Name="cdjugadors" Width="0"/>
             <ColumnDefinition x:Name="cdequips" Width="0"/>
             <ColumnDefinition x:Name="cdntrenadors" Width="0"/>
             <ColumnDefinition x:Name="cdTemporada" Width="0"/>
@@ -197,14 +199,42 @@
                 <Button x:Name="btnDadesAmonestacions" Content="Amonestacions" FontSize="16" FontWeight="Bold" Margin="10,40,10,0" Click="btnDadesAmonestacions_CLick" Background="#FF52B64E" BorderBrush="{x:Null}" BorderThickness="1" Foreground="#FF0B2E10"/>
                 <Border Margin="10,0,10,0" x:Name="wpAmonestacions" BorderThickness="2">
                     <WrapPanel x:Name="wpAmonestacionsjugador" Background="#FF52B64E" DataContext="{StaticResource jugadorsamonestacions_partitViewSource}">
-                        <DataGrid x:Name="amonestacions_partitDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="600" MaxWidth="600" Margin="10" SelectionChanged="amonestacions_partitDataGrid_SelectionChanged">
+                        <DataGrid x:Name="amonestacions_partitDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" FontSize="14" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" Width="900" MaxWidth="900" Margin="10">
                             <DataGrid.Columns>
-                                
-                                <DataGridTextColumn x:Name="id_tipus_amonestacioColumn1" Binding="{Binding id_tipus_amonestacio}" Header="Tipus amonestacio" Width="SizeToHeader" FontSize="16"/>
-                                <DataGridTextColumn x:Name="id_partitColumn1" Binding="{Binding id_partit}" Header="Partit" Width="SizeToHeader"/>
+                                <DataGridTemplateColumn x:Name="color" Header="Targeta" Width="50">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Canvas>
+                                                <Canvas.Style>
+                                                    <Style TargetType="Canvas">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding id_tipus_amonestacio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Value="1">
+                                                                <Setter Property="Background" Value="Red" />
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding id_tipus_amonestacio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Value="2">
+                                                                <Setter Property="Background" Value="Yellow" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Canvas.Style>
+                                            </Canvas>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn x:Name="id_partitColumn1" Header="Partit" Width="200" Binding="{Binding id_partit}"/>
                                 <DataGridTextColumn x:Name="id_jugadorColumn" Binding="{Binding id_jugador}" Header="id jugador" Visibility="Hidden"/>
                                 <DataGridTextColumn x:Name="minutColumn1" Binding="{Binding minut}" Header="Minut" Width="SizeToHeader"/>
-                                <DataGridTextColumn x:Name="descripcio_amonestacioColumn" Binding="{Binding descripcio_amonestacio}" Header="Descripció amonestació" Width="500"/>
+                                <DataGridTextColumn x:Name="descripcio_amonestacioColumn" Binding="{Binding descripcio_amonestacio}" Header="Descripció amonestació" Width="480"/>
+                                <DataGridTemplateColumn x:Name="id_tipus_amonestacioColumn" Header="Tipus amonestacio" Width="SizeToHeader">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox x:Name="cbAmonestacionsGrid" SelectedValuePath="Tag" SelectedValue="{Binding id_tipus_amonestacio, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}">
+                                                <ComboBoxItem x:Name="cbi1" Content="Targeta Vermella" Tag="1"/>
+                                                <ComboBoxItem x:Name="cbi2" Content="Targeta Groga" Tag="2"/>
+                                            </ComboBox>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </WrapPanel>
